@@ -31,24 +31,44 @@
   .scroll-x { overflow-x: auto; scrollbar-width: thin; }
 
   /* ===== PETA ===== */
-  .map-wrapper {
-    position: relative; width: 100%; max-width: 1400px; margin: 0 auto;
-    border-radius: 1.5rem; overflow: hidden;
-    box-shadow: 0 25px 50px -12px rgba(0,0,0,.25);
-    border: 4px solid #fef3c7; background: #bae6fd;
+  .map-scroll {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 6px;
   }
-  .map-canvas { position: relative; }
+  .map-scroll::-webkit-scrollbar { height: 8px; }
+  .map-scroll::-webkit-scrollbar-thumb { background: #fbbf24; border-radius: 8px; }
+  .map-scroll::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 8px; }
+
+  .map-wrapper {
+    position: relative;
+    width: 100%;
+    min-width: 900px;      /* supaya hotspot tidak bertumpuk di layar kecil */
+    max-width: 1400px;
+    margin: 0 auto;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,.25);
+    border: 4px solid #fef3c7;
+    background: #bae6fd;
+  }
+  .map-canvas { position: relative; width: 100%; }
   .map-canvas img { width: 100%; height: auto; display: block; user-select: none; pointer-events: none; }
+  /* mode fallback (SVG) — rasio 1000:400 agar posisi % presisi */
+  .map-canvas.is-fallback { aspect-ratio: 1000 / 400; }
+  .map-canvas.is-fallback svg.map-svg { width: 100%; height: 100%; display: block; }
 
   .hotspot {
     position: absolute;
-    width: 34px; height: 34px;
+    width: 30px; height: 30px;
     border-radius: 50%;
     background: #ffffff;
     border: 2.5px solid #b91c1c;
     color: #b91c1c;
     font-weight: 800;
-    font-size: 13px;
+    font-size: 12px;
     cursor: pointer;
     transform: translate(-50%, -100%);
     transition: all .25s ease;
@@ -57,17 +77,19 @@
     justify-content: center;
     z-index: 10;
     box-shadow: 0 3px 8px rgba(0,0,0,.25);
+    padding: 0;
+    line-height: 1;
   }
   .hotspot::after {
     content: '';
     position: absolute;
-    bottom: -7px;
+    bottom: -6px;
     left: 50%;
     transform: translateX(-50%);
     width: 0; height: 0;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 9px solid #b91c1c;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 8px solid #b91c1c;
   }
   .hotspot:hover {
     background: #b91c1c;
@@ -171,7 +193,7 @@
   }
   .religion-segment {
     display: flex; align-items: center; justify-content: center;
-    color: white; font-size: 10px; font-weight: 700; min-width: 30px;
+    color: white; font-size: 10px; font-weight: 700; min-width: 2px;
   }
 
   .region-list-item {
@@ -260,14 +282,14 @@
     </div>
 
     <div class="flex justify-center flex-wrap gap-2 mb-5">
-      <button class="filter-pill active" onclick="filterIsland('semua', this)">🌏 Semua (38)</button>
-      <button class="filter-pill" onclick="filterIsland('Sumatra', this)">Sumatra (10)</button>
-      <button class="filter-pill" onclick="filterIsland('Jawa', this)">Jawa (6)</button>
-      <button class="filter-pill" onclick="filterIsland('Kalimantan', this)">Kalimantan (5)</button>
-      <button class="filter-pill" onclick="filterIsland('Sulawesi', this)">Sulawesi (6)</button>
-      <button class="filter-pill" onclick="filterIsland('Bali & Nusa Tenggara', this)">Bali & Nusa Tenggara (3)</button>
-      <button class="filter-pill" onclick="filterIsland('Maluku', this)">Maluku (2)</button>
-      <button class="filter-pill" onclick="filterIsland('Papua', this)">Papua (6)</button>
+      <button type="button" class="filter-pill active" onclick="filterIsland('semua', this)">🌏 Semua (38)</button>
+      <button type="button" class="filter-pill" onclick="filterIsland('Sumatra', this)">Sumatra (10)</button>
+      <button type="button" class="filter-pill" onclick="filterIsland('Jawa', this)">Jawa (6)</button>
+      <button type="button" class="filter-pill" onclick="filterIsland('Kalimantan', this)">Kalimantan (5)</button>
+      <button type="button" class="filter-pill" onclick="filterIsland('Sulawesi', this)">Sulawesi (6)</button>
+      <button type="button" class="filter-pill" onclick="filterIsland('Bali & Nusa Tenggara', this)">Bali & Nusa Tenggara (3)</button>
+      <button type="button" class="filter-pill" onclick="filterIsland('Maluku', this)">Maluku (2)</button>
+      <button type="button" class="filter-pill" onclick="filterIsland('Papua', this)">Papua (6)</button>
     </div>
 
     <div class="grid lg:grid-cols-4 gap-5">
@@ -289,7 +311,7 @@
             <div class="w-full bg-slate-200 rounded-full h-2">
               <div id="exploreBar" class="gradient-hero h-2 rounded-full progress-bar" style="width:0%"></div>
             </div>
-            <button onclick="randomExplore()" class="mt-3 w-full bg-krem text-merah px-3 py-2 rounded-lg font-bold text-xs hover:bg-amber-200">
+            <button type="button" onclick="randomExplore()" class="mt-3 w-full bg-krem text-merah px-3 py-2 rounded-lg font-bold text-xs hover:bg-amber-200">
               <i class="fa-solid fa-dice"></i> Jelajah Acak
             </button>
           </div>
@@ -297,29 +319,33 @@
       </div>
 
       <div class="lg:col-span-3">
-        <div class="map-wrapper">
-          <div id="mapCanvas" class="map-canvas">
-            <img id="mapImage" src="map-indonesia.jpg" alt="Peta Indonesia 38 Provinsi">
-          </div>
-          <div class="map-legend">
-            <p class="font-bold text-merah mb-1">🗺️ Keterangan</p>
-            <p class="flex items-center gap-2"><span class="inline-block w-4 h-4 rounded-full bg-white border-2 border-merah"></span> Belum dijelajahi</p>
-            <p class="flex items-center gap-2"><span class="inline-block w-4 h-4 rounded-full bg-green-600"></span> Sudah dijelajahi</p>
-            <p class="text-slate-500 mt-1">Total: <strong>38 provinsi</strong></p>
-          </div>
-          <div class="map-zoom-btns">
-            <button onclick="mapZoom(1.2)" title="Perbesar"><i class="fa-solid fa-plus"></i></button>
-            <button onclick="mapZoom(0.8)" title="Perkecil"><i class="fa-solid fa-minus"></i></button>
-            <button onclick="mapReset()" title="Reset"><i class="fa-solid fa-rotate-left"></i></button>
-            <button onclick="toggleFullscreenMap()" title="Layar Penuh"><i class="fa-solid fa-expand"></i></button>
+        <div class="map-scroll">
+          <div class="map-wrapper">
+            <div id="mapCanvas" class="map-canvas">
+              <img id="mapImage" src="map-indonesia.jpg" alt="Peta Indonesia 38 Provinsi">
+            </div>
+            <div class="map-legend">
+              <p class="font-bold text-merah mb-1">🗺️ Keterangan</p>
+              <p class="flex items-center gap-2"><span class="inline-block w-4 h-4 rounded-full bg-white border-2 border-merah"></span> Belum dijelajahi</p>
+              <p class="flex items-center gap-2"><span class="inline-block w-4 h-4 rounded-full bg-green-600"></span> Sudah dijelajahi</p>
+              <p class="text-slate-500 mt-1">Total: <strong>38 provinsi</strong></p>
+            </div>
+            <div class="map-zoom-btns">
+              <button type="button" onclick="mapZoom(1.2)" title="Perbesar"><i class="fa-solid fa-plus"></i></button>
+              <button type="button" onclick="mapZoom(0.8)" title="Perkecil"><i class="fa-solid fa-minus"></i></button>
+              <button type="button" onclick="mapReset()" title="Reset"><i class="fa-solid fa-rotate-left"></i></button>
+              <button type="button" onclick="toggleFullscreenMap()" title="Layar Penuh"><i class="fa-solid fa-expand"></i></button>
+            </div>
           </div>
         </div>
 
         <div id="petaFallback" class="hidden mt-4">
           <div class="bg-amber-50 border border-amber-300 rounded-xl p-4 text-sm text-slate-700">
             <i class="fa-solid fa-circle-info text-amber-600"></i>
-            Gambar <code class="bg-white px-1 rounded">map-indonesia.jpg</code> tidak ditemukan — peta placeholder dipakai.
-            Nomor <strong>1–38</strong> tetap bisa diklik. Letakkan file <code class="bg-white px-1 rounded">map-indonesia.jpg</code> di folder yang sama agar tampil peta asli.
+            Peta asli (<code class="bg-white px-1 rounded">map-indonesia.jpg</code>) belum tersedia —
+            peta ilustrasi dipakai. Nomor <strong>1–38</strong> tetap bisa diklik.
+            Letakkan file <code class="bg-white px-1 rounded">map-indonesia.jpg</code> di folder yang sama
+            untuk menampilkan peta asli.
           </div>
         </div>
 
@@ -347,7 +373,7 @@
             <p class="text-sm text-white/85 mt-2 italic" id="modalDeskripsi"></p>
           </div>
         </div>
-        <button onclick="closeModalDaerah()" class="bg-white/20 hover:bg-white/30 rounded-full w-10 h-10 flex items-center justify-center text-white flex-shrink-0 transition">
+        <button type="button" onclick="closeModalDaerah()" class="bg-white/20 hover:bg-white/30 rounded-full w-10 h-10 flex items-center justify-center text-white flex-shrink-0 transition">
           <i class="fa-solid fa-times text-lg"></i>
         </button>
       </div>
@@ -359,12 +385,12 @@
     </div>
 
     <div class="modal-tabs">
-      <button class="modal-tab active" onclick="switchTab('suku', this)">👥 Suku</button>
-      <button class="modal-tab" onclick="switchTab('bahasa', this)">🗣️ Bahasa</button>
-      <button class="modal-tab" onclick="switchTab('agama', this)">🕌 Agama</button>
-      <button class="modal-tab" onclick="switchTab('budaya', this)">🎭 Budaya</button>
-      <button class="modal-tab" onclick="switchTab('kuliner', this)">🍲 Kuliner</button>
-      <button class="modal-tab" onclick="switchTab('tradisi', this)">🎉 Tradisi</button>
+      <button type="button" class="modal-tab active" onclick="switchTab('suku', this)">👥 Suku</button>
+      <button type="button" class="modal-tab" onclick="switchTab('bahasa', this)">🗣️ Bahasa</button>
+      <button type="button" class="modal-tab" onclick="switchTab('agama', this)">🕌 Agama</button>
+      <button type="button" class="modal-tab" onclick="switchTab('budaya', this)">🎭 Budaya</button>
+      <button type="button" class="modal-tab" onclick="switchTab('kuliner', this)">🍲 Kuliner</button>
+      <button type="button" class="modal-tab" onclick="switchTab('tradisi', this)">🎉 Tradisi</button>
     </div>
 
     <div id="modalBody" class="p-6 md:p-7" style="max-height: 65vh; overflow-y: auto;"></div>
@@ -381,14 +407,14 @@
           <h2 class="text-2xl font-extrabold mt-1" id="authTitle">Masuk</h2>
           <p class="text-xs text-white/80 mt-1" id="authSubtitle">Selamat datang kembali! Lanjutkan petualanganmu. 🇮🇩</p>
         </div>
-        <button onclick="closeAuthModal()" class="bg-white/20 hover:bg-white/30 rounded-full w-10 h-10 flex items-center justify-center text-white flex-shrink-0 transition">
+        <button type="button" onclick="closeAuthModal()" class="bg-white/20 hover:bg-white/30 rounded-full w-10 h-10 flex items-center justify-center text-white flex-shrink-0 transition">
           <i class="fa-solid fa-times text-lg"></i>
         </button>
       </div>
     </div>
     <div class="modal-tabs">
-      <button class="modal-tab active" data-authtab="login" onclick="switchAuthTab('login', this)">Masuk</button>
-      <button class="modal-tab" data-authtab="register" onclick="switchAuthTab('register', this)">Daftar</button>
+      <button type="button" class="modal-tab active" data-authtab="login" onclick="switchAuthTab('login', this)">Masuk</button>
+      <button type="button" class="modal-tab" data-authtab="register" onclick="switchAuthTab('register', this)">Daftar</button>
     </div>
     <div class="p-6">
       <div id="firebaseWarning" class="hidden mb-4 p-3 bg-amber-50 border border-amber-300 rounded-lg text-xs text-amber-800"></div>
@@ -412,7 +438,7 @@
         </button>
       </form>
 
-      <button id="forgotBtn" onclick="forgotPassword()" class="w-full text-center text-xs text-merah font-semibold mt-3 hover:underline">
+      <button type="button" id="forgotBtn" onclick="forgotPassword()" class="w-full text-center text-xs text-merah font-semibold mt-3 hover:underline">
         Lupa password?
       </button>
 
@@ -422,7 +448,7 @@
         <div class="flex-1 h-px bg-slate-200"></div>
       </div>
 
-      <button onclick="loginGoogle()" class="w-full bg-white border border-slate-300 py-3 rounded-lg font-bold text-sm text-slate-700 hover:bg-slate-50 flex items-center justify-center gap-2 transition">
+      <button type="button" onclick="loginGoogle()" class="w-full bg-white border border-slate-300 py-3 rounded-lg font-bold text-sm text-slate-700 hover:bg-slate-50 flex items-center justify-center gap-2 transition">
         <i class="fa-brands fa-google text-red-500"></i> Masuk dengan Google
       </button>
 
@@ -442,11 +468,11 @@
       <h3 class="text-3xl md:text-4xl font-extrabold text-slate-800 mt-2">5 Modul Keberagaman</h3>
     </div>
     <div class="scroll-x flex gap-2 mb-6 pb-2">
-      <button onclick="showModul(1)" id="tabM1" class="modul-tab whitespace-nowrap px-5 py-2 rounded-lg font-semibold border border-slate-200 text-sm">1. Pengertian</button>
-      <button onclick="showModul(2)" id="tabM2" class="modul-tab whitespace-nowrap px-5 py-2 rounded-lg font-semibold border border-slate-200 text-sm">2. 5 Faktor</button>
-      <button onclick="showModul(3)" id="tabM3" class="modul-tab whitespace-nowrap px-5 py-2 rounded-lg font-semibold border border-slate-200 text-sm">3. Jenis & Contoh</button>
-      <button onclick="showModul(4)" id="tabM4" class="modul-tab whitespace-nowrap px-5 py-2 rounded-lg font-semibold border border-slate-200 text-sm">4. Konflik</button>
-      <button onclick="showModul(5)" id="tabM5" class="modul-tab whitespace-nowrap px-5 py-2 rounded-lg font-semibold border border-slate-200 text-sm">5. Solusi</button>
+      <button type="button" onclick="showModul(1)" id="tabM1" class="modul-tab whitespace-nowrap px-5 py-2 rounded-lg font-semibold border border-slate-200 text-sm">1. Pengertian</button>
+      <button type="button" onclick="showModul(2)" id="tabM2" class="modul-tab whitespace-nowrap px-5 py-2 rounded-lg font-semibold border border-slate-200 text-sm">2. 5 Faktor</button>
+      <button type="button" onclick="showModul(3)" id="tabM3" class="modul-tab whitespace-nowrap px-5 py-2 rounded-lg font-semibold border border-slate-200 text-sm">3. Jenis & Contoh</button>
+      <button type="button" onclick="showModul(4)" id="tabM4" class="modul-tab whitespace-nowrap px-5 py-2 rounded-lg font-semibold border border-slate-200 text-sm">4. Konflik</button>
+      <button type="button" onclick="showModul(5)" id="tabM5" class="modul-tab whitespace-nowrap px-5 py-2 rounded-lg font-semibold border border-slate-200 text-sm">5. Solusi</button>
     </div>
     <div id="modulContent" class="bg-white rounded-2xl shadow-lg p-6 md:p-10"></div>
   </div>
@@ -470,7 +496,7 @@
       </div>
       <div id="quizBody"></div>
       <div id="quizFeedback" class="hidden mt-4 p-4 rounded-lg text-sm"></div>
-      <button id="quizNextBtn" class="hidden mt-4 w-full bg-merah text-white py-3 rounded-lg font-bold hover:bg-red-800">Lanjut →</button>
+      <button type="button" id="quizNextBtn" class="hidden mt-4 w-full bg-merah text-white py-3 rounded-lg font-bold hover:bg-red-800">Lanjut →</button>
       <div id="quizResult" class="hidden"></div>
     </div>
   </div>
@@ -488,7 +514,7 @@
       <textarea id="jurnalInput" rows="6" placeholder="Tuliskan pemikiranmu..." class="w-full p-4 rounded-lg border border-slate-300 focus:border-merah outline-none resize-none"></textarea>
       <div class="flex justify-between items-center mt-3">
         <span class="text-xs text-slate-500"><i class="fa-solid fa-cloud"></i> <span id="jurnalHint">Tersimpan lokal</span></span>
-        <button onclick="simpanJurnal()" class="bg-merah text-white px-5 py-2 rounded-lg font-semibold hover:bg-red-800"><i class="fa-solid fa-save"></i> Simpan</button>
+        <button type="button" onclick="simpanJurnal()" class="bg-merah text-white px-5 py-2 rounded-lg font-semibold hover:bg-red-800"><i class="fa-solid fa-save"></i> Simpan</button>
       </div>
     </div>
     <div id="jurnalList" class="mt-6 space-y-3"></div>
@@ -546,9 +572,10 @@ let db   = null;
 
 /* ============================================================
    DATA 38 PROVINSI INDONESIA
+   x / y = posisi hotspot dalam persen (%)
    ============================================================ */
 const DAERAH = [
-  { no:1, id:"aceh", nama:"Aceh", ibukota:"Banda Aceh", pulau:"Sumatra", x:8.9, y:20.5,
+  { no:1, id:"aceh", nama:"Aceh", ibukota:"Banda Aceh", pulau:"Sumatra", x:9.0, y:12.5,
     populasi:"5,3 juta", deskripsi:"Serambi Mekkah — gerbang barat Indonesia dengan syariat Islam dan budaya Melayu yang kental.",
     suku:[{n:"Aceh",d:"Mayoritas, penutur bahasa Aceh"},{n:"Gayo",d:"Dataran tinggi, kopi arabika"},{n:"Alas",d:"Aceh Tenggara"},{n:"Tamiang",d:"Perbatasan Sumut"},{n:"Simeulue",d:"Pulau Simeulue, kearifan smong"},{n:"Kluet",d:"Aceh Selatan"}],
     bahasa:["Bahasa Aceh","Bahasa Gayo","Bahasa Alas","Bahasa Tamiang","Bahasa Simeulue","Bahasa Devayan"],
@@ -562,7 +589,7 @@ const DAERAH = [
     tradisi:[{n:"Peusijuek",d:"Upacara tepung tawar untuk keberkahan"},{n:"Khanduri Maulod",d:"Perayaan Maulid Nabi"},{n:"Khanduri Blang",d:"Syukuran sebelum turun ke sawah"}],
     fakta:"Satu-satunya provinsi dengan syariat Islam resmi. Tari Saman diakui UNESCO." },
 
-  { no:2, id:"sumut", nama:"Sumatra Utara", ibukota:"Medan", pulau:"Sumatra", x:13.5, y:28.5,
+  { no:2, id:"sumut", nama:"Sumatra Utara", ibukota:"Medan", pulau:"Sumatra", x:13.0, y:21.25,
     populasi:"14,9 juta", deskripsi:"Rumah bagi Danau Toba dan budaya Batak dengan falsafah Dalihan Na Tolu.",
     suku:[{n:"Batak Toba",d:"Sekitar Danau Toba"},{n:"Batak Karo",d:"Dataran tinggi Karo"},{n:"Batak Simalungun",d:"Kab. Simalungun"},{n:"Batak Mandailing",d:"Mandailing Natal"},{n:"Batak Pakpak",d:"Dairi & Pakpak Bharat"},{n:"Nias",d:"Pulau Nias, tradisi Fahombo"},{n:"Melayu",d:"Pesisir timur"}],
     bahasa:["Bahasa Batak Toba","Bahasa Karo","Bahasa Simalungun","Bahasa Mandailing","Bahasa Pakpak","Bahasa Nias","Bahasa Melayu"],
@@ -576,7 +603,7 @@ const DAERAH = [
     tradisi:[{n:"Fahombo",d:"Lompat batu setinggi 2m di Nias"},{n:"Mangongkal Holi",d:"Pemindahan tulang leluhur"},{n:"Marpangir",d:"Upacara di tepi Danau Toba"}],
     fakta:"Danau Toba adalah danau vulkanik terbesar di dunia (1.145 km²)." },
 
-  { no:3, id:"sumbar", nama:"Sumatra Barat", ibukota:"Padang", pulau:"Sumatra", x:15,9, y:37.7,
+  { no:3, id:"sumbar", nama:"Sumatra Barat", ibukota:"Padang", pulau:"Sumatra", x:14.0, y:33.75,
     populasi:"5,6 juta", deskripsi:"Tanah Minang dengan sistem matrilineal terbesar di dunia dan rendang yang mendunia.",
     suku:[{n:"Minangkabau",d:"Mayoritas, sistem matrilineal"},{n:"Mentawai",d:"Kepulauan Mentawai, pemburu"},{n:"Melayu",d:"Pesisir"},{n:"Nias",d:"Kepulauan Batu"}],
     bahasa:["Bahasa Minangkabau","Bahasa Mentawai","Bahasa Melayu"],
@@ -590,7 +617,7 @@ const DAERAH = [
     tradisi:[{n:"Tabuik",d:"Perayaan 10 Muharram di Pariaman"},{n:"Randai",d:"Teater rakyat dengan silat"},{n:"Batagak Gala",d:"Pengangkatan gelar adat"}],
     fakta:"Rendang dinobatkan makanan terenak nomor 1 dunia versi CNN Travel." },
 
-  { no:4, id:"riau", nama:"Riau", ibukota:"Pekanbaru", pulau:"Sumatra", x:20, y:27,
+  { no:4, id:"riau", nama:"Riau", ibukota:"Pekanbaru", pulau:"Sumatra", x:19.0, y:21.25,
     populasi:"6,5 juta", deskripsi:"Bumi Lancang Kuning — pusat budaya Melayu dengan warisan Kesultanan Siak.",
     suku:[{n:"Melayu",d:"Mayoritas"},{n:"Minangkabau",d:"Perantau"},{n:"Batak",d:"Perantau"},{n:"Jawa",d:"Transmigran"},{n:"Tionghoa-Indonesia",d:"Komunitas dagang"},{n:"Sakai",d:"Suku pedalaman"}],
     bahasa:["Bahasa Melayu Riau","Bahasa Minang","Bahasa Batak","Bahasa Sakai"],
@@ -604,7 +631,7 @@ const DAERAH = [
     tradisi:[{n:"Petang Megang",d:"Tradisi menyambut Ramadhan"},{n:"Balimau Kasai",d:"Mandi bersama dengan limau"}],
     fakta:"Riau memiliki warisan Kesultanan Siak Sri Indrapura yang berpengaruh di Selat Malaka." },
 
-  { no:5, id:"kepri", nama:"Kepulauan Riau", ibukota:"Tanjungpinang", pulau:"Sumatra", x:26, y:30,
+  { no:5, id:"kepri", nama:"Kepulauan Riau", ibukota:"Tanjungpinang", pulau:"Sumatra", x:24.5, y:22.5,
     populasi:"2,1 juta", deskripsi:"Provinsi kepulauan dengan 2.408 pulau, budaya Melayu pesisir yang kuat.",
     suku:[{n:"Melayu",d:"Mayoritas"},{n:"Tionghoa-Indonesia",d:"Komunitas besar"},{n:"Jawa",d:"Transmigran"},{n:"Batak",d:"Perantau"},{n:"Minang",d:"Perantau"},{n:"Bugis",d:"Pelaut"}],
     bahasa:["Bahasa Melayu Riau","Bahasa Hokkien","Bahasa Jawa","Bahasa Bugis"],
@@ -618,7 +645,7 @@ const DAERAH = [
     tradisi:[{n:"Mandirikan Ruwah",d:"Tradisi Melayu Kepri"},{n:"Tepuk Tepung Tawar",d:"Upacara keberkahan"}],
     fakta:"Kepulauan Riau memiliki 2.408 pulau — 96% berupa lautan." },
 
-  { no:6, id:"jambi", nama:"Jambi", ibukota:"Jambi", pulau:"Sumatra", x:18.7, y:33,
+  { no:6, id:"jambi", nama:"Jambi", ibukota:"Jambi", pulau:"Sumatra", x:20.0, y:32.0,
     populasi:"3,6 juta", deskripsi:"Tanah Pilih Pesako Betuah — rumah bagi Suku Anak Dalam dan warisan Melayu Kuno.",
     suku:[{n:"Melayu Jambi",d:"Mayoritas"},{n:"Kubu (Anak Dalam)",d:"Hutan Bukit Duabelas"},{n:"Kerinci",d:"Dataran tinggi"},{n:"Batin",d:"Pedalaman"},{n:"Pindah",d:"Berpindah ladang"}],
     bahasa:["Bahasa Melayu Jambi","Bahasa Kubu","Bahasa Kerinci","Bahasa Batin"],
@@ -632,7 +659,7 @@ const DAERAH = [
     tradisi:[{n:"Kenduri Sko",d:"Membersihkan pusaka leluhur Kerinci"},{n:"Betauh",d:"Menumbuk padi bersama"}],
     fakta:"Suku Anak Dalam (Kubu) masih hidup semi-nomaden di dalam TN Bukit Duabelas." },
 
-  { no:7, id:"bengkulu", nama:"Bengkulu", ibukota:"Bengkulu", pulau:"Sumatra", x:19, y:40,
+  { no:7, id:"bengkulu", nama:"Bengkulu", ibukota:"Bengkulu", pulau:"Sumatra", x:16.5, y:46.25,
     populasi:"2,0 juta", deskripsi:"Bumi Rafflesia — rumah bagi bunga terbesar di dunia dan Suku Rejang.",
     suku:[{n:"Rejang",d:"Mayoritas, bahasa Rejang"},{n:"Serawai",d:"Bengkulu Selatan"},{n:"Lembak",d:"Bengkulu Tengah"},{n:"Melayu",d:"Pesisir"},{n:"Enggano",d:"Pulau Enggano"},{n:"Jawa",d:"Transmigran"}],
     bahasa:["Bahasa Rejang","Bahasa Serawai","Bahasa Lembak","Bahasa Enggano","Bahasa Melayu"],
@@ -646,7 +673,7 @@ const DAERAH = [
     tradisi:[{n:"Kejei",d:"Perayaan adat Rejang"},{n:"Tabot",d:"Tradisi Muharram seperti Tabuik"},{n:"Nundang Padi",d:"Syukuran panen"}],
     fakta:"Bengkulu adalah rumah asli bunga Rafflesia arnoldii — bunga terbesar di dunia." },
 
-  { no:8, id:"sumsel", nama:"Sumatra Selatan", ibukota:"Palembang", pulau:"Sumatra", x:25, y:38,
+  { no:8, id:"sumsel", nama:"Sumatra Selatan", ibukota:"Palembang", pulau:"Sumatra", x:23.5, y:40.0,
     populasi:"8,6 juta", deskripsi:"Bumi Sriwijaya — pusat kerajaan maritim terbesar Nusantara dengan Sungai Musi.",
     suku:[{n:"Palembang",d:"Mayoritas"},{n:"Komering",d:"Sepanjang Sungai Komering"},{n:"Musi",d:"Sekitar Sungai Musi"},{n:"Ogan",d:"OKI & OKU"},{n:"Pasemah",d:"Dataran tinggi megalitik"},{n:"Semendo",d:"Perantau"}],
     bahasa:["Bahasa Palembang","Bahasa Komering","Bahasa Musi","Bahasa Ogan","Bahasa Pasemah"],
@@ -660,7 +687,7 @@ const DAERAH = [
     tradisi:[{n:"Perang Ketupat",d:"Tradisi di Desa Air Salek"},{n:"Nganggung",d:"Membawa makanan ke masjid"}],
     fakta:"Kerajaan Sriwijaya (abad 7-13) berpusat di Palembang — kerajaan maritim terbesar Asia Tenggara." },
 
-  { no:9, id:"lampung", nama:"Lampung", ibukota:"Bandar Lampung", pulau:"Sumatra", x:31, y:43,
+  { no:9, id:"lampung", nama:"Lampung", ibukota:"Bandar Lampung", pulau:"Sumatra", x:27.5, y:50.0,
     populasi:"9,2 juta", deskripsi:"Sang Bumi Ruwa Jurai — gerbang selatan Sumatra dengan tradisi Pepadun.",
     suku:[{n:"Lampung Pepadun",d:"Pedalaman, patrilineal"},{n:"Lampung Saibatin",d:"Pesisir"},{n:"Jawa",d:"Transmigran mayoritas"},{n:"Sunda",d:"Lampung Barat"},{n:"Semendo",d:"Perantau"}],
     bahasa:["Bahasa Lampung","Bahasa Jawa","Bahasa Sunda","Bahasa Melayu"],
@@ -674,7 +701,7 @@ const DAERAH = [
     tradisi:[{n:"Ngejalang",d:"Silaturahmi saat Lebaran"},{n:"Cangget",d:"Tarian muda-mudi Lampung"},{n:"Nayuh",d:"Menangkap ikan bersama"}],
     fakta:"Lampung memiliki 2 kelompok adat: Pepadun (pedalaman) dan Saibatin (pesisir)." },
 
-  { no:10, id:"babel", nama:"Kep. Bangka Belitung", ibukota:"Pangkal Pinang", pulau:"Sumatra", x:29, y:43,
+  { no:10, id:"babel", nama:"Kep. Bangka Belitung", ibukota:"Pangkal Pinang", pulau:"Sumatra", x:28.0, y:35.0,
     populasi:"1,5 juta", deskripsi:"Provinsi kepulauan timah dengan pantai eksotis dan budaya Melayu pesisir.",
     suku:[{n:"Melayu Bangka",d:"Mayoritas"},{n:"Tionghoa-Indonesia",d:"Komunitas besar, penambang timah"},{n:"Bugis",d:"Pelaut"},{n:"Jawa",d:"Transmigran"},{n:"Sekah",d:"Suku pedalaman Bangka"}],
     bahasa:["Bahasa Bangka","Bahasa Belitung","Bahasa Hokkien","Bahasa Melayu"],
@@ -688,7 +715,7 @@ const DAERAH = [
     tradisi:[{n:"Rehong",d:"Tradisi menyambut Lebaran"},{n:"Perang Ketupat",d:"Tradisi di Bangka"},{n:"Nganggung",d:"Makan bersama"}],
     fakta:"Bangka Belitung adalah penghasil timah terbesar di Indonesia. Kain Cual adalah tenun khas Bangka." },
 
-  { no:11, id:"banten", nama:"Banten", ibukota:"Serang", pulau:"Jawa", x:25, y:54,
+  { no:11, id:"banten", nama:"Banten", ibukota:"Serang", pulau:"Jawa", x:31.0, y:55.0,
     populasi:"11,9 juta", deskripsi:"Ujung barat Jawa — rumah bagi Suku Baduy yang menolak modernisasi.",
     suku:[{n:"Sunda Banten",d:"Mayoritas"},{n:"Baduy",d:"Pedalaman Lebak, menolak modernisasi"},{n:"Jawa",d:"Perantau"},{n:"Betawi",d:"Perbatasan Jakarta"},{n:"Tionghoa-Indonesia",d:"Komunitas dagang"}],
     bahasa:["Bahasa Sunda Banten","Bahasa Baduy","Bahasa Jawa Serang","Bahasa Betawi"],
@@ -702,7 +729,7 @@ const DAERAH = [
     tradisi:[{n:"Sepekan Ruwat Bumi",d:"Tradisi Baduy"},{n:"Kawalu",d:"Upacara Baduy selama 3 bulan"},{n:"Ngaruwat",d:"Syukuran bersama"}],
     fakta:"Suku Baduy Dalam menolak listrik, sekolah formal, dan teknologi modern." },
 
-  { no:12, id:"jabar", nama:"Jawa Barat", ibukota:"Bandung", pulau:"Jawa", x:32, y:51,
+  { no:12, id:"jabar", nama:"Jawa Barat", ibukota:"Bandung", pulau:"Jawa", x:38.6, y:53.75,
     populasi:"48,6 juta", deskripsi:"Paris van Java — tanah Pasundan dengan budaya Sunda yang kental.",
     suku:[{n:"Sunda",d:"Mayoritas"},{n:"Cirebon",d:"Pesisir utara, akulturasi"},{n:"Betawi",d:"Perbatasan Jakarta"},{n:"Jawa",d:"Transmigran"},{n:"Tionghoa-Indonesia",d:"Komunitas di Bandung"}],
     bahasa:["Bahasa Sunda","Bahasa Cirebon","Bahasa Melayu Betawi","Bahasa Indonesia"],
@@ -716,7 +743,7 @@ const DAERAH = [
     tradisi:[{n:"Seren Taun",d:"Syukuran panen padi"},{n:"Ngaruwat Bumi",d:"Tolak bala"},{n:"Babacakan",d:"Makan bersama di atas daun pisang"}],
     fakta:"Angklung diakui UNESCO sebagai Warisan Budaya Takbenda (2010)." },
 
-  { no:13, id:"jateng", nama:"Jawa Tengah", ibukota:"Semarang", pulau:"Jawa", x:36, y:50,
+  { no:13, id:"jateng", nama:"Jawa Tengah", ibukota:"Semarang", pulau:"Jawa", x:42.4, y:63.0,
     populasi:"36,5 juta", deskripsi:"Jantung budaya Jawa klasik — rumah bagi Keraton Surakarta dan tradisi wayang.",
     suku:[{n:"Jawa",d:"Mayoritas"},{n:"Samin",d:"Blora, menolak pajak kolonial"},{n:"Tionghoa-Indonesia",d:"Semarang, Solo"},{n:"Arab-Indonesia",d:"Pekalongan, Kudus"}],
     bahasa:["Bahasa Jawa (Ngoko, Krama, Krama Inggil)","Bahasa Samin","Bahasa Indonesia"],
@@ -730,7 +757,7 @@ const DAERAH = [
     tradisi:[{n:"Sekaten",d:"Perayaan Maulid dengan gamelan"},{n:"Ruwatan Sukerta",d:"Tolak bala dengan wayang"},{n:"Tingkeban",d:"Upacara ibu hamil 7 bulan"}],
     fakta:"Batik diakui UNESCO (2009). Bahasa Jawa punya 3 tingkatan: Ngoko, Krama, Krama Inggil." },
 
-  { no:14, id:"diy", nama:"DI Yogyakarta", ibukota:"Yogyakarta", pulau:"Jawa", x:33, y:57,
+  { no:14, id:"diy", nama:"DI Yogyakarta", ibukota:"Yogyakarta", pulau:"Jawa", x:46.2, y:53.75,
     populasi:"3,7 juta", deskripsi:"Kota Budaya & Kota Pelajar — pusat kebudayaan Jawa dengan Keraton Ngayogyakarta.",
     suku:[{n:"Jawa",d:"Mayoritas"},{n:"Tionghoa-Indonesia",d:"Kawasan Ketandan"},{n:"Arab-Indonesia",d:"Kauman"}],
     bahasa:["Bahasa Jawa Ngoko","Bahasa Jawa Krama","Bahasa Jawa Krama Inggil"],
@@ -744,7 +771,7 @@ const DAERAH = [
     tradisi:[{n:"Sekaten",d:"Perayaan Maulid Nabi"},{n:"Labuhan",d:"Persembahan ke laut selatan"},{n:"Grebeg",d:"Arak-arakan gunungan"}],
     fakta:"Satu-satunya provinsi yang dipimpin Sultan sebagai gubernur (UU Keistimewaan 2012)." },
 
-  { no:15, id:"jatim", nama:"Jawa Timur", ibukota:"Surabaya", pulau:"Jawa", x:41, y:51,
+  { no:15, id:"jatim", nama:"Jawa Timur", ibukota:"Surabaya", pulau:"Jawa", x:49.8, y:62.5,
     populasi:"40,6 juta", deskripsi:"Kota Pahlawan — rumah bagi Suku Jawa, Madura, dan Tengger.",
     suku:[{n:"Jawa",d:"Mayoritas"},{n:"Madura",d:"Karapan sapi"},{n:"Tengger",d:"Gunung Bromo, Hindu kuno"},{n:"Osing",d:"Banyuwangi"},{n:"Samin",d:"Bojonegoro"},{n:"Bawean",d:"Pulau Bawean"}],
     bahasa:["Bahasa Jawa Timur (dialek Arekan)","Bahasa Madura","Bahasa Tengger","Bahasa Osing"],
@@ -758,7 +785,7 @@ const DAERAH = [
     tradisi:[{n:"Karapan Sapi",d:"Balapan sapi khas Madura"},{n:"Kasada",d:"Sesajen ke Gunung Bromo"},{n:"Kebo-keboan",d:"Tradisi Banyuwangi"}],
     fakta:"Suku Tengger adalah keturunan Majapahit yang mempertahankan Hindu-Buddha kuno." },
 
-  { no:37, id:"dki", nama:"DKI Jakarta", ibukota:"Jakarta", pulau:"Jawa", x:30, y:48,
+  { no:37, id:"dki", nama:"DKI Jakarta", ibukota:"Jakarta", pulau:"Jawa", x:34.8, y:63.0,
     populasi:"10,6 juta", deskripsi:"Ibu kota negara — melting pot budaya dari seluruh Nusantara dengan Suku Betawi.",
     suku:[{n:"Betawi",d:"Suku asli Jakarta"},{n:"Jawa",d:"Pendatang terbesar"},{n:"Sunda",d:"Jakarta Selatan & Timur"},{n:"Tionghoa-Indonesia",d:"Glodok, Kelapa Gading"},{n:"Batak",d:"Jakarta Pusat"},{n:"Minang",d:"Pasar Rumput"},{n:"Bugis",d:"Pesisir"},{n:"Madura",d:"Jakarta Utara"}],
     bahasa:["Bahasa Betawi","Bahasa Indonesia","Bahasa Jawa","Bahasa Sunda","Bahasa Hokkien"],
@@ -772,7 +799,7 @@ const DAERAH = [
     tradisi:[{n:"Palang Pintu",d:"Uji silat & pantun pernikahan"},{n:"Ngarak Pengantin",d:"Arak-arakan ondel-ondel"},{n:"Ruwatan",d:"Tolak bala"}],
     fakta:"Suku Betawi adalah hasil akulturasi Melayu, Arab, Tionghoa, Belanda, dan Portugis." },
 
-  { no:16, id:"bali", nama:"Bali", ibukota:"Denpasar", pulau:"Bali & Nusa Tenggara", x:45, y:54,
+  { no:16, id:"bali", nama:"Bali", ibukota:"Denpasar", pulau:"Bali & Nusa Tenggara", x:53.5, y:55.0,
     populasi:"4,3 juta", deskripsi:"Pulau Dewata — Hindu-Bali unik dengan falsafah Tri Hita Karana.",
     suku:[{n:"Bali",d:"Mayoritas, Hindu-Bali"},{n:"Bali Aga",d:"Tenganan, Trunyan"},{n:"Jawa",d:"Pendatang"},{n:"Madura",d:"Komunitas"},{n:"Tionghoa-Indonesia",d:"Denpasar"}],
     bahasa:["Bahasa Bali (Sor Singgih)","Bahasa Kawi (kuno)","Bahasa Indonesia"],
@@ -786,7 +813,7 @@ const DAERAH = [
     tradisi:[{n:"Ngaben",d:"Kremasi jenazah Hindu Bali"},{n:"Nyepi",d:"Hari raya sepi 24 jam"},{n:"Galungan & Kuningan",d:"Kemenangan dharma"},{n:"Mekare-kare",d:"Perang pandan di Tenganan"}],
     fakta:"Sistem subak (irigasi tradisional) diakui UNESCO. Falsafah Tri Hita Karana: harmoni manusia-Tuhan-alam." },
 
-  { no:17, id:"ntb", nama:"Nusa Tenggara Barat", ibukota:"Mataram", pulau:"Bali & Nusa Tenggara", x:49, y:54,
+  { no:17, id:"ntb", nama:"Nusa Tenggara Barat", ibukota:"Mataram", pulau:"Bali & Nusa Tenggara", x:57.5, y:57.0,
     populasi:"5,3 juta", deskripsi:"Bumi Gora — rumah bagi Suku Sasak di Lombok dan Suku Sumbawa.",
     suku:[{n:"Sasak",d:"Lombok, akulturasi Bali-Jawa"},{n:"Sumbawa",d:"Pulau Sumbawa"},{n:"Bima",d:"Bima, budaya kerajaan"},{n:"Bali",d:"Mataram, Lombok Barat"},{n:"Samawa",d:"Sumbawa Besar"},{n:"Mbojo",d:"Bima, Dompu"}],
     bahasa:["Bahasa Sasak","Bahasa Sumbawa (Samawa)","Bahasa Bima (Mbojo)","Bahasa Bali"],
@@ -800,7 +827,7 @@ const DAERAH = [
     tradisi:[{n:"Bau Nyale",d:"Menangkap cacing laut di Lombok"},{n:"Perisean",d:"Adu ketangkasan Sasak"},{n:"Nyongkolan",d:"Arak-arakan pengantin"}],
     fakta:"Suku Sasak memiliki 2 versi Islam: Wetu Telu (sinkretis) dan Wetu Lima (ortodoks) — hidup damai." },
 
-  { no:18, id:"ntt", nama:"Nusa Tenggara Timur", ibukota:"Kupang", pulau:"Bali & Nusa Tenggara", x:56, y:53,
+  { no:18, id:"ntt", nama:"Nusa Tenggara Timur", ibukota:"Kupang", pulau:"Bali & Nusa Tenggara", x:62.0, y:61.25,
     populasi:"5,4 juta", deskripsi:"Bumi Flobamora — rumah bagi suku Flores, Timor, Sumba dengan tradisi megalitik.",
     suku:[{n:"Flores",d:"Katolik kuat"},{n:"Timor (Atoni)",d:"Timor Barat, megalitik"},{n:"Sumba",d:"Pasola, kubur batu"},{n:"Rote",d:"Sasando"},{n:"Alor",d:"Kepulauan Alor"},{n:"Lio",d:"Flores"},{n:"Helong",d:"Kupang, Semau"}],
     bahasa:["Bahasa Dawan","Bahasa Tetun","Bahasa Manggarai","Bahasa Sumba","Bahasa Rote","Bahasa Alor"],
@@ -814,7 +841,7 @@ const DAERAH = [
     tradisi:[{n:"Pasola",d:"Perang berkuda di Sumba"},{n:"Caci",d:"Perang cambuk di Manggarai"},{n:"Penti",d:"Pesta panen Manggarai"}],
     fakta:"Sasando terbuat dari daun lontar. Sumba dijuluki 'Pulau Megalitik Hidup'." },
 
-  { no:19, id:"kalbar", nama:"Kalimantan Barat", ibukota:"Pontianak", pulau:"Kalimantan", x:35, y:33,
+  { no:19, id:"kalbar", nama:"Kalimantan Barat", ibukota:"Pontianak", pulau:"Kalimantan", x:37.0, y:25.0,
     populasi:"5,4 juta", deskripsi:"Kota Khatulistiwa — rumah bagi Dayak Kanayatn, Melayu, dan Tionghoa.",
     suku:[{n:"Dayak Kanayatn",d:"Naik Dango"},{n:"Melayu Pontianak",d:"Bercampur Arab"},{n:"Tionghoa-Indonesia",d:"Pontianak, Singkawang"},{n:"Dayak Iban",d:"Perbatasan Malaysia"},{n:"Dayak Bidayuh",d:"Sanggau, Landak"},{n:"Bugis",d:"Pelaut"}],
     bahasa:["Bahasa Melayu Pontianak","Bahasa Dayak Kanayatn","Bahasa Dayak Iban","Bahasa Khek"],
@@ -828,7 +855,7 @@ const DAERAH = [
     tradisi:[{n:"Naik Dango",d:"Syukuran panen Dayak"},{n:"Cap Go Meh",d:"Perayaan Imlek dengan tatung"},{n:"Gawai Dayak",d:"Perayaan adat Dayak"}],
     fakta:"Pontianak dilalui garis khatulistiwa. Singkawang = 'Kota Seribu Kelenteng' dan kota paling toleran." },
 
-  { no:20, id:"kalteng", nama:"Kalimantan Tengah", ibukota:"Palangkaraya", pulau:"Kalimantan", x:41, y:37,
+  { no:20, id:"kalteng", nama:"Kalimantan Tengah", ibukota:"Palangkaraya", pulau:"Kalimantan", x:42.0, y:35.0,
     populasi:"2,7 juta", deskripsi:"Bumi Tambun Bungai — rumah bagi Suku Dayak Ngaju dengan Rumah Betang.",
     suku:[{n:"Dayak Ngaju",d:"Mayoritas"},{n:"Dayak Maanyan",d:"Kalteng timur"},{n:"Dayak Ot Danum",d:"Pedalaman"},{n:"Dayak Lawangan",d:"Kaltim & Kalteng"},{n:"Melayu",d:"Pesisir"},{n:"Jawa",d:"Transmigran"}],
     bahasa:["Bahasa Ngaju","Bahasa Maanyan","Bahasa Ot Danum","Bahasa Lawangan","Bahasa Melayu"],
@@ -842,7 +869,7 @@ const DAERAH = [
     tradisi:[{n:"Tiwah",d:"Kremasi besar Dayak Ngaju"},{n:"Manasai",d:"Tarian pergaulan Dayak"},{n:"Manyanggar",d:"Tolak bala"}],
     fakta:"Rumah Betang bisa dihuni 30-40 keluarga. Agama Kaharingan adalah agama asli Dayak." },
 
-  { no:21, id:"kalsel", nama:"Kalimantan Selatan", ibukota:"Banjarmasin", pulau:"Kalimantan", x:46, y:41,
+  { no:21, id:"kalsel", nama:"Kalimantan Selatan", ibukota:"Banjarmasin", pulau:"Kalimantan", x:45.5, y:46.25,
     populasi:"4,1 juta", deskripsi:"Kota Seribu Sungai — rumah bagi Suku Banjar dengan budaya sungai.",
     suku:[{n:"Banjar",d:"Mayoritas"},{n:"Dayak Meratus",d:"Pegunungan Meratus"},{n:"Dayak Ngaju",d:"Kalsel utara"},{n:"Jawa",d:"Transmigran"},{n:"Bugis",d:"Pelaut"},{n:"Tionghoa-Indonesia",d:"Banjarmasin"}],
     bahasa:["Bahasa Banjar","Bahasa Dayak Meratus","Bahasa Melayu","Bahasa Jawa"],
@@ -856,7 +883,7 @@ const DAERAH = [
     tradisi:[{n:"Bausung",d:"Menggotong pengantin"},{n:"Batatapas",d:"Tepung tawar pengantin"},{n:"Pasar Terapung",d:"Jual beli di atas perahu"}],
     fakta:"Pasar Terapung Lok Baintan adalah pasar terapung tertua di Indonesia. Kain Sasirangan = batik Banjar." },
 
-  { no:22, id:"kaltim", nama:"Kalimantan Timur", ibukota:"Samarinda", pulau:"Kalimantan", x:49, y:29,
+  { no:22, id:"kaltim", nama:"Kalimantan Timur", ibukota:"Samarinda", pulau:"Kalimantan", x:48.0, y:27.5,
     populasi:"4,0 juta", deskripsi:"Bumi Mulawarman — rumah bagi Kerajaan Kutai, kerajaan Hindu tertua.",
     suku:[{n:"Kutai",d:"Keturunan Kerajaan Kutai"},{n:"Dayak Kenyah",d:"Tari Enggang"},{n:"Dayak Bahau",d:"Pedalaman Mahakam"},{n:"Dayak Benuaq",d:"Kutai Barat"},{n:"Banjar",d:"Kalsel"},{n:"Bugis",d:"Pesisir"},{n:"Jawa",d:"Transmigran"}],
     bahasa:["Bahasa Kutai","Bahasa Kenyah","Bahasa Bahau","Bahasa Benuaq","Bahasa Banjar"],
@@ -870,7 +897,7 @@ const DAERAH = [
     tradisi:[{n:"Hudoq",d:"Tarian topeng Dayak syukuran panen"},{n:"Erau",d:"Festival budaya Kutai"},{n:"Belian",d:"Pengobatan tradisional Dayak"}],
     fakta:"Kerajaan Kutai Martadipura (abad 4 M) adalah kerajaan Hindu tertua di Indonesia." },
 
-  { no:23, id:"kaltara", nama:"Kalimantan Utara", ibukota:"Tanjung Selor", pulau:"Kalimantan", x:48, y:23,
+  { no:23, id:"kaltara", nama:"Kalimantan Utara", ibukota:"Tanjung Selor", pulau:"Kalimantan", x:44.5, y:15.5,
     populasi:"720 ribu", deskripsi:"Provinsi termuda di Kalimantan — rumah bagi Dayak Kenyah & Tidung.",
     suku:[{n:"Dayak Kenyah",d:"Mayoritas"},{n:"Dayak Kayan",d:"Pedalaman"},{n:"Tidung",d:"Pesisir"},{n:"Bulungan",d:"Kesultanan Bulungan"},{n:"Dayak Punan",d:"Nomaden hutan"},{n:"Banjar",d:"Perantau"}],
     bahasa:["Bahasa Kenyah","Bahasa Tidung","Bahasa Bulungan","Bahasa Kayan","Bahasa Punan"],
@@ -884,7 +911,7 @@ const DAERAH = [
     tradisi:[{n:"Hudoq",d:"Tarian topeng Dayak"},{n:"Bepelas",d:"Upacara adat Tidung"},{n:"Nyanggar",d:"Syukuran panen"}],
     fakta:"Kaltara adalah provinsi termuda di Kalimantan (dimekarkan dari Kaltim tahun 2012)." },
 
-  { no:24, id:"sulsel", nama:"Sulawesi Selatan", ibukota:"Makassar", pulau:"Sulawesi", x:55, y:47,
+  { no:24, id:"sulsel", nama:"Sulawesi Selatan", ibukota:"Makassar", pulau:"Sulawesi", x:54.8, y:47.5,
     populasi:"9,1 juta", deskripsi:"Kota Daeng — rumah bagi pelaut ulung Bugis-Makassar dan Suku Toraja.",
     suku:[{n:"Bugis",d:"Pelaut ulung, Siri' na Pacce"},{n:"Makassar",d:"Mayoritas Makassar"},{n:"Toraja",d:"Rambu Solo'"},{n:"Mandar",d:"Sulawesi Barat"},{n:"Konjo",d:"Bulukumba"},{n:"Selayar",d:"Pulau Selayar"}],
     bahasa:["Bahasa Bugis","Bahasa Makassar","Bahasa Toraja (Sa'dan)","Bahasa Mandar","Bahasa Konjo"],
@@ -898,7 +925,7 @@ const DAERAH = [
     tradisi:[{n:"Rambu Solo'",d:"Pemakaman Toraja megah"},{n:"Rambu Tuka'",d:"Syukuran Toraja"},{n:"Ma'randing",d:"Tarian perang Toraja"},{n:"Angngaru",d:"Sumpah prajurit Bugis"}],
     fakta:"Rambu Solo' bisa menghabiskan miliaran rupiah. Falsafah Siri' na Pacce = jiwa Bugis-Makassar." },
 
-  { no:25, id:"sultra", nama:"Sulawesi Tenggara", ibukota:"Kendari", pulau:"Sulawesi", x:58, y:43,
+  { no:25, id:"sultra", nama:"Sulawesi Tenggara", ibukota:"Kendari", pulau:"Sulawesi", x:61.0, y:43.75,
     populasi:"2,7 juta", deskripsi:"Bumi Anoa — rumah bagi Suku Tolaki, Buton, dan Muna.",
     suku:[{n:"Tolaki",d:"Mayoritas"},{n:"Buton",d:"Kesultanan Buton"},{n:"Muna",d:"Pulau Muna"},{n:"Moronene",d:"Bombana"},{n:"Wolio",d:"Baubau"},{n:"Bugis",d:"Pelaut"}],
     bahasa:["Bahasa Tolaki","Bahasa Buton (Wolio)","Bahasa Muna","Bahasa Moronene","Bahasa Bugis"],
@@ -912,7 +939,7 @@ const DAERAH = [
     tradisi:[{n:"Mosehe",d:"Ritual penyucian Tolaki"},{n:"Tari Lariangi",d:"Tarian penyambutan"},{n:"Haroana",d:"Pesta adat Buton"}],
     fakta:"Benteng Keraton Buton adalah benteng terluas di dunia (23,375 hektar)." },
 
-  { no:26, id:"sulbar", nama:"Sulawesi Barat", ibukota:"Mamuju", pulau:"Sulawesi", x:52, y:39,
+  { no:26, id:"sulbar", nama:"Sulawesi Barat", ibukota:"Mamuju", pulau:"Sulawesi", x:52.0, y:35.0,
     populasi:"1,4 juta", deskripsi:"Provinsi termuda di Sulawesi — rumah bagi Suku Mandar, pelaut ulung.",
     suku:[{n:"Mandar",d:"Mayoritas, pelaut"},{n:"Bugis",d:"Perantau"},{n:"Toraja",d:"Perbatasan Sulsel"},{n:"Mamuju",d:"Suku lokal"},{n:"Kalumpang",d:"Pedalaman"}],
     bahasa:["Bahasa Mandar","Bahasa Bugis","Bahasa Toraja","Bahasa Mamuju"],
@@ -926,7 +953,7 @@ const DAERAH = [
     tradisi:[{n:"Mappande Banua",d:"Syukuran rumah baru"},{n:"Sayyang Pattu'du",d:"Kuda menari"},{n:"Mesa Kada",d:"Upacara adat"}],
     fakta:"Sulawesi Barat adalah provinsi termuda di Sulawesi (dimekarkan 2004)." },
 
-  { no:27, id:"sulteng", nama:"Sulawesi Tengah", ibukota:"Palu", pulau:"Sulawesi", x:57, y:34,
+  { no:27, id:"sulteng", nama:"Sulawesi Tengah", ibukota:"Palu", pulau:"Sulawesi", x:56.0, y:32.5,
     populasi:"3,0 juta", deskripsi:"Kota Teluk Palu — rumah bagi Suku Kaili dan tradisi megalitik Lembah Bada.",
     suku:[{n:"Kaili",d:"Mayoritas"},{n:"Banggai",d:"Kepulauan Banggai"},{n:"Toli-Toli",d:"Toli-Toli"},{n:"Bugis",d:"Pesisir"},{n:"Mandar",d:"Sulbar"},{n:"Saluan",d:"Banggai"},{n:"Balantak",d:"Banggai"}],
     bahasa:["Bahasa Kaili","Bahasa Banggai","Bahasa Toli-Toli","Bahasa Saluan","Bahasa Balantak"],
@@ -940,7 +967,7 @@ const DAERAH = [
     tradisi:[{n:"Vunja",d:"Upacara adat Kaili"},{n:"Nolunu",d:"Penyembuhan tradisional"},{n:"Padungku",d:"Syukuran adat Kaili"}],
     fakta:"Lembah Bada menyimpan ratusan patung megalitik berusia 3.000+ tahun." },
 
-  { no:28, id:"gorontalo", nama:"Gorontalo", ibukota:"Gorontalo", pulau:"Sulawesi", x:60, y:28,
+  { no:28, id:"gorontalo", nama:"Gorontalo", ibukota:"Gorontalo", pulau:"Sulawesi", x:60.0, y:22.5,
     populasi:"1,2 juta", deskripsi:"Serambi Madinah — rumah bagi Suku Gorontalo dengan budaya Islam kuat.",
     suku:[{n:"Gorontalo",d:"Mayoritas, Islam kuat"},{n:"Suvu",d:"Pegunungan"},{n:"Atinggola",d:"Gorontalo Utara"},{n:"Bolango",d:"Bone Bolango"},{n:"Bugis",d:"Pelaut"}],
     bahasa:["Bahasa Gorontalo","Bahasa Suwawa","Bahasa Atinggola","Bahasa Bolango"],
@@ -954,7 +981,7 @@ const DAERAH = [
     tradisi:[{n:"Tumbilotohe",d:"Lampu minyak 3 malam terakhir Ramadhan"},{n:"Molapi Saronde",d:"Menginjak telur saat pernikahan"},{n:"Dikili",d:"Zikir bersama"}],
     fakta:"Gorontalo dijuluki 'Serambi Madinah'. Tumbilotohe = warisan budaya takbenda Indonesia." },
 
-  { no:29, id:"sulut", nama:"Sulawesi Utara", ibukota:"Manado", pulau:"Sulawesi", x:65, y:25,
+  { no:29, id:"sulut", nama:"Sulawesi Utara", ibukota:"Manado", pulau:"Sulawesi", x:63.5, y:23.75,
     populasi:"2,6 juta", deskripsi:"Kota Tinutuan — rumah bagi Suku Minahasa dengan falsafah Si Tou Timou Tumou Tou.",
     suku:[{n:"Minahasa",d:"8 sub-suku"},{n:"Sangir",d:"Kepulauan Sangihe"},{n:"Talaud",d:"Kepulauan Talaud"},{n:"Bolaang Mongondow",d:"Bolaang Mongondow"},{n:"Gorontalo",d:"Perbatasan"},{n:"Tionghoa-Indonesia",d:"Manado"}],
     bahasa:["Bahasa Manado (Melayu Manado)","Bahasa Minahasa","Bahasa Sangir","Bahasa Talaud","Bahasa Mongondow"],
@@ -968,7 +995,7 @@ const DAERAH = [
     tradisi:[{n:"Pengucapan Syukur",d:"Syukuran panen tahunan"},{n:"Mapalus",d:"Sistem gotong royong"},{n:"Foso Rumah",d:"Gotong royong bangun rumah"}],
     fakta:"Kolintang diakui UNESCO (2013). Falsafah 'Si Tou Timou Tumou Tou' = manusia hidup untuk memanusiakan orang lain." },
 
-  { no:30, id:"maluku", nama:"Maluku", ibukota:"Ambon", pulau:"Maluku", x:72, y:38,
+  { no:30, id:"maluku", nama:"Maluku", ibukota:"Ambon", pulau:"Maluku", x:70.0, y:36.25,
     populasi:"1,8 juta", deskripsi:"Kepulauan Rempah — pusat perdagangan rempah dunia abad ke-16.",
     suku:[{n:"Ambon",d:"Mayoritas, musik kuat"},{n:"Ternate",d:"Malut"},{n:"Buru",d:"Pulau Buru"},{n:"Seram",d:"Pulau Seram"},{n:"Kei",d:"Kepulauan Kei"},{n:"Tanimbar",d:"Kepulauan Tanimbar"},{n:"Aru",d:"Kepulauan Aru"}],
     bahasa:["Bahasa Ambon (Melayu Ambon)","Bahasa Kei","Bahasa Tanimbar","Bahasa Buru","Bahasa Seram"],
@@ -982,7 +1009,7 @@ const DAERAH = [
     tradisi:[{n:"Pukul Sapu",d:"Saling memukul dengan sapu lidi"},{n:"Bambu Gila",d:"Tradisi mistis"},{n:"Cuci Negeri",d:"Bersih-bersih kampung"},{n:"Sasi",d:"Larangan adat menjaga alam"}],
     fakta:"Maluku = satu-satunya sumber cengkih & pala dunia sebelum abad 17." },
 
-  { no:31, id:"malut", nama:"Maluku Utara", ibukota:"Sofifi", pulau:"Maluku", x:70, y:26,
+  { no:31, id:"malut", nama:"Maluku Utara", ibukota:"Sofifi", pulau:"Maluku", x:68.0, y:21.25,
     populasi:"1,3 juta", deskripsi:"Kota Rempah — pusat Kesultanan Ternate, kerajaan Islam tertua di Maluku.",
     suku:[{n:"Ternate",d:"Kesultanan Ternate"},{n:"Tidore",d:"Kesultanan Tidore"},{n:"Bacan",d:"Pulau Bacan"},{n:"Tobelo",d:"Halmahera Utara"},{n:"Galela",d:"Halmahera"},{n:"Makian",d:"Pulau Makian"}],
     bahasa:["Bahasa Ternate","Bahasa Tidore","Bahasa Tobelo","Bahasa Galela","Bahasa Bacan","Bahasa Makian"],
@@ -996,7 +1023,7 @@ const DAERAH = [
     tradisi:[{n:"Legu Salai",d:"Tarian perang Ternate"},{n:"Soya-Soya",d:"Tarian kemenangan Sultan"},{n:"Kololi Kie",d:"Keliling pulau Ternate setahun sekali"}],
     fakta:"Kesultanan Ternate (1257) = kerajaan Islam tertua. Sultan Baabullah mengusir Portugis dari Maluku (1575)." },
 
-  { no:32, id:"papbar", nama:"Papua Barat", ibukota:"Manokwari", pulau:"Papua", x:82, y:33,
+  { no:32, id:"papbar", nama:"Papua Barat", ibukota:"Manokwari", pulau:"Papua", x:83.0, y:27.5,
     populasi:"1,1 juta", deskripsi:"Kota Injil — rumah bagi Suku Biak, Arfak, dan suku pegunungan Arfak.",
     suku:[{n:"Biak",d:"Kepulauan Biak-Numfor"},{n:"Arfak",d:"Pegunungan Arfak, rumah kaki seribu"},{n:"Sough",d:"Sorong"},{n:"Moi",d:"Sorong, Raja Ampat"},{n:"Ayamaru",d:"Maybrat"},{n:"Wandamen",d:"Pesisir selatan"},{n:"Mpur",d:"Kebar"}],
     bahasa:["Bahasa Biak","Bahasa Arfak","Bahasa Moi","Bahasa Sough","Bahasa Ayamaru","Bahasa Wandamen"],
@@ -1010,7 +1037,7 @@ const DAERAH = [
     tradisi:[{n:"Wor",d:"Pesta adat Biak"},{n:"Rumsram",d:"Rumah inisiasi pemuda Biak"},{n:"Kain Timur",d:"Kain sakral mahar & perdamaian"}],
     fakta:"Rumah Kaki Seribu Arfak = tahan gempa & binatang buas." },
 
-  { no:33, id:"papua", nama:"Papua", ibukota:"Jayapura", pulau:"Papua", x:90, y:26,
+  { no:33, id:"papua", nama:"Papua", ibukota:"Jayapura", pulau:"Papua", x:93.0, y:27.5,
     populasi:"3,4 juta", deskripsi:"Bumi Cenderawasih — rumah bagi 250+ suku dan bahasa.",
     suku:[{n:"Sentani",d:"Danau Sentani"},{n:"Biak",d:"Pesisir"},{n:"Yali",d:"Pegunungan tengah"},{n:"Amungme",d:"Pegunungan"},{n:"Waropen",d:"Pesisir"},{n:"Mee",d:"Paniai"}],
     bahasa:["Bahasa Sentani","Bahasa Biak","Bahasa Yali","Bahasa Amungme","Bahasa Waropen","+ 250 bahasa lainnya"],
@@ -1024,7 +1051,7 @@ const DAERAH = [
     tradisi:[{n:"Bakar Batu",d:"Memasak dengan batu panas"},{n:"Wor",d:"Pesta adat Biak"},{n:"Mbitoro",d:"Ukir Asmat"}],
     fakta:"Papua memiliki 250+ bahasa daerah — terbanyak di Indonesia." },
 
-  { no:34, id:"papteng", nama:"Papua Tengah", ibukota:"Nabire", pulau:"Papua", x:86, y:39,
+  { no:34, id:"papteng", nama:"Papua Tengah", ibukota:"Nabire", pulau:"Papua", x:86.0, y:41.25,
     populasi:"1,4 juta", deskripsi:"Provinsi hasil pemekaran 2022 — rumah bagi Suku Mee, Amungme, dan Kamoro.",
     suku:[{n:"Mee",d:"Paniai, petani ubi"},{n:"Amungme",d:"Pegunungan, tambang Freeport"},{n:"Kamoro",d:"Pesisir Mimika, ukir"},{n:"Damal",d:"Pegunungan"},{n:"Nduga",d:"Pegunungan"},{n:"Wolani",d:"Paniai"}],
     bahasa:["Bahasa Mee","Bahasa Amungme","Bahasa Kamoro","Bahasa Damal","Bahasa Nduga"],
@@ -1038,7 +1065,7 @@ const DAERAH = [
     tradisi:[{n:"Bakar Batu",d:"Memasak dengan batu panas"},{n:"Emawin",d:"Pesta adat Mee"},{n:"Mbitoro",d:"Ukir leluhur Kamoro"}],
     fakta:"Papua Tengah adalah provinsi hasil pemekaran tahun 2022." },
 
-  { no:35, id:"pappeg", nama:"Papua Pegunungan", ibukota:"Jayawijaya", pulau:"Papua", x:93, y:32,
+  { no:35, id:"pappeg", nama:"Papua Pegunungan", ibukota:"Jayawijaya", pulau:"Papua", x:88.0, y:26.25,
     populasi:"1,4 juta", deskripsi:"Provinsi pegunungan dengan Lembah Baliem dan tradisi Suku Dani.",
     suku:[{n:"Dani",d:"Lembah Baliem, bakar batu"},{n:"Lani",d:"Pegunungan tengah"},{n:"Yali",d:"Pegunungan"},{n:"Nduga",d:"Pegunungan"},{n:"Damal",d:"Pegunungan"},{n:"Korowai",d:"Rumah pohon"}],
     bahasa:["Bahasa Dani","Bahasa Lani","Bahasa Yali","Bahasa Nduga","Bahasa Damal"],
@@ -1052,7 +1079,7 @@ const DAERAH = [
     tradisi:[{n:"Bakar Batu",d:"Memasak batu panas pesta adat"},{n:"Iki Palek",d:"Potong jari saat berduka"},{n:"Wim",d:"Pesta adat Dani"}],
     fakta:"Honai dibangun rendah untuk menghangatkan ruangan. Suku Korowai membangun rumah di atas pohon setinggi 30m." },
 
-  { no:36, id:"papsel", nama:"Papua Selatan", ibukota:"Merauke", pulau:"Papua", x:92, y:49,
+  { no:36, id:"papsel", nama:"Papua Selatan", ibukota:"Merauke", pulau:"Papua", x:90.5, y:50.0,
     populasi:"520 ribu", deskripsi:"Kota paling timur Indonesia — rumah bagi Suku Marind Anim dan Asmat.",
     suku:[{n:"Marind Anim",d:"Mayoritas, tradisi kuat"},{n:"Muyu",d:"Boven Digoel"},{n:"Mandobo",d:"Boven Digoel"},{n:"Citak",d:"Mappi"},{n:"Asmat",d:"Agats, ukir kayu"},{n:"Kombai",d:"Boven Digoel"}],
     bahasa:["Bahasa Marind","Bahasa Muyu","Bahasa Mandobo","Bahasa Citak","Bahasa Asmat","Bahasa Kombai"],
@@ -1066,7 +1093,7 @@ const DAERAH = [
     tradisi:[{n:"Mbitoro",d:"Ukir leluhur Asmat"},{n:"Bakar Batu",d:"Memasak batu panas"},{n:"Wuramon",d:"Pesta adat Asmat"},{n:"Emak Cem",d:"Inisiasi pemuda Marind"}],
     fakta:"Merauke = kota paling timur Indonesia. Suku Asmat terkenal seni ukir kayu diakui dunia." },
 
-  { no:38, id:"papbarda", nama:"Papua Barat Daya", ibukota:"Sorong", pulau:"Papua", x:79, y:32,
+  { no:38, id:"papbarda", nama:"Papua Barat Daya", ibukota:"Sorong", pulau:"Papua", x:79.0, y:32.5,
     populasi:"620 ribu", deskripsi:"Provinsi hasil pemekaran 2022 — rumah bagi Suku Moi dan Raja Ampat.",
     suku:[{n:"Moi",d:"Sorong, Raja Ampat"},{n:"Maya",d:"Pulau Salawati"},{n:"Biak",d:"Pesisir"},{n:"Tehit",d:"Sorong Selatan"},{n:"Mpur",d:"Kebar"},{n:"Karon",d:"Pegunungan"}],
     bahasa:["Bahasa Moi","Bahasa Maya","Bahasa Tehit","Bahasa Mpur","Bahasa Karon"],
@@ -1082,22 +1109,90 @@ const DAERAH = [
 ];
 
 /* ============================================================
+   PETA FALLBACK (SVG) — dipakai bila map-indonesia.jpg tidak ada
+   ============================================================ */
+const FALLBACK_MAP_SVG = `
+<svg class="map-svg" viewBox="0 0 1000 400" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs>
+    <linearGradient id="seaGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#dbeafe"/>
+      <stop offset="100%" stop-color="#93c5fd"/>
+    </linearGradient>
+    <linearGradient id="landGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#86efac"/>
+      <stop offset="100%" stop-color="#22c55e"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="400" fill="url(#seaGrad)"/>
+  <g fill="url(#landGrad)" stroke="#16a34a" stroke-width="1.5" stroke-linejoin="round">
+    <!-- Sumatra -->
+    <ellipse cx="185" cy="125" rx="118" ry="42" transform="rotate(42 185 125)"/>
+    <!-- Jawa -->
+    <ellipse cx="405" cy="233" rx="118" ry="26"/>
+    <!-- Kalimantan -->
+    <ellipse cx="430" cy="125" rx="78" ry="68"/>
+    <!-- Sulawesi -->
+    <ellipse cx="600" cy="92"  rx="52" ry="15" transform="rotate(15 600 92)"/>
+    <ellipse cx="540" cy="145" rx="30" ry="55"/>
+    <ellipse cx="612" cy="178" rx="48" ry="13" transform="rotate(35 612 178)"/>
+    <ellipse cx="556" cy="196" rx="14" ry="30" transform="rotate(-5 556 196)"/>
+    <!-- Maluku -->
+    <ellipse cx="680" cy="88"  rx="13" ry="26" transform="rotate(15 680 88)"/>
+    <ellipse cx="702" cy="142" rx="10" ry="34" transform="rotate(-10 702 142)"/>
+    <ellipse cx="724" cy="105" rx="8"  ry="16"/>
+    <!-- Papua -->
+    <ellipse cx="878" cy="152" rx="95" ry="56" transform="rotate(-8 878 152)"/>
+    <ellipse cx="788" cy="126" rx="32" ry="26"/>
+    <!-- Bali & Nusa Tenggara -->
+    <ellipse cx="535" cy="224" rx="8"  ry="13"/>
+    <ellipse cx="578" cy="228" rx="22" ry="9"  transform="rotate(-10 578 228)"/>
+    <ellipse cx="618" cy="238" rx="26" ry="8"  transform="rotate(-8 618 238)"/>
+    <ellipse cx="665" cy="252" rx="20" ry="9"  transform="rotate(-20 665 252)"/>
+  </g>
+</svg>`;
+
+/* ============================================================
    STATE & UTIL
    ============================================================ */
-let exploredSet = new Set(JSON.parse(localStorage.getItem("bhinneka_explored_v6") || "[]"));
+const STORAGE_KEY_EXPLORED = "bhinneka_explored_v6";
+const STORAGE_KEY_JURNAL   = "bhinneka_jurnal_v1";
+
+/* localStorage bisa diblokir (mode privat / file://) → jangan sampai crash */
+const safeStorage = {
+  get(key, fallback) {
+    try { const v = localStorage.getItem(key); return v === null ? fallback : v; }
+    catch (e) { return fallback; }
+  },
+  set(key, value) {
+    try { localStorage.setItem(key, value); return true; }
+    catch (e) { console.warn("[Bhinneka Edu] localStorage tidak tersedia:", e); return false; }
+  }
+};
+
+let exploredSet = new Set((() => {
+  try { return JSON.parse(safeStorage.get(STORAGE_KEY_EXPLORED, "[]")) || []; }
+  catch (e) { return []; }
+})());
+
 let mapScale = 1;
 let state = { currentDaerah: null, currentTab: "suku", currentFilter: "semua" };
+
+function saveExplored() {
+  safeStorage.set(STORAGE_KEY_EXPLORED, JSON.stringify([...exploredSet]));
+}
 
 function renderHotspots() {
   const canvas = document.getElementById("mapCanvas");
   if (!canvas) return;
   canvas.querySelectorAll(".hotspot").forEach(h => h.remove());
   DAERAH.forEach(d => {
-    const h = document.createElement("div");
+    const h = document.createElement("button");
+    h.type = "button";
     const isExplored = exploredSet.has(d.id);
     h.className = "hotspot" + (isExplored ? " explored" : "");
     h.style.left = d.x + "%";
     h.style.top = d.y + "%";
+    h.setAttribute("aria-label", `Provinsi ${d.no}. ${d.nama}`);
     h.innerHTML = `${d.no}<span class="tip">${d.no}. ${d.nama}</span>`;
     h.dataset.id = d.id;
     h.onclick = (e) => { e.stopPropagation(); openModalDaerah(d.id); };
@@ -1106,21 +1201,14 @@ function renderHotspots() {
   updateExploreProgress();
 }
 
-window.handleMapError = function() {
+window.handleMapError = function () {
   const img = document.getElementById("mapImage");
-  if (img) img.style.display = "none";
   const canvas = document.getElementById("mapCanvas");
-  if (canvas) {
-    canvas.style.minHeight = "560px";
-    // Placeholder bergaya kepulauan
-    canvas.style.background = `
-      radial-gradient(ellipse 16% 20% at 15% 25%, rgba(34,197,94,.55), transparent 72%),
-      radial-gradient(ellipse 10% 28% at 33% 52%, rgba(34,197,94,.55), transparent 72%),
-      radial-gradient(ellipse 14% 16% at 46% 36%, rgba(34,197,94,.55), transparent 72%),
-      radial-gradient(ellipse 7% 20% at 53% 44%, rgba(34,197,94,.55), transparent 72%),
-      radial-gradient(ellipse 12% 14% at 90% 36%, rgba(34,197,94,.55), transparent 72%),
-      radial-gradient(ellipse 8% 12% at 70% 34%, rgba(34,197,94,.55), transparent 72%),
-      linear-gradient(180deg, #bae6fd 0%, #7dd3fc 100%)`;
+  if (!canvas) return;
+  if (img) img.style.display = "none";
+  if (!canvas.querySelector("svg.map-svg")) {
+    canvas.classList.add("is-fallback");
+    canvas.insertAdjacentHTML("afterbegin", FALLBACK_MAP_SVG);
   }
   const fb = document.getElementById("petaFallback");
   if (fb) fb.classList.remove("hidden");
@@ -1129,23 +1217,27 @@ window.handleMapError = function() {
 
 function updateExploreProgress() {
   const total = DAERAH.length;
-  const count = exploredSet.size;
-  document.getElementById("exploreCount").innerText = count;
-  document.getElementById("exploreBar").style.width = Math.min(100, (count / total) * 100) + "%";
+  const count = [...exploredSet].filter(id => DAERAH.some(d => d.id === id)).length;
+  const elCount = document.getElementById("exploreCount");
+  const elBar = document.getElementById("exploreBar");
+  if (elCount) elCount.innerText = count;
+  if (elBar) elBar.style.width = Math.min(100, (count / total) * 100) + "%";
 }
 
-window.mapZoom = function(factor) {
+window.mapZoom = function (factor) {
   mapScale = Math.max(0.6, Math.min(2.5, mapScale * factor));
-  document.getElementById("mapCanvas").style.transform = `scale(${mapScale})`;
+  const c = document.getElementById("mapCanvas");
+  if (c) c.style.transform = `scale(${mapScale})`;
 };
-window.mapReset = function() {
+window.mapReset = function () {
   mapScale = 1;
-  document.getElementById("mapCanvas").style.transform = "scale(1)";
+  const c = document.getElementById("mapCanvas");
+  if (c) c.style.transform = "scale(1)";
 };
-window.toggleFullscreenMap = function() {
+window.toggleFullscreenMap = function () {
   const el = document.querySelector(".map-wrapper");
   if (!el) return;
-  if (!document.fullscreenElement) el.requestFullscreen?.();
+  if (!document.fullscreenElement) el.requestFullscreen?.().catch(() => {});
   else document.exitFullscreen?.();
 };
 
@@ -1173,23 +1265,23 @@ function renderRegionList(filter = "semua", query = "") {
   `).join("");
 }
 
-window.filterIsland = function(island, el) {
+window.filterIsland = function (island, el) {
   state.currentFilter = island;
   document.querySelectorAll(".filter-pill").forEach(p => p.classList.remove("active"));
-  el.classList.add("active");
+  if (el) el.classList.add("active");
   renderRegionList(island, document.getElementById("searchRegion")?.value || "");
 };
 
-window.searchRegion = function(q) { renderRegionList(state.currentFilter, q); };
+window.searchRegion = function (q) { renderRegionList(state.currentFilter, q); };
 
-window.randomExplore = function() {
+window.randomExplore = function () {
   const notExplored = DAERAH.filter(d => !exploredSet.has(d.id));
   const pool = notExplored.length ? notExplored : DAERAH;
   const pick = pool[Math.floor(Math.random() * pool.length)];
   openModalDaerah(pick.id);
 };
 
-window.openModalDaerah = function(id) {
+window.openModalDaerah = function (id) {
   const d = DAERAH.find(x => x.id === id);
   if (!d) return;
   state.currentDaerah = id;
@@ -1210,24 +1302,24 @@ window.openModalDaerah = function(id) {
 
   if (!exploredSet.has(d.id)) {
     exploredSet.add(d.id);
-    localStorage.setItem("bhinneka_explored_v6", JSON.stringify([...exploredSet]));
+    saveExplored();
     updateExploreProgress();
     renderHotspots();
     renderRegionList(state.currentFilter, document.getElementById("searchRegion")?.value || "");
   }
 };
 
-window.closeModalDaerah = function() {
+window.closeModalDaerah = function () {
   document.getElementById("modalDaerah").classList.remove("show");
   if (!document.getElementById("authModal").classList.contains("show")) {
     document.body.style.overflow = "";
   }
 };
 
-window.switchTab = function(tab, el) {
+window.switchTab = function (tab, el) {
   state.currentTab = tab;
   document.querySelectorAll("#modalDaerah .modal-tab").forEach(t => t.classList.remove("active"));
-  el.classList.add("active");
+  if (el) el.classList.add("active");
   renderModalTab(tab);
 };
 
@@ -1312,7 +1404,7 @@ function renderModalTab(tab) {
 }
 
 /* ============================================================
-   MODUL PEMBELAJARAN (FIX: showModul didefinisikan)
+   MODUL PEMBELAJARAN
    ============================================================ */
 const MODUL = {
   1: {
@@ -1636,8 +1728,7 @@ const MODUL = {
   },
 };
 
-/* FIX: fungsi showModul yang hilang */
-window.showModul = function(n) {
+window.showModul = function (n) {
   const data = MODUL[n];
   if (!data) return;
   const container = document.getElementById("modulContent");
@@ -1714,7 +1805,7 @@ function buildQuiz() {
   quizIdx = 0; quizScore = 0; userAnswers = [];
 }
 
-window.renderQuiz = function() {
+window.renderQuiz = function () {
   const q = QUIZ_QUESTIONS[quizIdx];
   if (!q) return;
   quizAnswered = false;
@@ -1737,17 +1828,17 @@ window.renderQuiz = function() {
     body += `</div>`;
   } else {
     body += `<input id="fillAnswer" type="text" placeholder="Jawabanmu..." class="w-full p-3 rounded-lg border border-slate-300 focus:border-merah outline-none" onkeydown="if(event.key==='Enter'){event.preventDefault();answerFill();}">
-      <button onclick="answerFill()" class="mt-3 bg-merah text-white px-5 py-2 rounded-lg font-semibold hover:bg-red-800">Jawab</button>`;
+      <button type="button" onclick="answerFill()" class="mt-3 bg-merah text-white px-5 py-2 rounded-lg font-semibold hover:bg-red-800">Jawab</button>`;
   }
   document.getElementById("quizBody").innerHTML = body;
 };
 
-window.answerQuizByIndex = function(i, el) {
+window.answerQuizByIndex = function (i, el) {
   const q = QUIZ_QUESTIONS[quizIdx];
   if (!q || !q.options) return;
-  const opt = q.options[i];
   if (quizAnswered) return;
   quizAnswered = true;
+  const opt = q.options[i];
   const correct = opt === q.answer;
   userAnswers.push({ q: q.q, userAns: opt, correctAns: q.answer, isCorrect: correct });
   document.querySelectorAll("#quizBody .quiz-opt").forEach(o => {
@@ -1757,7 +1848,6 @@ window.answerQuizByIndex = function(i, el) {
   if (correct) { el.style.background = "#16a34a"; el.style.color = "white"; el.style.borderColor = "#16a34a"; quizScore += 10; }
   else {
     el.style.background = "#dc2626"; el.style.color = "white"; el.style.borderColor = "#dc2626";
-    // tandai jawaban benar
     document.querySelectorAll("#quizBody .quiz-opt").forEach((o, idx) => {
       if (q.options[idx] === q.answer) {
         o.style.background = "#16a34a"; o.style.color = "white"; o.style.borderColor = "#16a34a";
@@ -1774,12 +1864,13 @@ window.answerQuizByIndex = function(i, el) {
   btn.innerText = quizIdx === QUIZ_TOTAL - 1 ? "Lihat Hasil 🎉" : "Lanjut →";
 };
 
-window.answerFill = function() {
+window.answerFill = function () {
   if (quizAnswered) return;
   const el = document.getElementById("fillAnswer");
   if (!el) return;
   const val = el.value.trim().toLowerCase();
   const q = QUIZ_QUESTIONS[quizIdx];
+  if (!q || !Array.isArray(q.answer)) return;
   const correct = q.answer.some(a => val.includes(a.toLowerCase()));
   quizAnswered = true;
   userAnswers.push({ q: q.q, userAns: val || "(kosong)", correctAns: q.answer[0], isCorrect: correct });
@@ -1813,8 +1904,8 @@ function showQuizResult() {
     <div class="border-l-4 ${a.isCorrect ? 'border-green-500 bg-green-50' : 'border-red-500 bg-red-50'} rounded p-3 mb-2">
       <p class="text-xs font-bold text-slate-600 mb-1">Soal ${i + 1} ${a.isCorrect ? '✅' : '❌'}</p>
       <p class="text-sm font-semibold text-slate-800 mb-1">${a.q}</p>
-      <p class="text-xs text-slate-600">Jawabanmu: <strong>${a.userAns}</strong></p>
-      ${!a.isCorrect ? `<p class="text-xs text-green-700">Jawaban benar: <strong>${a.correctAns}</strong></p>` : ""}
+      <p class="text-xs text-slate-600">Jawabanmu: <strong>${escapeHtml(a.userAns)}</strong></p>
+      ${!a.isCorrect ? `<p class="text-xs text-green-700">Jawaban benar: <strong>${escapeHtml(a.correctAns)}</strong></p>` : ""}
     </div>`).join("");
 
   const res = document.getElementById("quizResult");
@@ -1830,14 +1921,14 @@ function showQuizResult() {
         <p class="text-sm font-bold text-amber-600">Nilai: ${grade} (${pct}%)</p>
       </div>
       <div class="flex gap-2 justify-center mt-4 flex-wrap">
-        <button onclick="restartQuiz()" class="bg-merah text-white px-6 py-3 rounded-lg font-bold hover:bg-red-800"><i class="fa-solid fa-dice"></i> Coba Lagi</button>
-        <button onclick="document.getElementById('reviewBox').classList.toggle('hidden')" class="bg-slate-100 text-slate-700 px-6 py-3 rounded-lg font-bold hover:bg-slate-200"><i class="fa-solid fa-list-check"></i> Pembahasan</button>
+        <button type="button" onclick="restartQuiz()" class="bg-merah text-white px-6 py-3 rounded-lg font-bold hover:bg-red-800"><i class="fa-solid fa-dice"></i> Coba Lagi</button>
+        <button type="button" onclick="document.getElementById('reviewBox').classList.toggle('hidden')" class="bg-slate-100 text-slate-700 px-6 py-3 rounded-lg font-bold hover:bg-slate-200"><i class="fa-solid fa-list-check"></i> Pembahasan</button>
       </div>
       <div id="reviewBox" class="hidden mt-6 text-left max-h-96 overflow-y-auto">${reviewHTML}</div>
     </div>`;
 }
 
-window.restartQuiz = function() {
+window.restartQuiz = function () {
   buildQuiz();
   document.getElementById("quizResult").classList.add("hidden");
   renderQuiz();
@@ -1867,7 +1958,7 @@ async function loadJournalFromCloud() {
   }
 }
 
-window.simpanJurnal = async function() {
+window.simpanJurnal = async function () {
   const val = document.getElementById("jurnalInput").value.trim();
   if (!val) { toast("Jurnal kosong!"); return; }
   const entry = { text: val, time: new Date().toISOString() };
@@ -1884,9 +1975,10 @@ window.simpanJurnal = async function() {
       return;
     }
   } else {
-    let list = JSON.parse(localStorage.getItem("bhinneka_jurnal") || "[]");
+    let list = [];
+    try { list = JSON.parse(safeStorage.get(STORAGE_KEY_JURNAL, "[]")) || []; } catch (e) { list = []; }
     list.unshift(entry);
-    localStorage.setItem("bhinneka_jurnal", JSON.stringify(list));
+    safeStorage.set(STORAGE_KEY_JURNAL, JSON.stringify(list.slice(0, 50)));
     toast("✅ Jurnal tersimpan lokal!");
   }
   document.getElementById("jurnalInput").value = "";
@@ -1894,9 +1986,12 @@ window.simpanJurnal = async function() {
 };
 
 function renderJurnal() {
-  const list = currentUser()
-    ? (cloudJournals || [])
-    : JSON.parse(localStorage.getItem("bhinneka_jurnal") || "[]");
+  let list = [];
+  if (currentUser()) {
+    list = cloudJournals || [];
+  } else {
+    try { list = JSON.parse(safeStorage.get(STORAGE_KEY_JURNAL, "[]")) || []; } catch (e) { list = []; }
+  }
   const el = document.getElementById("jurnalList");
   if (!el) return;
   if (!list.length) {
@@ -1913,6 +2008,7 @@ function updateJurnalStatus() {
   const user = currentUser();
   const status = document.getElementById("jurnalStatus");
   const hint = document.getElementById("jurnalHint");
+  if (!status || !hint) return;
   if (user) {
     status.innerHTML = `☁️ Mode akun <strong>${escapeHtml(user.displayName || user.email)}</strong> — jurnal tersinkron ke cloud.`;
     hint.innerText = "Tersimpan di Firebase";
@@ -1922,7 +2018,7 @@ function updateJurnalStatus() {
   }
 }
 
-window.toggleUserMenu = function(e) {
+window.toggleUserMenu = function (e) {
   if (e) e.stopPropagation();
   const m = document.getElementById("userMenu");
   if (m) m.classList.toggle("hidden");
@@ -1941,7 +2037,7 @@ document.addEventListener("click", (e) => {
    ============================================================ */
 let authMode = "login";
 
-window.openAuthModal = function() {
+window.openAuthModal = function () {
   document.getElementById("authModal").classList.add("show");
   document.body.style.overflow = "hidden";
   if (!firebaseReady) {
@@ -1951,17 +2047,17 @@ window.openAuthModal = function() {
   }
 };
 
-window.closeAuthModal = function() {
+window.closeAuthModal = function () {
   document.getElementById("authModal").classList.remove("show");
   if (!document.getElementById("modalDaerah").classList.contains("show")) {
     document.body.style.overflow = "";
   }
 };
 
-window.switchAuthTab = function(mode, el) {
+window.switchAuthTab = function (mode, el) {
   authMode = mode;
   document.querySelectorAll("#authModal [data-authtab]").forEach(t => t.classList.remove("active"));
-  el.classList.add("active");
+  if (el) el.classList.add("active");
   document.getElementById("authTitle").innerText = mode === "login" ? "Masuk" : "Daftar";
   document.getElementById("authSubtitle").innerText = mode === "login"
     ? "Selamat datang kembali! Lanjutkan petualanganmu. 🇮🇩"
@@ -2000,7 +2096,7 @@ function translateAuthError(err) {
   return map[code] || (err && err.message) || "Terjadi kesalahan.";
 }
 
-window.forgotPassword = async function() {
+window.forgotPassword = async function () {
   if (!firebaseReady) { showAuthError("Firebase belum dikonfigurasi."); return; }
   const email = document.getElementById("authEmail").value.trim();
   if (!email) { showAuthError("Masukkan email dulu, lalu klik Lupa password."); return; }
@@ -2010,7 +2106,7 @@ window.forgotPassword = async function() {
   } catch (err) { showAuthError(translateAuthError(err)); }
 };
 
-window.loginGoogle = async function() {
+window.loginGoogle = async function () {
   if (!firebaseReady) { showAuthError("Firebase belum dikonfigurasi."); return; }
   try {
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -2029,7 +2125,7 @@ window.loginGoogle = async function() {
   }
 };
 
-window.logout = async function() {
+window.logout = async function () {
   if (!firebaseReady) return;
   try {
     await auth.signOut();
@@ -2058,10 +2154,10 @@ function handleAuthChange(user) {
             <p class="text-xs font-bold text-slate-800 truncate">${escapeHtml(name)}</p>
             <p class="text-[10px] text-slate-500 truncate">${escapeHtml(user.email || "")}</p>
           </div>
-          <button onclick="loadJournalFromCloud().then(renderJurnal);document.getElementById('userMenu').classList.add('hidden');toast('☁️ Jurnal disinkronkan');" class="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-krem">
+          <button type="button" onclick="loadJournalFromCloud().then(renderJurnal);document.getElementById('userMenu').classList.add('hidden');toast('☁️ Jurnal disinkronkan');" class="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-krem">
             <i class="fa-solid fa-cloud-arrow-down text-merah"></i> Sinkron Jurnal
           </button>
-          <button onclick="logout()" class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50">
+          <button type="button" onclick="logout()" class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50">
             <i class="fa-solid fa-right-from-bracket"></i> Keluar
           </button>
         </div>
@@ -2069,7 +2165,7 @@ function handleAuthChange(user) {
     loadJournalFromCloud();
   } else {
     area.innerHTML = `
-      <button onclick="openAuthModal()" class="bg-merah text-white px-4 py-2 rounded-lg font-semibold text-sm hover:bg-red-800 transition">
+      <button type="button" onclick="openAuthModal()" class="bg-merah text-white px-4 py-2 rounded-lg font-semibold text-sm hover:bg-red-800 transition">
         <i class="fa-solid fa-user"></i> Masuk
       </button>`;
     cloudJournals = null;
@@ -2084,6 +2180,7 @@ function handleAuthChange(user) {
 let toastTimer;
 function toast(msg) {
   const el = document.getElementById("toast");
+  if (!el) return;
   el.innerText = msg;
   el.classList.remove("hidden");
   el.classList.add("fade-in");
@@ -2096,7 +2193,7 @@ window.toast = toast;
    INIT
    ============================================================ */
 document.addEventListener("DOMContentLoaded", () => {
-  // === Auth form handler ===
+  /* === Auth form handler === */
   const authForm = document.getElementById("authForm");
   if (authForm) {
     authForm.addEventListener("submit", async (e) => {
@@ -2116,7 +2213,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
           const cred = await auth.createUserWithEmailAndPassword(email, password);
           if (name) {
-            try { await cred.user.updateProfile({ displayName: name }); } catch(_){}
+            try { await cred.user.updateProfile({ displayName: name }); } catch (_) {}
           }
           await db.collection("users").doc(cred.user.uid).set({
             name: name || email.split("@")[0],
@@ -2137,7 +2234,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // === Quiz next button ===
+  /* === Quiz next button === */
   const nextBtn = document.getElementById("quizNextBtn");
   if (nextBtn) {
     nextBtn.onclick = () => {
@@ -2146,7 +2243,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 
-  // === MAP IMAGE handling ===
+  /* === MAP IMAGE handling === */
   const img = document.getElementById("mapImage");
   if (img) {
     img.addEventListener("load", () => {
@@ -2154,15 +2251,16 @@ document.addEventListener("DOMContentLoaded", () => {
       renderHotspots();
     });
     img.addEventListener("error", () => { handleMapError(); });
+    // Bila gambar sudah selesai (sukses/gagal) sebelum listener terpasang
     if (img.complete) {
       if (img.naturalWidth > 0) renderHotspots();
       else handleMapError();
     }
   } else {
-    renderHotspots();
+    handleMapError();
   }
 
-  // === Render awal ===
+  /* === Render awal === */
   renderRegionList("semua", "");
   renderJurnal();
   showModul(1);
@@ -2170,7 +2268,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderQuiz();
   updateJurnalStatus();
 
-  // === ESC untuk tutup modal ===
+  /* === ESC untuk tutup modal === */
   document.addEventListener("keydown", (e) => {
     if (e.key !== "Escape") return;
     if (document.getElementById("modalDaerah").classList.contains("show")) closeModalDaerah();
