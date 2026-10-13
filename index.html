@@ -30,200 +30,154 @@
   .progress-bar { transition: width .5s ease; }
   .scroll-x { overflow-x: auto; scrollbar-width: thin; }
 
-  /* ===== PETA ===== */
-  .map-scroll {
-    width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 6px;
-  }
-  .map-scroll::-webkit-scrollbar { height: 8px; }
-  .map-scroll::-webkit-scrollbar-thumb { background: #fbbf24; border-radius: 8px; }
-  .map-scroll::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 8px; }
+  .map-scroll { width:100%; overflow-x:auto; overflow-y:hidden; -webkit-overflow-scrolling:touch; padding-bottom:6px; }
+  .map-scroll::-webkit-scrollbar { height:8px; }
+  .map-scroll::-webkit-scrollbar-thumb { background:#fbbf24; border-radius:8px; }
+  .map-scroll::-webkit-scrollbar-track { background:#f1f5f9; border-radius:8px; }
 
   .map-wrapper {
-    position: relative;
-    width: 100%;
-    min-width: 900px;
-    max-width: 1400px;
-    margin: 0 auto;
-    border-radius: 1.5rem;
-    overflow: hidden;
+    position: relative; width: 100%; min-width: 900px; max-width: 1400px;
+    margin: 0 auto; border-radius: 1.5rem; overflow: hidden;
     box-shadow: 0 25px 50px -12px rgba(0,0,0,.25);
-    border: 4px solid #fef3c7;
-    background: #bae6fd;
+    border: 4px solid #fef3c7; background: #bae6fd;
   }
   .map-canvas { position: relative; width: 100%; }
   .map-canvas img { width: 100%; height: auto; display: block; user-select: none; pointer-events: none; }
   .map-canvas.is-fallback { aspect-ratio: 1000 / 400; }
   .map-canvas.is-fallback svg.map-svg { width: 100%; height: 100%; display: block; }
 
-  .map-zoom-btns {
-    position: absolute; top: 14px; right: 14px;
-    display: flex; flex-direction: column; gap: 6px; z-index: 20;
-  }
+  .map-zoom-btns { position:absolute; top:14px; right:14px; display:flex; flex-direction:column; gap:6px; z-index:20; }
   .map-zoom-btns button {
-    width: 38px; height: 38px; background: rgba(255,255,255,0.95);
-    border-radius: 10px; border: 1px solid #fde68a; color: #b91c1c;
-    font-weight: bold; box-shadow: 0 4px 12px rgba(0,0,0,.15);
-    cursor: pointer; transition: all .2s;
+    width:38px; height:38px; background:rgba(255,255,255,0.95);
+    border-radius:10px; border:1px solid #fde68a; color:#b91c1c;
+    font-weight:bold; box-shadow:0 4px 12px rgba(0,0,0,.15);
+    cursor:pointer; transition:all .2s;
   }
-  .map-zoom-btns button:hover { background: #fef3c7; transform: scale(1.05); }
+  .map-zoom-btns button:hover { background:#fef3c7; transform:scale(1.05); }
 
-  /* ===== MODAL ===== */
   .modal-overlay {
-    display: none; position: fixed; inset: 0;
-    background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(4px);
-    z-index: 200; align-items: flex-start; justify-content: center;
-    padding: 16px; overflow-y: auto;
+    display:none; position:fixed; inset:0;
+    background:rgba(15,23,42,0.75); backdrop-filter:blur(4px);
+    z-index:200; align-items:flex-start; justify-content:center;
+    padding:16px; overflow-y:auto;
   }
-  .modal-overlay.show { display: flex; }
+  .modal-overlay.show { display:flex; }
   .modal-content {
-    background: white; border-radius: 1.5rem; max-width: 900px; width: 100%;
-    margin: 20px auto; overflow: hidden;
-    box-shadow: 0 25px 50px -12px rgba(0,0,0,.5);
-    animation: slideUp .4s ease;
+    background:white; border-radius:1.5rem; max-width:900px; width:100%;
+    margin:20px auto; overflow:hidden;
+    box-shadow:0 25px 50px -12px rgba(0,0,0,.5);
+    animation:slideUp .4s ease;
   }
-  @keyframes slideUp { from{opacity:0; transform: translateY(30px)} to{opacity:1; transform: translateY(0)} }
+  @keyframes slideUp { from{opacity:0; transform:translateY(30px)} to{opacity:1; transform:translateY(0)} }
   .modal-header {
     background: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 50%, #ea580c 100%);
     color: white; padding: 24px 28px; position: relative;
   }
   .modal-tabs {
-    display: flex; overflow-x: auto; gap: 4px;
-    border-bottom: 2px solid #f1f5f9; padding: 0 20px;
-    background: #f8fafc; scrollbar-width: thin;
+    display:flex; overflow-x:auto; gap:4px;
+    border-bottom:2px solid #f1f5f9; padding:0 20px;
+    background:#f8fafc; scrollbar-width:thin;
   }
   .modal-tab {
-    padding: 12px 18px; font-weight: 600; font-size: 13px;
-    color: #64748b; border-bottom: 3px solid transparent;
-    cursor: pointer; white-space: nowrap; transition: all .2s;
-    background: none; border-top: none; border-left: none; border-right: none;
+    padding:12px 18px; font-weight:600; font-size:13px;
+    color:#64748b; border-bottom:3px solid transparent;
+    cursor:pointer; white-space:nowrap; transition:all .2s;
+    background:none; border-top:none; border-left:none; border-right:none;
   }
-  .modal-tab:hover { color: #b91c1c; background: #fef3c7; }
-  .modal-tab.active { color: #b91c1c; border-bottom-color: #b91c1c; background: white; }
+  .modal-tab:hover { color:#b91c1c; background:#fef3c7; }
+  .modal-tab.active { color:#b91c1c; border-bottom-color:#b91c1c; background:white; }
 
-  .info-card {
-    background: #f8fafc; border: 1px solid #e2e8f0;
-    border-radius: 12px; padding: 14px; transition: all .2s;
-  }
-  .info-card:hover { background: #fef3c7; border-color: #fbbf24; }
+  .info-card { background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:14px; transition:all .2s; }
+  .info-card:hover { background:#fef3c7; border-color:#fbbf24; }
 
-  .chip {
-    display: inline-block; padding: 5px 12px; margin: 3px;
-    background: #fef3c7; color: #92400e; border-radius: 20px;
-    font-size: 12px; font-weight: 600; border: 1px solid #fde68a;
-  }
-  .chip.merah { background: #fee2e2; color: #991b1b; border-color: #fecaca; }
-  .chip.biru { background: #dbeafe; color: #1e40af; border-color: #bfdbfe; }
-  .chip.hijau { background: #dcfce7; color: #166534; border-color: #bbf7d0; }
-  .chip.ungu { background: #ede9fe; color: #5b21b6; border-color: #ddd6fe; }
+  .chip { display:inline-block; padding:5px 12px; margin:3px; background:#fef3c7; color:#92400e; border-radius:20px; font-size:12px; font-weight:600; border:1px solid #fde68a; }
+  .chip.merah { background:#fee2e2; color:#991b1b; border-color:#fecaca; }
+  .chip.biru { background:#dbeafe; color:#1e40af; border-color:#bfdbfe; }
+  .chip.hijau { background:#dcfce7; color:#166534; border-color:#bbf7d0; }
+  .chip.ungu { background:#ede9fe; color:#5b21b6; border-color:#ddd6fe; }
 
-  .religion-bar {
-    height: 32px; border-radius: 8px; overflow: hidden;
-    display: flex; box-shadow: inset 0 1px 3px rgba(0,0,0,.1);
-  }
-  .religion-segment {
-    display: flex; align-items: center; justify-content: center;
-    color: white; font-size: 10px; font-weight: 700; min-width: 2px;
-  }
+  .religion-bar { height:32px; border-radius:8px; overflow:hidden; display:flex; box-shadow:inset 0 1px 3px rgba(0,0,0,.1); }
+  .religion-segment { display:flex; align-items:center; justify-content:center; color:white; font-size:10px; font-weight:700; min-width:2px; }
 
   .region-list-item {
-    padding: 10px 12px; border-radius: 8px; cursor: pointer;
-    transition: all .2s; font-size: 12px; font-weight: 600;
-    display: flex; align-items: center; justify-content: space-between; gap: 6px;
-    border: 1px solid transparent;
+    padding:10px 12px; border-radius:8px; cursor:pointer;
+    transition:all .2s; font-size:12px; font-weight:600;
+    display:flex; align-items:center; justify-content:space-between; gap:6px;
+    border:1px solid transparent;
   }
-  .region-list-item:hover { background: #fef3c7; border-color: #fde68a; }
-  .region-list-item.active { background: #b91c1c; color: white; }
-  .badge-island { font-size: 9px; padding: 2px 8px; border-radius: 10px; background: #fef3c7; color: #92400e; font-weight: 700; white-space: nowrap; }
-  .region-list-item.active .badge-island { background: rgba(255,255,255,.25); color: white; }
+  .region-list-item:hover { background:#fef3c7; border-color:#fde68a; }
+  .region-list-item.active { background:#b91c1c; color:white; }
+  .badge-island { font-size:9px; padding:2px 8px; border-radius:10px; background:#fef3c7; color:#92400e; font-weight:700; white-space:nowrap; }
+  .region-list-item.active .badge-island { background:rgba(255,255,255,.25); color:white; }
 
   .filter-pill {
-    padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600;
-    background: white; border: 1px solid #e2e8f0; color: #64748b;
-    cursor: pointer; transition: all .2s; white-space: nowrap;
+    padding:6px 14px; border-radius:20px; font-size:12px; font-weight:600;
+    background:white; border:1px solid #e2e8f0; color:#64748b;
+    cursor:pointer; transition:all .2s; white-space:nowrap;
   }
-  .filter-pill:hover { background: #fef3c7; border-color: #fde68a; }
-  .filter-pill.active { background: #b91c1c; color: white; border-color: #b91c1c; }
+  .filter-pill:hover { background:#fef3c7; border-color:#fde68a; }
+  .filter-pill.active { background:#b91c1c; color:white; border-color:#b91c1c; }
 
   .province-num {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 26px; height: 26px; border-radius: 50%;
-    background: #b91c1c; color: white; font-weight: 800; font-size: 12px;
-    margin-right: 8px; flex-shrink: 0;
+    display:inline-flex; align-items:center; justify-content:center;
+    width:26px; height:26px; border-radius:50%;
+    background:#b91c1c; color:white; font-weight:800; font-size:12px;
+    margin-right:8px; flex-shrink:0;
   }
 
-  .materi-box { background: #f8fafc; border-left: 4px solid #b91c1c; border-radius: 0.5rem; padding: 1rem 1.25rem; margin: 1rem 0; }
-  .materi-box h5 { font-weight: 700; color: #b91c1c; margin-bottom: 0.5rem; }
+  .materi-box { background:#f8fafc; border-left:4px solid #b91c1c; border-radius:0.5rem; padding:1rem 1.25rem; margin:1rem 0; }
+  .materi-box h5 { font-weight:700; color:#b91c1c; margin-bottom:0.5rem; }
 
   .auth-input {
-    width: 100%; padding: 10px 12px; border-radius: 10px;
-    border: 1px solid #cbd5e1; font-size: 14px; outline: none; transition: all .2s;
+    width:100%; padding:10px 12px; border-radius:10px;
+    border:1px solid #cbd5e1; font-size:14px; outline:none; transition:all .2s;
   }
-  .auth-input:focus { border-color: #b91c1c; box-shadow: 0 0 0 3px rgba(185,28,28,.12); }
-  .auth-label { display:block; font-size: 11px; font-weight: 700; color:#475569; margin-bottom: 4px; letter-spacing:.3px; text-transform: uppercase; }
+  .auth-input:focus { border-color:#b91c1c; box-shadow:0 0 0 3px rgba(185,28,28,.12); }
+  .auth-label { display:block; font-size:11px; font-weight:700; color:#475569; margin-bottom:4px; letter-spacing:.3px; text-transform:uppercase; }
 
-  /* Kartu daftar provinsi lengkap */
   .province-card {
-    background: white;
-    border: 1px solid #e2e8f0;
-    border-radius: 16px;
-    padding: 16px;
-    transition: all .2s ease;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+    background:white; border:1px solid #e2e8f0; border-radius:16px;
+    padding:16px; transition:all .2s ease;
+    display:flex; flex-direction:column; gap:8px;
   }
   .province-card:hover {
-    border-color: #fbbf24;
-    box-shadow: 0 8px 20px -8px rgba(185, 28, 28, 0.25);
-    transform: translateY(-2px);
+    border-color:#fbbf24;
+    box-shadow:0 8px 20px -8px rgba(185,28,28,0.25);
+    transform:translateY(-2px);
   }
   .province-card .header-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    border-bottom: 1px dashed #e2e8f0;
-    padding-bottom: 8px;
+    display:flex; align-items:center; gap:10px;
+    border-bottom:1px dashed #e2e8f0; padding-bottom:8px;
   }
   .province-card .number-badge {
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #b91c1c, #ea580c);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 14px;
-    flex-shrink: 0;
+    width:32px; height:32px; border-radius:50%;
+    background:linear-gradient(135deg, #b91c1c, #ea580c);
+    color:white; display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:14px; flex-shrink:0;
   }
-  .province-card .province-name {
-    font-weight: 800;
-    font-size: 15px;
-    color: #1e293b;
-    line-height: 1.2;
-  }
-  .province-card .province-capital {
-    font-size: 11px;
-    color: #64748b;
-  }
-  .province-card .highlight-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-    margin-top: 2px;
-  }
+  .province-card .province-name { font-weight:800; font-size:15px; color:#1e293b; line-height:1.2; }
+  .province-card .province-capital { font-size:11px; color:#64748b; }
+  .province-card .highlight-list { display:flex; flex-wrap:wrap; gap:4px; margin-top:2px; }
   .province-card .highlight-item {
-    font-size: 11px;
-    background: #f1f5f9;
-    padding: 3px 8px;
-    border-radius: 12px;
-    color: #334155;
-    font-weight: 600;
+    font-size:11px; background:#f1f5f9; padding:3px 8px;
+    border-radius:12px; color:#334155; font-weight:600;
   }
+
+  /* Modul: tipografi materi panjang */
+  .modul-isi p { line-height: 1.75; margin-bottom: 0.75rem; }
+  .modul-isi h4 { font-weight: 800; color: #1e293b; margin-top: 1.25rem; margin-bottom: .5rem; font-size: 1.05rem; }
+  .modul-isi h5 { font-weight: 700; color: #b91c1c; margin-bottom: .5rem; }
+  .modul-isi ul, .modul-isi ol { padding-left: 1.25rem; }
+  .modul-isi li { margin-bottom: .35rem; line-height: 1.65; }
+  .modul-isi .materi-box p:last-child { margin-bottom: 0; }
+  .modul-isi blockquote {
+    border-left: 4px solid #f59e0b; background:#fffbeb;
+    padding: 12px 16px; border-radius: 0 8px 8px 0;
+    font-style: italic; color:#78350f; margin: 1rem 0;
+  }
+  .modul-isi table { width:100%; border-collapse: collapse; margin: 1rem 0; font-size: 13px; }
+  .modul-isi table th { background:#fef3c7; color:#7f1d1d; padding:8px 10px; text-align:left; border:1px solid #fde68a; font-weight:700; }
+  .modul-isi table td { padding:8px 10px; border:1px solid #e2e8f0; vertical-align:top; }
 </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
@@ -258,19 +212,17 @@
   <div class="max-w-7xl mx-auto px-4 text-center">
     <span class="inline-block bg-white/20 px-4 py-1 rounded-full text-xs font-semibold mb-3">🇮🇩 38 Provinsi · 1.340 Suku · 1.001 Bahasa</span>
     <h2 class="text-3xl md:text-5xl font-extrabold leading-tight mb-3">Keragaman di Indonesia</h2>
-    <p class="text-white/90 max-w-2xl mx-auto">Jelajahi kekayaan budaya 38 provinsi melalui daftar lengkap di bawah peta.</p>
+    <p class="text-white/90 max-w-2xl mx-auto">Jelajahi kekayaan budaya 38 provinsi dan pelajari materi keberagaman secara mendalam.</p>
   </div>
 </section>
 
-<!-- ==================== PETA 38 PROVINSI ==================== -->
+<!-- PETA -->
 <section id="peta" class="py-10 bg-gradient-to-b from-white to-sky-50">
   <div class="max-w-7xl mx-auto px-4">
     <div class="text-center mb-6">
       <span class="text-xs font-bold text-merah uppercase tracking-widest">Jelajah Nusantara</span>
       <h3 class="text-3xl md:text-4xl font-extrabold text-slate-800 mt-2">Peta Keragaman 38 Provinsi</h3>
-      <p class="text-slate-500 mt-2 max-w-2xl mx-auto">
-        Pilih provinsi dari daftar lengkap di bawah peta untuk melihat profil keberagaman.
-      </p>
+      <p class="text-slate-500 mt-2 max-w-2xl mx-auto">Pilih provinsi dari daftar lengkap di bawah peta untuk melihat profil keberagaman.</p>
     </div>
 
     <div class="flex justify-center flex-wrap gap-2 mb-5">
@@ -291,8 +243,7 @@
             <i class="fa-solid fa-list text-merah"></i>
             <h4 class="font-extrabold text-slate-800">Daftar Provinsi</h4>
           </div>
-          <input id="searchRegion" type="text" placeholder="🔍 Cari provinsi..."
-                 oninput="searchRegion(this.value)"
+          <input id="searchRegion" type="text" placeholder="🔍 Cari provinsi..." oninput="searchRegion(this.value)"
                  class="w-full px-3 py-2 rounded-lg border border-slate-200 focus:border-merah outline-none text-sm mb-3">
           <div id="regionList" class="space-y-1 max-h-[520px] overflow-y-auto pr-1"></div>
           <div class="mt-4 pt-3 border-t border-slate-100">
@@ -330,8 +281,6 @@
             <i class="fa-solid fa-circle-info text-amber-600"></i>
             Peta asli (<code class="bg-white px-1 rounded">map-indonesia.jpg</code>) belum tersedia —
             peta ilustrasi dipakai. Silakan pilih provinsi dari daftar lengkap di bawah.
-            Letakkan file <code class="bg-white px-1 rounded">map-indonesia.jpg</code> di folder yang sama
-            untuk menampilkan peta asli.
           </div>
         </div>
 
@@ -346,7 +295,7 @@
   </div>
 </section>
 
-<!-- ==================== DAFTAR LENGKAP 38 PROVINSI ==================== -->
+<!-- DAFTAR LENGKAP 38 PROVINSI -->
 <section id="daftar-lengkap" class="py-14 bg-white border-t border-slate-200">
   <div class="max-w-7xl mx-auto px-4">
     <div class="text-center mb-10">
@@ -368,13 +317,11 @@
       <button type="button" class="filter-pill" onclick="filterProvinceList('Papua', this)">Papua (6)</button>
     </div>
 
-    <div id="provinceGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-      <!-- Diisi oleh JavaScript -->
-    </div>
+    <div id="provinceGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"></div>
   </div>
 </section>
 
-<!-- ==================== MODAL DETAIL PROVINSI ==================== -->
+<!-- MODAL DETAIL PROVINSI -->
 <div id="modalDaerah" class="modal-overlay" onclick="if(event.target===this)closeModalDaerah()">
   <div class="modal-content">
     <div class="modal-header">
@@ -411,7 +358,7 @@
   </div>
 </div>
 
-<!-- ==================== MODAL AUTH (FIREBASE) ==================== -->
+<!-- MODAL AUTH -->
 <div id="authModal" class="modal-overlay" onclick="if(event.target===this)closeAuthModal()">
   <div class="modal-content" style="max-width:460px;">
     <div class="modal-header">
@@ -432,7 +379,6 @@
     </div>
     <div class="p-6">
       <div id="firebaseWarning" class="hidden mb-4 p-3 bg-amber-50 border border-amber-300 rounded-lg text-xs text-amber-800"></div>
-
       <form id="authForm" class="space-y-3">
         <div id="nameField" class="hidden">
           <label class="auth-label" for="authName">Nama Lengkap</label>
@@ -451,37 +397,28 @@
           <i class="fa-solid fa-right-to-bracket"></i> Masuk
         </button>
       </form>
-
-      <button type="button" id="forgotBtn" onclick="forgotPassword()" class="w-full text-center text-xs text-merah font-semibold mt-3 hover:underline">
-        Lupa password?
-      </button>
-
+      <button type="button" id="forgotBtn" onclick="forgotPassword()" class="w-full text-center text-xs text-merah font-semibold mt-3 hover:underline">Lupa password?</button>
       <div class="flex items-center gap-3 my-4">
         <div class="flex-1 h-px bg-slate-200"></div>
         <span class="text-xs text-slate-400 font-semibold">ATAU</span>
         <div class="flex-1 h-px bg-slate-200"></div>
       </div>
-
       <button type="button" onclick="loginGoogle()" class="w-full bg-white border border-slate-300 py-3 rounded-lg font-bold text-sm text-slate-700 hover:bg-slate-50 flex items-center justify-center gap-2 transition">
         <i class="fa-brands fa-google text-red-500"></i> Masuk dengan Google
       </button>
-
-      <p class="text-center text-[11px] text-slate-500 mt-4 leading-relaxed">
-        Dengan masuk, kamu menyetujui penggunaan data untuk keperluan pembelajaran.
-        Jurnalmu akan tersinkron ke cloud secara otomatis.
-      </p>
     </div>
   </div>
 </div>
 
-<!-- ==================== MODUL ==================== -->
+<!-- MODUL PEMBELAJARAN -->
 <section id="modul" class="py-16 bg-slate-50">
-  <div class="max-w-7xl mx-auto px-4">
+  <div class="max-w-5xl mx-auto px-4">
     <div class="text-center mb-10">
       <span class="text-xs font-bold text-merah uppercase tracking-widest">Modul Pembelajaran</span>
-      <h3 class="text-3xl md:text-4xl font-extrabold text-slate-800 mt-2">5 Modul Keberagaman</h3>
+      <h3 class="text-3xl md:text-4xl font-extrabold text-slate-800 mt-2">5 Modul Keberagaman Indonesia</h3>
+      <p class="text-slate-500 mt-2 max-w-2xl mx-auto">Materi lengkap dari pengertian, faktor penyebab, jenis, konflik, hingga solusinya.</p>
     </div>
-    <div class="scroll-x flex gap-2 mb-6 pb-2">
+    <div class="scroll-x flex gap-2 mb-6 pb-2 justify-start md:justify-center">
       <button type="button" onclick="showModul(1)" id="tabM1" class="modul-tab whitespace-nowrap px-5 py-2 rounded-lg font-semibold border border-slate-200 text-sm">1. Pengertian</button>
       <button type="button" onclick="showModul(2)" id="tabM2" class="modul-tab whitespace-nowrap px-5 py-2 rounded-lg font-semibold border border-slate-200 text-sm">2. 5 Faktor</button>
       <button type="button" onclick="showModul(3)" id="tabM3" class="modul-tab whitespace-nowrap px-5 py-2 rounded-lg font-semibold border border-slate-200 text-sm">3. Jenis & Contoh</button>
@@ -492,7 +429,7 @@
   </div>
 </section>
 
-<!-- ==================== KUIS 15 SOAL ==================== -->
+<!-- KUIS -->
 <section id="kuis" class="py-16 gradient-hero">
   <div class="max-w-3xl mx-auto px-4">
     <div class="text-center mb-8 text-white">
@@ -549,12 +486,12 @@
    FIREBASE INIT
    ============================================================ */
 const firebaseConfig = {
-  apiKey:            "AIzaSyBg31zwq8JzlTYDJInbY3Saxrck6FM7mX8",
-  authDomain:        "bhinneka-edu.firebaseapp.com",
-  projectId:         "bhinneka-edu",
-  storageBucket:     "bhinneka-edu.firebasestorage.app",
-  messagingSenderId: "913789318244",
-  appId:             "1:913789318244:web:0ac90392d8d518abdedb71"
+  apiKey:            "YOUR_API_KEY",
+  authDomain:        "YOUR_PROJECT.firebaseapp.com",
+  projectId:         "YOUR_PROJECT_ID",
+  storageBucket:     "YOUR_PROJECT.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId:             "YOUR_APP_ID"
 };
 
 let firebaseReady = false;
@@ -563,31 +500,23 @@ let db   = null;
 
 (function initFirebase() {
   try {
-    if (typeof firebase === "undefined") {
-      console.warn("[Bhinneka Edu] Firebase SDK belum dimuat.");
-      return;
-    }
-    if (!firebaseConfig.apiKey || firebaseConfig.apiKey.startsWith("YOUR_")) {
-      console.warn("[Bhinneka Edu] Firebase belum dikonfigurasi — jalankan dalam mode tamu.");
-      return;
-    }
+    if (typeof firebase === "undefined") { console.warn("[Bhinneka Edu] Firebase SDK belum dimuat."); return; }
+    if (!firebaseConfig.apiKey || firebaseConfig.apiKey.startsWith("YOUR_")) { console.warn("[Bhinneka Edu] Firebase belum dikonfigurasi — mode tamu."); return; }
     if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
     auth = firebase.auth();
     db   = firebase.firestore();
     firebaseReady = true;
     auth.onAuthStateChanged(handleAuthChange);
-  } catch (e) {
-    console.error("[Bhinneka Edu] Firebase init error:", e);
-  }
+  } catch (e) { console.error("[Bhinneka Edu] Firebase init error:", e); }
 })();
 
 /* ============================================================
-   DATA 38 PROVINSI INDONESIA (sesuai gambar)
+   DATA 38 PROVINSI INDONESIA (ringkas - lihat versi lengkap)
    ============================================================ */
 const DAERAH = [
-  { no:1, id:"aceh", nama:"Aceh", ibukota:"Banda Aceh", pulau:"Sumatra", x:9.0, y:12.5,
-    populasi:"5,3 juta", deskripsi:"Serambi Mekkah — gerbang barat Indonesia dengan syariat Islam dan budaya Melayu yang kental.",
-    suku:[{n:"Aceh",d:"Mayoritas, penutur bahasa Aceh"},{n:"Gayo",d:"Dataran tinggi, kopi arabika"},{n:"Alas",d:"Aceh Tenggara"},{n:"Tamiang",d:"Perbatasan Sumut"},{n:"Simeulue",d:"Pulau Simeulue, kearifan smong"},{n:"Kluet",d:"Aceh Selatan"}],
+  { no:1, id:"aceh", nama:"Aceh", ibukota:"Banda Aceh", pulau:"Sumatra", x:9.0, y:12.5, populasi:"5,3 juta",
+    deskripsi:"Serambi Mekkah — gerbang barat Indonesia dengan syariat Islam dan budaya Melayu yang kental.",
+    suku:[{n:"Aceh",d:"Mayoritas"},{n:"Gayo",d:"Dataran tinggi"},{n:"Alas",d:"Aceh Tenggara"},{n:"Tamiang",d:"Perbatasan Sumut"},{n:"Simeulue",d:"Pulau Simeulue"},{n:"Kluet",d:"Aceh Selatan"}],
     bahasa:["Bahasa Aceh","Bahasa Gayo","Bahasa Alas","Bahasa Tamiang","Bahasa Simeulue","Bahasa Devayan"],
     agama:[{n:"Islam",p:98.5,c:"#16a34a"},{n:"Kristen",p:0.7,c:"#2563eb"},{n:"Buddha",p:0.5,c:"#f59e0b"},{n:"Hindu",p:0.2,c:"#dc2626"},{n:"Lainnya",p:0.1,c:"#64748b"}],
     rumah:[{n:"Krong Bade",d:"Rumah panggung kayu dengan tangga depan"},{n:"Rumoh Aceh",d:"Rumah adat dengan ukiran ayat Al-Qur'an"}],
@@ -596,67 +525,67 @@ const DAERAH = [
     pakaian:["Ulee Balang","Daroh Baro"],
     makanan:["Mie Aceh","Kari Kambing","Timphan","Boh Punah","Sie Reuboh"],
     senjata:["Rencong","Sikin Panyang","Peudeung"],
-    tradisi:[{n:"Peusijuek",d:"Upacara tepung tawar untuk keberkahan"},{n:"Khanduri Maulod",d:"Perayaan Maulid Nabi"},{n:"Khanduri Blang",d:"Syukuran sebelum turun ke sawah"}],
+    tradisi:[{n:"Peusijuek",d:"Upacara tepung tawar"},{n:"Khanduri Maulod",d:"Maulid Nabi"},{n:"Khanduri Blang",d:"Syukuran turun sawah"}],
     fakta:"Satu-satunya provinsi dengan syariat Islam resmi. Tari Saman diakui UNESCO." },
 
-  { no:2, id:"sumut", nama:"Sumatra Utara", ibukota:"Medan", pulau:"Sumatra", x:13.0, y:21.25,
-    populasi:"14,9 juta", deskripsi:"Rumah bagi Danau Toba dan budaya Batak dengan falsafah Dalihan Na Tolu.",
-    suku:[{n:"Batak Toba",d:"Sekitar Danau Toba"},{n:"Batak Karo",d:"Dataran tinggi Karo"},{n:"Batak Simalungun",d:"Kab. Simalungun"},{n:"Batak Mandailing",d:"Mandailing Natal"},{n:"Batak Pakpak",d:"Dairi & Pakpak Bharat"},{n:"Nias",d:"Pulau Nias, tradisi Fahombo"},{n:"Melayu",d:"Pesisir timur"}],
+  { no:2, id:"sumut", nama:"Sumatra Utara", ibukota:"Medan", pulau:"Sumatra", x:13.0, y:21.25, populasi:"14,9 juta",
+    deskripsi:"Rumah bagi Danau Toba dan budaya Batak dengan falsafah Dalihan Na Tolu.",
+    suku:[{n:"Batak Toba",d:"Sekitar Danau Toba"},{n:"Batak Karo",d:"Dataran tinggi Karo"},{n:"Batak Simalungun",d:"Simalungun"},{n:"Batak Mandailing",d:"Mandailing Natal"},{n:"Batak Pakpak",d:"Dairi"},{n:"Nias",d:"Pulau Nias"},{n:"Melayu",d:"Pesisir timur"}],
     bahasa:["Bahasa Batak Toba","Bahasa Karo","Bahasa Simalungun","Bahasa Mandailing","Bahasa Pakpak","Bahasa Nias","Bahasa Melayu"],
     agama:[{n:"Islam",p:62,c:"#16a34a"},{n:"Kristen Protestan",p:28,c:"#2563eb"},{n:"Katolik",p:6,c:"#7c3aed"},{n:"Buddha",p:3,c:"#f59e0b"},{n:"Hindu",p:1,c:"#dc2626"}],
-    rumah:[{n:"Rumah Bolon",d:"Rumah adat Batak Toba, atap melengkung"},{n:"Siwaluh Jabu",d:"Rumah Karo untuk 8 keluarga"},{n:"Omo Sebua",d:"Rumah Nias tanpa paku"}],
+    rumah:[{n:"Rumah Bolon",d:"Rumah adat Batak Toba"},{n:"Siwaluh Jabu",d:"Rumah Karo 8 keluarga"},{n:"Omo Sebua",d:"Rumah Nias tanpa paku"}],
     tarian:["Tari Tortor","Tari Serampang Dua Belas","Tari Piso Surit","Tari Ndurung"],
     musik:["Gondang","Taganing","Sordam","Hapetan"],
-    pakaian:["Ulos (kain tenun sakral)","Bulang-bulang"],
+    pakaian:["Ulos","Bulang-bulang"],
     makanan:["Bika Ambon","Mie Gomak","Arsik","Saksang","Naniura"],
     senjata:["Piso Halasan","Parang","Tumbuk Lada"],
-    tradisi:[{n:"Fahombo",d:"Lompat batu setinggi 2m di Nias"},{n:"Mangongkal Holi",d:"Pemindahan tulang leluhur"},{n:"Marpangir",d:"Upacara di tepi Danau Toba"}],
+    tradisi:[{n:"Fahombo",d:"Lompat batu di Nias"},{n:"Mangongkal Holi",d:"Pemindahan tulang leluhur"},{n:"Marpangir",d:"Upacara tepi Danau Toba"}],
     fakta:"Danau Toba adalah danau vulkanik terbesar di dunia (1.145 km²)." },
 
-  { no:3, id:"sumbar", nama:"Sumatra Barat", ibukota:"Padang", pulau:"Sumatra", x:14.0, y:33.75,
-    populasi:"5,6 juta", deskripsi:"Tanah Minang dengan sistem matrilineal terbesar di dunia dan rendang yang mendunia.",
-    suku:[{n:"Minangkabau",d:"Mayoritas, sistem matrilineal"},{n:"Mentawai",d:"Kepulauan Mentawai, pemburu"},{n:"Melayu",d:"Pesisir"},{n:"Nias",d:"Kepulauan Batu"}],
+  { no:3, id:"sumbar", nama:"Sumatra Barat", ibukota:"Padang", pulau:"Sumatra", x:14.0, y:33.75, populasi:"5,6 juta",
+    deskripsi:"Tanah Minang dengan sistem matrilineal terbesar di dunia dan rendang yang mendunia.",
+    suku:[{n:"Minangkabau",d:"Mayoritas, matrilineal"},{n:"Mentawai",d:"Kepulauan Mentawai"},{n:"Melayu",d:"Pesisir"},{n:"Nias",d:"Kepulauan Batu"}],
     bahasa:["Bahasa Minangkabau","Bahasa Mentawai","Bahasa Melayu"],
     agama:[{n:"Islam",p:97.5,c:"#16a34a"},{n:"Kristen",p:1.8,c:"#2563eb"},{n:"Katolik",p:0.5,c:"#7c3aed"},{n:"Buddha",p:0.2,c:"#f59e0b"}],
-    rumah:[{n:"Rumah Gadang",d:"Atap gonjong, simbol kemenangan"},{n:"Rumah Uma",d:"Rumah panjang Mentawai"}],
+    rumah:[{n:"Rumah Gadang",d:"Atap gonjong"},{n:"Rumah Uma",d:"Rumah panjang Mentawai"}],
     tarian:["Tari Piring","Tari Payung","Tari Indang","Tari Randai"],
     musik:["Saluang","Talempong","Rebab","Bansi"],
     pakaian:["Baju Batabue","Tingkuluak","Suntiang"],
-    makanan:["Rendang (terenak dunia)","Sate Padang","Dendeng Balado","Ayam Pop"],
+    makanan:["Rendang","Sate Padang","Dendeng Balado","Ayam Pop"],
     senjata:["Keris Minang","Karih","Rudus"],
-    tradisi:[{n:"Tabuik",d:"Perayaan 10 Muharram di Pariaman"},{n:"Randai",d:"Teater rakyat dengan silat"},{n:"Batagak Gala",d:"Pengangkatan gelar adat"}],
+    tradisi:[{n:"Tabuik",d:"10 Muharram di Pariaman"},{n:"Randai",d:"Teater rakyat"},{n:"Batagak Gala",d:"Pengangkatan gelar"}],
     fakta:"Rendang dinobatkan makanan terenak nomor 1 dunia versi CNN Travel." },
 
-  { no:4, id:"riau", nama:"Riau", ibukota:"Pekanbaru", pulau:"Sumatra", x:19.0, y:21.25,
-    populasi:"6,5 juta", deskripsi:"Bumi Lancang Kuning — pusat budaya Melayu dengan warisan Kesultanan Siak.",
-    suku:[{n:"Melayu",d:"Mayoritas"},{n:"Minangkabau",d:"Perantau"},{n:"Batak",d:"Perantau"},{n:"Jawa",d:"Transmigran"},{n:"Tionghoa-Indonesia",d:"Komunitas dagang"},{n:"Sakai",d:"Suku pedalaman"}],
+  { no:4, id:"riau", nama:"Riau", ibukota:"Pekanbaru", pulau:"Sumatra", x:19.0, y:21.25, populasi:"6,5 juta",
+    deskripsi:"Bumi Lancang Kuning — pusat budaya Melayu dengan warisan Kesultanan Siak.",
+    suku:[{n:"Melayu",d:"Mayoritas"},{n:"Minangkabau",d:"Perantau"},{n:"Batak",d:"Perantau"},{n:"Jawa",d:"Transmigran"},{n:"Tionghoa-Indonesia",d:"Dagang"},{n:"Sakai",d:"Pedalaman"}],
     bahasa:["Bahasa Melayu Riau","Bahasa Minang","Bahasa Batak","Bahasa Sakai"],
     agama:[{n:"Islam",p:88,c:"#16a34a"},{n:"Kristen",p:8,c:"#2563eb"},{n:"Katolik",p:3,c:"#7c3aed"},{n:"Buddha",p:1,c:"#f59e0b"}],
-    rumah:[{n:"Rumah Selaso Jatuh Kembar",d:"Rumah adat Melayu panggung"},{n:"Rumah Panggung",d:"Rumah tradisional Melayu"}],
+    rumah:[{n:"Rumah Selaso Jatuh Kembar",d:"Rumah adat Melayu"},{n:"Rumah Panggung",d:"Rumah tradisional"}],
     tarian:["Tari Zapin","Tari Persembahan","Tari Melemang"],
     musik:["Gambus","Rebana","Marwas","Gong"],
     pakaian:["Baju Kurung Melayu","Teluk Belanga"],
     makanan:["Gulai Ikan Patin","Asam Pedas","Bolu Kemojo","Mie Sagu"],
     senjata:["Keris Melayu","Tombak"],
-    tradisi:[{n:"Petang Megang",d:"Tradisi menyambut Ramadhan"},{n:"Balimau Kasai",d:"Mandi bersama dengan limau"}],
-    fakta:"Riau memiliki warisan Kesultanan Siak Sri Indrapura yang berpengaruh di Selat Malaka." },
+    tradisi:[{n:"Petang Megang",d:"Sambut Ramadhan"},{n:"Balimau Kasai",d:"Mandi limau"}],
+    fakta:"Riau memiliki warisan Kesultanan Siak Sri Indrapura." },
 
-  { no:5, id:"kepri", nama:"Kepulauan Riau", ibukota:"Tanjungpinang", pulau:"Sumatra", x:24.5, y:22.5,
-    populasi:"2,1 juta", deskripsi:"Provinsi kepulauan dengan 2.408 pulau, budaya Melayu pesisir yang kuat.",
+  { no:5, id:"kepri", nama:"Kepulauan Riau", ibukota:"Tanjungpinang", pulau:"Sumatra", x:24.5, y:22.5, populasi:"2,1 juta",
+    deskripsi:"Provinsi kepulauan dengan 2.408 pulau, budaya Melayu pesisir yang kuat.",
     suku:[{n:"Melayu",d:"Mayoritas"},{n:"Tionghoa-Indonesia",d:"Komunitas besar"},{n:"Jawa",d:"Transmigran"},{n:"Batak",d:"Perantau"},{n:"Minang",d:"Perantau"},{n:"Bugis",d:"Pelaut"}],
     bahasa:["Bahasa Melayu Riau","Bahasa Hokkien","Bahasa Jawa","Bahasa Bugis"],
     agama:[{n:"Islam",p:78,c:"#16a34a"},{n:"Buddha",p:9,c:"#f59e0b"},{n:"Kristen",p:8,c:"#2563eb"},{n:"Katolik",p:3,c:"#7c3aed"},{n:"Konghucu",p:2,c:"#a16207"}],
-    rumah:[{n:"Rumah Belah Bubung",d:"Rumah panggung Melayu"},{n:"Rumah Limas Potong",d:"Rumah adat Melayu Kepri"}],
+    rumah:[{n:"Rumah Belah Bubung",d:"Panggung Melayu"},{n:"Rumah Limas Potong",d:"Rumah adat Kepri"}],
     tarian:["Tari Malemang","Tari Jogi","Tari Zapin"],
     musik:["Gambus","Rebana","Gong"],
     pakaian:["Kebaya Labuh","Teluk Belanga"],
     makanan:["Otak-otak","Laksa","Mie Tarempa","Gonggong"],
     senjata:["Keris","Tombak"],
-    tradisi:[{n:"Mandirikan Ruwah",d:"Tradisi Melayu Kepri"},{n:"Tepuk Tepung Tawar",d:"Upacara keberkahan"}],
-    fakta:"Kepulauan Riau memiliki 2.408 pulau — 96% berupa lautan." },
+    tradisi:[{n:"Mandirikan Ruwah",d:"Tradisi Melayu"},{n:"Tepuk Tepung Tawar",d:"Keberkahan"}],
+    fakta:"Kepulauan Riau memiliki 2.408 pulau — 96% lautan." },
 
-  { no:6, id:"jambi", nama:"Jambi", ibukota:"Jambi", pulau:"Sumatra", x:20.0, y:32.0,
-    populasi:"3,6 juta", deskripsi:"Tanah Pilih Pesako Betuah — rumah bagi Suku Anak Dalam dan warisan Melayu Kuno.",
+  { no:6, id:"jambi", nama:"Jambi", ibukota:"Jambi", pulau:"Sumatra", x:20.0, y:32.0, populasi:"3,6 juta",
+    deskripsi:"Tanah Pilih Pesako Betuah — rumah bagi Suku Anak Dalam dan warisan Melayu Kuno.",
     suku:[{n:"Melayu Jambi",d:"Mayoritas"},{n:"Kubu (Anak Dalam)",d:"Hutan Bukit Duabelas"},{n:"Kerinci",d:"Dataran tinggi"},{n:"Batin",d:"Pedalaman"},{n:"Pindah",d:"Berpindah ladang"}],
     bahasa:["Bahasa Melayu Jambi","Bahasa Kubu","Bahasa Kerinci","Bahasa Batin"],
     agama:[{n:"Islam",p:96,c:"#16a34a"},{n:"Kristen",p:2.5,c:"#2563eb"},{n:"Buddha",p:1,c:"#f59e0b"},{n:"Hindu",p:0.4,c:"#dc2626"}],
@@ -666,456 +595,456 @@ const DAERAH = [
     pakaian:["Baju Kurung Tanggung","Tengkuluk"],
     makanan:["Tempoyak","Gulai Ikan Patin","Nasi Gemuk","Kue Lapis"],
     senjata:["Keris","Tombak","Badik"],
-    tradisi:[{n:"Kenduri Sko",d:"Membersihkan pusaka leluhur Kerinci"},{n:"Betauh",d:"Menumbuk padi bersama"}],
-    fakta:"Suku Anak Dalam (Kubu) masih hidup semi-nomaden di dalam TN Bukit Duabelas." },
+    tradisi:[{n:"Kenduri Sko",d:"Pusaka leluhur Kerinci"},{n:"Betauh",d:"Menumbuk padi"}],
+    fakta:"Suku Anak Dalam (Kubu) masih hidup semi-nomaden di TN Bukit Duabelas." },
 
-  { no:7, id:"bengkulu", nama:"Bengkulu", ibukota:"Bengkulu", pulau:"Sumatra", x:16.5, y:46.25,
-    populasi:"2,0 juta", deskripsi:"Bumi Rafflesia — rumah bagi bunga terbesar di dunia dan Suku Rejang.",
-    suku:[{n:"Rejang",d:"Mayoritas, bahasa Rejang"},{n:"Serawai",d:"Bengkulu Selatan"},{n:"Lembak",d:"Bengkulu Tengah"},{n:"Melayu",d:"Pesisir"},{n:"Enggano",d:"Pulau Enggano"},{n:"Jawa",d:"Transmigran"}],
+  { no:7, id:"bengkulu", nama:"Bengkulu", ibukota:"Bengkulu", pulau:"Sumatra", x:16.5, y:46.25, populasi:"2,0 juta",
+    deskripsi:"Bumi Rafflesia — rumah bagi bunga terbesar di dunia dan Suku Rejang.",
+    suku:[{n:"Rejang",d:"Mayoritas"},{n:"Serawai",d:"Bengkulu Selatan"},{n:"Lembak",d:"Bengkulu Tengah"},{n:"Melayu",d:"Pesisir"},{n:"Enggano",d:"Pulau Enggano"},{n:"Jawa",d:"Transmigran"}],
     bahasa:["Bahasa Rejang","Bahasa Serawai","Bahasa Lembak","Bahasa Enggano","Bahasa Melayu"],
     agama:[{n:"Islam",p:95,c:"#16a34a"},{n:"Kristen",p:2,c:"#2563eb"},{n:"Hindu",p:2,c:"#dc2626"},{n:"Buddha",p:1,c:"#f59e0b"}],
-    rumah:[{n:"Rumah Bubungan Lima",d:"Rumah adat dengan 5 bubungan"},{n:"Rumah Panggung",d:"Rumah tradisional"}],
+    rumah:[{n:"Rumah Bubungan Lima",d:"5 bubungan"},{n:"Rumah Panggung",d:"Rumah tradisional"}],
     tarian:["Tari Andun","Tari Kejei","Tari Ganau"],
     musik:["Dol","Kalak","Serunai","Gendang"],
     pakaian:["Baju Adat Rejang","Depati"],
     makanan:["Pendap","Bagar Hiu","Kue Bay Tat","Lemang"],
     senjata:["Keris","Parang","Tombak"],
-    tradisi:[{n:"Kejei",d:"Perayaan adat Rejang"},{n:"Tabot",d:"Tradisi Muharram seperti Tabuik"},{n:"Nundang Padi",d:"Syukuran panen"}],
-    fakta:"Bengkulu adalah rumah asli bunga Rafflesia arnoldii — bunga terbesar di dunia." },
+    tradisi:[{n:"Kejei",d:"Perayaan adat Rejang"},{n:"Tabot",d:"Tradisi Muharram"},{n:"Nundang Padi",d:"Syukuran panen"}],
+    fakta:"Bengkulu adalah rumah asli bunga Rafflesia arnoldii." },
 
-  { no:8, id:"sumsel", nama:"Sumatra Selatan", ibukota:"Palembang", pulau:"Sumatra", x:23.5, y:40.0,
-    populasi:"8,6 juta", deskripsi:"Bumi Sriwijaya — pusat kerajaan maritim terbesar Nusantara dengan Sungai Musi.",
-    suku:[{n:"Palembang",d:"Mayoritas"},{n:"Komering",d:"Sepanjang Sungai Komering"},{n:"Musi",d:"Sekitar Sungai Musi"},{n:"Ogan",d:"OKI & OKU"},{n:"Pasemah",d:"Dataran tinggi megalitik"},{n:"Semendo",d:"Perantau"}],
+  { no:8, id:"sumsel", nama:"Sumatra Selatan", ibukota:"Palembang", pulau:"Sumatra", x:23.5, y:40.0, populasi:"8,6 juta",
+    deskripsi:"Bumi Sriwijaya — pusat kerajaan maritim terbesar Nusantara dengan Sungai Musi.",
+    suku:[{n:"Palembang",d:"Mayoritas"},{n:"Komering",d:"Sungai Komering"},{n:"Musi",d:"Sungai Musi"},{n:"Ogan",d:"OKI & OKU"},{n:"Pasemah",d:"Dataran tinggi"},{n:"Semendo",d:"Perantau"}],
     bahasa:["Bahasa Palembang","Bahasa Komering","Bahasa Musi","Bahasa Ogan","Bahasa Pasemah"],
     agama:[{n:"Islam",p:96.5,c:"#16a34a"},{n:"Kristen",p:1.8,c:"#2563eb"},{n:"Buddha",p:1.2,c:"#f59e0b"},{n:"Hindu",p:0.4,c:"#dc2626"}],
-    rumah:[{n:"Rumah Limas",d:"Rumah adat 5 tingkat"},{n:"Rumah Rakit",d:"Rumah terapung di Sungai Musi"}],
+    rumah:[{n:"Rumah Limas",d:"5 tingkat"},{n:"Rumah Rakit",d:"Terapung di Sungai Musi"}],
     tarian:["Tari Gending Sriwijaya","Tari Tanggai","Tari Putri Bekhusek"],
     musik:["Gambus","Rebana","Kenong","Gong"],
     pakaian:["Aesan Gede","Aesan Paksangko"],
     makanan:["Pempek","Tekwan","Model","Laksan","Mie Celor"],
     senjata:["Keris Palembang","Tombak","Sikin"],
-    tradisi:[{n:"Perang Ketupat",d:"Tradisi di Desa Air Salek"},{n:"Nganggung",d:"Membawa makanan ke masjid"}],
-    fakta:"Kerajaan Sriwijaya (abad 7-13) berpusat di Palembang — kerajaan maritim terbesar Asia Tenggara." },
+    tradisi:[{n:"Perang Ketupat",d:"Air Salek"},{n:"Nganggung",d:"Makanan ke masjid"}],
+    fakta:"Kerajaan Sriwijaya (abad 7-13) berpusat di Palembang." },
 
-  { no:9, id:"lampung", nama:"Lampung", ibukota:"Bandar Lampung", pulau:"Sumatra", x:27.5, y:50.0,
-    populasi:"9,2 juta", deskripsi:"Sang Bumi Ruwa Jurai — gerbang selatan Sumatra dengan tradisi Pepadun.",
-    suku:[{n:"Lampung Pepadun",d:"Pedalaman, patrilineal"},{n:"Lampung Saibatin",d:"Pesisir"},{n:"Jawa",d:"Transmigran mayoritas"},{n:"Sunda",d:"Lampung Barat"},{n:"Semendo",d:"Perantau"}],
+  { no:9, id:"lampung", nama:"Lampung", ibukota:"Bandar Lampung", pulau:"Sumatra", x:27.5, y:50.0, populasi:"9,2 juta",
+    deskripsi:"Sang Bumi Ruwa Jurai — gerbang selatan Sumatra dengan tradisi Pepadun.",
+    suku:[{n:"Lampung Pepadun",d:"Pedalaman"},{n:"Lampung Saibatin",d:"Pesisir"},{n:"Jawa",d:"Transmigran"},{n:"Sunda",d:"Lampung Barat"},{n:"Semendo",d:"Perantau"}],
     bahasa:["Bahasa Lampung","Bahasa Jawa","Bahasa Sunda","Bahasa Melayu"],
     agama:[{n:"Islam",p:95,c:"#16a34a"},{n:"Kristen",p:2.5,c:"#2563eb"},{n:"Hindu",p:1.5,c:"#dc2626"},{n:"Buddha",p:0.8,c:"#f59e0b"}],
-    rumah:[{n:"Nuwou Sesat",d:"Atap berbentuk tanduk"},{n:"Nuwou Balak",d:"Rumah keluarga besar"}],
+    rumah:[{n:"Nuwou Sesat",d:"Atap tanduk"},{n:"Nuwou Balak",d:"Keluarga besar"}],
     tarian:["Tari Sigeh Penguten","Tari Bedana","Tari Melinting","Tari Jangget"],
     musik:["Bende","Serdam","Gambus Lunik"],
     pakaian:["Tulang Bawang","Pepadun"],
     makanan:["Seruit","Pindang Ikan","Gulai Taboh","Sambal Rampai"],
     senjata:["Keris Lampung","Terapang","Badik"],
-    tradisi:[{n:"Ngejalang",d:"Silaturahmi saat Lebaran"},{n:"Cangget",d:"Tarian muda-mudi Lampung"},{n:"Nayuh",d:"Menangkap ikan bersama"}],
-    fakta:"Lampung memiliki 2 kelompok adat: Pepadun (pedalaman) dan Saibatin (pesisir)." },
+    tradisi:[{n:"Ngejalang",d:"Silaturahmi Lebaran"},{n:"Cangget",d:"Tarian muda-mudi"},{n:"Nayuh",d:"Menangkap ikan"}],
+    fakta:"Lampung memiliki 2 kelompok adat: Pepadun & Saibatin." },
 
-  { no:10, id:"babel", nama:"Kep. Bangka Belitung", ibukota:"Pangkal Pinang", pulau:"Sumatra", x:28.0, y:35.0,
-    populasi:"1,5 juta", deskripsi:"Provinsi kepulauan timah dengan pantai eksotis dan budaya Melayu pesisir.",
-    suku:[{n:"Melayu Bangka",d:"Mayoritas"},{n:"Tionghoa-Indonesia",d:"Komunitas besar, penambang timah"},{n:"Bugis",d:"Pelaut"},{n:"Jawa",d:"Transmigran"},{n:"Sekah",d:"Suku pedalaman Bangka"}],
+  { no:10, id:"babel", nama:"Kep. Bangka Belitung", ibukota:"Pangkal Pinang", pulau:"Sumatra", x:28.0, y:35.0, populasi:"1,5 juta",
+    deskripsi:"Provinsi kepulauan timah dengan pantai eksotis dan budaya Melayu pesisir.",
+    suku:[{n:"Melayu Bangka",d:"Mayoritas"},{n:"Tionghoa-Indonesia",d:"Penambang timah"},{n:"Bugis",d:"Pelaut"},{n:"Jawa",d:"Transmigran"},{n:"Sekah",d:"Pedalaman"}],
     bahasa:["Bahasa Bangka","Bahasa Belitung","Bahasa Hokkien","Bahasa Melayu"],
     agama:[{n:"Islam",p:82,c:"#16a34a"},{n:"Buddha",p:8,c:"#f59e0b"},{n:"Kristen",p:5,c:"#2563eb"},{n:"Konghucu",p:3,c:"#a16207"},{n:"Katolik",p:2,c:"#7c3aed"}],
-    rumah:[{n:"Rumah Limas",d:"Rumah adat Melayu Bangka"},{n:"Rumah Panggung",d:"Rumah tradisional"}],
+    rumah:[{n:"Rumah Limas",d:"Melayu Bangka"},{n:"Rumah Panggung",d:"Rumah tradisional"}],
     tarian:["Tari Campak","Tari Sepen","Tari Kipas"],
     musik:["Gambus","Rebana","Gong","Dambus"],
     pakaian:["Baju Seting","Kain Cual"],
     makanan:["Lempah Kuning","Mie Bangka","Rusip","Otak-otak","Kue Jongkong"],
     senjata:["Parang","Keris"],
-    tradisi:[{n:"Rehong",d:"Tradisi menyambut Lebaran"},{n:"Perang Ketupat",d:"Tradisi di Bangka"},{n:"Nganggung",d:"Makan bersama"}],
-    fakta:"Bangka Belitung adalah penghasil timah terbesar di Indonesia. Kain Cual adalah tenun khas Bangka." },
+    tradisi:[{n:"Rehong",d:"Sambut Lebaran"},{n:"Perang Ketupat",d:"Bangka"},{n:"Nganggung",d:"Makan bersama"}],
+    fakta:"Penghasil timah terbesar Indonesia. Kain Cual = tenun khas Bangka." },
 
-  { no:11, id:"banten", nama:"Banten", ibukota:"Serang", pulau:"Jawa", x:31.0, y:55.0,
-    populasi:"11,9 juta", deskripsi:"Ujung barat Jawa — rumah bagi Suku Baduy yang menolak modernisasi.",
-    suku:[{n:"Sunda Banten",d:"Mayoritas"},{n:"Baduy",d:"Pedalaman Lebak, menolak modernisasi"},{n:"Jawa",d:"Perantau"},{n:"Betawi",d:"Perbatasan Jakarta"},{n:"Tionghoa-Indonesia",d:"Komunitas dagang"}],
+  { no:11, id:"banten", nama:"Banten", ibukota:"Serang", pulau:"Jawa", x:31.0, y:55.0, populasi:"11,9 juta",
+    deskripsi:"Ujung barat Jawa — rumah bagi Suku Baduy yang menolak modernisasi.",
+    suku:[{n:"Sunda Banten",d:"Mayoritas"},{n:"Baduy",d:"Pedalaman Lebak"},{n:"Jawa",d:"Perantau"},{n:"Betawi",d:"Perbatasan Jakarta"},{n:"Tionghoa-Indonesia",d:"Dagang"}],
     bahasa:["Bahasa Sunda Banten","Bahasa Baduy","Bahasa Jawa Serang","Bahasa Betawi"],
     agama:[{n:"Islam",p:96,c:"#16a34a"},{n:"Kristen",p:2,c:"#2563eb"},{n:"Katolik",p:1,c:"#7c3aed"},{n:"Buddha",p:0.8,c:"#f59e0b"},{n:"Hindu",p:0.2,c:"#dc2626"}],
-    rumah:[{n:"Rumah Baduy",d:"Rumah panggung sederhana Suku Baduy"},{n:"Rumah Sulah Nyanda",d:"Rumah adat Sunda Banten"}],
+    rumah:[{n:"Rumah Baduy",d:"Panggung sederhana"},{n:"Rumah Sulah Nyanda",d:"Sunda Banten"}],
     tarian:["Tari Bedhaya","Tari Bendrong Lesung","Tari Rampak Bedug","Tari Jaipong"],
     musik:["Angklung Buhun","Dogdog Lojor","Rampak Bedug","Gendang"],
     pakaian:["Baju Adat Baduy","Kebaya Banten"],
     makanan:["Sate Bandeng","Rabeg","Kue Cucur","Angeun Lada"],
     senjata:["Golok","Keris"],
-    tradisi:[{n:"Sepekan Ruwat Bumi",d:"Tradisi Baduy"},{n:"Kawalu",d:"Upacara Baduy selama 3 bulan"},{n:"Ngaruwat",d:"Syukuran bersama"}],
+    tradisi:[{n:"Sepekan Ruwat Bumi",d:"Baduy"},{n:"Kawalu",d:"Upacara Baduy 3 bulan"},{n:"Ngaruwat",d:"Syukuran"}],
     fakta:"Suku Baduy Dalam menolak listrik, sekolah formal, dan teknologi modern." },
 
-  { no:12, id:"jabar", nama:"Jawa Barat", ibukota:"Bandung", pulau:"Jawa", x:38.6, y:53.75,
-    populasi:"48,6 juta", deskripsi:"Paris van Java — tanah Pasundan dengan budaya Sunda yang kental.",
-    suku:[{n:"Sunda",d:"Mayoritas"},{n:"Cirebon",d:"Pesisir utara, akulturasi"},{n:"Betawi",d:"Perbatasan Jakarta"},{n:"Jawa",d:"Transmigran"},{n:"Tionghoa-Indonesia",d:"Komunitas di Bandung"}],
+  { no:12, id:"jabar", nama:"Jawa Barat", ibukota:"Bandung", pulau:"Jawa", x:38.6, y:53.75, populasi:"48,6 juta",
+    deskripsi:"Paris van Java — tanah Pasundan dengan budaya Sunda yang kental.",
+    suku:[{n:"Sunda",d:"Mayoritas"},{n:"Cirebon",d:"Pesisir utara"},{n:"Betawi",d:"Perbatasan Jakarta"},{n:"Jawa",d:"Transmigran"},{n:"Tionghoa-Indonesia",d:"Bandung"}],
     bahasa:["Bahasa Sunda","Bahasa Cirebon","Bahasa Melayu Betawi","Bahasa Indonesia"],
     agama:[{n:"Islam",p:97,c:"#16a34a"},{n:"Kristen",p:1.8,c:"#2563eb"},{n:"Katolik",p:0.6,c:"#7c3aed"},{n:"Buddha",p:0.4,c:"#f59e0b"},{n:"Hindu",p:0.1,c:"#dc2626"}],
-    rumah:[{n:"Julang Ngapak",d:"Atap melebar seperti sayap burung"},{n:"Capit Gunting",d:"Atap berbentuk gunting"}],
+    rumah:[{n:"Julang Ngapak",d:"Atap sayap burung"},{n:"Capit Gunting",d:"Atap gunting"}],
     tarian:["Tari Jaipong","Tari Merak","Tari Topeng Cirebon","Tari Ketuk Tilu"],
     musik:["Angklung (UNESCO)","Kecapi Suling","Calung","Degung"],
     pakaian:["Kebaya Sunda","Baju Pangsi","Iket Sunda"],
     makanan:["Karedok","Batagor","Siomay","Mie Kocok","Surabi","Bandrek"],
     senjata:["Kujang","Golok","Bedog"],
-    tradisi:[{n:"Seren Taun",d:"Syukuran panen padi"},{n:"Ngaruwat Bumi",d:"Tolak bala"},{n:"Babacakan",d:"Makan bersama di atas daun pisang"}],
+    tradisi:[{n:"Seren Taun",d:"Syukuran panen"},{n:"Ngaruwat Bumi",d:"Tolak bala"},{n:"Babacakan",d:"Makan bersama"}],
     fakta:"Angklung diakui UNESCO sebagai Warisan Budaya Takbenda (2010)." },
 
-  { no:13, id:"jateng", nama:"Jawa Tengah", ibukota:"Semarang", pulau:"Jawa", x:42.4, y:63.0,
-    populasi:"36,5 juta", deskripsi:"Jantung budaya Jawa klasik — rumah bagi Keraton Surakarta dan tradisi wayang.",
-    suku:[{n:"Jawa",d:"Mayoritas"},{n:"Samin",d:"Blora, menolak pajak kolonial"},{n:"Tionghoa-Indonesia",d:"Semarang, Solo"},{n:"Arab-Indonesia",d:"Pekalongan, Kudus"}],
+  { no:13, id:"jateng", nama:"Jawa Tengah", ibukota:"Semarang", pulau:"Jawa", x:42.4, y:63.0, populasi:"36,5 juta",
+    deskripsi:"Jantung budaya Jawa klasik — rumah bagi Keraton Surakarta dan tradisi wayang.",
+    suku:[{n:"Jawa",d:"Mayoritas"},{n:"Samin",d:"Blora"},{n:"Tionghoa-Indonesia",d:"Semarang, Solo"},{n:"Arab-Indonesia",d:"Pekalongan, Kudus"}],
     bahasa:["Bahasa Jawa (Ngoko, Krama, Krama Inggil)","Bahasa Samin","Bahasa Indonesia"],
     agama:[{n:"Islam",p:96,c:"#16a34a"},{n:"Kristen",p:2,c:"#2563eb"},{n:"Katolik",p:1.2,c:"#7c3aed"},{n:"Hindu",p:0.4,c:"#dc2626"},{n:"Buddha",p:0.3,c:"#f59e0b"}],
-    rumah:[{n:"Rumah Joglo",d:"4 tiang utama (soko guru), atap tajug"},{n:"Rumah Limasan",d:"Atap limas"},{n:"Rumah Kampung",d:"Rumah tradisional rakyat"}],
+    rumah:[{n:"Rumah Joglo",d:"4 soko guru"},{n:"Rumah Limasan",d:"Atap limas"},{n:"Rumah Kampung",d:"Rakyat"}],
     tarian:["Tari Gambyong","Tari Serimpi","Tari Bedhaya","Tari Bambangan Cakil"],
     musik:["Gamelan Jawa","Siter","Bonang","Kendang","Rebab"],
     pakaian:["Batik (UNESCO)","Kebaya Jawa","Besar","Jawi Jangkep"],
     makanan:["Gudeg","Lumpia Semarang","Nasi Liwet","Soto Kudus","Wedang Ronde"],
     senjata:["Keris Jawa","Kudi","Tombak"],
-    tradisi:[{n:"Sekaten",d:"Perayaan Maulid dengan gamelan"},{n:"Ruwatan Sukerta",d:"Tolak bala dengan wayang"},{n:"Tingkeban",d:"Upacara ibu hamil 7 bulan"}],
-    fakta:"Batik diakui UNESCO (2009). Bahasa Jawa punya 3 tingkatan: Ngoko, Krama, Krama Inggil." },
+    tradisi:[{n:"Sekaten",d:"Maulid dengan gamelan"},{n:"Ruwatan Sukerta",d:"Tolak bala wayang"},{n:"Tingkeban",d:"Ibu hamil 7 bulan"}],
+    fakta:"Batik diakui UNESCO (2009). Bahasa Jawa punya 3 tingkatan." },
 
-  { no:14, id:"diy", nama:"DI Yogyakarta", ibukota:"Yogyakarta", pulau:"Jawa", x:46.2, y:53.75,
-    populasi:"3,7 juta", deskripsi:"Kota Budaya & Kota Pelajar — pusat kebudayaan Jawa dengan Keraton Ngayogyakarta.",
-    suku:[{n:"Jawa",d:"Mayoritas"},{n:"Tionghoa-Indonesia",d:"Kawasan Ketandan"},{n:"Arab-Indonesia",d:"Kauman"}],
+  { no:14, id:"diy", nama:"DI Yogyakarta", ibukota:"Yogyakarta", pulau:"Jawa", x:46.2, y:53.75, populasi:"3,7 juta",
+    deskripsi:"Kota Budaya & Kota Pelajar — pusat kebudayaan Jawa dengan Keraton Ngayogyakarta.",
+    suku:[{n:"Jawa",d:"Mayoritas"},{n:"Tionghoa-Indonesia",d:"Ketandan"},{n:"Arab-Indonesia",d:"Kauman"}],
     bahasa:["Bahasa Jawa Ngoko","Bahasa Jawa Krama","Bahasa Jawa Krama Inggil"],
     agama:[{n:"Islam",p:92,c:"#16a34a"},{n:"Katolik",p:4,c:"#7c3aed"},{n:"Kristen",p:3,c:"#2563eb"},{n:"Buddha",p:0.5,c:"#f59e0b"},{n:"Hindu",p:0.3,c:"#dc2626"}],
-    rumah:[{n:"Rumah Joglo",d:"4 tiang utama (soko guru)"},{n:"Bangsal Kencono",d:"Bangunan keraton"}],
+    rumah:[{n:"Rumah Joglo",d:"4 soko guru"},{n:"Bangsal Kencono",d:"Bangunan keraton"}],
     tarian:["Tari Serimpi","Tari Bedhaya Ketawang","Tari Golek Menak"],
     musik:["Gamelan","Siter","Gender","Bonang","Kendang"],
     pakaian:["Batik Yogyakarta","Kebaya","Besar","Blangkon"],
     makanan:["Gudeg","Sate Klatak","Bakpia","Wedang Uwuh","Yangko","Kipo"],
     senjata:["Keris Yogyakarta","Tombak","Kudi"],
-    tradisi:[{n:"Sekaten",d:"Perayaan Maulid Nabi"},{n:"Labuhan",d:"Persembahan ke laut selatan"},{n:"Grebeg",d:"Arak-arakan gunungan"}],
-    fakta:"Satu-satunya provinsi yang dipimpin Sultan sebagai gubernur (UU Keistimewaan 2012)." },
+    tradisi:[{n:"Sekaten",d:"Maulid Nabi"},{n:"Labuhan",d:"Laut selatan"},{n:"Grebeg",d:"Arak-arakan gunungan"}],
+    fakta:"Satu-satunya provinsi yang dipimpin Sultan sebagai gubernur." },
 
-  { no:15, id:"jatim", nama:"Jawa Timur", ibukota:"Surabaya", pulau:"Jawa", x:49.8, y:62.5,
-    populasi:"40,6 juta", deskripsi:"Kota Pahlawan — rumah bagi Suku Jawa, Madura, dan Tengger.",
-    suku:[{n:"Jawa",d:"Mayoritas"},{n:"Madura",d:"Karapan sapi"},{n:"Tengger",d:"Gunung Bromo, Hindu kuno"},{n:"Osing",d:"Banyuwangi"},{n:"Samin",d:"Bojonegoro"},{n:"Bawean",d:"Pulau Bawean"}],
-    bahasa:["Bahasa Jawa Timur (dialek Arekan)","Bahasa Madura","Bahasa Tengger","Bahasa Osing"],
+  { no:15, id:"jatim", nama:"Jawa Timur", ibukota:"Surabaya", pulau:"Jawa", x:49.8, y:62.5, populasi:"40,6 juta",
+    deskripsi:"Kota Pahlawan — rumah bagi Suku Jawa, Madura, dan Tengger.",
+    suku:[{n:"Jawa",d:"Mayoritas"},{n:"Madura",d:"Karapan sapi"},{n:"Tengger",d:"Gunung Bromo"},{n:"Osing",d:"Banyuwangi"},{n:"Samin",d:"Bojonegoro"},{n:"Bawean",d:"Pulau Bawean"}],
+    bahasa:["Bahasa Jawa Timur (Arekan)","Bahasa Madura","Bahasa Tengger","Bahasa Osing"],
     agama:[{n:"Islam",p:94,c:"#16a34a"},{n:"Kristen",p:3,c:"#2563eb"},{n:"Katolik",p:1.5,c:"#7c3aed"},{n:"Hindu",p:1,c:"#dc2626"},{n:"Buddha",p:0.4,c:"#f59e0b"}],
-    rumah:[{n:"Rumah Joglo Situbondo",d:"4 tiang utama"},{n:"Rumah Tengger",d:"Rumah adat Suku Tengger"},{n:"Taneyan Lanjang",d:"Rumah panjang Madura"}],
+    rumah:[{n:"Rumah Joglo Situbondo",d:"4 tiang"},{n:"Rumah Tengger",d:"Suku Tengger"},{n:"Taneyan Lanjang",d:"Panjang Madura"}],
     tarian:["Tari Reog Ponorogo (UNESCO)","Tari Remo","Tari Gandrung","Tari Topeng Malangan"],
     musik:["Gamelan","Saronen (Madura)","Karawitan"],
     pakaian:["Batik Madura","Kebaya","Kain Sarung"],
     makanan:["Rawon","Soto Lamongan","Rujak Cingur","Lontong Balap","Tahu Tek"],
     senjata:["Clurit (Madura)","Keris","Celurit"],
-    tradisi:[{n:"Karapan Sapi",d:"Balapan sapi khas Madura"},{n:"Kasada",d:"Sesajen ke Gunung Bromo"},{n:"Kebo-keboan",d:"Tradisi Banyuwangi"}],
-    fakta:"Suku Tengger adalah keturunan Majapahit yang mempertahankan Hindu-Buddha kuno." },
+    tradisi:[{n:"Karapan Sapi",d:"Madura"},{n:"Kasada",d:"Gunung Bromo"},{n:"Kebo-keboan",d:"Banyuwangi"}],
+    fakta:"Suku Tengger keturunan Majapahit yang mempertahankan Hindu-Buddha kuno." },
 
-  { no:37, id:"dki", nama:"DKI Jakarta", ibukota:"Jakarta", pulau:"Jawa", x:34.8, y:63.0,
-    populasi:"10,6 juta", deskripsi:"Ibu kota negara — melting pot budaya dari seluruh Nusantara dengan Suku Betawi.",
-    suku:[{n:"Betawi",d:"Suku asli Jakarta"},{n:"Jawa",d:"Pendatang terbesar"},{n:"Sunda",d:"Jakarta Selatan & Timur"},{n:"Tionghoa-Indonesia",d:"Glodok, Kelapa Gading"},{n:"Batak",d:"Jakarta Pusat"},{n:"Minang",d:"Pasar Rumput"},{n:"Bugis",d:"Pesisir"},{n:"Madura",d:"Jakarta Utara"}],
+  { no:37, id:"dki", nama:"DKI Jakarta", ibukota:"Jakarta", pulau:"Jawa", x:34.8, y:63.0, populasi:"10,6 juta",
+    deskripsi:"Ibu kota negara — melting pot budaya dari seluruh Nusantara dengan Suku Betawi.",
+    suku:[{n:"Betawi",d:"Suku asli"},{n:"Jawa",d:"Pendatang"},{n:"Sunda",d:"Jaksel & Jaktim"},{n:"Tionghoa-Indonesia",d:"Glodok"},{n:"Batak",d:"Jakpus"},{n:"Minang",d:"Pasar Rumput"},{n:"Bugis",d:"Pesisir"},{n:"Madura",d:"Jakut"}],
     bahasa:["Bahasa Betawi","Bahasa Indonesia","Bahasa Jawa","Bahasa Sunda","Bahasa Hokkien"],
     agama:[{n:"Islam",p:83,c:"#16a34a"},{n:"Kristen Protestan",p:8,c:"#2563eb"},{n:"Katolik",p:4,c:"#7c3aed"},{n:"Buddha",p:3.5,c:"#f59e0b"},{n:"Hindu",p:1,c:"#dc2626"},{n:"Konghucu",p:0.5,c:"#a16207"}],
-    rumah:[{n:"Rumah Kebaya",d:"Atap pelana khas Betawi"},{n:"Rumah Gudang",d:"Atap limas"}],
+    rumah:[{n:"Rumah Kebaya",d:"Atap pelana Betawi"},{n:"Rumah Gudang",d:"Atap limas"}],
     tarian:["Tari Topeng Betawi","Tari Ondel-Ondel","Tari Yapong","Tari Lenggang Nyai"],
     musik:["Gambang Kromong","Tanjidor","Keroncong Tugu","Rebana Biang"],
     pakaian:["Baju Sadariah","Kebaya Encim"],
     makanan:["Kerak Telor","Soto Betawi","Nasi Uduk","Ketoprak","Roti Buaya"],
     senjata:["Golok Betawi","Keris"],
-    tradisi:[{n:"Palang Pintu",d:"Uji silat & pantun pernikahan"},{n:"Ngarak Pengantin",d:"Arak-arakan ondel-ondel"},{n:"Ruwatan",d:"Tolak bala"}],
-    fakta:"Suku Betawi adalah hasil akulturasi Melayu, Arab, Tionghoa, Belanda, dan Portugis." },
+    tradisi:[{n:"Palang Pintu",d:"Silat & pantun"},{n:"Ngarak Pengantin",d:"Ondel-ondel"},{n:"Ruwatan",d:"Tolak bala"}],
+    fakta:"Suku Betawi hasil akulturasi Melayu, Arab, Tionghoa, Belanda, Portugis." },
 
-  { no:16, id:"bali", nama:"Bali", ibukota:"Denpasar", pulau:"Bali & Nusa Tenggara", x:53.5, y:55.0,
-    populasi:"4,3 juta", deskripsi:"Pulau Dewata — Hindu-Bali unik dengan falsafah Tri Hita Karana.",
-    suku:[{n:"Bali",d:"Mayoritas, Hindu-Bali"},{n:"Bali Aga",d:"Tenganan, Trunyan"},{n:"Jawa",d:"Pendatang"},{n:"Madura",d:"Komunitas"},{n:"Tionghoa-Indonesia",d:"Denpasar"}],
-    bahasa:["Bahasa Bali (Sor Singgih)","Bahasa Kawi (kuno)","Bahasa Indonesia"],
+  { no:16, id:"bali", nama:"Bali", ibukota:"Denpasar", pulau:"Bali & Nusa Tenggara", x:53.5, y:55.0, populasi:"4,3 juta",
+    deskripsi:"Pulau Dewata — Hindu-Bali unik dengan falsafah Tri Hita Karana.",
+    suku:[{n:"Bali",d:"Mayoritas"},{n:"Bali Aga",d:"Tenganan, Trunyan"},{n:"Jawa",d:"Pendatang"},{n:"Madura",d:"Komunitas"},{n:"Tionghoa-Indonesia",d:"Denpasar"}],
+    bahasa:["Bahasa Bali (Sor Singgih)","Bahasa Kawi","Bahasa Indonesia"],
     agama:[{n:"Hindu Bali",p:86,c:"#dc2626"},{n:"Islam",p:10,c:"#16a34a"},{n:"Kristen",p:2,c:"#2563eb"},{n:"Katolik",p:1,c:"#7c3aed"},{n:"Buddha",p:0.5,c:"#f59e0b"},{n:"Konghucu",p:0.5,c:"#a16207"}],
-    rumah:[{n:"Gapura Candi Bentar",d:"Gerbang tanpa atap"},{n:"Bale Gede",d:"Rumah untuk upacara"},{n:"Bale Daja",d:"Rumah kepala keluarga"}],
+    rumah:[{n:"Gapura Candi Bentar",d:"Gerbang tanpa atap"},{n:"Bale Gede",d:"Rumah upacara"},{n:"Bale Daja",d:"Kepala keluarga"}],
     tarian:["Tari Kecak","Tari Barong","Tari Legong","Tari Pendet","Tari Sanghyang"],
     musik:["Gamelan Bali","Gong Kebyar","Rindik","Jegog"],
     pakaian:["Kebaya Bali","Udeng","Kamen"],
     makanan:["Ayam Betutu","Babi Guling","Lawar","Sate Lilit","Pisang Rai"],
     senjata:["Keris Bali","Tombak","Pengawin"],
-    tradisi:[{n:"Ngaben",d:"Kremasi jenazah Hindu Bali"},{n:"Nyepi",d:"Hari raya sepi 24 jam"},{n:"Galungan & Kuningan",d:"Kemenangan dharma"},{n:"Mekare-kare",d:"Perang pandan di Tenganan"}],
-    fakta:"Sistem subak (irigasi tradisional) diakui UNESCO. Falsafah Tri Hita Karana: harmoni manusia-Tuhan-alam." },
+    tradisi:[{n:"Ngaben",d:"Kremasi"},{n:"Nyepi",d:"Sepi 24 jam"},{n:"Galungan & Kuningan",d:"Kemenangan dharma"},{n:"Mekare-kare",d:"Perang pandan"}],
+    fakta:"Subak (irigasi tradisional) diakui UNESCO. Falsafah Tri Hita Karana." },
 
-  { no:17, id:"ntb", nama:"Nusa Tenggara Barat", ibukota:"Mataram", pulau:"Bali & Nusa Tenggara", x:57.5, y:57.0,
-    populasi:"5,3 juta", deskripsi:"Bumi Gora — rumah bagi Suku Sasak di Lombok dan Suku Sumbawa.",
-    suku:[{n:"Sasak",d:"Lombok, akulturasi Bali-Jawa"},{n:"Sumbawa",d:"Pulau Sumbawa"},{n:"Bima",d:"Bima, budaya kerajaan"},{n:"Bali",d:"Mataram, Lombok Barat"},{n:"Samawa",d:"Sumbawa Besar"},{n:"Mbojo",d:"Bima, Dompu"}],
+  { no:17, id:"ntb", nama:"Nusa Tenggara Barat", ibukota:"Mataram", pulau:"Bali & Nusa Tenggara", x:57.5, y:57.0, populasi:"5,3 juta",
+    deskripsi:"Bumi Gora — rumah bagi Suku Sasak di Lombok dan Suku Sumbawa.",
+    suku:[{n:"Sasak",d:"Lombok"},{n:"Sumbawa",d:"Pulau Sumbawa"},{n:"Bima",d:"Bima"},{n:"Bali",d:"Mataram"},{n:"Samawa",d:"Sumbawa Besar"},{n:"Mbojo",d:"Bima, Dompu"}],
     bahasa:["Bahasa Sasak","Bahasa Sumbawa (Samawa)","Bahasa Bima (Mbojo)","Bahasa Bali"],
     agama:[{n:"Islam",p:96,c:"#16a34a"},{n:"Hindu",p:3,c:"#dc2626"},{n:"Kristen",p:0.6,c:"#2563eb"},{n:"Buddha",p:0.3,c:"#f59e0b"}],
-    rumah:[{n:"Bale Sasak",d:"Atap alang-alang"},{n:"Dalam Loka",d:"Istana kerajaan Sumbawa"}],
+    rumah:[{n:"Bale Sasak",d:"Atap alang-alang"},{n:"Dalam Loka",d:"Istana Sumbawa"}],
     tarian:["Tari Gendang Beleq","Tari Mpaa Lenggogo","Tari Rudat","Tari Perisean"],
     musik:["Gendang Beleq","Serunai","Rebana","Cilokaq"],
     pakaian:["Lambung (Sasak)","Pakaian Adat Sumbawa"],
     makanan:["Ayam Taliwang","Plecing Kangkung","Sate Bulayak","Bebalung"],
     senjata:["Keris Sasak","Tulup","Kelewang"],
-    tradisi:[{n:"Bau Nyale",d:"Menangkap cacing laut di Lombok"},{n:"Perisean",d:"Adu ketangkasan Sasak"},{n:"Nyongkolan",d:"Arak-arakan pengantin"}],
-    fakta:"Suku Sasak memiliki 2 versi Islam: Wetu Telu (sinkretis) dan Wetu Lima (ortodoks) — hidup damai." },
+    tradisi:[{n:"Bau Nyale",d:"Cacing laut Lombok"},{n:"Perisean",d:"Adu ketangkasan"},{n:"Nyongkolan",d:"Arak pengantin"}],
+    fakta:"Suku Sasak punya 2 versi Islam: Wetu Telu & Wetu Lima — hidup damai." },
 
-  { no:18, id:"ntt", nama:"Nusa Tenggara Timur", ibukota:"Kupang", pulau:"Bali & Nusa Tenggara", x:62.0, y:61.25,
-    populasi:"5,4 juta", deskripsi:"Bumi Flobamora — rumah bagi suku Flores, Timor, Sumba dengan tradisi megalitik.",
-    suku:[{n:"Flores",d:"Katolik kuat"},{n:"Timor (Atoni)",d:"Timor Barat, megalitik"},{n:"Sumba",d:"Pasola, kubur batu"},{n:"Rote",d:"Sasando"},{n:"Alor",d:"Kepulauan Alor"},{n:"Lio",d:"Flores"},{n:"Helong",d:"Kupang, Semau"}],
+  { no:18, id:"ntt", nama:"Nusa Tenggara Timur", ibukota:"Kupang", pulau:"Bali & Nusa Tenggara", x:62.0, y:61.25, populasi:"5,4 juta",
+    deskripsi:"Bumi Flobamora — rumah bagi suku Flores, Timor, Sumba dengan tradisi megalitik.",
+    suku:[{n:"Flores",d:"Katolik kuat"},{n:"Timor (Atoni)",d:"Timor Barat"},{n:"Sumba",d:"Pasola"},{n:"Rote",d:"Sasando"},{n:"Alor",d:"Kepulauan Alor"},{n:"Lio",d:"Flores"},{n:"Helong",d:"Kupang"}],
     bahasa:["Bahasa Dawan","Bahasa Tetun","Bahasa Manggarai","Bahasa Sumba","Bahasa Rote","Bahasa Alor"],
     agama:[{n:"Katolik",p:55,c:"#7c3aed"},{n:"Kristen Protestan",p:35,c:"#2563eb"},{n:"Islam",p:8,c:"#16a34a"},{n:"Hindu",p:1.5,c:"#dc2626"},{n:"Buddha",p:0.5,c:"#f59e0b"}],
-    rumah:[{n:"Mbaru Niang",d:"Rumah kerucut Flores 5 lantai"},{n:"Rumah Adat Sumba",d:"Atap menjulang tinggi"},{n:"Lopo",d:"Rumah pertemuan Timor"}],
+    rumah:[{n:"Mbaru Niang",d:"Kerucut Flores 5 lantai"},{n:"Rumah Adat Sumba",d:"Atap tinggi"},{n:"Lopo",d:"Pertemuan Timor"}],
     tarian:["Tari Likurai","Tari Caci (Sumba)","Tari Ja'i","Tari Bonet"],
     musik:["Sasando (Rote)","Foa","Knobe","Gong"],
     pakaian:["Tenun Ikat NTT","Selimut Sumba"],
-    makanan:["Se'i Sapi","Jagung Bose","Kolo (nasi bambu)","Rumpu Rampe"],
+    makanan:["Se'i Sapi","Jagung Bose","Kolo","Rumpu Rampe"],
     senjata:["Kelewang","Tombak","Perisai Kayu"],
-    tradisi:[{n:"Pasola",d:"Perang berkuda di Sumba"},{n:"Caci",d:"Perang cambuk di Manggarai"},{n:"Penti",d:"Pesta panen Manggarai"}],
-    fakta:"Sasando terbuat dari daun lontar. Sumba dijuluki 'Pulau Megalitik Hidup'." },
+    tradisi:[{n:"Pasola",d:"Perang berkuda Sumba"},{n:"Caci",d:"Perang cambuk Manggarai"},{n:"Penti",d:"Panen Manggarai"}],
+    fakta:"Sasando dari daun lontar. Sumba = 'Pulau Megalitik Hidup'." },
 
-  { no:19, id:"kalbar", nama:"Kalimantan Barat", ibukota:"Pontianak", pulau:"Kalimantan", x:37.0, y:25.0,
-    populasi:"5,4 juta", deskripsi:"Kota Khatulistiwa — rumah bagi Dayak Kanayatn, Melayu, dan Tionghoa.",
-    suku:[{n:"Dayak Kanayatn",d:"Naik Dango"},{n:"Melayu Pontianak",d:"Bercampur Arab"},{n:"Tionghoa-Indonesia",d:"Pontianak, Singkawang"},{n:"Dayak Iban",d:"Perbatasan Malaysia"},{n:"Dayak Bidayuh",d:"Sanggau, Landak"},{n:"Bugis",d:"Pelaut"}],
+  { no:19, id:"kalbar", nama:"Kalimantan Barat", ibukota:"Pontianak", pulau:"Kalimantan", x:37.0, y:25.0, populasi:"5,4 juta",
+    deskripsi:"Kota Khatulistiwa — rumah bagi Dayak Kanayatn, Melayu, dan Tionghoa.",
+    suku:[{n:"Dayak Kanayatn",d:"Naik Dango"},{n:"Melayu Pontianak",d:"Bercampur Arab"},{n:"Tionghoa-Indonesia",d:"Pontianak, Singkawang"},{n:"Dayak Iban",d:"Perbatasan"},{n:"Dayak Bidayuh",d:"Sanggau"},{n:"Bugis",d:"Pelaut"}],
     bahasa:["Bahasa Melayu Pontianak","Bahasa Dayak Kanayatn","Bahasa Dayak Iban","Bahasa Khek"],
     agama:[{n:"Islam",p:57,c:"#16a34a"},{n:"Katolik",p:22,c:"#7c3aed"},{n:"Kristen Protestan",p:12,c:"#2563eb"},{n:"Buddha",p:7,c:"#f59e0b"},{n:"Konghucu",p:1.5,c:"#a16207"},{n:"Hindu",p:0.5,c:"#dc2626"}],
-    rumah:[{n:"Rumah Panjang (Betang)",d:"Rumah adat Dayak"},{n:"Rumah Melayu Pontianak",d:"Panggung dengan ukiran"}],
+    rumah:[{n:"Rumah Panjang (Betang)",d:"Rumah adat Dayak"},{n:"Rumah Melayu Pontianak",d:"Panggung berukir"}],
     tarian:["Tari Monong","Tari Pingan","Tari Jonggan","Tari Kondan"],
     musik:["Sape (Dayak)","Japin","Rebana","Gong"],
     pakaian:["King Baba","King Bibinge","Baju Kurung Melayu"],
     makanan:["Pengkang","Choipan","Bubur Pedas","Chai Kue"],
     senjata:["Mandau (Dayak)","Talawang","Keris"],
-    tradisi:[{n:"Naik Dango",d:"Syukuran panen Dayak"},{n:"Cap Go Meh",d:"Perayaan Imlek dengan tatung"},{n:"Gawai Dayak",d:"Perayaan adat Dayak"}],
-    fakta:"Pontianak dilalui garis khatulistiwa. Singkawang = 'Kota Seribu Kelenteng' dan kota paling toleran." },
+    tradisi:[{n:"Naik Dango",d:"Panen Dayak"},{n:"Cap Go Meh",d:"Tatung"},{n:"Gawai Dayak",d:"Adat Dayak"}],
+    fakta:"Pontianak dilalui garis khatulistiwa. Singkawang = 'Kota Seribu Kelenteng'." },
 
-  { no:20, id:"kalteng", nama:"Kalimantan Tengah", ibukota:"Palangkaraya", pulau:"Kalimantan", x:42.0, y:35.0,
-    populasi:"2,7 juta", deskripsi:"Bumi Tambun Bungai — rumah bagi Suku Dayak Ngaju dengan Rumah Betang.",
+  { no:20, id:"kalteng", nama:"Kalimantan Tengah", ibukota:"Palangkaraya", pulau:"Kalimantan", x:42.0, y:35.0, populasi:"2,7 juta",
+    deskripsi:"Bumi Tambun Bungai — rumah bagi Suku Dayak Ngaju dengan Rumah Betang.",
     suku:[{n:"Dayak Ngaju",d:"Mayoritas"},{n:"Dayak Maanyan",d:"Kalteng timur"},{n:"Dayak Ot Danum",d:"Pedalaman"},{n:"Dayak Lawangan",d:"Kaltim & Kalteng"},{n:"Melayu",d:"Pesisir"},{n:"Jawa",d:"Transmigran"}],
     bahasa:["Bahasa Ngaju","Bahasa Maanyan","Bahasa Ot Danum","Bahasa Lawangan","Bahasa Melayu"],
     agama:[{n:"Kristen Protestan",p:52,c:"#2563eb"},{n:"Islam",p:36,c:"#16a34a"},{n:"Katolik",p:7,c:"#7c3aed"},{n:"Hindu Kaharingan",p:4,c:"#dc2626"},{n:"Buddha",p:0.8,c:"#f59e0b"}],
-    rumah:[{n:"Rumah Betang",d:"Rumah panjang 30-40 keluarga"}],
+    rumah:[{n:"Rumah Betang",d:"Panjang 30-40 keluarga"}],
     tarian:["Tari Tambun Bungai","Tari Balean Dadas","Tari Giring-Giring","Tari Manasai"],
     musik:["Sape","Kecapi Dayak","Gong","Kangkanong"],
     pakaian:["Baju Sangkarut","Ta'a"],
     makanan:["Juhu Singkah","Kalawi","Roti Lenggang","Nasi Bakar Dayak"],
     senjata:["Mandau","Talawang","Duhung"],
-    tradisi:[{n:"Tiwah",d:"Kremasi besar Dayak Ngaju"},{n:"Manasai",d:"Tarian pergaulan Dayak"},{n:"Manyanggar",d:"Tolak bala"}],
-    fakta:"Rumah Betang bisa dihuni 30-40 keluarga. Agama Kaharingan adalah agama asli Dayak." },
+    tradisi:[{n:"Tiwah",d:"Kremasi besar Ngaju"},{n:"Manasai",d:"Tarian pergaulan"},{n:"Manyanggar",d:"Tolak bala"}],
+    fakta:"Rumah Betang dihuni 30-40 keluarga. Kaharingan = agama asli Dayak." },
 
-  { no:21, id:"kalsel", nama:"Kalimantan Selatan", ibukota:"Banjarmasin", pulau:"Kalimantan", x:45.5, y:46.25,
-    populasi:"4,1 juta", deskripsi:"Kota Seribu Sungai — rumah bagi Suku Banjar dengan budaya sungai.",
+  { no:21, id:"kalsel", nama:"Kalimantan Selatan", ibukota:"Banjarmasin", pulau:"Kalimantan", x:45.5, y:46.25, populasi:"4,1 juta",
+    deskripsi:"Kota Seribu Sungai — rumah bagi Suku Banjar dengan budaya sungai.",
     suku:[{n:"Banjar",d:"Mayoritas"},{n:"Dayak Meratus",d:"Pegunungan Meratus"},{n:"Dayak Ngaju",d:"Kalsel utara"},{n:"Jawa",d:"Transmigran"},{n:"Bugis",d:"Pelaut"},{n:"Tionghoa-Indonesia",d:"Banjarmasin"}],
     bahasa:["Bahasa Banjar","Bahasa Dayak Meratus","Bahasa Melayu","Bahasa Jawa"],
     agama:[{n:"Islam",p:96,c:"#16a34a"},{n:"Kristen Protestan",p:2,c:"#2563eb"},{n:"Katolik",p:0.8,c:"#7c3aed"},{n:"Hindu Kaharingan",p:0.7,c:"#dc2626"},{n:"Buddha",p:0.5,c:"#f59e0b"}],
-    rumah:[{n:"Rumah Bubungan Tinggi",d:"Atap tinggi menjulang"},{n:"Rumah Gajah Baliku",d:"Atap melengkung"},{n:"Rumah Lanting",d:"Rumah terapung di Sungai Barito"}],
+    rumah:[{n:"Rumah Bubungan Tinggi",d:"Atap tinggi"},{n:"Rumah Gajah Baliku",d:"Atap melengkung"},{n:"Rumah Lanting",d:"Terapung Barito"}],
     tarian:["Tari Baksa Kembang","Tari Kuda Gipang","Tari Radap Rahayu","Tari Jepen"],
     musik:["Panting","Kuriding","Gong","Rebana"],
     pakaian:["Baju Ba-amal","Baju Kurung","Sasirangan"],
     makanan:["Ketupat Kandangan","Soto Banjar","Nasi Kuning","Bingka","Apam Barabai"],
     senjata:["Keris Banjar","Kelewang","Tombak"],
-    tradisi:[{n:"Bausung",d:"Menggotong pengantin"},{n:"Batatapas",d:"Tepung tawar pengantin"},{n:"Pasar Terapung",d:"Jual beli di atas perahu"}],
-    fakta:"Pasar Terapung Lok Baintan adalah pasar terapung tertua di Indonesia. Kain Sasirangan = batik Banjar." },
+    tradisi:[{n:"Bausung",d:"Gotong pengantin"},{n:"Batatapas",d:"Tepung tawar"},{n:"Pasar Terapung",d:"Jual beli di perahu"}],
+    fakta:"Pasar Terapung Lok Baintan = tertua di Indonesia. Sasirangan = batik Banjar." },
 
-  { no:22, id:"kaltim", nama:"Kalimantan Timur", ibukota:"Samarinda", pulau:"Kalimantan", x:48.0, y:27.5,
-    populasi:"4,0 juta", deskripsi:"Bumi Mulawarman — rumah bagi Kerajaan Kutai, kerajaan Hindu tertua.",
+  { no:22, id:"kaltim", nama:"Kalimantan Timur", ibukota:"Samarinda", pulau:"Kalimantan", x:48.0, y:27.5, populasi:"4,0 juta",
+    deskripsi:"Bumi Mulawarman — rumah bagi Kerajaan Kutai, kerajaan Hindu tertua.",
     suku:[{n:"Kutai",d:"Keturunan Kerajaan Kutai"},{n:"Dayak Kenyah",d:"Tari Enggang"},{n:"Dayak Bahau",d:"Pedalaman Mahakam"},{n:"Dayak Benuaq",d:"Kutai Barat"},{n:"Banjar",d:"Kalsel"},{n:"Bugis",d:"Pesisir"},{n:"Jawa",d:"Transmigran"}],
     bahasa:["Bahasa Kutai","Bahasa Kenyah","Bahasa Bahau","Bahasa Benuaq","Bahasa Banjar"],
     agama:[{n:"Islam",p:85,c:"#16a34a"},{n:"Kristen Protestan",p:9,c:"#2563eb"},{n:"Katolik",p:3.5,c:"#7c3aed"},{n:"Hindu Kaharingan",p:1.5,c:"#dc2626"},{n:"Buddha",p:0.8,c:"#f59e0b"}],
-    rumah:[{n:"Rumah Lamin",d:"Rumah panjang Dayak Kenyah"}],
+    rumah:[{n:"Rumah Lamin",d:"Panjang Dayak Kenyah"}],
     tarian:["Tari Gong","Tari Enggang","Tari Hudoq","Tari Datun"],
     musik:["Sampe","Jatung Utang","Gong","Kangkanong"],
     pakaian:["Baju Adat Dayak Kenyah","Ta'a"],
     makanan:["Nasi Bekepor","Ayam Cincane","Gence Ruan","Kue Bingka"],
     senjata:["Mandau","Talawang","Sumpit"],
-    tradisi:[{n:"Hudoq",d:"Tarian topeng Dayak syukuran panen"},{n:"Erau",d:"Festival budaya Kutai"},{n:"Belian",d:"Pengobatan tradisional Dayak"}],
-    fakta:"Kerajaan Kutai Martadipura (abad 4 M) adalah kerajaan Hindu tertua di Indonesia." },
+    tradisi:[{n:"Hudoq",d:"Topeng Dayak panen"},{n:"Erau",d:"Festival Kutai"},{n:"Belian",d:"Pengobatan Dayak"}],
+    fakta:"Kerajaan Kutai Martadipura (abad 4 M) = kerajaan Hindu tertua di Indonesia." },
 
-  { no:23, id:"kaltara", nama:"Kalimantan Utara", ibukota:"Tanjung Selor", pulau:"Kalimantan", x:44.5, y:15.5,
-    populasi:"720 ribu", deskripsi:"Provinsi termuda di Kalimantan — rumah bagi Dayak Kenyah & Tidung.",
+  { no:23, id:"kaltara", nama:"Kalimantan Utara", ibukota:"Tanjung Selor", pulau:"Kalimantan", x:44.5, y:15.5, populasi:"720 ribu",
+    deskripsi:"Provinsi termuda di Kalimantan — rumah bagi Dayak Kenyah & Tidung.",
     suku:[{n:"Dayak Kenyah",d:"Mayoritas"},{n:"Dayak Kayan",d:"Pedalaman"},{n:"Tidung",d:"Pesisir"},{n:"Bulungan",d:"Kesultanan Bulungan"},{n:"Dayak Punan",d:"Nomaden hutan"},{n:"Banjar",d:"Perantau"}],
     bahasa:["Bahasa Kenyah","Bahasa Tidung","Bahasa Bulungan","Bahasa Kayan","Bahasa Punan"],
     agama:[{n:"Kristen Protestan",p:52,c:"#2563eb"},{n:"Islam",p:35,c:"#16a34a"},{n:"Katolik",p:9,c:"#7c3aed"},{n:"Hindu Kaharingan",p:3,c:"#dc2626"},{n:"Buddha",p:1,c:"#f59e0b"}],
-    rumah:[{n:"Rumah Lamin",d:"Rumah panjang Dayak"}],
+    rumah:[{n:"Rumah Lamin",d:"Panjang Dayak"}],
     tarian:["Tari Enggang","Tari Hudoq","Tari Kancet Ledo"],
     musik:["Sampe","Jatung Utang","Gong"],
     pakaian:["Baju Adat Dayak Kenyah"],
     makanan:["Nasi Bekepor","Kue Cincin","Ikan Bakar"],
     senjata:["Mandau","Talawang","Sumpit"],
-    tradisi:[{n:"Hudoq",d:"Tarian topeng Dayak"},{n:"Bepelas",d:"Upacara adat Tidung"},{n:"Nyanggar",d:"Syukuran panen"}],
-    fakta:"Kaltara adalah provinsi termuda di Kalimantan (dimekarkan dari Kaltim tahun 2012)." },
+    tradisi:[{n:"Hudoq",d:"Topeng Dayak"},{n:"Bepelas",d:"Adat Tidung"},{n:"Nyanggar",d:"Syukuran panen"}],
+    fakta:"Kaltara = provinsi termuda di Kalimantan (dimekarkan 2012)." },
 
-  { no:24, id:"sulsel", nama:"Sulawesi Selatan", ibukota:"Makassar", pulau:"Sulawesi", x:54.8, y:47.5,
-    populasi:"9,1 juta", deskripsi:"Kota Daeng — rumah bagi pelaut ulung Bugis-Makassar dan Suku Toraja.",
-    suku:[{n:"Bugis",d:"Pelaut ulung, Siri' na Pacce"},{n:"Makassar",d:"Mayoritas Makassar"},{n:"Toraja",d:"Rambu Solo'"},{n:"Mandar",d:"Sulawesi Barat"},{n:"Konjo",d:"Bulukumba"},{n:"Selayar",d:"Pulau Selayar"}],
-    bahasa:["Bahasa Bugis","Bahasa Makassar","Bahasa Toraja (Sa'dan)","Bahasa Mandar","Bahasa Konjo"],
+  { no:24, id:"sulsel", nama:"Sulawesi Selatan", ibukota:"Makassar", pulau:"Sulawesi", x:54.8, y:47.5, populasi:"9,1 juta",
+    deskripsi:"Kota Daeng — rumah bagi pelaut ulung Bugis-Makassar dan Suku Toraja.",
+    suku:[{n:"Bugis",d:"Pelaut, Siri' na Pacce"},{n:"Makassar",d:"Mayoritas"},{n:"Toraja",d:"Rambu Solo'"},{n:"Mandar",d:"Sulbar"},{n:"Konjo",d:"Bulukumba"},{n:"Selayar",d:"Pulau Selayar"}],
+    bahasa:["Bahasa Bugis","Bahasa Makassar","Bahasa Toraja","Bahasa Mandar","Bahasa Konjo"],
     agama:[{n:"Islam",p:88,c:"#16a34a"},{n:"Kristen Protestan",p:7,c:"#2563eb"},{n:"Katolik",p:3,c:"#7c3aed"},{n:"Hindu",p:1,c:"#dc2626"},{n:"Buddha",p:0.8,c:"#f59e0b"}],
-    rumah:[{n:"Tongkonan",d:"Atap melengkung seperti perahu"},{n:"Balla Lompoa",d:"Rumah Bugis-Makassar"},{n:"Bola Soba",d:"Rumah adat Bugis"}],
+    rumah:[{n:"Tongkonan",d:"Atap perahu"},{n:"Balla Lompoa",d:"Bugis-Makassar"},{n:"Bola Soba",d:"Bugis"}],
     tarian:["Tari Kipas","Tari Pakarena","Tari Bosara","Tari Gandrang Bulo"],
     musik:["Kecapi Bugis","Anak Becing","Keso-Keso","Gong"],
     pakaian:["Baju Bodo (Bugis-Makassar)","Baju Pokko (Toraja)"],
     makanan:["Coto Makassar","Konro","Pallubasa","Sop Saudara","Barongko"],
     senjata:["Badik","Keris","Kelewang"],
-    tradisi:[{n:"Rambu Solo'",d:"Pemakaman Toraja megah"},{n:"Rambu Tuka'",d:"Syukuran Toraja"},{n:"Ma'randing",d:"Tarian perang Toraja"},{n:"Angngaru",d:"Sumpah prajurit Bugis"}],
-    fakta:"Rambu Solo' bisa menghabiskan miliaran rupiah. Falsafah Siri' na Pacce = jiwa Bugis-Makassar." },
+    tradisi:[{n:"Rambu Solo'",d:"Pemakaman Toraja"},{n:"Rambu Tuka'",d:"Syukuran Toraja"},{n:"Ma'randing",d:"Perang Toraja"},{n:"Angngaru",d:"Sumpah Bugis"}],
+    fakta:"Rambu Solo' bisa miliaran rupiah. Siri' na Pacce = jiwa Bugis-Makassar." },
 
-  { no:25, id:"sultra", nama:"Sulawesi Tenggara", ibukota:"Kendari", pulau:"Sulawesi", x:61.0, y:43.75,
-    populasi:"2,7 juta", deskripsi:"Bumi Anoa — rumah bagi Suku Tolaki, Buton, dan Muna.",
+  { no:25, id:"sultra", nama:"Sulawesi Tenggara", ibukota:"Kendari", pulau:"Sulawesi", x:61.0, y:43.75, populasi:"2,7 juta",
+    deskripsi:"Bumi Anoa — rumah bagi Suku Tolaki, Buton, dan Muna.",
     suku:[{n:"Tolaki",d:"Mayoritas"},{n:"Buton",d:"Kesultanan Buton"},{n:"Muna",d:"Pulau Muna"},{n:"Moronene",d:"Bombana"},{n:"Wolio",d:"Baubau"},{n:"Bugis",d:"Pelaut"}],
     bahasa:["Bahasa Tolaki","Bahasa Buton (Wolio)","Bahasa Muna","Bahasa Moronene","Bahasa Bugis"],
     agama:[{n:"Islam",p:88,c:"#16a34a"},{n:"Kristen Protestan",p:6,c:"#2563eb"},{n:"Hindu",p:3,c:"#dc2626"},{n:"Katolik",p:2,c:"#7c3aed"},{n:"Buddha",p:0.8,c:"#f59e0b"}],
-    rumah:[{n:"Rumah Laika",d:"Rumah adat Tolaki"},{n:"Banua Tada",d:"Rumah Buton tanpa paku"},{n:"Rumah Sasadu",d:"Rumah adat Sahu"}],
+    rumah:[{n:"Rumah Laika",d:"Tolaki"},{n:"Banua Tada",d:"Buton tanpa paku"},{n:"Rumah Sasadu",d:"Sahu"}],
     tarian:["Tari Lariangi","Tari Balumpa","Tari Molulo","Tari Moduai"],
     musik:["Gambus","Rebana","Gong","Kolintang"],
     pakaian:["Baju Adat Tolaki","Baju Adat Buton"],
-    makanan:["Sinonggi (sagu)","Lapa-Lapa","Kasoami","Kambu"],
+    makanan:["Sinonggi","Lapa-Lapa","Kasoami","Kambu"],
     senjata:["Keris","Tombak","Parang"],
-    tradisi:[{n:"Mosehe",d:"Ritual penyucian Tolaki"},{n:"Tari Lariangi",d:"Tarian penyambutan"},{n:"Haroana",d:"Pesta adat Buton"}],
-    fakta:"Benteng Keraton Buton adalah benteng terluas di dunia (23,375 hektar)." },
+    tradisi:[{n:"Mosehe",d:"Penyucian Tolaki"},{n:"Tari Lariangi",d:"Penyambutan"},{n:"Haroana",d:"Pesta Buton"}],
+    fakta:"Benteng Keraton Buton = benteng terluas di dunia (23,375 hektar)." },
 
-  { no:26, id:"sulbar", nama:"Sulawesi Barat", ibukota:"Mamuju", pulau:"Sulawesi", x:52.0, y:35.0,
-    populasi:"1,4 juta", deskripsi:"Provinsi termuda di Sulawesi — rumah bagi Suku Mandar, pelaut ulung.",
+  { no:26, id:"sulbar", nama:"Sulawesi Barat", ibukota:"Mamuju", pulau:"Sulawesi", x:52.0, y:35.0, populasi:"1,4 juta",
+    deskripsi:"Provinsi termuda di Sulawesi — rumah bagi Suku Mandar, pelaut ulung.",
     suku:[{n:"Mandar",d:"Mayoritas, pelaut"},{n:"Bugis",d:"Perantau"},{n:"Toraja",d:"Perbatasan Sulsel"},{n:"Mamuju",d:"Suku lokal"},{n:"Kalumpang",d:"Pedalaman"}],
     bahasa:["Bahasa Mandar","Bahasa Bugis","Bahasa Toraja","Bahasa Mamuju"],
     agama:[{n:"Islam",p:83,c:"#16a34a"},{n:"Kristen Protestan",p:13,c:"#2563eb"},{n:"Katolik",p:2,c:"#7c3aed"},{n:"Hindu",p:1.5,c:"#dc2626"},{n:"Buddha",p:0.5,c:"#f59e0b"}],
-    rumah:[{n:"Rumah Boyang",d:"Rumah adat Mandar panggung"}],
+    rumah:[{n:"Rumah Boyang",d:"Mandar panggung"}],
     tarian:["Tari Pattudu","Tari Manindang","Tari Toerang","Tari Kalindaqdaq"],
     musik:["Keke","Calong","Gong","Rebana"],
     pakaian:["Baju Adat Mandar"],
     makanan:["Jepa","Bau Peapi","Kue Kue","Loka Anjoroi"],
     senjata:["Badik Mandar","Kelewang","Tombak"],
-    tradisi:[{n:"Mappande Banua",d:"Syukuran rumah baru"},{n:"Sayyang Pattu'du",d:"Kuda menari"},{n:"Mesa Kada",d:"Upacara adat"}],
-    fakta:"Sulawesi Barat adalah provinsi termuda di Sulawesi (dimekarkan 2004)." },
+    tradisi:[{n:"Mappande Banua",d:"Rumah baru"},{n:"Sayyang Pattu'du",d:"Kuda menari"},{n:"Mesa Kada",d:"Adat"}],
+    fakta:"Sulawesi Barat = provinsi termuda di Sulawesi (dimekarkan 2004)." },
 
-  { no:27, id:"sulteng", nama:"Sulawesi Tengah", ibukota:"Palu", pulau:"Sulawesi", x:56.0, y:32.5,
-    populasi:"3,0 juta", deskripsi:"Kota Teluk Palu — rumah bagi Suku Kaili dan tradisi megalitik Lembah Bada.",
+  { no:27, id:"sulteng", nama:"Sulawesi Tengah", ibukota:"Palu", pulau:"Sulawesi", x:56.0, y:32.5, populasi:"3,0 juta",
+    deskripsi:"Kota Teluk Palu — rumah bagi Suku Kaili dan tradisi megalitik Lembah Bada.",
     suku:[{n:"Kaili",d:"Mayoritas"},{n:"Banggai",d:"Kepulauan Banggai"},{n:"Toli-Toli",d:"Toli-Toli"},{n:"Bugis",d:"Pesisir"},{n:"Mandar",d:"Sulbar"},{n:"Saluan",d:"Banggai"},{n:"Balantak",d:"Banggai"}],
     bahasa:["Bahasa Kaili","Bahasa Banggai","Bahasa Toli-Toli","Bahasa Saluan","Bahasa Balantak"],
     agama:[{n:"Islam",p:78,c:"#16a34a"},{n:"Kristen Protestan",p:15,c:"#2563eb"},{n:"Hindu",p:3,c:"#dc2626"},{n:"Katolik",p:3,c:"#7c3aed"},{n:"Buddha",p:0.8,c:"#f59e0b"}],
-    rumah:[{n:"Rumah Tambi",d:"Atap melengkung Kaili"},{n:"Rumah Souraja",d:"Istana raja Kaili"}],
+    rumah:[{n:"Rumah Tambi",d:"Kaili"},{n:"Rumah Souraja",d:"Istana Kaili"}],
     tarian:["Tari Pamonte","Tari Dero","Tari Balia","Tari Moduai"],
     musik:["Lalove","Gambus","Rebana","Gong"],
     pakaian:["Baju Adat Kaili"],
     makanan:["Kaledo","Palumara","Uta Dada","Sambal Kaledo"],
     senjata:["Keris","Tombak","Parang"],
-    tradisi:[{n:"Vunja",d:"Upacara adat Kaili"},{n:"Nolunu",d:"Penyembuhan tradisional"},{n:"Padungku",d:"Syukuran adat Kaili"}],
+    tradisi:[{n:"Vunja",d:"Adat Kaili"},{n:"Nolunu",d:"Penyembuhan"},{n:"Padungku",d:"Syukuran"}],
     fakta:"Lembah Bada menyimpan ratusan patung megalitik berusia 3.000+ tahun." },
 
-  { no:28, id:"gorontalo", nama:"Gorontalo", ibukota:"Gorontalo", pulau:"Sulawesi", x:60.0, y:22.5,
-    populasi:"1,2 juta", deskripsi:"Serambi Madinah — rumah bagi Suku Gorontalo dengan budaya Islam kuat.",
-    suku:[{n:"Gorontalo",d:"Mayoritas, Islam kuat"},{n:"Suvu",d:"Pegunungan"},{n:"Atinggola",d:"Gorontalo Utara"},{n:"Bolango",d:"Bone Bolango"},{n:"Bugis",d:"Pelaut"}],
+  { no:28, id:"gorontalo", nama:"Gorontalo", ibukota:"Gorontalo", pulau:"Sulawesi", x:60.0, y:22.5, populasi:"1,2 juta",
+    deskripsi:"Serambi Madinah — rumah bagi Suku Gorontalo dengan budaya Islam kuat.",
+    suku:[{n:"Gorontalo",d:"Mayoritas"},{n:"Suvu",d:"Pegunungan"},{n:"Atinggola",d:"Gorut"},{n:"Bolango",d:"Bone Bolango"},{n:"Bugis",d:"Pelaut"}],
     bahasa:["Bahasa Gorontalo","Bahasa Suwawa","Bahasa Atinggola","Bahasa Bolango"],
     agama:[{n:"Islam",p:97,c:"#16a34a"},{n:"Kristen",p:1.8,c:"#2563eb"},{n:"Katolik",p:0.6,c:"#7c3aed"},{n:"Hindu",p:0.4,c:"#dc2626"},{n:"Buddha",p:0.2,c:"#f59e0b"}],
-    rumah:[{n:"Rumah Dulohupa",d:"Rumah musyawarah Gorontalo"},{n:"Bandayo Poboide",d:"Rumah upacara"}],
+    rumah:[{n:"Rumah Dulohupa",d:"Musyawarah"},{n:"Bandayo Poboide",d:"Upacara"}],
     tarian:["Tari Saronde","Tari Polopalo","Tari Dana-Dana","Tari Binthe Biluhuta"],
     musik:["Polopalo","Gambus","Rebana","Gong"],
     pakaian:["Baju Takowa","Payungga"],
-    makanan:["Binte Biluhuta (Milu Siram)","Ilabulo","Sate Tuna","Tiliaya"],
+    makanan:["Binte Biluhuta","Ilabulo","Sate Tuna","Tiliaya"],
     senjata:["Keris","Tombak","Parang"],
-    tradisi:[{n:"Tumbilotohe",d:"Lampu minyak 3 malam terakhir Ramadhan"},{n:"Molapi Saronde",d:"Menginjak telur saat pernikahan"},{n:"Dikili",d:"Zikir bersama"}],
-    fakta:"Gorontalo dijuluki 'Serambi Madinah'. Tumbilotohe = warisan budaya takbenda Indonesia." },
+    tradisi:[{n:"Tumbilotohe",d:"Lampu 3 malam"},{n:"Molapi Saronde",d:"Telur pernikahan"},{n:"Dikili",d:"Zikir"}],
+    fakta:"Gorontalo = 'Serambi Madinah'. Tumbilotohe = warisan budaya takbenda." },
 
-  { no:29, id:"sulut", nama:"Sulawesi Utara", ibukota:"Manado", pulau:"Sulawesi", x:63.5, y:23.75,
-    populasi:"2,6 juta", deskripsi:"Kota Tinutuan — rumah bagi Suku Minahasa dengan falsafah Si Tou Timou Tumou Tou.",
-    suku:[{n:"Minahasa",d:"8 sub-suku"},{n:"Sangir",d:"Kepulauan Sangihe"},{n:"Talaud",d:"Kepulauan Talaud"},{n:"Bolaang Mongondow",d:"Bolaang Mongondow"},{n:"Gorontalo",d:"Perbatasan"},{n:"Tionghoa-Indonesia",d:"Manado"}],
-    bahasa:["Bahasa Manado (Melayu Manado)","Bahasa Minahasa","Bahasa Sangir","Bahasa Talaud","Bahasa Mongondow"],
+  { no:29, id:"sulut", nama:"Sulawesi Utara", ibukota:"Manado", pulau:"Sulawesi", x:63.5, y:23.75, populasi:"2,6 juta",
+    deskripsi:"Kota Tinutuan — rumah bagi Suku Minahasa dengan falsafah Si Tou Timou Tumou Tou.",
+    suku:[{n:"Minahasa",d:"8 sub-suku"},{n:"Sangir",d:"Sangihe"},{n:"Talaud",d:"Talaud"},{n:"Bolaang Mongondow",d:"Bolmong"},{n:"Gorontalo",d:"Perbatasan"},{n:"Tionghoa-Indonesia",d:"Manado"}],
+    bahasa:["Bahasa Manado","Bahasa Minahasa","Bahasa Sangir","Bahasa Talaud","Bahasa Mongondow"],
     agama:[{n:"Kristen Protestan",p:68,c:"#2563eb"},{n:"Islam",p:25,c:"#16a34a"},{n:"Katolik",p:5,c:"#7c3aed"},{n:"Hindu",p:1,c:"#dc2626"},{n:"Buddha",p:0.8,c:"#f59e0b"}],
-    rumah:[{n:"Rumah Wale",d:"Rumah adat Minahasa panggung"},{n:"Rumah Pewaris",d:"Rumah adat modern Minahasa"}],
+    rumah:[{n:"Rumah Wale",d:"Minahasa panggung"},{n:"Rumah Pewaris",d:"Modern Minahasa"}],
     tarian:["Tari Kabasaran","Tari Maengket","Tari Poco-Poco","Tari Sasambo"],
     musik:["Kolintang (UNESCO)","Tetengkoren","Gong","Rebana"],
     pakaian:["Baju Laku Tepu","Kain Bentenan"],
-    makanan:["Tinutuan (bubur Manado)","Cakalang Fufu","Klapertart","Paniki","Rica-Rica"],
+    makanan:["Tinutuan","Cakalang Fufu","Klapertart","Paniki","Rica-Rica"],
     senjata:["Keris Minahasa","Sumpit","Parang"],
-    tradisi:[{n:"Pengucapan Syukur",d:"Syukuran panen tahunan"},{n:"Mapalus",d:"Sistem gotong royong"},{n:"Foso Rumah",d:"Gotong royong bangun rumah"}],
-    fakta:"Kolintang diakui UNESCO (2013). Falsafah 'Si Tou Timou Tumou Tou' = manusia hidup untuk memanusiakan orang lain." },
+    tradisi:[{n:"Pengucapan Syukur",d:"Panen tahunan"},{n:"Mapalus",d:"Gotong royong"},{n:"Foso Rumah",d:"Bangun rumah"}],
+    fakta:"Kolintang diakui UNESCO (2013). Si Tou Timou Tumou Tou = memanusiakan orang lain." },
 
-  { no:30, id:"maluku", nama:"Maluku", ibukota:"Ambon", pulau:"Maluku", x:70.0, y:36.25,
-    populasi:"1,8 juta", deskripsi:"Kepulauan Rempah — pusat perdagangan rempah dunia abad ke-16.",
-    suku:[{n:"Ambon",d:"Mayoritas, musik kuat"},{n:"Ternate",d:"Malut"},{n:"Buru",d:"Pulau Buru"},{n:"Seram",d:"Pulau Seram"},{n:"Kei",d:"Kepulauan Kei"},{n:"Tanimbar",d:"Kepulauan Tanimbar"},{n:"Aru",d:"Kepulauan Aru"}],
-    bahasa:["Bahasa Ambon (Melayu Ambon)","Bahasa Kei","Bahasa Tanimbar","Bahasa Buru","Bahasa Seram"],
+  { no:30, id:"maluku", nama:"Maluku", ibukota:"Ambon", pulau:"Maluku", x:70.0, y:36.25, populasi:"1,8 juta",
+    deskripsi:"Kepulauan Rempah — pusat perdagangan rempah dunia abad ke-16.",
+    suku:[{n:"Ambon",d:"Mayoritas"},{n:"Ternate",d:"Malut"},{n:"Buru",d:"Pulau Buru"},{n:"Seram",d:"Pulau Seram"},{n:"Kei",d:"Kepulauan Kei"},{n:"Tanimbar",d:"Tanimbar"},{n:"Aru",d:"Kepulauan Aru"}],
+    bahasa:["Bahasa Ambon","Bahasa Kei","Bahasa Tanimbar","Bahasa Buru","Bahasa Seram"],
     agama:[{n:"Kristen Protestan",p:56,c:"#2563eb"},{n:"Islam",p:41,c:"#16a34a"},{n:"Katolik",p:2,c:"#7c3aed"},{n:"Hindu",p:0.5,c:"#dc2626"},{n:"Buddha",p:0.3,c:"#f59e0b"}],
-    rumah:[{n:"Rumah Baileo",d:"Rumah musyawarah Maluku"},{n:"Rumah Sasadu",d:"Rumah adat Sahu"}],
+    rumah:[{n:"Rumah Baileo",d:"Musyawarah"},{n:"Rumah Sasadu",d:"Sahu"}],
     tarian:["Tari Cakalele","Tari Lenso","Tari Sawa","Tari Bambu Gila"],
-    musik:["Tifa","Totobuang","Hawaiian (ukulele)","Gong"],
+    musik:["Tifa","Totobuang","Hawaiian","Gong"],
     pakaian:["Baju Cele","Kain Tenun Maluku"],
     makanan:["Papeda","Ikan Kuah Kuning","Sagu Lempeng","Kohu-Kohu","Kue Koyabu"],
     senjata:["Parang Salawaku","Tombak","Keris"],
-    tradisi:[{n:"Pukul Sapu",d:"Saling memukul dengan sapu lidi"},{n:"Bambu Gila",d:"Tradisi mistis"},{n:"Cuci Negeri",d:"Bersih-bersih kampung"},{n:"Sasi",d:"Larangan adat menjaga alam"}],
+    tradisi:[{n:"Pukul Sapu",d:"Sapu lidi"},{n:"Bambu Gila",d:"Tradisi mistis"},{n:"Cuci Negeri",d:"Bersih kampung"},{n:"Sasi",d:"Larangan adat"}],
     fakta:"Maluku = satu-satunya sumber cengkih & pala dunia sebelum abad 17." },
 
-  { no:31, id:"malut", nama:"Maluku Utara", ibukota:"Sofifi", pulau:"Maluku", x:68.0, y:21.25,
-    populasi:"1,3 juta", deskripsi:"Kota Rempah — pusat Kesultanan Ternate, kerajaan Islam tertua di Maluku.",
+  { no:31, id:"malut", nama:"Maluku Utara", ibukota:"Sofifi", pulau:"Maluku", x:68.0, y:21.25, populasi:"1,3 juta",
+    deskripsi:"Kota Rempah — pusat Kesultanan Ternate, kerajaan Islam tertua di Maluku.",
     suku:[{n:"Ternate",d:"Kesultanan Ternate"},{n:"Tidore",d:"Kesultanan Tidore"},{n:"Bacan",d:"Pulau Bacan"},{n:"Tobelo",d:"Halmahera Utara"},{n:"Galela",d:"Halmahera"},{n:"Makian",d:"Pulau Makian"}],
     bahasa:["Bahasa Ternate","Bahasa Tidore","Bahasa Tobelo","Bahasa Galela","Bahasa Bacan","Bahasa Makian"],
     agama:[{n:"Islam",p:75,c:"#16a34a"},{n:"Kristen Protestan",p:22,c:"#2563eb"},{n:"Katolik",p:2,c:"#7c3aed"},{n:"Hindu",p:0.5,c:"#dc2626"},{n:"Buddha",p:0.3,c:"#f59e0b"}],
-    rumah:[{n:"Rumah Baileo",d:"Rumah musyawarah"},{n:"Kraton Ternate",d:"Istana Kesultanan Ternate"}],
+    rumah:[{n:"Rumah Baileo",d:"Musyawarah"},{n:"Kraton Ternate",d:"Istana Ternate"}],
     tarian:["Tari Soya-Soya","Tari Cakalele","Tari Gumatere","Tari Legu Salai"],
     musik:["Tifa","Gong","Rebana","Totobuang"],
     pakaian:["Baju Manteren Lamo","Kain Cengkeh"],
     makanan:["Gohu Ikan","Popeda","Papeda","Ikan Bakar Rica"],
     senjata:["Parang Salawaku","Keris","Tombak"],
-    tradisi:[{n:"Legu Salai",d:"Tarian perang Ternate"},{n:"Soya-Soya",d:"Tarian kemenangan Sultan"},{n:"Kololi Kie",d:"Keliling pulau Ternate setahun sekali"}],
-    fakta:"Kesultanan Ternate (1257) = kerajaan Islam tertua. Sultan Baabullah mengusir Portugis dari Maluku (1575)." },
+    tradisi:[{n:"Legu Salai",d:"Perang Ternate"},{n:"Soya-Soya",d:"Kemenangan Sultan"},{n:"Kololi Kie",d:"Keliling Ternate"}],
+    fakta:"Kesultanan Ternate (1257) = kerajaan Islam tertua. Sultan Baabullah mengusir Portugis (1575)." },
 
-  { no:32, id:"papbar", nama:"Papua Barat", ibukota:"Manokwari", pulau:"Papua", x:83.0, y:27.5,
-    populasi:"1,1 juta", deskripsi:"Kota Injil — rumah bagi Suku Biak, Arfak, dan suku pegunungan Arfak.",
-    suku:[{n:"Biak",d:"Kepulauan Biak-Numfor"},{n:"Arfak",d:"Pegunungan Arfak, rumah kaki seribu"},{n:"Sough",d:"Sorong"},{n:"Moi",d:"Sorong, Raja Ampat"},{n:"Ayamaru",d:"Maybrat"},{n:"Wandamen",d:"Pesisir selatan"},{n:"Mpur",d:"Kebar"}],
+  { no:32, id:"papbar", nama:"Papua Barat", ibukota:"Manokwari", pulau:"Papua", x:83.0, y:27.5, populasi:"1,1 juta",
+    deskripsi:"Kota Injil — rumah bagi Suku Biak, Arfak, dan suku pegunungan Arfak.",
+    suku:[{n:"Biak",d:"Biak-Numfor"},{n:"Arfak",d:"Pegunungan Arfak"},{n:"Sough",d:"Sorong"},{n:"Moi",d:"Sorong, Raja Ampat"},{n:"Ayamaru",d:"Maybrat"},{n:"Wandamen",d:"Pesisir selatan"},{n:"Mpur",d:"Kebar"}],
     bahasa:["Bahasa Biak","Bahasa Arfak","Bahasa Moi","Bahasa Sough","Bahasa Ayamaru","Bahasa Wandamen"],
     agama:[{n:"Kristen Protestan",p:76,c:"#2563eb"},{n:"Katolik",p:13,c:"#7c3aed"},{n:"Islam",p:10,c:"#16a34a"},{n:"Hindu",p:0.5,c:"#dc2626"},{n:"Buddha",p:0.3,c:"#f59e0b"},{n:"Kepercayaan lokal",p:0.2,c:"#64748b"}],
-    rumah:[{n:"Rumah Kaki Seribu",d:"Rumah adat Arfak banyak tiang"},{n:"Rumah Kariwari",d:"Rumah adat Biak kerucut"}],
+    rumah:[{n:"Rumah Kaki Seribu",d:"Arfak banyak tiang"},{n:"Rumah Kariwari",d:"Biak kerucut"}],
     tarian:["Tari Yospan","Tari Wor","Tari Mansorandak","Tari Suanggi"],
     musik:["Tifa","Pikon","Suling Bambu"],
     pakaian:["Baju Adat Arfak","Rumbai-rumbai"],
     makanan:["Papeda","Sagu Lempeng","Ikan Bakar Manokwari","Ubi Bakar"],
     senjata:["Busur & Panah","Tombak","Parang"],
-    tradisi:[{n:"Wor",d:"Pesta adat Biak"},{n:"Rumsram",d:"Rumah inisiasi pemuda Biak"},{n:"Kain Timur",d:"Kain sakral mahar & perdamaian"}],
+    tradisi:[{n:"Wor",d:"Pesta Biak"},{n:"Rumsram",d:"Inisiasi pemuda Biak"},{n:"Kain Timur",d:"Kain sakral"}],
     fakta:"Rumah Kaki Seribu Arfak = tahan gempa & binatang buas." },
 
-  { no:33, id:"papua", nama:"Papua", ibukota:"Jayapura", pulau:"Papua", x:93.0, y:27.5,
-    populasi:"3,4 juta", deskripsi:"Bumi Cenderawasih — rumah bagi 250+ suku dan bahasa.",
+  { no:33, id:"papua", nama:"Papua", ibukota:"Jayapura", pulau:"Papua", x:93.0, y:27.5, populasi:"3,4 juta",
+    deskripsi:"Bumi Cenderawasih — rumah bagi 250+ suku dan bahasa.",
     suku:[{n:"Sentani",d:"Danau Sentani"},{n:"Biak",d:"Pesisir"},{n:"Yali",d:"Pegunungan tengah"},{n:"Amungme",d:"Pegunungan"},{n:"Waropen",d:"Pesisir"},{n:"Mee",d:"Paniai"}],
     bahasa:["Bahasa Sentani","Bahasa Biak","Bahasa Yali","Bahasa Amungme","Bahasa Waropen","+ 250 bahasa lainnya"],
     agama:[{n:"Kristen Protestan",p:70,c:"#2563eb"},{n:"Katolik",p:15,c:"#7c3aed"},{n:"Islam",p:13,c:"#16a34a"},{n:"Hindu",p:1,c:"#dc2626"},{n:"Buddha",p:0.5,c:"#f59e0b"},{n:"Kepercayaan lokal",p:0.5,c:"#64748b"}],
-    rumah:[{n:"Rumah Kariwari",d:"Rumah adat Sentani & Biak"}],
+    rumah:[{n:"Rumah Kariwari",d:"Sentani & Biak"}],
     tarian:["Tari Sajojo","Tari Yospan","Tari Selamat Datang","Tari Suanggi"],
     musik:["Tifa","Pikon","Suling Bambu"],
     pakaian:["Baju Adat Papua","Rumbai-rumbai"],
     makanan:["Papeda","Sagu Bakar","Ubi Bakar","Keladi"],
     senjata:["Busur & Panah","Tombak","Parang"],
-    tradisi:[{n:"Bakar Batu",d:"Memasak dengan batu panas"},{n:"Wor",d:"Pesta adat Biak"},{n:"Mbitoro",d:"Ukir Asmat"}],
+    tradisi:[{n:"Bakar Batu",d:"Batu panas"},{n:"Wor",d:"Pesta Biak"},{n:"Mbitoro",d:"Ukir Asmat"}],
     fakta:"Papua memiliki 250+ bahasa daerah — terbanyak di Indonesia." },
 
-  { no:34, id:"papteng", nama:"Papua Tengah", ibukota:"Nabire", pulau:"Papua", x:86.0, y:41.25,
-    populasi:"1,4 juta", deskripsi:"Provinsi hasil pemekaran 2022 — rumah bagi Suku Mee, Amungme, dan Kamoro.",
-    suku:[{n:"Mee",d:"Paniai, petani ubi"},{n:"Amungme",d:"Pegunungan, tambang Freeport"},{n:"Kamoro",d:"Pesisir Mimika, ukir"},{n:"Damal",d:"Pegunungan"},{n:"Nduga",d:"Pegunungan"},{n:"Wolani",d:"Paniai"}],
+  { no:34, id:"papteng", nama:"Papua Tengah", ibukota:"Nabire", pulau:"Papua", x:86.0, y:41.25, populasi:"1,4 juta",
+    deskripsi:"Provinsi hasil pemekaran 2022 — rumah bagi Suku Mee, Amungme, dan Kamoro.",
+    suku:[{n:"Mee",d:"Paniai"},{n:"Amungme",d:"Pegunungan"},{n:"Kamoro",d:"Pesisir Mimika"},{n:"Damal",d:"Pegunungan"},{n:"Nduga",d:"Pegunungan"},{n:"Wolani",d:"Paniai"}],
     bahasa:["Bahasa Mee","Bahasa Amungme","Bahasa Kamoro","Bahasa Damal","Bahasa Nduga"],
     agama:[{n:"Kristen Protestan",p:68,c:"#2563eb"},{n:"Katolik",p:20,c:"#7c3aed"},{n:"Islam",p:10,c:"#16a34a"},{n:"Kepercayaan lokal",p:1.5,c:"#64748b"},{n:"Hindu",p:0.3,c:"#dc2626"},{n:"Buddha",p:0.2,c:"#f59e0b"}],
-    rumah:[{n:"Rumah Adat Kamoro",d:"Rumah panggung pesisir"}],
+    rumah:[{n:"Rumah Adat Kamoro",d:"Panggung pesisir"}],
     tarian:["Tari Sajojo","Tari Emau","Tari Kamoro","Tari Amungme"],
     musik:["Tifa","Pikon","Suling Bambu"],
     pakaian:["Baju Adat Papua","Koteka"],
     makanan:["Sagu Bakar","Ubi Bakar","Ikan Bakar","Papeda"],
     senjata:["Busur & Panah","Tombak","Parang"],
-    tradisi:[{n:"Bakar Batu",d:"Memasak dengan batu panas"},{n:"Emawin",d:"Pesta adat Mee"},{n:"Mbitoro",d:"Ukir leluhur Kamoro"}],
-    fakta:"Papua Tengah adalah provinsi hasil pemekaran tahun 2022." },
+    tradisi:[{n:"Bakar Batu",d:"Batu panas"},{n:"Emawin",d:"Pesta Mee"},{n:"Mbitoro",d:"Ukir Kamoro"}],
+    fakta:"Papua Tengah = provinsi hasil pemekaran tahun 2022." },
 
-  { no:35, id:"pappeg", nama:"Papua Pegunungan", ibukota:"Jayawijaya", pulau:"Papua", x:88.0, y:26.25,
-    populasi:"1,4 juta", deskripsi:"Provinsi pegunungan dengan Lembah Baliem dan tradisi Suku Dani.",
-    suku:[{n:"Dani",d:"Lembah Baliem, bakar batu"},{n:"Lani",d:"Pegunungan tengah"},{n:"Yali",d:"Pegunungan"},{n:"Nduga",d:"Pegunungan"},{n:"Damal",d:"Pegunungan"},{n:"Korowai",d:"Rumah pohon"}],
+  { no:35, id:"pappeg", nama:"Papua Pegunungan", ibukota:"Jayawijaya", pulau:"Papua", x:88.0, y:26.25, populasi:"1,4 juta",
+    deskripsi:"Provinsi pegunungan dengan Lembah Baliem dan tradisi Suku Dani.",
+    suku:[{n:"Dani",d:"Lembah Baliem"},{n:"Lani",d:"Pegunungan tengah"},{n:"Yali",d:"Pegunungan"},{n:"Nduga",d:"Pegunungan"},{n:"Damal",d:"Pegunungan"},{n:"Korowai",d:"Rumah pohon"}],
     bahasa:["Bahasa Dani","Bahasa Lani","Bahasa Yali","Bahasa Nduga","Bahasa Damal"],
     agama:[{n:"Kristen Protestan",p:78,c:"#2563eb"},{n:"Katolik",p:14,c:"#7c3aed"},{n:"Islam",p:6,c:"#16a34a"},{n:"Kepercayaan lokal",p:1.5,c:"#64748b"},{n:"Hindu",p:0.3,c:"#dc2626"},{n:"Buddha",p:0.2,c:"#f59e0b"}],
-    rumah:[{n:"Honai",d:"Rumah bundar Dani rendah"},{n:"Rumah Pohon",d:"Rumah Korowai di atas pohon"}],
+    rumah:[{n:"Honai",d:"Bundar Dani"},{n:"Rumah Pohon",d:"Korowai"}],
     tarian:["Tari Sajojo","Tari Perang","Tari Wor","Tari Emau"],
     musik:["Pikon","Tifa","Suling Bambu"],
     pakaian:["Koteka","Baju Adat Dani","Rumbai-rumbai"],
     makanan:["Ubi Bakar","Daging Bakar Batu","Keladi","Sagu"],
     senjata:["Busur & Panah","Tombak","Parang"],
-    tradisi:[{n:"Bakar Batu",d:"Memasak batu panas pesta adat"},{n:"Iki Palek",d:"Potong jari saat berduka"},{n:"Wim",d:"Pesta adat Dani"}],
-    fakta:"Honai dibangun rendah untuk menghangatkan ruangan. Suku Korowai membangun rumah di atas pohon setinggi 30m." },
+    tradisi:[{n:"Bakar Batu",d:"Batu panas"},{n:"Iki Palek",d:"Potong jari berduka"},{n:"Wim",d:"Pesta Dani"}],
+    fakta:"Honai rendah untuk menghangatkan. Korowai bangun rumah pohon 30m." },
 
-  { no:36, id:"papsel", nama:"Papua Selatan", ibukota:"Merauke", pulau:"Papua", x:90.5, y:50.0,
-    populasi:"520 ribu", deskripsi:"Kota paling timur Indonesia — rumah bagi Suku Marind Anim dan Asmat.",
-    suku:[{n:"Marind Anim",d:"Mayoritas, tradisi kuat"},{n:"Muyu",d:"Boven Digoel"},{n:"Mandobo",d:"Boven Digoel"},{n:"Citak",d:"Mappi"},{n:"Asmat",d:"Agats, ukir kayu"},{n:"Kombai",d:"Boven Digoel"}],
+  { no:36, id:"papsel", nama:"Papua Selatan", ibukota:"Merauke", pulau:"Papua", x:90.5, y:50.0, populasi:"520 ribu",
+    deskripsi:"Kota paling timur Indonesia — rumah bagi Suku Marind Anim dan Asmat.",
+    suku:[{n:"Marind Anim",d:"Mayoritas"},{n:"Muyu",d:"Boven Digoel"},{n:"Mandobo",d:"Boven Digoel"},{n:"Citak",d:"Mappi"},{n:"Asmat",d:"Agats"},{n:"Kombai",d:"Boven Digoel"}],
     bahasa:["Bahasa Marind","Bahasa Muyu","Bahasa Mandobo","Bahasa Citak","Bahasa Asmat","Bahasa Kombai"],
     agama:[{n:"Katolik",p:58,c:"#7c3aed"},{n:"Kristen Protestan",p:32,c:"#2563eb"},{n:"Islam",p:8,c:"#16a34a"},{n:"Kepercayaan lokal",p:1.5,c:"#64748b"},{n:"Hindu",p:0.3,c:"#dc2626"},{n:"Buddha",p:0.2,c:"#f59e0b"}],
-    rumah:[{n:"Rumah Jew",d:"Rumah adat Asmat dengan ukiran"},{n:"Rumah Marind",d:"Rumah adat Marind Anim"}],
+    rumah:[{n:"Rumah Jew",d:"Asmat berukir"},{n:"Rumah Marind",d:"Marind Anim"}],
     tarian:["Tari Sajojo","Tari Marind","Tari Perang Asmat","Tari Suanggi"],
     musik:["Tifa","Pikon","Gong","Suling Bambu"],
     pakaian:["Baju Adat Marind","Rumbai-rumbai","Koteka"],
     makanan:["Sagu Sep","Papeda","Ikan Bakar","Ubi Bakar"],
     senjata:["Busur & Panah","Tombak","Parang Asmat"],
-    tradisi:[{n:"Mbitoro",d:"Ukir leluhur Asmat"},{n:"Bakar Batu",d:"Memasak batu panas"},{n:"Wuramon",d:"Pesta adat Asmat"},{n:"Emak Cem",d:"Inisiasi pemuda Marind"}],
-    fakta:"Merauke = kota paling timur Indonesia. Suku Asmat terkenal seni ukir kayu diakui dunia." },
+    tradisi:[{n:"Mbitoro",d:"Ukir Asmat"},{n:"Bakar Batu",d:"Batu panas"},{n:"Wuramon",d:"Pesta Asmat"},{n:"Emak Cem",d:"Inisiasi Marind"}],
+    fakta:"Merauke = kota paling timur. Asmat terkenal seni ukir kayu dunia." },
 
-  { no:38, id:"papbarda", nama:"Papua Barat Daya", ibukota:"Sorong", pulau:"Papua", x:79.0, y:32.5,
-    populasi:"620 ribu", deskripsi:"Provinsi hasil pemekaran 2022 — rumah bagi Suku Moi dan Raja Ampat.",
-    suku:[{n:"Moi",d:"Sorong, Raja Ampat"},{n:"Maya",d:"Pulau Salawati"},{n:"Biak",d:"Pesisir"},{n:"Tehit",d:"Sorong Selatan"},{n:"Mpur",d:"Kebar"},{n:"Karon",d:"Pegunungan"}],
+  { no:38, id:"papbarda", nama:"Papua Barat Daya", ibukota:"Sorong", pulau:"Papua", x:79.0, y:32.5, populasi:"620 ribu",
+    deskripsi:"Provinsi hasil pemekaran 2022 — rumah bagi Suku Moi dan Raja Ampat.",
+    suku:[{n:"Moi",d:"Sorong, Raja Ampat"},{n:"Maya",d:"Salawati"},{n:"Biak",d:"Pesisir"},{n:"Tehit",d:"Sorong Selatan"},{n:"Mpur",d:"Kebar"},{n:"Karon",d:"Pegunungan"}],
     bahasa:["Bahasa Moi","Bahasa Maya","Bahasa Tehit","Bahasa Mpur","Bahasa Karon"],
     agama:[{n:"Kristen Protestan",p:60,c:"#2563eb"},{n:"Islam",p:25,c:"#16a34a"},{n:"Katolik",p:12,c:"#7c3aed"},{n:"Kepercayaan lokal",p:1.5,c:"#64748b"},{n:"Hindu",p:0.5,c:"#dc2626"},{n:"Buddha",p:0.3,c:"#f59e0b"}],
-    rumah:[{n:"Rumah Adat Moi",d:"Rumah panggung pesisir"},{n:"Rumah Kaki Seribu",d:"Rumah adat pegunungan"}],
+    rumah:[{n:"Rumah Adat Moi",d:"Panggung pesisir"},{n:"Rumah Kaki Seribu",d:"Pegunungan"}],
     tarian:["Tari Yospan","Tari Wor","Tari Moi","Tari Mansorandak"],
     musik:["Tifa","Pikon","Suling Bambu","Gong"],
     pakaian:["Baju Adat Moi","Rumbai-rumbai"],
     makanan:["Papeda","Ikan Bakar","Sagu Lempeng","Ubi Bakar"],
     senjata:["Busur & Panah","Tombak","Parang"],
-    tradisi:[{n:"Wor",d:"Pesta adat Biak"},{n:"Kain Timur",d:"Kain sakral perdamaian"},{n:"Sasi",d:"Larangan adat menjaga laut"}],
-    fakta:"Papua Barat Daya adalah provinsi hasil pemekaran 2022. Raja Ampat = surga biodiversitas laut dunia." },
+    tradisi:[{n:"Wor",d:"Pesta Biak"},{n:"Kain Timur",d:"Kain perdamaian"},{n:"Sasi",d:"Larangan adat laut"}],
+    fakta:"Raja Ampat = surga biodiversitas laut dunia. Pemekaran 2022." },
 ];
 
 /* ============================================================
@@ -1125,12 +1054,10 @@ const FALLBACK_MAP_SVG = `
 <svg class="map-svg" viewBox="0 0 1000 400" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <defs>
     <linearGradient id="seaGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#dbeafe"/>
-      <stop offset="100%" stop-color="#93c5fd"/>
+      <stop offset="0%" stop-color="#dbeafe"/><stop offset="100%" stop-color="#93c5fd"/>
     </linearGradient>
     <linearGradient id="landGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#86efac"/>
-      <stop offset="100%" stop-color="#22c55e"/>
+      <stop offset="0%" stop-color="#86efac"/><stop offset="100%" stop-color="#22c55e"/>
     </linearGradient>
   </defs>
   <rect width="1000" height="400" fill="url(#seaGrad)"/>
@@ -1138,19 +1065,19 @@ const FALLBACK_MAP_SVG = `
     <ellipse cx="185" cy="125" rx="118" ry="42" transform="rotate(42 185 125)"/>
     <ellipse cx="405" cy="233" rx="118" ry="26"/>
     <ellipse cx="430" cy="125" rx="78" ry="68"/>
-    <ellipse cx="600" cy="92"  rx="52" ry="15" transform="rotate(15 600 92)"/>
+    <ellipse cx="600" cy="92" rx="52" ry="15" transform="rotate(15 600 92)"/>
     <ellipse cx="540" cy="145" rx="30" ry="55"/>
     <ellipse cx="612" cy="178" rx="48" ry="13" transform="rotate(35 612 178)"/>
     <ellipse cx="556" cy="196" rx="14" ry="30" transform="rotate(-5 556 196)"/>
-    <ellipse cx="680" cy="88"  rx="13" ry="26" transform="rotate(15 680 88)"/>
+    <ellipse cx="680" cy="88" rx="13" ry="26" transform="rotate(15 680 88)"/>
     <ellipse cx="702" cy="142" rx="10" ry="34" transform="rotate(-10 702 142)"/>
-    <ellipse cx="724" cy="105" rx="8"  ry="16"/>
+    <ellipse cx="724" cy="105" rx="8" ry="16"/>
     <ellipse cx="878" cy="152" rx="95" ry="56" transform="rotate(-8 878 152)"/>
     <ellipse cx="788" cy="126" rx="32" ry="26"/>
-    <ellipse cx="535" cy="224" rx="8"  ry="13"/>
-    <ellipse cx="578" cy="228" rx="22" ry="9"  transform="rotate(-10 578 228)"/>
-    <ellipse cx="618" cy="238" rx="26" ry="8"  transform="rotate(-8 618 238)"/>
-    <ellipse cx="665" cy="252" rx="20" ry="9"  transform="rotate(-20 665 252)"/>
+    <ellipse cx="535" cy="224" rx="8" ry="13"/>
+    <ellipse cx="578" cy="228" rx="22" ry="9" transform="rotate(-10 578 228)"/>
+    <ellipse cx="618" cy="238" rx="26" ry="8" transform="rotate(-8 618 238)"/>
+    <ellipse cx="665" cy="252" rx="20" ry="9" transform="rotate(-20 665 252)"/>
   </g>
 </svg>`;
 
@@ -1161,27 +1088,15 @@ const STORAGE_KEY_EXPLORED = "bhinneka_explored_v6";
 const STORAGE_KEY_JURNAL   = "bhinneka_jurnal_v1";
 
 const safeStorage = {
-  get(key, fallback) {
-    try { const v = localStorage.getItem(key); return v === null ? fallback : v; }
-    catch (e) { return fallback; }
-  },
-  set(key, value) {
-    try { localStorage.setItem(key, value); return true; }
-    catch (e) { console.warn("[Bhinneka Edu] localStorage tidak tersedia:", e); return false; }
-  }
+  get(key, fallback) { try { const v = localStorage.getItem(key); return v === null ? fallback : v; } catch (e) { return fallback; } },
+  set(key, value) { try { localStorage.setItem(key, value); return true; } catch (e) { console.warn("[Bhinneka Edu] localStorage tidak tersedia:", e); return false; } }
 };
 
-let exploredSet = new Set((() => {
-  try { return JSON.parse(safeStorage.get(STORAGE_KEY_EXPLORED, "[]")) || []; }
-  catch (e) { return []; }
-})());
-
+let exploredSet = new Set((() => { try { return JSON.parse(safeStorage.get(STORAGE_KEY_EXPLORED, "[]")) || []; } catch (e) { return []; } })());
 let mapScale = 1;
 let state = { currentDaerah: null, currentTab: "suku", currentFilter: "semua", currentListFilter: "semua" };
 
-function saveExplored() {
-  safeStorage.set(STORAGE_KEY_EXPLORED, JSON.stringify([...exploredSet]));
-}
+function saveExplored() { safeStorage.set(STORAGE_KEY_EXPLORED, JSON.stringify([...exploredSet])); }
 
 window.handleMapError = function () {
   const img = document.getElementById("mapImage");
@@ -1222,9 +1137,6 @@ window.toggleFullscreenMap = function () {
   else document.exitFullscreen?.();
 };
 
-/* ============================================================
-   RENDER LIST (SIDEBAR & GRID)
-   ============================================================ */
 function renderRegionList(filter = "semua", query = "") {
   const list = document.getElementById("regionList");
   if (!list) return;
@@ -1234,10 +1146,7 @@ function renderRegionList(filter = "semua", query = "") {
     const q = query.toLowerCase();
     filtered = filtered.filter(d => d.nama.toLowerCase().includes(q) || d.ibukota.toLowerCase().includes(q));
   }
-  if (!filtered.length) {
-    list.innerHTML = '<p class="text-center text-slate-400 text-xs py-4">Tidak ada provinsi.</p>';
-    return;
-  }
+  if (!filtered.length) { list.innerHTML = '<p class="text-center text-slate-400 text-xs py-4">Tidak ada provinsi.</p>'; return; }
   list.innerHTML = filtered.map(d => `
     <div class="region-list-item ${state.currentDaerah === d.id ? 'active' : ''}" onclick="openModalDaerah('${d.id}')">
       <div class="flex items-center gap-2 min-w-0">
@@ -1245,8 +1154,7 @@ function renderRegionList(filter = "semua", query = "") {
         <span class="truncate">${d.nama}</span>
       </div>
       <span class="badge-island">${d.pulau.split(' ')[0]}</span>
-    </div>
-  `).join("");
+    </div>`).join("");
 }
 
 window.filterIsland = function (island, el) {
@@ -1255,9 +1163,7 @@ window.filterIsland = function (island, el) {
   if (el) el.classList.add("active");
   renderRegionList(island, document.getElementById("searchRegion")?.value || "");
 };
-
 window.searchRegion = function (q) { renderRegionList(state.currentFilter, q); };
-
 window.filterProvinceList = function (island, el) {
   state.currentListFilter = island;
   document.querySelectorAll("#daftar-lengkap .filter-pill").forEach(p => p.classList.remove("active"));
@@ -1272,13 +1178,9 @@ function renderProvinceGrid(filter = "semua") {
   if (filter !== "semua") filtered = filtered.filter(d => d.pulau === filter);
 
   grid.innerHTML = filtered.map(d => {
-    // Ambil 2 suku utama
     const topSuku = d.suku.slice(0, 2).map(s => s.n).join(", ");
-    // Ambil 2 makanan utama
     const topMakanan = d.makanan.slice(0, 2).join(", ");
-    // Ambil 1 tarian utama
     const topTarian = d.tarian[0] || "-";
-
     return `
       <div class="province-card fade-in" onclick="openModalDaerah('${d.id}')" style="cursor:pointer;">
         <div class="header-row">
@@ -1293,14 +1195,11 @@ function renderProvinceGrid(filter = "semua") {
           <span class="highlight-item">🍲 ${topMakanan}</span>
           <span class="highlight-item">💃 ${topTarian}</span>
         </div>
-        <div class="text-[11px] text-slate-400 mt-1">
-          🏝️ ${d.pulau} · 👥 ${d.populasi}
-        </div>
+        <div class="text-[11px] text-slate-400 mt-1">🏝️ ${d.pulau} · 👥 ${d.populasi}</div>
         <button type="button" class="mt-2 w-full bg-krem text-merah text-xs font-bold py-1.5 rounded-lg hover:bg-amber-200 transition">
           Lihat Detail <i class="fa-solid fa-arrow-right ml-1"></i>
         </button>
-      </div>
-    `;
+      </div>`;
   }).join("");
 }
 
@@ -1311,9 +1210,6 @@ window.randomExplore = function () {
   openModalDaerah(pick.id);
 };
 
-/* ============================================================
-   MODAL LOGIC
-   ============================================================ */
 window.openModalDaerah = function (id) {
   const d = DAERAH.find(x => x.id === id);
   if (!d) return;
@@ -1338,16 +1234,13 @@ window.openModalDaerah = function (id) {
     saveExplored();
     updateExploreProgress();
     renderRegionList(state.currentFilter, document.getElementById("searchRegion")?.value || "");
-    // Refresh grid untuk update warna jika ada indikator explored (opsional)
     renderProvinceGrid(state.currentListFilter);
   }
 };
 
 window.closeModalDaerah = function () {
   document.getElementById("modalDaerah").classList.remove("show");
-  if (!document.getElementById("authModal").classList.contains("show")) {
-    document.body.style.overflow = "";
-  }
+  if (!document.getElementById("authModal").classList.contains("show")) document.body.style.overflow = "";
 };
 
 window.switchTab = function (tab, el) {
@@ -1369,16 +1262,14 @@ function renderModalTab(tab) {
       <div class="grid sm:grid-cols-2 gap-3">
         ${d.suku.map(s => `<div class="info-card"><p class="font-bold text-merah mb-1">${s.n}</p><p class="text-xs text-slate-600 leading-relaxed">${s.d}</p></div>`).join("")}
       </div>`;
-  }
-  else if (tab === "bahasa") {
+  } else if (tab === "bahasa") {
     html = `<div class="mb-4"><h4 class="font-extrabold text-slate-800 mb-1">🗣️ Bahasa Daerah di ${d.nama}</h4>
       <p class="text-sm text-slate-500">${d.bahasa.length} bahasa utama</p></div>
       <div class="flex flex-wrap">${d.bahasa.map(b => `<span class="chip ungu">${b}</span>`).join("")}</div>
       <div class="mt-5 p-4 bg-amber-50 border-l-4 border-amber-400 rounded">
         <p class="text-xs text-slate-700"><strong>💡 Bahasa Indonesia</strong> menjadi bahasa pemersatu, tetapi bahasa daerah tetap lestari.</p>
       </div>`;
-  }
-  else if (tab === "agama") {
+  } else if (tab === "agama") {
     html = `<div class="mb-4"><h4 class="font-extrabold text-slate-800 mb-1">🕌 Komposisi Agama di ${d.nama}</h4>
       <p class="text-sm text-slate-500">Kerukunan antar umat beragama</p></div>
       <div class="religion-bar mb-4">
@@ -1393,8 +1284,7 @@ function renderModalTab(tab) {
       <div class="mt-5 p-4 bg-green-50 border-l-4 border-green-500 rounded">
         <p class="text-xs text-slate-700"><strong>🤝 Toleransi:</strong> Masyarakat ${d.nama} hidup rukun dan saling menghormati.</p>
       </div>`;
-  }
-  else if (tab === "budaya") {
+  } else if (tab === "budaya") {
     html = `<div class="mb-4"><h4 class="font-extrabold text-slate-800 mb-1">🎭 Kekayaan Budaya ${d.nama}</h4></div>
       <div class="mb-5"><p class="text-xs font-bold uppercase text-merah mb-2">🏠 Rumah Adat</p>
         <div class="grid sm:grid-cols-2 gap-3">
@@ -1413,8 +1303,7 @@ function renderModalTab(tab) {
       <div><p class="text-xs font-bold uppercase text-merah mb-2">⚔️ Senjata Tradisional</p>
         <div class="flex flex-wrap">${d.senjata.map(s => `<span class="chip ungu">${s}</span>`).join("")}</div>
       </div>`;
-  }
-  else if (tab === "kuliner") {
+  } else if (tab === "kuliner") {
     html = `<div class="mb-4"><h4 class="font-extrabold text-slate-800 mb-1">🍲 Kuliner Khas ${d.nama}</h4>
       <p class="text-sm text-slate-500">${d.makanan.length} makanan & minuman ikonik</p></div>
       <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
@@ -1423,8 +1312,7 @@ function renderModalTab(tab) {
           <p class="font-bold text-sm text-slate-800">${m}</p>
         </div>`).join("")}
       </div>`;
-  }
-  else if (tab === "tradisi") {
+  } else if (tab === "tradisi") {
     html = `<div class="mb-4"><h4 class="font-extrabold text-slate-800 mb-1">🎉 Tradisi & Upacara Adat ${d.nama}</h4>
       <p class="text-sm text-slate-500">${d.tradisi.length} tradisi yang masih dilestarikan</p></div>
       <div class="space-y-3">
@@ -1438,325 +1326,628 @@ function renderModalTab(tab) {
 }
 
 /* ============================================================
-   MODUL PEMBELAJARAN
+   MODUL PEMBELAJARAN (LENGKAP - ±3.700 KATA)
    ============================================================ */
 const MODUL = {
   1: {
     judul: "Apa Itu Keberagaman?",
     ikon: "🌈",
     isi: `
-      <p class="text-slate-700 leading-relaxed mb-4">
-        Indonesia adalah salah satu negara <strong>multikultur terbesar di dunia</strong>. 
-        Menurut data Badan Pusat Statistik (BPS), Indonesia memiliki sekitar <strong>1.340 suku bangsa</strong>, 
-        <strong>1.001 bahasa daerah</strong>, <strong>6 agama resmi</strong>, dan ratusan tradisi yang tersebar 
-        di <strong>17.000+ pulau</strong> dengan <strong>38 provinsi</strong>. Keragaman ini adalah kekayaan 
-        yang tidak dimiliki banyak negara di dunia, sekaligus tantangan besar dalam menjaga persatuan.
-      </p>
+      <p>Indonesia adalah salah satu negara <strong>multikultur terbesar di dunia</strong>. Berdasarkan data Badan Pusat Statistik (BPS) dan berbagai sensus penduduk, Indonesia memiliki sekitar <strong>1.340 suku bangsa</strong>, <strong>1.001 bahasa daerah</strong>, <strong>6 agama resmi</strong> yang diakui negara, serta ratusan bahkan ribuan tradisi dan upacara adat yang tersebar di lebih dari <strong>17.000 pulau</strong> dengan <strong>38 provinsi</strong>. Keragaman ini adalah kekayaan luar biasa yang tidak dimiliki banyak negara di dunia, sekaligus tantangan besar dalam menjaga persatuan dan kesatuan bangsa.</p>
+
+      <p>Keberagaman bukan hanya sekadar perbedaan yang tampak secara kasat mata, melainkan sebuah sistem sosial yang kompleks dan saling terkait. Memahami keberagaman berarti memahami bahwa setiap kelompok masyarakat memiliki sejarah, nilai, kepercayaan, dan cara pandang yang berbeda. Perbedaan ini bukan untuk dipertentangkan, melainkan untuk dihargai sebagai bagian dari mozaik kebudayaan Indonesia.</p>
+
       <div class="materi-box">
         <h5>📖 Definisi Keberagaman</h5>
-        <p class="text-sm text-slate-700 leading-relaxed mb-2">
-          Kata <strong>"keberagaman"</strong> berasal dari kata dasar <em>"ragam"</em> yang berarti jenis, macam, 
-          atau warna. Dalam konteks sosial, keberagaman (atau keragaman) adalah <strong>kondisi masyarakat 
-          yang memiliki perbedaan dalam berbagai aspek kehidupan</strong>, meliputi suku bangsa, agama, ras, 
-          bahasa, budaya, adat istiadat, dan golongan sosial.
-        </p>
-        <p class="text-sm text-slate-700 leading-relaxed">
-          Keberagaman Indonesia bersifat <strong>horizontal</strong> (perbedaan antar kelompok setara seperti 
-          suku dan bahasa) dan <strong>vertikal</strong> (perbedaan antar lapisan seperti ekonomi dan pendidikan).
-        </p>
+        <p>Secara etimologis, kata <strong>"keberagaman"</strong> berasal dari kata dasar <em>"ragam"</em> yang berarti jenis, macam, warna, atau corak. Dalam Bahasa Indonesia, "ragam" bisa berarti berbagai hal yang berbeda satu dengan yang lain. Ketika diberi awalan "ber-" dan akhiran "-an", menjadi "keberagaman" yang berarti <strong>kondisi atau keadaan yang memiliki banyak ragam, banyak jenis, atau banyak perbedaan</strong>.</p>
+        <p>Dalam konteks sosial, keberagaman (atau keragaman) adalah <strong>kondisi masyarakat yang memiliki perbedaan dalam berbagai aspek kehidupan</strong>, meliputi suku bangsa, agama, ras, bahasa, budaya, adat istiadat, golongan sosial, jenis kelamin, profesi, dan lain sebagainya. Keberagaman adalah keniscayaan dalam masyarakat majemuk seperti Indonesia.</p>
       </div>
+
+      <div class="materi-box">
+        <h5>👨‍🎓 Pandangan Para Ahli</h5>
+        <ul>
+          <li><strong>Parsudi Suparlan</strong> mendefinisikan keberagaman sebagai suatu kondisi masyarakat yang memiliki perbedaan dalam berbagai dimensi kehidupan, baik secara horizontal (antar kelompok setara) maupun vertikal (antar lapisan sosial).</li>
+          <li><strong>Clifford Geertz</strong> menyebut Indonesia sebagai "masyarakat majemuk" (<em>plural society</em>) di mana kelompok-kelompok budaya hidup berdampingan namun seringkali memiliki ikatan yang longgar.</li>
+          <li><strong>J.S. Furnivall</strong> mendefinisikan masyarakat majemuk sebagai masyarakat yang terdiri dari dua atau lebih elemen sosial yang hidup berdampingan namun tidak berbaur menjadi satu kesatuan politik.</li>
+          <li><strong>Bhinneka Tunggal Ika</strong> — semboyan negara yang menegaskan bahwa meskipun berbeda-beda, Indonesia tetap satu.</li>
+        </ul>
+      </div>
+
+      <div class="materi-box">
+        <h5>🧭 Dua Dimensi Keberagaman</h5>
+        <p>Keberagaman Indonesia dapat dilihat dari dua dimensi utama:</p>
+        <ol>
+          <li><strong>Keberagaman Horizontal</strong>: Perbedaan antar kelompok yang setara atau sederajat. Contohnya perbedaan suku bangsa, bahasa daerah, agama, adat istiadat, dan budaya. Perbedaan ini tidak menunjukkan tingkatan tinggi-rendah, melainkan sekadar perbedaan jenis.</li>
+          <li><strong>Keberagaman Vertikal</strong>: Perbedaan antar lapisan sosial yang bertingkat. Contohnya perbedaan ekonomi (kaya-miskin), pendidikan, jabatan, kekuasaan, dan status sosial. Perbedaan ini menunjukkan tingkatan atau hierarki.</li>
+        </ol>
+      </div>
+
+      <div class="materi-box">
+        <h5>📊 Data Keberagaman Indonesia</h5>
+        <table>
+          <thead><tr><th>Aspek</th><th>Jumlah</th></tr></thead>
+          <tbody>
+            <tr><td>Suku bangsa</td><td>±1.340 suku</td></tr>
+            <tr><td>Bahasa daerah</td><td>1.001 bahasa</td></tr>
+            <tr><td>Agama resmi</td><td>6 agama</td></tr>
+            <tr><td>Provinsi</td><td>38 provinsi</td></tr>
+            <tr><td>Pulau</td><td>17.000+ pulau</td></tr>
+            <tr><td>Rumah adat</td><td>Ratusan jenis</td></tr>
+            <tr><td>Tarian tradisional</td><td>3.000+ tarian</td></tr>
+            <tr><td>Lagu daerah</td><td>Ribuan lagu</td></tr>
+          </tbody>
+        </table>
+      </div>
+
       <div class="materi-box">
         <h5>🎯 Mengapa Keberagaman Penting?</h5>
-        <ul class="text-sm list-disc pl-5 space-y-2">
-          <li><strong>Kekayaan bangsa:</strong> Setiap suku memiliki kearifan lokal unik.</li>
-          <li><strong>Identitas nasional:</strong> Semboyan <em>Bhinneka Tunggal Ika</em> menjadi perekat.</li>
-          <li><strong>Modal pembangunan:</strong> Daya tarik pariwisata & kreativitas.</li>
-          <li><strong>Pembelajaran hidup:</strong> Melatih empati dan kolaborasi.</li>
-          <li><strong>Ketahanan sosial:</strong> Masyarakat lebih toleran dan adaptif.</li>
-        </ul>
+        <p>Keberagaman bukanlah kelemahan, melainkan kekayaan dan kekuatan bangsa. Ada beberapa alasan mengapa keberagaman penting bagi Indonesia:</p>
+        <ol>
+          <li><strong>Kekayaan bangsa</strong>: Setiap suku memiliki kearifan lokal, pengetahuan tradisional, seni, dan budaya yang unik. Kekayaan ini adalah modal budaya yang tak ternilai.</li>
+          <li><strong>Identitas nasional</strong>: Semboyan "Bhinneka Tunggal Ika" (berbeda-beda tetapi tetap satu) menjadi perekat bangsa. Keberagaman adalah identitas Indonesia di mata dunia.</li>
+          <li><strong>Modal pembangunan</strong>: Keberagaman menjadi daya tarik pariwisata, sumber kreativitas, dan potensi ekonomi kreatif.</li>
+          <li><strong>Pembelajaran hidup</strong>: Hidup dalam keberagaman melatih empati, toleransi, dan kemampuan berkolaborasi dengan orang berbeda.</li>
+          <li><strong>Ketahanan sosial</strong>: Masyarakat yang menghargai keberagaman lebih adaptif, inovatif, dan tangguh menghadapi perubahan.</li>
+          <li><strong>Sumber inovasi</strong>: Perbedaan cara pandang melahirkan gagasan-gagasan baru yang tidak muncul dalam masyarakat homogen.</li>
+        </ol>
       </div>
+
       <div class="materi-box">
-        <h5>📜 Landasan Hukum</h5>
-        <ul class="text-sm list-disc pl-5 space-y-2">
-          <li><strong>Pancasila sila ke-3:</strong> Persatuan Indonesia.</li>
-          <li><strong>UUD 1945 Pasal 29:</strong> Kemerdekaan beragama.</li>
-          <li><strong>UUD 1945 Pasal 32:</strong> Pemeliharaan bahasa daerah.</li>
-          <li><strong>UU No. 5 Tahun 2017:</strong> Pemajuan Kebudayaan.</li>
-          <li><strong>UU No. 40 Tahun 2008:</strong> Penghapusan Diskriminasi Ras & Etnis.</li>
+        <h5>📜 Landasan Hukum Keberagaman Indonesia</h5>
+        <p>Keberagaman Indonesia dilindungi oleh berbagai regulasi, di antaranya:</p>
+        <ul>
+          <li><strong>Pancasila sila ke-3</strong>: "Persatuan Indonesia" menjadi dasar pentingnya menjaga persatuan dalam keberagaman.</li>
+          <li><strong>UUD 1945 Pasal 29</strong>: Menjamin kemerdekaan setiap warga negara untuk memeluk agama dan beribadah menurut agamanya.</li>
+          <li><strong>UUD 1945 Pasal 32</strong>: Negara memajukan kebudayaan nasional dan menghormati bahasa daerah.</li>
+          <li><strong>UU No. 5 Tahun 2017 tentang Pemajuan Kebudayaan</strong>: Melindungi dan memajukan kebudayaan nasional termasuk kebudayaan daerah.</li>
+          <li><strong>UU No. 40 Tahun 2008 tentang Penghapusan Diskriminasi Ras dan Etnis</strong>: Melarang segala bentuk diskriminasi berdasarkan ras dan etnis.</li>
+          <li><strong>Perpres No. 7 Tahun 2021 tentang Rencana Aksi Nasional Toleransi</strong>: Mendorong kerukunan antar umat beragama.</li>
+          <li><strong>UU No. 20 Tahun 2003 tentang Sistem Pendidikan Nasional</strong>: Mengatur pendidikan multikultural.</li>
         </ul>
       </div>
+
+      <div class="materi-box">
+        <h5>🦅 Makna Bhinneka Tunggal Ika</h5>
+        <p>Semboyan "Bhinneka Tunggal Ika" berasal dari Kitab Sutasoma karya Mpu Tantular pada zaman Kerajaan Majapahit abad ke-14, tepatnya pada masa pemerintahan Raja Hayam Wuruk. Frasa lengkapnya adalah "<em>Bhinneka Tunggal Ika Tan Hana Dharma Mangrwa</em>" yang berarti "berbeda-beda tetapi tetap satu, tidak ada kebenaran yang mendua".</p>
+        <p>Semboyan ini kemudian diadopsi sebagai semboyan negara Indonesia dan tercantum dalam pita yang dicengkeram kaki Garuda Pancasila. Maknanya adalah meskipun Indonesia terdiri dari berbagai suku, agama, ras, dan bahasa, semuanya tetap satu kesatuan dalam bingkai Negara Kesatuan Republik Indonesia (NKRI).</p>
+      </div>
+
+      <div class="materi-box">
+        <h5>⚠️ Tantangan Keberagaman</h5>
+        <p>Meskipun keberagaman adalah kekayaan, ia juga membawa tantangan yang harus dikelola dengan bijak:</p>
+        <ul>
+          <li><strong>Potensi konflik antar kelompok</strong>: Perbedaan kepentingan bisa memicu perselisihan.</li>
+          <li><strong>Stereotip dan prasangka</strong>: Generalisasi negatif terhadap kelompok tertentu.</li>
+          <li><strong>Diskriminasi</strong>: Perlakuan tidak adil terhadap kelompok minoritas.</li>
+          <li><strong>Etnosentrisme</strong>: Menganggap budaya sendiri paling baik dan merendahkan budaya lain.</li>
+          <li><strong>Primordialisme</strong>: Kesetiaan berlebihan pada kelompok sendiri.</li>
+          <li><strong>Radikalisme dan ekstremisme</strong>: Paham yang menginginkan perubahan drastis dengan kekerasan.</li>
+          <li><strong>Disintegrasi bangsa</strong>: Ancaman terbesar jika keberagaman tidak dikelola dengan baik.</li>
+        </ul>
+      </div>
+
       <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded">
-        <p class="text-sm text-slate-700">
-          <strong>💡 Tahukah kamu?</strong> UNESCO mencatat <strong>169 bahasa daerah Indonesia</strong> 
-          terancam punah karena penuturnya kurang dari 1.000 orang.
-        </p>
+        <p><strong>💡 Tahukah kamu?</strong> UNESCO mencatat <strong>169 bahasa daerah Indonesia</strong> terancam punah karena penuturnya kurang dari 1.000 orang. Bahasa-bahasa ini terutama ada di Papua, Maluku, dan Kalimantan. Indonesia juga merupakan negara dengan jumlah bahasa terbanyak kedua di dunia setelah Papua Nugini.</p>
       </div>
+
       <div class="bg-slate-50 rounded-xl p-5 border border-slate-200 mt-4">
-        <h4 class="font-bold text-slate-800 mb-3">💭 Pertanyaan Refleksi</h4>
-        <ul class="space-y-2 text-sm text-slate-700">
-          <li>1. Jika Indonesia hanya memiliki satu suku dan satu bahasa, apa yang akan hilang?</li>
-          <li>2. Bagaimana kamu merasakan keberagaman di sekolahmu?</li>
-          <li>3. Apakah keberagaman bisa menjadi sumber konflik? Mengapa?</li>
-          <li>4. Apa perbedaan antara "toleransi" dan "menghargai perbedaan"?</li>
-        </ul>
+        <h4>💭 Pertanyaan Refleksi</h4>
+        <ol>
+          <li>Jika Indonesia hanya memiliki satu suku dan satu bahasa, apa yang akan hilang dari bangsa ini?</li>
+          <li>Bagaimana kamu merasakan keberagaman di sekolah dan lingkungan rumahmu?</li>
+          <li>Apakah keberagaman bisa menjadi sumber konflik? Mengapa?</li>
+          <li>Apa perbedaan antara "toleransi" dan "menghargai perbedaan"?</li>
+          <li>Bagaimana caramu menghargai teman yang berbeda suku, agama, atau budaya?</li>
+          <li>Sebutkan 3 contoh keberagaman yang kamu temui dalam kehidupan sehari-hari.</li>
+        </ol>
       </div>
     `,
   },
+
   2: {
     judul: "5 Faktor Penyebab Keberagaman Indonesia",
     ikon: "🌏",
     isi: `
-      <p class="text-slate-700 leading-relaxed mb-4">
-        Keberagaman masyarakat Indonesia tidak terjadi begitu saja. Ada <strong>5 faktor utama</strong> 
-        yang saling berkaitan dan membentuk mozaik kebudayaan yang kaya.
-      </p>
+      <p>Keberagaman masyarakat Indonesia tidak terjadi begitu saja. Ada <strong>5 faktor utama</strong> yang saling berkaitan dan membentuk mozaik kebudayaan yang kaya. Kelima faktor ini bekerja secara simultan dan saling memperkuat satu sama lain, sehingga menghasilkan Indonesia yang unik dan beragam.</p>
+
       <div class="materi-box">
         <h5>1️⃣ Letak Strategis Wilayah Indonesia</h5>
-        <p class="text-sm text-slate-700 leading-relaxed mb-2">
-          Indonesia terletak di <strong>posisi silang</strong>, di antara dua samudra (Hindia & Pasifik) 
-          dan dua benua (Asia & Australia). Letak ini menjadikan Indonesia <strong>jalur perdagangan 
-          internasional</strong> sejak berabad-abad. Pengaruh Hindu-Buddha (abad 4 M), Islam (abad 11–15), 
-          dan Barat (abad 16) membentuk lapisan budaya Indonesia.
-        </p>
-        <div class="bg-white rounded-lg p-3 mt-2 border border-slate-200">
-          <p class="text-xs text-slate-600"><strong>Contoh:</strong> Kosakata Sanskerta, arsitektur candi, 
-          dan sistem hukum Eropa meninggalkan jejak jelas dalam budaya Indonesia.</p>
-        </div>
+        <p>Indonesia terletak di <strong>posisi silang</strong>, yaitu di antara dua samudra (Samudra Hindia dan Samudra Pasifik) dan dua benua (Benua Asia dan Benua Australia). Letak ini menjadikan Indonesia sebagai <strong>jalur perdagangan internasional</strong> sejak berabad-abad yang lalu. Kapal-kapal dagang dari berbagai penjuru dunia singgah di pelabuhan-pelabuhan Nusantara untuk berdagang rempah-rempah, kayu cendana, dan hasil bumi lainnya.</p>
+        <p>Akibatnya, terjadi interaksi budaya yang intensif antara masyarakat lokal dengan pedagang asing. Pengaruh Hindu-Buddha dari India (abad 4 M), pengaruh Islam dari Gujarat, Persia, dan Arab (abad 11–15), pengaruh Tionghoa, serta pengaruh Barat dari Portugis, Spanyol, Belanda, dan Inggris (abad 16–20) secara bertahap membentuk lapisan-lapisan budaya Indonesia.</p>
+        <p><strong>Contoh pengaruh:</strong></p>
+        <ul>
+          <li>Kosakata Sanskerta dalam Bahasa Indonesia (contoh: raja, kerta, darma, bahasa)</li>
+          <li>Arsitektur candi Borobudur dan Prambanan yang bercorak Hindu-Buddha</li>
+          <li>Sistem hukum Eropa yang memengaruhi sistem hukum modern Indonesia</li>
+          <li>Alat musik gambus yang berasal dari Timur Tengah</li>
+          <li>Kue-kue tradisional yang mendapat pengaruh Tionghoa dan Eropa</li>
+        </ul>
       </div>
+
       <div class="materi-box">
         <h5>2️⃣ Kondisi Negara Kepulauan</h5>
-        <p class="text-sm text-slate-700 leading-relaxed mb-2">
-          Indonesia memiliki <strong>17.000+ pulau</strong>. Setiap kelompok masyarakat di kepulauan 
-          mengembangkan <strong>budaya, bahasa, dan sistem sosialnya sendiri</strong>. 
-          Ahli C. Van Vollenhoven membagi masyarakat Indonesia menjadi <strong>19 daerah hukum adat</strong>.
-        </p>
-        <div class="bg-white rounded-lg p-3 mt-2 border border-slate-200">
-          <p class="text-xs text-slate-600"><strong>Contoh:</strong> Suku Baduy memilih hidup terisolasi 
-          dan memiliki sistem sosial berbeda dari Sunda sekitarnya.</p>
-        </div>
+        <p>Indonesia memiliki <strong>17.000+ pulau</strong> yang membentang dari Sabang hingga Merauke, dengan panjang lebih dari 5.100 km. Setiap kelompok masyarakat yang tinggal di pulau-pulau tersebut mengembangkan <strong>budaya, bahasa, dan sistem sosialnya sendiri</strong> karena terpisah oleh lautan. Isolasi geografis ini mendorong munculnya keragaman budaya yang khas di setiap daerah.</p>
+        <p>Ahli hukum adat asal Belanda, <strong>C. Van Vollenhoven</strong>, membagi masyarakat Indonesia menjadi <strong>19 daerah hukum adat</strong> (<em>rechtskringen</em>) berdasarkan persamaan ciri-ciri kebudayaan dan hukum adatnya. Pembagian ini kemudian disempurnakan oleh para ahli Indonesia menjadi 19 lingkaran hukum adat.</p>
+        <p><strong>Contoh dampak:</strong> Suku Baduy di Banten memilih hidup terisolasi dan memiliki sistem sosial yang sangat berbeda dari masyarakat Sunda di sekitarnya. Suku Anak Dalam di Jambi masih hidup semi-nomaden di dalam Taman Nasional Bukit Duabelas. Suku Korowai di Papua membangun rumah di atas pohon setinggi 30 meter.</p>
       </div>
+
       <div class="materi-box">
         <h5>3️⃣ Perbedaan Kondisi Alam</h5>
-        <p class="text-sm text-slate-700 leading-relaxed mb-2">
-          Kondisi alam (pantai, pegunungan, dataran rendah, rawa) memengaruhi mata pencaharian, 
-          makanan pokok, pakaian, dan arsitektur rumah adat.
-        </p>
-        <div class="bg-white rounded-lg p-3 mt-2 border border-slate-200">
-          <p class="text-xs text-slate-600"><strong>Contoh:</strong> Rumah Gadang (atap melengkung 
-          tahan hujan) vs Honai (rendah, hangat) vs Rumah Panggung (tahan banjir).</p>
-        </div>
+        <p>Kondisi alam Indonesia sangat beragam, mulai dari pantai, dataran rendah, dataran tinggi, pegunungan, hutan tropis, hingga rawa. Perbedaan kondisi alam ini memengaruhi:</p>
+        <ul>
+          <li><strong>Mata pencaharian</strong>: Masyarakat pesisir menjadi nelayan, dataran tinggi menjadi petani sayur, dataran rendah menjadi petani padi.</li>
+          <li><strong>Makanan pokok</strong>: Di Jawa dan Sumatra umumnya nasi, di Maluku dan Papua sagu, di Nusa Tenggara jagung dan ubi.</li>
+          <li><strong>Pakaian</strong>: Masyarakat pegunungan memakai pakaian tebal, masyarakat pesisir memakai pakaian tipis.</li>
+          <li><strong>Arsitektur rumah</strong>: Rumah Gadang (atap melengkung tahan hujan) vs Honai (rendah untuk menghangatkan) vs Rumah Panggung (tahan banjir) vs Rumah Betang (panjang untuk keluarga besar).</li>
+        </ul>
+        <p>Perbedaan kondisi alam ini juga memengaruhi sistem kepercayaan, tradisi, dan kearifan lokal. Contohnya, masyarakat Bali mengembangkan sistem <strong>Subak</strong> untuk irigasi sawah yang diakui UNESCO. Masyarakat Baduy mengembangkan <strong>Sepekan Ruwat Bumi</strong> untuk menjaga keseimbangan alam.</p>
       </div>
+
       <div class="materi-box">
         <h5>4️⃣ Keadaan Transportasi dan Komunikasi</h5>
-        <p class="text-sm text-slate-700 leading-relaxed mb-2">
-          Transportasi maju mempercepat <strong>akulturasi budaya</strong>, tetapi juga memicu 
-          <strong>homogenisasi budaya</strong> di era digital.
-        </p>
-        <div class="bg-white rounded-lg p-3 mt-2 border border-slate-200">
-          <p class="text-xs text-slate-600"><strong>Contoh:</strong> Sebelum Jalan Trans-Papua, suku 
-          pedalaman hidup sangat terisolasi; setelah terbuka, terjadi percampuran budaya.</p>
-        </div>
+        <p>Sebelum era modern, transportasi antar pulau sangat terbatas, sehingga setiap daerah berkembang secara mandiri. Namun, kemajuan teknologi transportasi dan komunikasi telah mengubah lanskap keberagaman Indonesia:</p>
+        <ul>
+          <li><strong>Dampak positif</strong>: Mempercepat akulturasi budaya, mempermudah pertukaran informasi, dan memperkuat integrasi nasional.</li>
+          <li><strong>Dampak negatif</strong>: Memicu homogenisasi budaya (budaya lokal tergerus budaya global), kesenjangan digital, dan hilangnya bahasa daerah.</li>
+        </ul>
+        <p><strong>Contoh:</strong> Sebelum adanya Jalan Trans-Papua, suku-suku pedalaman di Papua hidup sangat terisolasi. Setelah jalan terbuka, terjadi percampuran budaya yang lebih intensif, tetapi juga muncul tantangan baru seperti perubahan gaya hidup dan ketergantungan pada ekonomi uang.</p>
       </div>
+
       <div class="materi-box">
         <h5>5️⃣ Penerimaan Masyarakat terhadap Perubahan</h5>
-        <p class="text-sm text-slate-700 leading-relaxed mb-2">
-          Sikap masyarakat terhadap hal baru memengaruhi tingkat keberagaman. Ada yang 
-          <strong>terbuka</strong> (kosmopolit), ada yang <strong>tertutup</strong> (mempertahankan tradisi).
-        </p>
-        <div class="bg-white rounded-lg p-3 mt-2 border border-slate-200">
-          <p class="text-xs text-slate-600"><strong>Contoh:</strong> Yogyakarta & Bali terbuka terhadap 
-          wisatawan; Baduy Dalam menolak modernisasi.</p>
-        </div>
+        <p>Sikap masyarakat terhadap hal baru sangat memengaruhi tingkat keberagaman. Ada masyarakat yang <strong>terbuka</strong> (kosmopolit) dan ada yang <strong>tertutup</strong> (mempertahankan tradisi). Kedua sikap ini sama-sama memiliki nilai positif dan negatif.</p>
+        <p><strong>Masyarakat terbuka:</strong></p>
+        <ul>
+          <li>Lebih mudah menerima pengaruh budaya luar</li>
+          <li>Lebih adaptif terhadap perubahan zaman</li>
+          <li>Lebih inovatif dan kreatif</li>
+          <li>Contoh: Yogyakarta dan Bali yang terbuka terhadap wisatawan</li>
+        </ul>
+        <p><strong>Masyarakat tertutup:</strong></p>
+        <ul>
+          <li>Mempertahankan tradisi dan kearifan lokal</li>
+          <li>Menolak pengaruh luar yang dianggap merusak</li>
+          <li>Lebih homogen dan stabil secara budaya</li>
+          <li>Contoh: Suku Baduy Dalam di Banten, Suku Tengger di Jawa Timur</li>
+        </ul>
       </div>
+
       <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded mt-4">
-        <p class="text-sm text-slate-700">
-          <strong>💡 Kesimpulan:</strong> Kelima faktor bekerja bersama-sama menciptakan keberagaman 
-          Indonesia. Memahaminya membantu kita menghargai perbedaan sebagai <strong>kekayaan</strong>.
-        </p>
+        <p><strong>💡 Kesimpulan:</strong> Kelima faktor di atas bekerja bersama-sama menciptakan keberagaman Indonesia yang luar biasa. Memahami faktor-faktor ini membantu kita menghargai perbedaan sebagai <strong>kekayaan bangsa</strong>, bukan sebagai ancaman. Keberagaman adalah anugerah yang harus dijaga dan dilestarikan untuk generasi mendatang.</p>
+      </div>
+
+      <div class="bg-slate-50 rounded-xl p-5 border border-slate-200 mt-4">
+        <h4>💭 Pertanyaan Refleksi</h4>
+        <ol>
+          <li>Faktor mana yang menurutmu paling berpengaruh terhadap keberagaman di daerahmu?</li>
+          <li>Bagaimana kondisi alam di daerahmu memengaruhi budaya masyarakatnya?</li>
+          <li>Apakah kemajuan teknologi memperkuat atau mengancam keberagaman Indonesia? Jelaskan!</li>
+          <li>Menurutmu, bagaimana cara menjaga keseimbangan antara keterbukaan dan pelestarian tradisi?</li>
+        </ol>
       </div>
     `,
   },
+
   3: {
     judul: "Jenis Keberagaman & Contoh Nyata",
     ikon: "🎭",
     isi: `
-      <p class="text-slate-700 leading-relaxed mb-4">
-        Keberagaman Indonesia dapat dikelompokkan menjadi <strong>enam jenis utama</strong>.
-      </p>
+      <p>Keberagaman Indonesia dapat dikelompokkan menjadi <strong>enam jenis utama</strong>. Setiap jenis keberagaman memiliki ciri khas, contoh, dan peran penting dalam kehidupan bermasyarakat. Memahami jenis-jenis keberagaman ini membantu kita menghargai perbedaan dan membangun kerukunan.</p>
+
       <div class="grid sm:grid-cols-2 gap-3 mb-4">
         <div class="bg-krem rounded-xl p-4 border border-amber-200">
           <h4 class="font-bold text-merah mb-2">👥 Keberagaman Suku Bangsa</h4>
-          <p class="text-sm text-slate-700 leading-relaxed">Lebih dari <strong>1.340 suku bangsa</strong>. 
-          Suku Jawa terbesar (40% populasi), diikuti Sunda, Batak, Madura, Bugis, dan Minangkabau.</p>
+          <p class="text-sm leading-relaxed">Lebih dari <strong>1.340 suku bangsa</strong>. Suku Jawa terbesar (40% populasi), diikuti Sunda, Batak, Madura, Bugis, dan Minangkabau. Setiap suku memiliki bahasa, adat, dan budaya yang khas.</p>
         </div>
         <div class="bg-blue-50 rounded-xl p-4 border border-blue-200">
           <h4 class="font-bold text-blue-700 mb-2">🕌 Keberagaman Agama</h4>
-          <p class="text-sm text-slate-700 leading-relaxed">Enam agama resmi: Islam, Kristen, Katolik, 
-          Hindu, Buddha, Konghucu. Plus kepercayaan lokal (Kaharingan, Sunda Wiwitan, Marapu).</p>
+          <p class="text-sm leading-relaxed">Enam agama resmi: Islam, Kristen, Katolik, Hindu, Buddha, Konghucu. Plus kepercayaan lokal (Kaharingan, Sunda Wiwitan, Marapu, Parmalim).</p>
         </div>
         <div class="bg-green-50 rounded-xl p-4 border border-green-200">
           <h4 class="font-bold text-green-700 mb-2">🧬 Keberagaman Ras</h4>
-          <p class="text-sm text-slate-700 leading-relaxed">Empat ras utama: Malayan-Mongoloid, Melanesoid, 
-          Asiatic Mongoloid, dan Kaukasoid.</p>
+          <p class="text-sm leading-relaxed">Empat ras utama: Malayan-Mongoloid, Melanesoid, Asiatic Mongoloid, dan Kaukasoid. Ras menentukan ciri fisik seperti warna kulit, bentuk rambut, dan bentuk mata.</p>
         </div>
         <div class="bg-purple-50 rounded-xl p-4 border border-purple-200">
           <h4 class="font-bold text-purple-700 mb-2">🗣️ Keberagaman Bahasa</h4>
-          <p class="text-sm text-slate-700 leading-relaxed"><strong>1.001 bahasa daerah</strong> dengan 
-          penutur terbanyak: Jawa, Sunda, Melayu, Madura, Batak, Minang, Bugis, Bali, Aceh, dan Sasak.</p>
+          <p class="text-sm leading-relaxed"><strong>1.001 bahasa daerah</strong> dengan penutur terbanyak: Jawa, Sunda, Melayu, Madura, Batak, Minang, Bugis, Bali, Aceh, dan Sasak.</p>
         </div>
         <div class="bg-amber-50 rounded-xl p-4 border border-amber-200">
           <h4 class="font-bold text-amber-700 mb-2">🎨 Keberagaman Budaya</h4>
-          <p class="text-sm text-slate-700 leading-relaxed">Mencakup rumah adat, tarian, pakaian, senjata, 
-          lagu daerah, alat musik, dan upacara adat.</p>
+          <p class="text-sm leading-relaxed">Mencakup rumah adat, tarian, pakaian, senjata, lagu daerah, alat musik, dan upacara adat. Indonesia memiliki 3.000+ tarian tradisional.</p>
         </div>
         <div class="bg-pink-50 rounded-xl p-4 border border-pink-200">
           <h4 class="font-bold text-pink-700 mb-2">💼 Keberagaman Golongan</h4>
-          <p class="text-sm text-slate-700 leading-relaxed">Perbedaan profesi, ekonomi, pendidikan, 
-          status sosial, dan latar belakang keluarga.</p>
+          <p class="text-sm leading-relaxed">Perbedaan profesi, ekonomi, pendidikan, status sosial, dan latar belakang keluarga. Perbedaan ini bersifat vertikal.</p>
         </div>
       </div>
+
       <div class="materi-box">
-        <h5>🔍 Kearifan Lokal Terkenal</h5>
-        <p class="text-sm text-slate-700 leading-relaxed">
-          <em>Gotong royong</em> (Jawa), <em>Tri Hita Karana</em> (Bali), <em>Dalihan Na Tolu</em> (Batak), 
-          <em>Siri' na Pacce</em> (Bugis-Makassar), <em>Si Tou Timou Tumou Tou</em> (Minahasa), 
-          <em>Subak</em> (Bali — irigasi UNESCO).
-        </p>
+        <h5>👥 1. Keberagaman Suku Bangsa</h5>
+        <p>Indonesia memiliki lebih dari 1.340 suku bangsa yang tersebar di seluruh kepulauan. Suku-suku besar di Indonesia antara lain:</p>
+        <ul>
+          <li><strong>Suku Jawa</strong> (±40% populasi): Jawa Tengah, Jawa Timur, Yogyakarta</li>
+          <li><strong>Suku Sunda</strong> (±15%): Jawa Barat, Banten</li>
+          <li><strong>Suku Batak</strong>: Sumatra Utara (Toba, Karo, Simalungun, Mandailing, Pakpak)</li>
+          <li><strong>Suku Madura</strong>: Jawa Timur, Madura</li>
+          <li><strong>Suku Bugis</strong>: Sulawesi Selatan</li>
+          <li><strong>Suku Minangkabau</strong>: Sumatra Barat</li>
+          <li><strong>Suku Dayak</strong>: Kalimantan</li>
+          <li><strong>Suku Papua</strong>: Lebih dari 250 suku di Papua</li>
+        </ul>
+      </div>
+
+      <div class="materi-box">
+        <h5>🕌 2. Keberagaman Agama</h5>
+        <p>Indonesia mengakui 6 agama resmi: Islam, Kristen Protestan, Katolik, Hindu, Buddha, dan Konghucu. Selain itu, terdapat kepercayaan lokal yang diakui seperti:</p>
+        <ul>
+          <li><strong>Kaharingan</strong> — agama asli Suku Dayak di Kalimantan</li>
+          <li><strong>Sunda Wiwitan</strong> — kepercayaan Suku Baduy di Banten</li>
+          <li><strong>Marapu</strong> — kepercayaan Suku Sumba di NTT</li>
+          <li><strong>Parmalim</strong> — kepercayaan Suku Batak di Sumatra Utara</li>
+          <li><strong>Aluk Todolo</strong> — kepercayaan Suku Toraja di Sulawesi Selatan</li>
+        </ul>
+        <p>Kerukunan antar umat beragama di Indonesia dibina melalui Forum Kerukunan Umat Beragama (FKUB) di setiap kabupaten/kota.</p>
+      </div>
+
+      <div class="materi-box">
+        <h5>🧬 3. Keberagaman Ras</h5>
+        <p>Ras adalah pengelompokan manusia berdasarkan ciri fisik seperti warna kulit, bentuk rambut, bentuk mata, dan tinggi badan. Di Indonesia terdapat empat ras utama:</p>
+        <ul>
+          <li><strong>Ras Malayan-Mongoloid</strong>: Mayoritas penduduk Indonesia, berkulit sawo matang, berambut lurus/ikal</li>
+          <li><strong>Ras Melanesoid</strong>: Penduduk Papua dan Maluku, berkulit gelap, berambut keriting</li>
+          <li><strong>Ras Asiatic Mongoloid</strong>: Penduduk keturunan Tionghoa, Jepang, Korea</li>
+          <li><strong>Ras Kaukasoid</strong>: Penduduk keturunan Eropa, Arab, India</li>
+        </ul>
+      </div>
+
+      <div class="materi-box">
+        <h5>🗣️ 4. Keberagaman Bahasa</h5>
+        <p>Indonesia memiliki <strong>1.001 bahasa daerah</strong> dengan penutur terbanyak:</p>
+        <ol>
+          <li>Bahasa Jawa — ±80 juta penutur</li>
+          <li>Bahasa Sunda — ±40 juta penutur</li>
+          <li>Bahasa Melayu — ±30 juta penutur</li>
+          <li>Bahasa Madura — ±15 juta penutur</li>
+          <li>Bahasa Batak — ±8 juta penutur</li>
+          <li>Bahasa Minangkabau — ±7 juta penutur</li>
+        </ol>
+        <p>Bahasa Indonesia ditetapkan sebagai bahasa persatuan pada Sumpah Pemuda 28 Oktober 1928. Meskipun demikian, bahasa daerah tetap dijaga dan dilestarikan sebagai warisan budaya bangsa.</p>
+      </div>
+
+      <div class="materi-box">
+        <h5>🎨 5. Keberagaman Budaya</h5>
+        <p>Keberagaman budaya Indonesia mencakup:</p>
+        <ul>
+          <li><strong>Rumah adat</strong>: Rumah Gadang, Tongkonan, Honai, Joglo, Rumah Betang, Rumah Baileo, dll.</li>
+          <li><strong>Tarian tradisional</strong>: Tari Saman (UNESCO), Tari Reog Ponorogo, Tari Kecak, Tari Piring, Tari Tortor, dll.</li>
+          <li><strong>Pakaian adat</strong>: Ulos, Batik, Kebaya, Baju Bodo, Koteka, dll.</li>
+          <li><strong>Alat musik</strong>: Gamelan, Angklung (UNESCO), Kolintang (UNESCO), Sasando, Tifa, dll.</li>
+          <li><strong>Senjata tradisional</strong>: Keris (UNESCO), Rencong, Mandau, Badik, Kujang, dll.</li>
+          <li><strong>Upacara adat</strong>: Ngaben (Bali), Rambu Solo' (Toraja), Sekaten (Yogyakarta), Kasada (Tengger), dll.</li>
+        </ul>
+        <p>Beberapa warisan budaya Indonesia yang diakui UNESCO: Batik (2009), Angklung (2010), Tari Saman (2011), Wayang (2008), Keris (2008), Noken (2012), dan Kolintang (2013).</p>
+      </div>
+
+      <div class="materi-box">
+        <h5>💼 6. Keberagaman Golongan</h5>
+        <p>Keberagaman golongan adalah perbedaan yang bersifat vertikal, mencakup:</p>
+        <ul>
+          <li>Perbedaan profesi (guru, dokter, petani, nelayan, pedagang)</li>
+          <li>Perbedaan ekonomi (kaya, menengah, miskin)</li>
+          <li>Perbedaan pendidikan (SD, SMP, SMA, S1, S2, S3)</li>
+          <li>Perbedaan status sosial (pejabat, tokoh masyarakat, warga biasa)</li>
+          <li>Perbedaan latar belakang keluarga</li>
+        </ul>
+        <p>Perbedaan golongan harus disikapi dengan sikap yang bijak agar tidak menimbulkan kecemburuan sosial dan kesenjangan yang meruncing.</p>
+      </div>
+
+      <div class="materi-box">
+        <h5>🔍 Kearifan Lokal Terkenal di Indonesia</h5>
+        <p>Kearifan lokal (<em>local wisdom</em>) adalah nilai-nilai luhur yang diwariskan secara turun-temurun dan menjadi pedoman hidup masyarakat. Contoh kearifan lokal Indonesia:</p>
+        <ul>
+          <li><strong>Gotong royong</strong> (Jawa) — bekerja sama untuk kepentingan bersama</li>
+          <li><strong>Tri Hita Karana</strong> (Bali) — harmoni manusia-Tuhan-alam</li>
+          <li><strong>Dalihan Na Tolu</strong> (Batak) — sistem kekerabatan tiga pilar</li>
+          <li><strong>Siri' na Pacce</strong> (Bugis-Makassar) — harga diri dan solidaritas</li>
+          <li><strong>Si Tou Timou Tumou Tou</strong> (Minahasa) — manusia hidup untuk memanusiakan orang lain</li>
+          <li><strong>Subak</strong> (Bali) — sistem irigasi tradisional, diakui UNESCO</li>
+          <li><strong>Mapalus</strong> (Minahasa) — sistem gotong royong</li>
+          <li><strong>Alang Tulung</strong> (Dayak) — gotong royong</li>
+        </ul>
+      </div>
+
+      <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded">
+        <p><strong>💡 Refleksi:</strong> Keberagaman bukan untuk dipertentangkan, melainkan untuk dirayakan. Setiap jenis keberagaman memiliki nilai positif yang dapat memperkaya kehidupan berbangsa dan bernegara. Tugas kita sebagai generasi muda adalah menjaga dan merawat keberagaman ini agar tetap lestari.</p>
       </div>
     `,
   },
+
   4: {
     judul: "Konflik Akibat Keberagaman",
     ikon: "⚠️",
     isi: `
       <div class="bg-red-50 border-l-4 border-merah p-4 rounded mb-4">
-        <p class="text-sm text-slate-700">
-          <strong>⚠️ Perhatian:</strong> Materi ini berisi sejarah kelam bangsa. 
-          Mari belajar dari masa lalu untuk masa depan yang lebih damai.
-        </p>
+        <p><strong>⚠️ Perhatian:</strong> Materi ini berisi sejarah kelam bangsa. Mari belajar dari masa lalu untuk masa depan yang lebih damai. Tujuan pembelajaran bukan untuk membangkitkan permusuhan, melainkan untuk mengambil pelajaran berharga.</p>
       </div>
-      <p class="text-slate-700 leading-relaxed mb-4">
-        Keberagaman tidak selalu berjalan mulus. Pernah terjadi <strong>konflik sosial bernuansa SARA</strong>.
-      </p>
+
+      <p>Keberagaman tidak selalu berjalan mulus. Dalam sejarah Indonesia, pernah terjadi <strong>konflik sosial bernuansa SARA</strong> (Suku, Agama, Ras, dan Antargolongan). Konflik-konflik ini menimbulkan korban jiwa, kerugian material, dan trauma mendalam bagi masyarakat. Memahami konflik-konflik ini penting agar kita tidak mengulangi kesalahan yang sama.</p>
+
+      <div class="materi-box">
+        <h5>📖 Pengertian Konflik Sosial</h5>
+        <p>Konflik sosial adalah pertentangan antara dua atau lebih kelompok masyarakat yang memiliki perbedaan kepentingan, nilai, atau tujuan. Konflik dapat terjadi dalam skala kecil (antar individu) maupun besar (antar kelompok). Konflik bernuansa SARA adalah konflik yang dipicu oleh isu suku, agama, ras, dan antargolongan.</p>
+        <p>Menurut <strong>Lewis Coser</strong>, konflik adalah bagian dari interaksi sosial yang bersifat positif maupun negatif. Konflik dapat memperkuat solidaritas internal kelompok, tetapi juga dapat menghancurkan tatanan sosial jika tidak dikelola dengan baik.</p>
+      </div>
+
+      <h4 class="font-extrabold text-slate-800 mt-6 mb-3">📜 Contoh Konflik Besar di Indonesia</h4>
+
       <div class="space-y-3 mb-4">
         <div class="bg-white border border-slate-200 rounded-xl p-4">
-          <div class="flex justify-between items-start mb-2">
-            <h4 class="font-bold text-merah">Konflik Sampit (2001)</h4>
+          <div class="flex justify-between items-start mb-2 flex-wrap gap-2">
+            <h4 class="font-bold text-merah">1. Konflik Sampit (2001)</h4>
             <span class="bg-red-100 text-red-700 text-xs px-2 py-1 rounded-full font-semibold">Etnis</span>
           </div>
-          <p class="text-sm text-slate-600 leading-relaxed">
-            Kerusuhan antar etnis Dayak dan migran Madura di Kalimantan Tengah. 
-            <strong>500+ kematian</strong>, <strong>100.000+</strong> kehilangan rumah. Akar: perebutan 
-            lahan dan ketidaksesuaian budaya.
-          </p>
+          <p class="text-sm text-slate-600 leading-relaxed mb-2">Kerusuhan antar etnis Dayak dan migran Madura di Sampit, Kalimantan Tengah. Konflik ini menewaskan lebih dari <strong>500 orang</strong> dan menyebabkan lebih dari <strong>100.000 orang</strong> kehilangan tempat tinggal. Konflik meluas ke Palangkaraya dan beberapa kota lain di Kalimantan.</p>
+          <p class="text-sm text-slate-600"><strong>Akar masalah:</strong> Perebutan lahan, ketidaksesuaian budaya, kesenjangan ekonomi, dan provokasi pihak tertentu.</p>
         </div>
+
         <div class="bg-white border border-slate-200 rounded-xl p-4">
-          <div class="flex justify-between items-start mb-2">
-            <h4 class="font-bold text-merah">Konflik Ambon (1999-2001)</h4>
+          <div class="flex justify-between items-start mb-2 flex-wrap gap-2">
+            <h4 class="font-bold text-merah">2. Konflik Ambon (1999-2001)</h4>
             <span class="bg-red-100 text-red-700 text-xs px-2 py-1 rounded-full font-semibold">Agama</span>
           </div>
-          <p class="text-sm text-slate-600 leading-relaxed">
-            Konflik bernuansa agama Muslim-Kristen di Maluku. Akar: persaingan ekonomi, kecemburuan sosial, 
-            dan provokasi pihak tertentu.
-          </p>
+          <p class="text-sm text-slate-600 leading-relaxed mb-2">Konflik bernuansa agama antara Muslim dan Kristen di Maluku. Konflik ini menewaskan lebih dari <strong>5.000 orang</strong> dan menyebabkan ratusan ribu orang mengungsi. Konflik meluas ke Maluku Utara (Ternate dan Tidore).</p>
+          <p class="text-sm text-slate-600"><strong>Akar masalah:</strong> Persaingan ekonomi, kecemburuan sosial, provokasi pihak tertentu, dan politisasi agama.</p>
         </div>
+
         <div class="bg-white border border-slate-200 rounded-xl p-4">
-          <div class="flex justify-between items-start mb-2">
-            <h4 class="font-bold text-merah">Konflik Poso (2000-2001)</h4>
+          <div class="flex justify-between items-start mb-2 flex-wrap gap-2">
+            <h4 class="font-bold text-merah">3. Konflik Poso (1998-2001)</h4>
             <span class="bg-red-100 text-red-700 text-xs px-2 py-1 rounded-full font-semibold">Multi-faktor</span>
           </div>
-          <p class="text-sm text-slate-600 leading-relaxed">
-            Kerusuhan di Sulawesi Tengah dipicu perebutan lahan dan provokasi elit kekuasaan.
-          </p>
+          <p class="text-sm text-slate-600 leading-relaxed mb-2">Kerusuhan di Poso, Sulawesi Tengah yang dipicu oleh perebutan lahan dan provokasi elit kekuasaan. Konflik ini menewaskan ratusan orang dan menyebabkan ribuan orang mengungsi. Hingga kini, Poso masih dalam proses pemulihan dan rekonsiliasi.</p>
+          <p class="text-sm text-slate-600"><strong>Akar masalah:</strong> Perebutan lahan, provokasi elit, ketidakadilan hukum, dan isu agama.</p>
+        </div>
+
+        <div class="bg-white border border-slate-200 rounded-xl p-4">
+          <div class="flex justify-between items-start mb-2 flex-wrap gap-2">
+            <h4 class="font-bold text-merah">4. Kerusuhan Mei 1998</h4>
+            <span class="bg-red-100 text-red-700 text-xs px-2 py-1 rounded-full font-semibold">Etnis & Politik</span>
+          </div>
+          <p class="text-sm text-slate-600 leading-relaxed mb-2">Kerusuhan besar di Jakarta dan beberapa kota lain yang dipicu oleh krisis ekonomi dan politik. Konflik ini menargetkan etnis Tionghoa-Indonesia dan menewaskan lebih dari <strong>1.000 orang</strong>. Peristiwa ini menjadi titik balik reformasi Indonesia.</p>
+          <p class="text-sm text-slate-600"><strong>Akar masalah:</strong> Krisis ekonomi, ketidakadilan sosial, provokasi politik, dan sentimen etnis.</p>
+        </div>
+
+        <div class="bg-white border border-slate-200 rounded-xl p-4">
+          <div class="flex justify-between items-start mb-2 flex-wrap gap-2">
+            <h4 class="font-bold text-merah">5. Konflik Aceh (1976-2005)</h4>
+            <span class="bg-red-100 text-red-700 text-xs px-2 py-1 rounded-full font-semibold">Separatisme</span>
+          </div>
+          <p class="text-sm text-slate-600 leading-relaxed mb-2">Konflik antara Gerakan Aceh Merdeka (GAM) dan pemerintah Indonesia. Konflik ini menewaskan lebih dari <strong>15.000 orang</strong> selama hampir 30 tahun. Konflik berakhir dengan damai melalui Perjanjian Helsinki 2005 dan otonomi khusus Aceh.</p>
+          <p class="text-sm text-slate-600"><strong>Akar masalah:</strong> Ketidakadilan ekonomi, keinginan merdeka, dan pelanggaran HAM.</p>
         </div>
       </div>
+
       <div class="materi-box">
-        <h5>🔍 Akar Penyebab Konflik</h5>
-        <ul class="text-sm list-disc pl-5 space-y-2">
-          <li><strong>Kesenjangan ekonomi</strong> & kecemburuan sosial.</li>
-          <li><strong>Perseteruan politik</strong> memanfaatkan isu SARA.</li>
-          <li><strong>Perebutan lahan</strong> antara pendatang & penduduk asli.</li>
-          <li><strong>Provokasi & hoaks</strong> di media sosial.</li>
-          <li><strong>Lemahnya penegakan hukum</strong> yang adil.</li>
+        <h5>🔍 Akar Penyebab Konflik Keberagaman</h5>
+        <p>Konflik bernuansa SARA umumnya tidak disebabkan oleh satu faktor tunggal, melainkan kombinasi dari beberapa faktor berikut:</p>
+        <ol>
+          <li><strong>Kesenjangan ekonomi</strong> & kecemburuan sosial antar kelompok.</li>
+          <li><strong>Perseteruan politik</strong> yang memanfaatkan isu SARA untuk kepentingan kekuasaan.</li>
+          <li><strong>Perebutan lahan</strong> antara pendatang dan penduduk asli.</li>
+          <li><strong>Provokasi & hoaks</strong> di media sosial yang menyebarkan kebencian.</li>
+          <li><strong>Lemahnya penegakan hukum</strong> yang adil dan konsisten.</li>
+          <li><strong>Ketidakadilan struktural</strong> yang dirasakan kelompok tertentu.</li>
+          <li><strong>Politik identitas</strong> yang memecah belah masyarakat.</li>
+          <li><strong>Radikalisme & ekstremisme</strong> yang mengatasnamakan agama.</li>
+          <li><strong>Sejarah kelam</strong> yang belum terselesaikan (trauma masa lalu).</li>
+          <li><strong>Ketidaksetaraan pembangunan</strong> antar daerah.</li>
+        </ol>
+      </div>
+
+      <div class="materi-box">
+        <h5>💔 Dampak Konflik Keberagaman</h5>
+        <p>Konflik bernuansa SARA menimbulkan dampak yang sangat merugikan:</p>
+        <ul>
+          <li><strong>Korban jiwa</strong>: Ribuan nyawa melayang sia-sia.</li>
+          <li><strong>Kerugian material</strong>: Rumah, sekolah, tempat ibadah, dan fasilitas umum hancur.</li>
+          <li><strong>Trauma psikologis</strong>: Masyarakat mengalami ketakutan dan stres berkepanjangan.</li>
+          <li><strong>Disintegrasi sosial</strong>: Hubungan antar kelompok yang dulunya harmonis menjadi rusak.</li>
+          <li><strong>Kemunduran ekonomi</strong>: Aktivitas ekonomi terhenti, investasi menurun.</li>
+          <li><strong>Citra bangsa</strong>: Indonesia dipandang negatif oleh dunia internasional.</li>
+          <li><strong>Pengungsian</strong>: Ratusan ribu orang kehilangan tempat tinggal.</li>
+          <li><strong>Hilangnya nyawa & masa depan</strong>: Generasi muda kehilangan kesempatan belajar dan bekerja.</li>
         </ul>
       </div>
+
+      <div class="materi-box">
+        <h5>📚 Pelajaran dari Konflik</h5>
+        <p>Dari konflik-konflik yang pernah terjadi, kita dapat mengambil pelajaran berharga:</p>
+        <ol>
+          <li><strong>Keberagaman bisa menjadi kekuatan sekaligus potensi konflik.</strong> Kuncinya adalah pengelolaan yang bijak.</li>
+          <li><strong>Isu SARA mudah dimanfaatkan</strong> oleh pihak-pihak yang ingin mengambil keuntungan politik.</li>
+          <li><strong>Pendidikan toleransi</strong> harus ditanamkan sejak dini.</li>
+          <li><strong>Penegakan hukum yang adil</strong> sangat penting untuk mencegah konflik.</li>
+          <li><strong>Dialog dan komunikasi</strong> antar kelompok harus terus dibangun.</li>
+          <li><strong>Keadilan sosial</strong> harus diwujudkan agar tidak ada kecemburuan.</li>
+          <li><strong>Media massa dan media sosial</strong> harus bijak dalam menyampaikan informasi.</li>
+        </ol>
+      </div>
+
       <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded">
-        <p class="text-sm text-slate-700">
-          <strong>💡 Pelajaran:</strong> Keberagaman bisa menjadi kekuatan sekaligus potensi konflik. 
-          Kuncinya adalah <strong>pendidikan, dialog, dan penegakan hukum yang adil</strong>.
-        </p>
+        <p><strong>💡 Refleksi:</strong> Konflik akibat keberagaman adalah luka yang harus disembuhkan, bukan dibiarkan menganga. Bangsa yang besar adalah bangsa yang mampu belajar dari masa lalu dan membangun masa depan yang lebih damai. Kita semua memiliki tanggung jawab untuk mencegah konflik serupa terjadi lagi.</p>
+      </div>
+
+      <div class="bg-slate-50 rounded-xl p-5 border border-slate-200 mt-4">
+        <h4>💭 Pertanyaan Refleksi</h4>
+        <ol>
+          <li>Menurutmu, apa penyebab utama konflik bernuansa SARA di Indonesia?</li>
+          <li>Bagaimana cara mencegah konflik serupa terulang kembali?</li>
+          <li>Apa peran media sosial dalam memicu atau meredakan konflik?</li>
+          <li>Bagaimana sikapmu jika melihat provokasi SARA di media sosial?</li>
+          <li>Menurutmu, apakah Indonesia sudah cukup baik dalam mengelola keberagaman? Jelaskan!</li>
+        </ol>
       </div>
     `,
   },
+
   5: {
     judul: "Solusi & Pencegahan Konflik",
     ikon: "🕊️",
     isi: `
-      <p class="text-slate-700 leading-relaxed mb-4">
-        Bagaimana mencegah dan menghentikan konflik akibat keberagaman? Berikut <strong>5 solusi utama</strong>.
-      </p>
+      <p>Bagaimana mencegah dan menghentikan konflik akibat keberagaman? Berikut <strong>5 solusi utama</strong> yang dapat diterapkan dalam kehidupan sehari-hari, baik di sekolah, keluarga, maupun masyarakat luas.</p>
+
       <div class="flex gap-4 items-start bg-white border border-slate-200 rounded-xl p-4 mb-3">
         <div class="w-10 h-10 rounded-full gradient-hero text-white flex items-center justify-center font-bold flex-shrink-0">1</div>
         <div>
           <h4 class="font-bold text-merah mb-1">Pendidikan Multikultural</h4>
-          <p class="text-sm text-slate-600 leading-relaxed">
-            Kurikulum multikultural mengajarkan siswa menghargai perbedaan sejak dini, 
-            melalui pembelajaran budaya, agama, dan adat yang beragam.
-          </p>
+          <p class="text-sm leading-relaxed mb-2">Kurikulum multikultural mengajarkan siswa menghargai perbedaan sejak dini, melalui pembelajaran budaya, agama, dan adat yang beragam. Pendidikan multikultural bertujuan menumbuhkan kesadaran bahwa perbedaan adalah kekayaan, bukan ancaman.</p>
+          <p class="text-sm leading-relaxed mb-2"><strong>Implementasi:</strong></p>
+          <ul class="text-sm list-disc pl-5 space-y-1">
+            <li>Mengintegrasikan materi keberagaman dalam kurikulum sekolah.</li>
+            <li>Mengadakan kegiatan lintas budaya (festival budaya, pertukaran pelajar).</li>
+            <li>Mengundang tokoh agama dan tokoh adat untuk berbagi pengalaman.</li>
+            <li>Menggunakan media pembelajaran yang inklusif dan representatif.</li>
+            <li>Melatih guru untuk mengajar dengan pendekatan multikultural.</li>
+          </ul>
         </div>
       </div>
+
       <div class="flex gap-4 items-start bg-white border border-slate-200 rounded-xl p-4 mb-3">
         <div class="w-10 h-10 rounded-full gradient-hero text-white flex items-center justify-center font-bold flex-shrink-0">2</div>
         <div>
           <h4 class="font-bold text-merah mb-1">Dialog Lintas Kelompok</h4>
-          <p class="text-sm text-slate-600 leading-relaxed">
-            Forum Kerukunan Umat Beragama (FKUB) berperan aktif — bukan hanya mediator konflik, 
-            tetapi juga mengisi ruang digital dengan edukasi damai.
-          </p>
+          <p class="text-sm leading-relaxed mb-2">Forum Kerukunan Umat Beragama (FKUB) berperan aktif — bukan hanya sebagai mediator konflik, tetapi juga mengisi ruang digital dengan edukasi damai. Dialog lintas kelompok membuka ruang komunikasi yang jujur dan saling menghargai.</p>
+          <p class="text-sm leading-relaxed mb-2"><strong>Implementasi:</strong></p>
+          <ul class="text-sm list-disc pl-5 space-y-1">
+            <li>Mengaktifkan FKUB di setiap kabupaten/kota.</li>
+            <li>Mengadakan dialog antar tokoh agama, tokoh adat, dan tokoh masyarakat.</li>
+            <li>Membangun komunitas lintas budaya di sekolah dan kampus.</li>
+            <li>Mengadakan kegiatan sosial bersama (bakti sosial, kerja bakti).</li>
+            <li>Memfasilitasi pertemuan rutin antar kelompok yang berbeda.</li>
+          </ul>
         </div>
       </div>
+
       <div class="flex gap-4 items-start bg-white border border-slate-200 rounded-xl p-4 mb-3">
         <div class="w-10 h-10 rounded-full gradient-hero text-white flex items-center justify-center font-bold flex-shrink-0">3</div>
         <div>
           <h4 class="font-bold text-merah mb-1">Literasi Keagamaan Lintas Budaya</h4>
-          <p class="text-sm text-slate-600 leading-relaxed">
-            Pelatihan memahami diri sendiri & pandangan orang dengan kepercayaan berbeda (LKLB).
-          </p>
+          <p class="text-sm leading-relaxed mb-2">Pelatihan memahami diri sendiri dan pandangan orang dengan kepercayaan berbeda (LKLB). Literasi keagamaan lintas budaya bertujuan menumbuhkan sikap saling pengertian dan mengurangi prasangka.</p>
+          <p class="text-sm leading-relaxed mb-2"><strong>Implementasi:</strong></p>
+          <ul class="text-sm list-disc pl-5 space-y-1">
+            <li>Mengadakan pelatihan literasi keagamaan untuk guru dan siswa.</li>
+            <li>Mempelajari ajaran agama lain secara objektif dan akademis.</li>
+            <li>Mengunjungi tempat ibadah agama lain dengan sikap hormat.</li>
+            <li>Membaca buku dan artikel tentang keberagaman.</li>
+            <li>Mengikuti diskusi lintas iman yang sehat dan terbuka.</li>
+          </ul>
         </div>
       </div>
+
       <div class="flex gap-4 items-start bg-white border border-slate-200 rounded-xl p-4 mb-3">
         <div class="w-10 h-10 rounded-full gradient-hero text-white flex items-center justify-center font-bold flex-shrink-0">4</div>
         <div>
           <h4 class="font-bold text-merah mb-1">Penguatan Nilai Pancasila</h4>
-          <p class="text-sm text-slate-600 leading-relaxed">
-            Sila ke-1 & ke-3 menjadi landasan menghormati keyakinan orang lain dalam satu kesatuan.
-          </p>
+          <p class="text-sm leading-relaxed mb-2">Sila ke-1 (Ketuhanan Yang Maha Esa) dan sila ke-3 (Persatuan Indonesia) menjadi landasan menghormati keyakinan orang lain dalam satu kesatuan. Pancasila adalah dasar negara yang menyatukan keberagaman.</p>
+          <p class="text-sm leading-relaxed mb-2"><strong>Implementasi:</strong></p>
+          <ul class="text-sm list-disc pl-5 space-y-1">
+            <li>Memahami dan mengamalkan nilai-nilai Pancasila dalam kehidupan sehari-hari.</li>
+            <li>Menghormati hak setiap orang untuk beribadah sesuai agamanya.</li>
+            <li>Mengutamakan persatuan di atas kepentingan pribadi dan kelompok.</li>
+            <li>Mengikuti upacara bendera dengan khidmat.</li>
+            <li>Menggunakan produk dalam negeri untuk mendukung ekonomi bangsa.</li>
+          </ul>
         </div>
       </div>
+
       <div class="flex gap-4 items-start bg-white border border-slate-200 rounded-xl p-4 mb-3">
         <div class="w-10 h-10 rounded-full gradient-hero text-white flex items-center justify-center font-bold flex-shrink-0">5</div>
         <div>
           <h4 class="font-bold text-merah mb-1">Moderasi Beragama</h4>
-          <p class="text-sm text-slate-600 leading-relaxed">
-            Mendorong sikap toleran, inklusif, dan menghargai perbedaan melalui Proyek Penguatan 
-            Profil Pelajar Pancasila (P5).
-          </p>
+          <p class="text-sm leading-relaxed mb-2">Mendorong sikap toleran, inklusif, dan menghargai perbedaan melalui Proyek Penguatan Profil Pelajar Pancasila (P5). Moderasi beragama adalah cara beragama yang tidak ekstrem, tidak liberal, dan selalu mengedepankan keseimbangan.</p>
+          <p class="text-sm leading-relaxed mb-2"><strong>Implementasi:</strong></p>
+          <ul class="text-sm list-disc pl-5 space-y-1">
+            <li>Mengembangkan sikap moderat dalam beragama.</li>
+            <li>Menolak segala bentuk radikalisme dan ekstremisme.</li>
+            <li>Menghargai perbedaan tafsir dalam agama sendiri.</li>
+            <li>Bekerja sama dengan pemeluk agama lain untuk kebaikan bersama.</li>
+            <li>Mengedepankan dialog daripada kekerasan dalam menyelesaikan perbedaan.</li>
+          </ul>
         </div>
       </div>
+
       <div class="materi-box mt-4">
         <h5>🌱 Aksi Nyata untuk Pelajar</h5>
-        <ul class="text-sm list-disc pl-5 space-y-2">
-          <li><strong>Di sekolah:</strong> Ikut kegiatan lintas budaya, hormati teman berbeda agama/suku.</li>
-          <li><strong>Di rumah:</strong> Diskusikan pentingnya toleransi bersama keluarga.</li>
-          <li><strong>Di media sosial:</strong> Sebar konten positif, jangan sebar hoaks.</li>
-          <li><strong>Di masyarakat:</strong> Ikut gotong royong & festival budaya daerah.</li>
+        <p>Sebagai pelajar, kamu dapat berkontribusi dalam menjaga keberagaman melalui aksi-aksi nyata berikut:</p>
+        <p><strong>Di sekolah:</strong></p>
+        <ul>
+          <li>Ikut kegiatan lintas budaya dan ekstrakurikuler yang beragam.</li>
+          <li>Hormati teman yang berbeda agama, suku, dan budaya.</li>
+          <li>Tidak melakukan bullying atau perundungan terhadap siapa pun.</li>
+          <li>Mengajak teman untuk belajar bersama tanpa membedakan latar belakang.</li>
+          <li>Mengikuti organisasi siswa yang inklusif.</li>
+        </ul>
+        <p><strong>Di rumah:</strong></p>
+        <ul>
+          <li>Diskusikan pentingnya toleransi bersama keluarga.</li>
+          <li>Menonton berita atau film yang mengangkat tema keberagaman.</li>
+          <li>Menghormati tetangga yang berbeda agama dan suku.</li>
+          <li>Membantu tetangga yang sedang kesulitan tanpa memandang latar belakang.</li>
+        </ul>
+        <p><strong>Di media sosial:</strong></p>
+        <ul>
+          <li>Sebar konten positif tentang keberagaman.</li>
+          <li>Jangan sebarkan hoaks dan ujaran kebencian.</li>
+          <li>Laporkan konten yang mengandung SARA.</li>
+          <li>Gunakan media sosial untuk kampanye perdamaian.</li>
+        </ul>
+        <p><strong>Di masyarakat:</strong></p>
+        <ul>
+          <li>Ikut gotong royong dan kerja bakti.</li>
+          <li>Berpartisipasi dalam festival budaya daerah.</li>
+          <li>Menghadiri undangan tetangga yang berbeda agama saat hari raya.</li>
+          <li>Menjaga kerukunan dan keamanan lingkungan.</li>
         </ul>
       </div>
+
+      <div class="materi-box">
+        <h5>🏛️ Peran Pemerintah & Lembaga Negara</h5>
+        <p>Pemerintah dan lembaga negara memiliki peran penting dalam menjaga keberagaman:</p>
+        <ul>
+          <li><strong>Kementerian Agama</strong>: Membina kerukunan umat beragama melalui FKUB.</li>
+          <li><strong>Kementerian Pendidikan</strong>: Mengembangkan kurikulum multikultural.</li>
+          <li><strong>Komnas HAM</strong>: Melindungi hak asasi manusia termasuk hak beragama.</li>
+          <li><strong>Badan Nasional Penanggulangan Terorisme (BNPT)</strong>: Mencegah radikalisme.</li>
+          <li><strong>Wahid Foundation & Setara Institute</strong>: Organisasi masyarakat sipil yang memantau kerukunan beragama.</li>
+          <li><strong>TNI & Polri</strong>: Menjaga keamanan dan ketertiban masyarakat.</li>
+        </ul>
+      </div>
+
+      <div class="materi-box">
+        <h5>🌍 Peran Indonesia di Dunia Internasional</h5>
+        <p>Indonesia juga berperan aktif dalam mempromosikan dialog antar agama dan budaya di tingkat internasional:</p>
+        <ul>
+          <li><strong>World Peace Forum</strong>: Forum perdamaian dunia yang diinisiasi Indonesia.</li>
+          <li><strong>Dialog Lintas Agama ASEAN</strong>: Indonesia sebagai pelopor dialog lintas agama di ASEAN.</li>
+          <li><strong>Bali Democracy Forum</strong>: Forum demokrasi yang membahas keberagaman.</li>
+          <li><strong>UN Alliance of Civilizations</strong>: Aliansi peradaban PBB yang diikuti Indonesia.</li>
+        </ul>
+      </div>
+
       <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded mt-4">
-        <p class="text-sm text-slate-700">
-          <strong>🌱 Kesimpulan:</strong> Mencegah konflik keberagaman adalah <strong>tanggung jawab 
-          kita semua</strong>. Mulai dari diri sendiri, dari hal kecil, dan dari sekarang.
-        </p>
+        <p><strong>🌱 Kesimpulan:</strong> Mencegah konflik keberagaman adalah <strong>tanggung jawab kita semua</strong>. Mulai dari diri sendiri, dari hal kecil, dan dari sekarang. Keberagaman Indonesia adalah anugerah yang harus dijaga, dirawat, dan dilestarikan. Dengan semangat <em>Bhinneka Tunggal Ika</em>, kita bisa membangun Indonesia yang damai, adil, dan sejahtera.</p>
+      </div>
+
+      <div class="bg-slate-50 rounded-xl p-5 border border-slate-200 mt-4">
+        <h4>💭 Pertanyaan Refleksi</h4>
+        <ol>
+          <li>Apa peranmu sebagai pelajar dalam menjaga keberagaman Indonesia?</li>
+          <li>Bagaimana cara mencegah konflik SARA di lingkungan sekolahmu?</li>
+          <li>Apa yang akan kamu lakukan jika melihat ujaran kebencian di media sosial?</li>
+          <li>Menurutmu, apakah pendidikan multikultural sudah diterapkan dengan baik di sekolahmu?</li>
+          <li>Bagaimana cara membangun dialog yang sehat antar kelompok yang berbeda?</li>
+          <li>Apa kontribusi yang bisa kamu berikan untuk perdamaian Indonesia?</li>
+        </ol>
       </div>
     `,
   },
@@ -1771,20 +1962,13 @@ window.showModul = function (n) {
       <span class="text-4xl">${data.ikon}</span>
       <h3 class="text-2xl md:text-3xl font-extrabold text-merah">${data.judul}</h3>
     </div>
-    <div class="fade-in">${data.isi}</div>
+    <div class="fade-in modul-isi text-slate-700 text-sm md:text-[15px]">${data.isi}</div>
   `;
   for (let i = 1; i <= 5; i++) {
     const btn = document.getElementById("tabM" + i);
     if (!btn) continue;
-    if (i === n) {
-      btn.style.background = "#b91c1c";
-      btn.style.color = "white";
-      btn.style.borderColor = "#b91c1c";
-    } else {
-      btn.style.background = "white";
-      btn.style.color = "";
-      btn.style.borderColor = "";
-    }
+    if (i === n) { btn.style.background = "#b91c1c"; btn.style.color = "white"; btn.style.borderColor = "#b91c1c"; }
+    else { btn.style.background = "white"; btn.style.color = ""; btn.style.borderColor = ""; }
   }
 };
 
@@ -1875,17 +2059,12 @@ window.answerQuizByIndex = function (i, el) {
   const opt = q.options[i];
   const correct = opt === q.answer;
   userAnswers.push({ q: q.q, userAns: opt, correctAns: q.answer, isCorrect: correct });
-  document.querySelectorAll("#quizBody .quiz-opt").forEach(o => {
-    o.style.pointerEvents = "none";
-    o.classList.remove("hover:bg-amber-50");
-  });
+  document.querySelectorAll("#quizBody .quiz-opt").forEach(o => { o.style.pointerEvents = "none"; o.classList.remove("hover:bg-amber-50"); });
   if (correct) { el.style.background = "#16a34a"; el.style.color = "white"; el.style.borderColor = "#16a34a"; quizScore += 10; }
   else {
     el.style.background = "#dc2626"; el.style.color = "white"; el.style.borderColor = "#dc2626";
     document.querySelectorAll("#quizBody .quiz-opt").forEach((o, idx) => {
-      if (q.options[idx] === q.answer) {
-        o.style.background = "#16a34a"; o.style.color = "white"; o.style.borderColor = "#16a34a";
-      }
+      if (q.options[idx] === q.answer) { o.style.background = "#16a34a"; o.style.color = "white"; o.style.borderColor = "#16a34a"; }
     });
   }
   const fb = document.getElementById("quizFeedback");
@@ -1970,14 +2149,10 @@ window.restartQuiz = function () {
 };
 
 /* ============================================================
-   JURNAL (Firestore jika login, localStorage jika tamu)
+   JURNAL
    ============================================================ */
 let cloudJournals = null;
-
-function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
-}
-
+function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c])); }
 function currentUser() { return (firebaseReady && auth) ? auth.currentUser : null; }
 
 async function loadJournalFromCloud() {
@@ -1987,9 +2162,7 @@ async function loadJournalFromCloud() {
     const doc = await db.collection("users").doc(user.uid).get();
     cloudJournals = (doc.exists && Array.isArray(doc.data().journals)) ? doc.data().journals : [];
     renderJurnal();
-  } catch (e) {
-    console.error("[Bhinneka Edu] gagal memuat jurnal cloud:", e);
-  }
+  } catch (e) { console.error("[Bhinneka Edu] gagal memuat jurnal cloud:", e); }
 }
 
 window.simpanJurnal = async function () {
@@ -1997,17 +2170,12 @@ window.simpanJurnal = async function () {
   if (!val) { toast("Jurnal kosong!"); return; }
   const entry = { text: val, time: new Date().toISOString() };
   const user = currentUser();
-
   if (user) {
     try {
       cloudJournals = [entry, ...(cloudJournals || [])].slice(0, 50);
       await db.collection("users").doc(user.uid).set({ journals: cloudJournals }, { merge: true });
       toast("☁️ Jurnal tersimpan ke cloud!");
-    } catch (e) {
-      console.error(e);
-      toast("Gagal simpan ke cloud — coba lagi.");
-      return;
-    }
+    } catch (e) { console.error(e); toast("Gagal simpan ke cloud — coba lagi."); return; }
   } else {
     let list = [];
     try { list = JSON.parse(safeStorage.get(STORAGE_KEY_JURNAL, "[]")) || []; } catch (e) { list = []; }
@@ -2021,17 +2189,11 @@ window.simpanJurnal = async function () {
 
 function renderJurnal() {
   let list = [];
-  if (currentUser()) {
-    list = cloudJournals || [];
-  } else {
-    try { list = JSON.parse(safeStorage.get(STORAGE_KEY_JURNAL, "[]")) || []; } catch (e) { list = []; }
-  }
+  if (currentUser()) { list = cloudJournals || []; }
+  else { try { list = JSON.parse(safeStorage.get(STORAGE_KEY_JURNAL, "[]")) || []; } catch (e) { list = []; } }
   const el = document.getElementById("jurnalList");
   if (!el) return;
-  if (!list.length) {
-    el.innerHTML = '<p class="text-center text-sm text-slate-400 py-6">Belum ada jurnal. Tulis pemikiranmu di atas! ✍️</p>';
-    return;
-  }
+  if (!list.length) { el.innerHTML = '<p class="text-center text-sm text-slate-400 py-6">Belum ada jurnal. Tulis pemikiranmu di atas! ✍️</p>'; return; }
   el.innerHTML = list.slice(0, 10).map(j => `<div class="bg-krem border-l-4 border-emas rounded-lg p-4 fade-in">
     <p class="text-xs text-slate-500 mb-1">${new Date(j.time).toLocaleString('id-ID')}</p>
     <p class="text-sm text-slate-700 whitespace-pre-wrap">${escapeHtml(j.text)}</p>
@@ -2052,12 +2214,7 @@ function updateJurnalStatus() {
   }
 }
 
-window.toggleUserMenu = function (e) {
-  if (e) e.stopPropagation();
-  const m = document.getElementById("userMenu");
-  if (m) m.classList.toggle("hidden");
-};
-
+window.toggleUserMenu = function (e) { if (e) e.stopPropagation(); const m = document.getElementById("userMenu"); if (m) m.classList.toggle("hidden"); };
 document.addEventListener("click", (e) => {
   const menu = document.getElementById("userMenu");
   if (!menu || menu.classList.contains("hidden")) return;
@@ -2067,7 +2224,7 @@ document.addEventListener("click", (e) => {
 });
 
 /* ============================================================
-   FIREBASE AUTH UI LOGIC
+   AUTH
    ============================================================ */
 let authMode = "login";
 
@@ -2077,108 +2234,63 @@ window.openAuthModal = function () {
   if (!firebaseReady) {
     const w = document.getElementById("firebaseWarning");
     w.classList.remove("hidden");
-    w.innerHTML = `⚠️ <strong>Firebase belum dikonfigurasi.</strong> Buka kode HTML dan isi <code class="bg-white px-1 rounded">firebaseConfig</code> dengan kredensial proyek Firebase-mu. Lihat instruksi di komentar script.`;
+    w.innerHTML = `⚠️ <strong>Firebase belum dikonfigurasi.</strong> Isi <code class="bg-white px-1 rounded">firebaseConfig</code> untuk mengaktifkan login.`;
   }
 };
-
 window.closeAuthModal = function () {
   document.getElementById("authModal").classList.remove("show");
-  if (!document.getElementById("modalDaerah").classList.contains("show")) {
-    document.body.style.overflow = "";
-  }
+  if (!document.getElementById("modalDaerah").classList.contains("show")) document.body.style.overflow = "";
 };
-
 window.switchAuthTab = function (mode, el) {
   authMode = mode;
   document.querySelectorAll("#authModal [data-authtab]").forEach(t => t.classList.remove("active"));
   if (el) el.classList.add("active");
   document.getElementById("authTitle").innerText = mode === "login" ? "Masuk" : "Daftar";
-  document.getElementById("authSubtitle").innerText = mode === "login"
-    ? "Selamat datang kembali! Lanjutkan petualanganmu. 🇮🇩"
-    : "Buat akun baru & simpan jurnalmu ke cloud. 🚀";
+  document.getElementById("authSubtitle").innerText = mode === "login" ? "Selamat datang kembali! 🇮🇩" : "Buat akun baru & simpan jurnalmu ke cloud. 🚀";
   document.getElementById("nameField").classList.toggle("hidden", mode !== "register");
   document.getElementById("forgotBtn").classList.toggle("hidden", mode !== "login");
-  document.getElementById("authSubmit").innerHTML = mode === "login"
-    ? '<i class="fa-solid fa-right-to-bracket"></i> Masuk'
-    : '<i class="fa-solid fa-user-plus"></i> Daftar';
+  document.getElementById("authSubmit").innerHTML = mode === "login" ? '<i class="fa-solid fa-right-to-bracket"></i> Masuk' : '<i class="fa-solid fa-user-plus"></i> Daftar';
   document.getElementById("authError").classList.add("hidden");
 };
-
-function showAuthError(msg) {
-  const el = document.getElementById("authError");
-  el.classList.remove("hidden");
-  el.innerText = "⚠️ " + msg;
-}
-
+function showAuthError(msg) { const el = document.getElementById("authError"); el.classList.remove("hidden"); el.innerText = "⚠️ " + msg; }
 function translateAuthError(err) {
   const code = err && err.code ? err.code : "";
   const map = {
-    "auth/invalid-email": "Format email tidak valid.",
-    "auth/user-not-found": "Akun tidak ditemukan. Silakan daftar dulu.",
-    "auth/wrong-password": "Password salah.",
-    "auth/invalid-credential": "Email atau password salah.",
-    "auth/email-already-in-use": "Email sudah terdaftar. Silakan masuk.",
-    "auth/weak-password": "Password minimal 6 karakter.",
-    "auth/too-many-requests": "Terlalu banyak percobaan. Coba lagi nanti.",
-    "auth/network-request-failed": "Koneksi internet bermasalah.",
-    "auth/popup-closed-by-user": "Jendela login ditutup sebelum selesai.",
-    "auth/popup-blocked": "Popup diblokir browser. Izinkan popup lalu coba lagi.",
-    "auth/operation-not-allowed": "Metode login ini belum diaktifkan di Firebase Console.",
-    "auth/unauthorized-domain": "Domain ini belum diizinkan di Firebase Console (Authentication → Settings → Authorized domains).",
-    "permission-denied": "Izin Firestore ditolak. Periksa Security Rules."
+    "auth/invalid-email": "Format email tidak valid.","auth/user-not-found": "Akun tidak ditemukan.","auth/wrong-password": "Password salah.","auth/invalid-credential": "Email atau password salah.","auth/email-already-in-use": "Email sudah terdaftar.","auth/weak-password": "Password minimal 6 karakter.","auth/too-many-requests": "Terlalu banyak percobaan.","auth/network-request-failed": "Koneksi bermasalah.","auth/popup-closed-by-user": "Jendela login ditutup.","auth/popup-blocked": "Popup diblokir browser.","auth/operation-not-allowed": "Metode login belum diaktifkan.","auth/unauthorized-domain": "Domain belum diizinkan di Firebase Console.","permission-denied": "Izin Firestore ditolak."
   };
   return map[code] || (err && err.message) || "Terjadi kesalahan.";
 }
-
 window.forgotPassword = async function () {
   if (!firebaseReady) { showAuthError("Firebase belum dikonfigurasi."); return; }
   const email = document.getElementById("authEmail").value.trim();
-  if (!email) { showAuthError("Masukkan email dulu, lalu klik Lupa password."); return; }
-  try {
-    await auth.sendPasswordResetEmail(email);
-    toast("📧 Email reset password sudah dikirim.");
-  } catch (err) { showAuthError(translateAuthError(err)); }
+  if (!email) { showAuthError("Masukkan email dulu."); return; }
+  try { await auth.sendPasswordResetEmail(email); toast("📧 Email reset password sudah dikirim."); }
+  catch (err) { showAuthError(translateAuthError(err)); }
 };
-
 window.loginGoogle = async function () {
   if (!firebaseReady) { showAuthError("Firebase belum dikonfigurasi."); return; }
   try {
     const provider = new firebase.auth.GoogleAuthProvider();
     const cred = await auth.signInWithPopup(provider);
-    await db.collection("users").doc(cred.user.uid).set({
-      name: cred.user.displayName || "",
-      email: cred.user.email || "",
-      photo: cred.user.photoURL || "",
-      lastLogin: firebase.firestore.FieldValue.serverTimestamp()
-    }, { merge: true });
+    await db.collection("users").doc(cred.user.uid).set({ name: cred.user.displayName || "", email: cred.user.email || "", photo: cred.user.photoURL || "", lastLogin: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true });
     closeAuthModal();
     toast("✅ Berhasil masuk dengan Google!");
-  } catch (err) {
-    console.error(err);
-    showAuthError(translateAuthError(err));
-  }
+  } catch (err) { console.error(err); showAuthError(translateAuthError(err)); }
 };
-
 window.logout = async function () {
   if (!firebaseReady) return;
-  try {
-    await auth.signOut();
-    cloudJournals = null;
-    toast("👋 Berhasil keluar.");
-  } catch (e) { console.error(e); }
+  try { await auth.signOut(); cloudJournals = null; toast("👋 Berhasil keluar."); } catch (e) { console.error(e); }
 };
 
 function handleAuthChange(user) {
   const area = document.getElementById("authArea");
   if (!area) return;
-
   if (user) {
     const name = user.displayName || (user.email ? user.email.split("@")[0] : "Pengguna");
     const initial = (name.charAt(0) || "U").toUpperCase();
     area.innerHTML = `
       <div class="relative">
-        <button data-user-toggle="1" onclick="toggleUserMenu(event)"
-                class="flex items-center gap-2 bg-krem hover:bg-amber-200 px-3 py-2 rounded-lg font-semibold text-sm text-merah transition">
+        <button data-user-toggle="1" onclick="toggleUserMenu(event)" class="flex items-center gap-2 bg-krem hover:bg-amber-200 px-3 py-2 rounded-lg font-semibold text-sm text-merah transition">
           <span class="w-7 h-7 rounded-full gradient-hero text-white flex items-center justify-center font-bold text-xs">${escapeHtml(initial)}</span>
           <span class="hidden sm:inline max-w-[110px] truncate">${escapeHtml(name)}</span>
           <i class="fa-solid fa-chevron-down text-xs"></i>
@@ -2188,29 +2300,20 @@ function handleAuthChange(user) {
             <p class="text-xs font-bold text-slate-800 truncate">${escapeHtml(name)}</p>
             <p class="text-[10px] text-slate-500 truncate">${escapeHtml(user.email || "")}</p>
           </div>
-          <button type="button" onclick="loadJournalFromCloud().then(renderJurnal);document.getElementById('userMenu').classList.add('hidden');toast('☁️ Jurnal disinkronkan');" class="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-krem">
-            <i class="fa-solid fa-cloud-arrow-down text-merah"></i> Sinkron Jurnal
-          </button>
-          <button type="button" onclick="logout()" class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50">
-            <i class="fa-solid fa-right-from-bracket"></i> Keluar
-          </button>
+          <button type="button" onclick="loadJournalFromCloud().then(renderJurnal);document.getElementById('userMenu').classList.add('hidden');toast('☁️ Jurnal disinkronkan');" class="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-krem"><i class="fa-solid fa-cloud-arrow-down text-merah"></i> Sinkron Jurnal</button>
+          <button type="button" onclick="logout()" class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50"><i class="fa-solid fa-right-from-bracket"></i> Keluar</button>
         </div>
       </div>`;
     loadJournalFromCloud();
   } else {
-    area.innerHTML = `
-      <button type="button" onclick="openAuthModal()" class="bg-merah text-white px-4 py-2 rounded-lg font-semibold text-sm hover:bg-red-800 transition">
-        <i class="fa-solid fa-user"></i> Masuk
-      </button>`;
+    area.innerHTML = `<button type="button" onclick="openAuthModal()" class="bg-merah text-white px-4 py-2 rounded-lg font-semibold text-sm hover:bg-red-800 transition"><i class="fa-solid fa-user"></i> Masuk</button>`;
     cloudJournals = null;
     renderJurnal();
   }
   updateJurnalStatus();
 }
 
-/* ============================================================
-   TOAST
-   ============================================================ */
+/* TOAST */
 let toastTimer;
 function toast(msg) {
   const el = document.getElementById("toast");
@@ -2223,16 +2326,13 @@ function toast(msg) {
 }
 window.toast = toast;
 
-/* ============================================================
-   INIT
-   ============================================================ */
+/* INIT */
 document.addEventListener("DOMContentLoaded", () => {
-  /* === Auth form handler === */
   const authForm = document.getElementById("authForm");
   if (authForm) {
     authForm.addEventListener("submit", async (e) => {
       e.preventDefault();
-      if (!firebaseReady) { showAuthError("Firebase belum dikonfigurasi. Isi firebaseConfig di kode HTML."); return; }
+      if (!firebaseReady) { showAuthError("Firebase belum dikonfigurasi."); return; }
       const email = document.getElementById("authEmail").value.trim();
       const password = document.getElementById("authPassword").value;
       const name = document.getElementById("authName").value.trim();
@@ -2241,58 +2341,29 @@ document.addEventListener("DOMContentLoaded", () => {
       btn.disabled = true;
       btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Memproses...';
       try {
-        if (authMode === "login") {
-          await auth.signInWithEmailAndPassword(email, password);
-          toast("✅ Berhasil masuk!");
-        } else {
+        if (authMode === "login") { await auth.signInWithEmailAndPassword(email, password); toast("✅ Berhasil masuk!"); }
+        else {
           const cred = await auth.createUserWithEmailAndPassword(email, password);
-          if (name) {
-            try { await cred.user.updateProfile({ displayName: name }); } catch (_) {}
-          }
-          await db.collection("users").doc(cred.user.uid).set({
-            name: name || email.split("@")[0],
-            email: email,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-          }, { merge: true });
+          if (name) { try { await cred.user.updateProfile({ displayName: name }); } catch (_) {} }
+          await db.collection("users").doc(cred.user.uid).set({ name: name || email.split("@")[0], email: email, createdAt: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true });
           toast("🎉 Akun berhasil dibuat!");
         }
-        closeAuthModal();
-        authForm.reset();
-      } catch (err) {
-        console.error(err);
-        showAuthError(translateAuthError(err));
-      } finally {
-        btn.disabled = false;
-        btn.innerHTML = originalHTML;
-      }
+        closeAuthModal(); authForm.reset();
+      } catch (err) { console.error(err); showAuthError(translateAuthError(err)); }
+      finally { btn.disabled = false; btn.innerHTML = originalHTML; }
     });
   }
 
-  /* === Quiz next button === */
   const nextBtn = document.getElementById("quizNextBtn");
-  if (nextBtn) {
-    nextBtn.onclick = () => {
-      if (quizIdx < QUIZ_TOTAL - 1) { quizIdx++; renderQuiz(); }
-      else showQuizResult();
-    };
-  }
+  if (nextBtn) nextBtn.onclick = () => { if (quizIdx < QUIZ_TOTAL - 1) { quizIdx++; renderQuiz(); } else showQuizResult(); };
 
-  /* === MAP IMAGE handling === */
   const img = document.getElementById("mapImage");
   if (img) {
-    img.addEventListener("load", () => {
-      document.getElementById("petaFallback")?.classList.add("hidden");
-    });
+    img.addEventListener("load", () => { document.getElementById("petaFallback")?.classList.add("hidden"); });
     img.addEventListener("error", () => { handleMapError(); });
-    if (img.complete) {
-      if (img.naturalWidth > 0) { /* gambar sukses dimuat */ }
-      else handleMapError();
-    }
-  } else {
-    handleMapError();
-  }
+    if (img.complete) { if (img.naturalWidth > 0) { /* ok */ } else handleMapError(); }
+  } else { handleMapError(); }
 
-  /* === Render awal === */
   renderRegionList("semua", "");
   renderProvinceGrid("semua");
   renderJurnal();
@@ -2301,7 +2372,6 @@ document.addEventListener("DOMContentLoaded", () => {
   renderQuiz();
   updateJurnalStatus();
 
-  /* === ESC untuk tutup modal === */
   document.addEventListener("keydown", (e) => {
     if (e.key !== "Escape") return;
     if (document.getElementById("modalDaerah").classList.contains("show")) closeModalDaerah();
