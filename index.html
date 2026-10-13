@@ -45,7 +45,7 @@
   .map-wrapper {
     position: relative;
     width: 100%;
-    min-width: 900px;      /* supaya peta tetap jelas di layar kecil */
+    min-width: 900px;
     max-width: 1400px;
     margin: 0 auto;
     border-radius: 1.5rem;
@@ -56,7 +56,6 @@
   }
   .map-canvas { position: relative; width: 100%; }
   .map-canvas img { width: 100%; height: auto; display: block; user-select: none; pointer-events: none; }
-  /* mode fallback (SVG) — rasio 1000:400 agar posisi % presisi */
   .map-canvas.is-fallback { aspect-ratio: 1000 / 400; }
   .map-canvas.is-fallback svg.map-svg { width: 100%; height: 100%; display: block; }
 
@@ -159,13 +158,72 @@
   .materi-box { background: #f8fafc; border-left: 4px solid #b91c1c; border-radius: 0.5rem; padding: 1rem 1.25rem; margin: 1rem 0; }
   .materi-box h5 { font-weight: 700; color: #b91c1c; margin-bottom: 0.5rem; }
 
-  /* form auth */
   .auth-input {
     width: 100%; padding: 10px 12px; border-radius: 10px;
     border: 1px solid #cbd5e1; font-size: 14px; outline: none; transition: all .2s;
   }
   .auth-input:focus { border-color: #b91c1c; box-shadow: 0 0 0 3px rgba(185,28,28,.12); }
   .auth-label { display:block; font-size: 11px; font-weight: 700; color:#475569; margin-bottom: 4px; letter-spacing:.3px; text-transform: uppercase; }
+
+  /* Kartu daftar provinsi lengkap */
+  .province-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 16px;
+    transition: all .2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .province-card:hover {
+    border-color: #fbbf24;
+    box-shadow: 0 8px 20px -8px rgba(185, 28, 28, 0.25);
+    transform: translateY(-2px);
+  }
+  .province-card .header-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px dashed #e2e8f0;
+    padding-bottom: 8px;
+  }
+  .province-card .number-badge {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #b91c1c, #ea580c);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .province-card .province-name {
+    font-weight: 800;
+    font-size: 15px;
+    color: #1e293b;
+    line-height: 1.2;
+  }
+  .province-card .province-capital {
+    font-size: 11px;
+    color: #64748b;
+  }
+  .province-card .highlight-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 2px;
+  }
+  .province-card .highlight-item {
+    font-size: 11px;
+    background: #f1f5f9;
+    padding: 3px 8px;
+    border-radius: 12px;
+    color: #334155;
+    font-weight: 600;
+  }
 </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
@@ -182,6 +240,7 @@
     </div>
     <div class="hidden md:flex items-center gap-1 text-sm font-semibold">
       <a href="#peta" class="px-3 py-2 rounded-lg hover:bg-krem">Peta</a>
+      <a href="#daftar-lengkap" class="px-3 py-2 rounded-lg hover:bg-krem">Daftar Provinsi</a>
       <a href="#modul" class="px-3 py-2 rounded-lg hover:bg-krem">Modul</a>
       <a href="#kuis" class="px-3 py-2 rounded-lg hover:bg-krem">Kuis</a>
       <a href="#jurnal" class="px-3 py-2 rounded-lg hover:bg-krem">Jurnal</a>
@@ -199,7 +258,7 @@
   <div class="max-w-7xl mx-auto px-4 text-center">
     <span class="inline-block bg-white/20 px-4 py-1 rounded-full text-xs font-semibold mb-3">🇮🇩 38 Provinsi · 1.340 Suku · 1.001 Bahasa</span>
     <h2 class="text-3xl md:text-5xl font-extrabold leading-tight mb-3">Keragaman di Indonesia</h2>
-    <p class="text-white/90 max-w-2xl mx-auto">Jelajahi kekayaan budaya 38 provinsi melalui daftar di samping peta.</p>
+    <p class="text-white/90 max-w-2xl mx-auto">Jelajahi kekayaan budaya 38 provinsi melalui daftar lengkap di bawah peta.</p>
   </div>
 </section>
 
@@ -210,7 +269,7 @@
       <span class="text-xs font-bold text-merah uppercase tracking-widest">Jelajah Nusantara</span>
       <h3 class="text-3xl md:text-4xl font-extrabold text-slate-800 mt-2">Peta Keragaman 38 Provinsi</h3>
       <p class="text-slate-500 mt-2 max-w-2xl mx-auto">
-        Pilih provinsi dari daftar di samping untuk melihat profil keberagaman lengkap.
+        Pilih provinsi dari daftar lengkap di bawah peta untuk melihat profil keberagaman.
       </p>
     </div>
 
@@ -270,7 +329,7 @@
           <div class="bg-amber-50 border border-amber-300 rounded-xl p-4 text-sm text-slate-700">
             <i class="fa-solid fa-circle-info text-amber-600"></i>
             Peta asli (<code class="bg-white px-1 rounded">map-indonesia.jpg</code>) belum tersedia —
-            peta ilustrasi dipakai. Silakan pilih provinsi dari daftar di samping.
+            peta ilustrasi dipakai. Silakan pilih provinsi dari daftar lengkap di bawah.
             Letakkan file <code class="bg-white px-1 rounded">map-indonesia.jpg</code> di folder yang sama
             untuk menampilkan peta asli.
           </div>
@@ -279,10 +338,38 @@
         <div class="mt-4 bg-gradient-to-r from-krem to-amber-100 rounded-xl p-4 border border-amber-200 flex items-center gap-3">
           <span class="text-2xl">💡</span>
           <p class="text-sm text-slate-700 flex-1">
-            <strong>Tips:</strong> Klik provinsi pada daftar di samping untuk melihat <strong>6 tab informasi</strong>: suku, bahasa, agama, budaya, kuliner, dan tradisi.
+            <strong>Tips:</strong> Klik provinsi pada daftar lengkap di bawah untuk melihat <strong>6 tab informasi</strong>: suku, bahasa, agama, budaya, kuliner, dan tradisi.
           </p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== DAFTAR LENGKAP 38 PROVINSI ==================== -->
+<section id="daftar-lengkap" class="py-14 bg-white border-t border-slate-200">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-10">
+      <span class="text-xs font-bold text-merah uppercase tracking-widest">Daftar Lengkap</span>
+      <h3 class="text-3xl md:text-4xl font-extrabold text-slate-800 mt-2">38 Provinsi & Keberagamannya</h3>
+      <p class="text-slate-500 mt-2 max-w-2xl mx-auto">
+        Sesuai peta di atas, berikut daftar lengkap provinsi beserta data keberagaman: suku, bahasa, agama, budaya, kuliner, dan tradisi.
+      </p>
+    </div>
+
+    <div class="flex justify-center flex-wrap gap-2 mb-8">
+      <button type="button" class="filter-pill active" onclick="filterProvinceList('semua', this)">🌏 Semua (38)</button>
+      <button type="button" class="filter-pill" onclick="filterProvinceList('Sumatra', this)">Sumatra (10)</button>
+      <button type="button" class="filter-pill" onclick="filterProvinceList('Jawa', this)">Jawa (6)</button>
+      <button type="button" class="filter-pill" onclick="filterProvinceList('Kalimantan', this)">Kalimantan (5)</button>
+      <button type="button" class="filter-pill" onclick="filterProvinceList('Sulawesi', this)">Sulawesi (6)</button>
+      <button type="button" class="filter-pill" onclick="filterProvinceList('Bali & Nusa Tenggara', this)">Bali & Nusa Tenggara (3)</button>
+      <button type="button" class="filter-pill" onclick="filterProvinceList('Maluku', this)">Maluku (2)</button>
+      <button type="button" class="filter-pill" onclick="filterProvinceList('Papua', this)">Papua (6)</button>
+    </div>
+
+    <div id="provinceGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      <!-- Diisi oleh JavaScript -->
     </div>
   </div>
 </section>
@@ -460,9 +547,6 @@
 <script>
 /* ============================================================
    FIREBASE INIT
-   ------------------------------------------------------------
-   GANTI objek di bawah dengan kredensial proyek Firebase-mu:
-   Firebase Console → Project Settings → Your apps → Web app
    ============================================================ */
 const firebaseConfig = {
   apiKey:            "YOUR_API_KEY",
@@ -498,9 +582,7 @@ let db   = null;
 })();
 
 /* ============================================================
-   DATA 38 PROVINSI INDONESIA
-   x / y = posisi hotspot dalam persen (%) — tidak dipakai lagi
-   untuk hotspot, tapi tetap disimpan untuk keperluan lain
+   DATA 38 PROVINSI INDONESIA (sesuai gambar)
    ============================================================ */
 const DAERAH = [
   { no:1, id:"aceh", nama:"Aceh", ibukota:"Banda Aceh", pulau:"Sumatra", x:9.0, y:12.5,
@@ -1037,7 +1119,7 @@ const DAERAH = [
 ];
 
 /* ============================================================
-   PETA FALLBACK (SVG) — dipakai bila map-indonesia.jpg tidak ada
+   PETA FALLBACK (SVG)
    ============================================================ */
 const FALLBACK_MAP_SVG = `
 <svg class="map-svg" viewBox="0 0 1000 400" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -1053,25 +1135,18 @@ const FALLBACK_MAP_SVG = `
   </defs>
   <rect width="1000" height="400" fill="url(#seaGrad)"/>
   <g fill="url(#landGrad)" stroke="#16a34a" stroke-width="1.5" stroke-linejoin="round">
-    <!-- Sumatra -->
     <ellipse cx="185" cy="125" rx="118" ry="42" transform="rotate(42 185 125)"/>
-    <!-- Jawa -->
     <ellipse cx="405" cy="233" rx="118" ry="26"/>
-    <!-- Kalimantan -->
     <ellipse cx="430" cy="125" rx="78" ry="68"/>
-    <!-- Sulawesi -->
     <ellipse cx="600" cy="92"  rx="52" ry="15" transform="rotate(15 600 92)"/>
     <ellipse cx="540" cy="145" rx="30" ry="55"/>
     <ellipse cx="612" cy="178" rx="48" ry="13" transform="rotate(35 612 178)"/>
     <ellipse cx="556" cy="196" rx="14" ry="30" transform="rotate(-5 556 196)"/>
-    <!-- Maluku -->
     <ellipse cx="680" cy="88"  rx="13" ry="26" transform="rotate(15 680 88)"/>
     <ellipse cx="702" cy="142" rx="10" ry="34" transform="rotate(-10 702 142)"/>
     <ellipse cx="724" cy="105" rx="8"  ry="16"/>
-    <!-- Papua -->
     <ellipse cx="878" cy="152" rx="95" ry="56" transform="rotate(-8 878 152)"/>
     <ellipse cx="788" cy="126" rx="32" ry="26"/>
-    <!-- Bali & Nusa Tenggara -->
     <ellipse cx="535" cy="224" rx="8"  ry="13"/>
     <ellipse cx="578" cy="228" rx="22" ry="9"  transform="rotate(-10 578 228)"/>
     <ellipse cx="618" cy="238" rx="26" ry="8"  transform="rotate(-8 618 238)"/>
@@ -1085,7 +1160,6 @@ const FALLBACK_MAP_SVG = `
 const STORAGE_KEY_EXPLORED = "bhinneka_explored_v6";
 const STORAGE_KEY_JURNAL   = "bhinneka_jurnal_v1";
 
-/* localStorage bisa diblokir (mode privat / file://) → jangan sampai crash */
 const safeStorage = {
   get(key, fallback) {
     try { const v = localStorage.getItem(key); return v === null ? fallback : v; }
@@ -1103,13 +1177,11 @@ let exploredSet = new Set((() => {
 })());
 
 let mapScale = 1;
-let state = { currentDaerah: null, currentTab: "suku", currentFilter: "semua" };
+let state = { currentDaerah: null, currentTab: "suku", currentFilter: "semua", currentListFilter: "semua" };
 
 function saveExplored() {
   safeStorage.set(STORAGE_KEY_EXPLORED, JSON.stringify([...exploredSet]));
 }
-
-/* renderHotspots dihapus — tidak ada lagi nomor yang bisa diklik di peta */
 
 window.handleMapError = function () {
   const img = document.getElementById("mapImage");
@@ -1122,7 +1194,6 @@ window.handleMapError = function () {
   }
   const fb = document.getElementById("petaFallback");
   if (fb) fb.classList.remove("hidden");
-  /* tidak ada renderHotspots() di sini */
 };
 
 function updateExploreProgress() {
@@ -1151,6 +1222,9 @@ window.toggleFullscreenMap = function () {
   else document.exitFullscreen?.();
 };
 
+/* ============================================================
+   RENDER LIST (SIDEBAR & GRID)
+   ============================================================ */
 function renderRegionList(filter = "semua", query = "") {
   const list = document.getElementById("regionList");
   if (!list) return;
@@ -1177,12 +1251,58 @@ function renderRegionList(filter = "semua", query = "") {
 
 window.filterIsland = function (island, el) {
   state.currentFilter = island;
-  document.querySelectorAll(".filter-pill").forEach(p => p.classList.remove("active"));
+  document.querySelectorAll("#peta .filter-pill").forEach(p => p.classList.remove("active"));
   if (el) el.classList.add("active");
   renderRegionList(island, document.getElementById("searchRegion")?.value || "");
 };
 
 window.searchRegion = function (q) { renderRegionList(state.currentFilter, q); };
+
+window.filterProvinceList = function (island, el) {
+  state.currentListFilter = island;
+  document.querySelectorAll("#daftar-lengkap .filter-pill").forEach(p => p.classList.remove("active"));
+  if (el) el.classList.add("active");
+  renderProvinceGrid(island);
+};
+
+function renderProvinceGrid(filter = "semua") {
+  const grid = document.getElementById("provinceGrid");
+  if (!grid) return;
+  let filtered = DAERAH;
+  if (filter !== "semua") filtered = filtered.filter(d => d.pulau === filter);
+
+  grid.innerHTML = filtered.map(d => {
+    // Ambil 2 suku utama
+    const topSuku = d.suku.slice(0, 2).map(s => s.n).join(", ");
+    // Ambil 2 makanan utama
+    const topMakanan = d.makanan.slice(0, 2).join(", ");
+    // Ambil 1 tarian utama
+    const topTarian = d.tarian[0] || "-";
+
+    return `
+      <div class="province-card fade-in" onclick="openModalDaerah('${d.id}')" style="cursor:pointer;">
+        <div class="header-row">
+          <div class="number-badge">${d.no}</div>
+          <div>
+            <div class="province-name">${d.nama}</div>
+            <div class="province-capital">🏛️ ${d.ibukota}</div>
+          </div>
+        </div>
+        <div class="highlight-list">
+          <span class="highlight-item">👥 ${topSuku}</span>
+          <span class="highlight-item">🍲 ${topMakanan}</span>
+          <span class="highlight-item">💃 ${topTarian}</span>
+        </div>
+        <div class="text-[11px] text-slate-400 mt-1">
+          🏝️ ${d.pulau} · 👥 ${d.populasi}
+        </div>
+        <button type="button" class="mt-2 w-full bg-krem text-merah text-xs font-bold py-1.5 rounded-lg hover:bg-amber-200 transition">
+          Lihat Detail <i class="fa-solid fa-arrow-right ml-1"></i>
+        </button>
+      </div>
+    `;
+  }).join("");
+}
 
 window.randomExplore = function () {
   const notExplored = DAERAH.filter(d => !exploredSet.has(d.id));
@@ -1191,6 +1311,9 @@ window.randomExplore = function () {
   openModalDaerah(pick.id);
 };
 
+/* ============================================================
+   MODAL LOGIC
+   ============================================================ */
 window.openModalDaerah = function (id) {
   const d = DAERAH.find(x => x.id === id);
   if (!d) return;
@@ -1214,5 +1337,978 @@ window.openModalDaerah = function (id) {
     exploredSet.add(d.id);
     saveExplored();
     updateExploreProgress();
-    /* renderHotspots() dihapus */
-    renderRegionList
+    renderRegionList(state.currentFilter, document.getElementById("searchRegion")?.value || "");
+    // Refresh grid untuk update warna jika ada indikator explored (opsional)
+    renderProvinceGrid(state.currentListFilter);
+  }
+};
+
+window.closeModalDaerah = function () {
+  document.getElementById("modalDaerah").classList.remove("show");
+  if (!document.getElementById("authModal").classList.contains("show")) {
+    document.body.style.overflow = "";
+  }
+};
+
+window.switchTab = function (tab, el) {
+  state.currentTab = tab;
+  document.querySelectorAll("#modalDaerah .modal-tab").forEach(t => t.classList.remove("active"));
+  if (el) el.classList.add("active");
+  renderModalTab(tab);
+};
+
+function renderModalTab(tab) {
+  const d = DAERAH.find(x => x.id === state.currentDaerah);
+  if (!d) return;
+  const body = document.getElementById("modalBody");
+  let html = "";
+
+  if (tab === "suku") {
+    html = `<div class="mb-4"><h4 class="font-extrabold text-slate-800 mb-1">👥 Suku Bangsa di ${d.nama}</h4>
+      <p class="text-sm text-slate-500">${d.suku.length} suku utama</p></div>
+      <div class="grid sm:grid-cols-2 gap-3">
+        ${d.suku.map(s => `<div class="info-card"><p class="font-bold text-merah mb-1">${s.n}</p><p class="text-xs text-slate-600 leading-relaxed">${s.d}</p></div>`).join("")}
+      </div>`;
+  }
+  else if (tab === "bahasa") {
+    html = `<div class="mb-4"><h4 class="font-extrabold text-slate-800 mb-1">🗣️ Bahasa Daerah di ${d.nama}</h4>
+      <p class="text-sm text-slate-500">${d.bahasa.length} bahasa utama</p></div>
+      <div class="flex flex-wrap">${d.bahasa.map(b => `<span class="chip ungu">${b}</span>`).join("")}</div>
+      <div class="mt-5 p-4 bg-amber-50 border-l-4 border-amber-400 rounded">
+        <p class="text-xs text-slate-700"><strong>💡 Bahasa Indonesia</strong> menjadi bahasa pemersatu, tetapi bahasa daerah tetap lestari.</p>
+      </div>`;
+  }
+  else if (tab === "agama") {
+    html = `<div class="mb-4"><h4 class="font-extrabold text-slate-800 mb-1">🕌 Komposisi Agama di ${d.nama}</h4>
+      <p class="text-sm text-slate-500">Kerukunan antar umat beragama</p></div>
+      <div class="religion-bar mb-4">
+        ${d.agama.map(a => `<div class="religion-segment" style="width:${a.p}%; background:${a.c};" title="${a.n}: ${a.p}%">${a.p >= 8 ? a.p + '%' : ''}</div>`).join("")}
+      </div>
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
+        ${d.agama.map(a => `<div class="info-card flex items-center gap-3">
+          <span class="w-4 h-4 rounded-full flex-shrink-0" style="background:${a.c};"></span>
+          <div><p class="font-bold text-sm text-slate-800">${a.n}</p><p class="text-xs text-slate-500">${a.p}% penduduk</p></div>
+        </div>`).join("")}
+      </div>
+      <div class="mt-5 p-4 bg-green-50 border-l-4 border-green-500 rounded">
+        <p class="text-xs text-slate-700"><strong>🤝 Toleransi:</strong> Masyarakat ${d.nama} hidup rukun dan saling menghormati.</p>
+      </div>`;
+  }
+  else if (tab === "budaya") {
+    html = `<div class="mb-4"><h4 class="font-extrabold text-slate-800 mb-1">🎭 Kekayaan Budaya ${d.nama}</h4></div>
+      <div class="mb-5"><p class="text-xs font-bold uppercase text-merah mb-2">🏠 Rumah Adat</p>
+        <div class="grid sm:grid-cols-2 gap-3">
+          ${d.rumah.map(r => `<div class="info-card"><p class="font-bold text-sm text-slate-800">${r.n}</p><p class="text-xs text-slate-600 mt-1">${r.d}</p></div>`).join("")}
+        </div>
+      </div>
+      <div class="mb-5"><p class="text-xs font-bold uppercase text-merah mb-2">💃 Tarian Tradisional</p>
+        <div class="flex flex-wrap">${d.tarian.map(t => `<span class="chip merah">${t}</span>`).join("")}</div>
+      </div>
+      <div class="mb-5"><p class="text-xs font-bold uppercase text-merah mb-2">🎵 Alat Musik</p>
+        <div class="flex flex-wrap">${d.musik.map(m => `<span class="chip biru">${m}</span>`).join("")}</div>
+      </div>
+      <div class="mb-5"><p class="text-xs font-bold uppercase text-merah mb-2">👗 Pakaian Adat</p>
+        <div class="flex flex-wrap">${d.pakaian.map(p => `<span class="chip hijau">${p}</span>`).join("")}</div>
+      </div>
+      <div><p class="text-xs font-bold uppercase text-merah mb-2">⚔️ Senjata Tradisional</p>
+        <div class="flex flex-wrap">${d.senjata.map(s => `<span class="chip ungu">${s}</span>`).join("")}</div>
+      </div>`;
+  }
+  else if (tab === "kuliner") {
+    html = `<div class="mb-4"><h4 class="font-extrabold text-slate-800 mb-1">🍲 Kuliner Khas ${d.nama}</h4>
+      <p class="text-sm text-slate-500">${d.makanan.length} makanan & minuman ikonik</p></div>
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
+        ${d.makanan.map((m, i) => `<div class="info-card text-center">
+          <div class="text-3xl mb-1">${["🍜","🍛","🍢","🍲","🥘","🧆"][i % 6]}</div>
+          <p class="font-bold text-sm text-slate-800">${m}</p>
+        </div>`).join("")}
+      </div>`;
+  }
+  else if (tab === "tradisi") {
+    html = `<div class="mb-4"><h4 class="font-extrabold text-slate-800 mb-1">🎉 Tradisi & Upacara Adat ${d.nama}</h4>
+      <p class="text-sm text-slate-500">${d.tradisi.length} tradisi yang masih dilestarikan</p></div>
+      <div class="space-y-3">
+        ${d.tradisi.map(t => `<div class="info-card"><p class="font-bold text-merah mb-1">✨ ${t.n}</p><p class="text-xs text-slate-600 leading-relaxed">${t.d}</p></div>`).join("")}
+      </div>
+      <div class="mt-5 p-4 bg-gradient-to-r from-krem to-amber-100 rounded-xl border border-amber-200">
+        <p class="text-sm text-slate-800"><strong>🌟 Fakta Unik:</strong> ${d.fakta}</p>
+      </div>`;
+  }
+  body.innerHTML = html;
+}
+
+/* ============================================================
+   MODUL PEMBELAJARAN
+   ============================================================ */
+const MODUL = {
+  1: {
+    judul: "Apa Itu Keberagaman?",
+    ikon: "🌈",
+    isi: `
+      <p class="text-slate-700 leading-relaxed mb-4">
+        Indonesia adalah salah satu negara <strong>multikultur terbesar di dunia</strong>. 
+        Menurut data Badan Pusat Statistik (BPS), Indonesia memiliki sekitar <strong>1.340 suku bangsa</strong>, 
+        <strong>1.001 bahasa daerah</strong>, <strong>6 agama resmi</strong>, dan ratusan tradisi yang tersebar 
+        di <strong>17.000+ pulau</strong> dengan <strong>38 provinsi</strong>. Keragaman ini adalah kekayaan 
+        yang tidak dimiliki banyak negara di dunia, sekaligus tantangan besar dalam menjaga persatuan.
+      </p>
+      <div class="materi-box">
+        <h5>📖 Definisi Keberagaman</h5>
+        <p class="text-sm text-slate-700 leading-relaxed mb-2">
+          Kata <strong>"keberagaman"</strong> berasal dari kata dasar <em>"ragam"</em> yang berarti jenis, macam, 
+          atau warna. Dalam konteks sosial, keberagaman (atau keragaman) adalah <strong>kondisi masyarakat 
+          yang memiliki perbedaan dalam berbagai aspek kehidupan</strong>, meliputi suku bangsa, agama, ras, 
+          bahasa, budaya, adat istiadat, dan golongan sosial.
+        </p>
+        <p class="text-sm text-slate-700 leading-relaxed">
+          Keberagaman Indonesia bersifat <strong>horizontal</strong> (perbedaan antar kelompok setara seperti 
+          suku dan bahasa) dan <strong>vertikal</strong> (perbedaan antar lapisan seperti ekonomi dan pendidikan).
+        </p>
+      </div>
+      <div class="materi-box">
+        <h5>🎯 Mengapa Keberagaman Penting?</h5>
+        <ul class="text-sm list-disc pl-5 space-y-2">
+          <li><strong>Kekayaan bangsa:</strong> Setiap suku memiliki kearifan lokal unik.</li>
+          <li><strong>Identitas nasional:</strong> Semboyan <em>Bhinneka Tunggal Ika</em> menjadi perekat.</li>
+          <li><strong>Modal pembangunan:</strong> Daya tarik pariwisata & kreativitas.</li>
+          <li><strong>Pembelajaran hidup:</strong> Melatih empati dan kolaborasi.</li>
+          <li><strong>Ketahanan sosial:</strong> Masyarakat lebih toleran dan adaptif.</li>
+        </ul>
+      </div>
+      <div class="materi-box">
+        <h5>📜 Landasan Hukum</h5>
+        <ul class="text-sm list-disc pl-5 space-y-2">
+          <li><strong>Pancasila sila ke-3:</strong> Persatuan Indonesia.</li>
+          <li><strong>UUD 1945 Pasal 29:</strong> Kemerdekaan beragama.</li>
+          <li><strong>UUD 1945 Pasal 32:</strong> Pemeliharaan bahasa daerah.</li>
+          <li><strong>UU No. 5 Tahun 2017:</strong> Pemajuan Kebudayaan.</li>
+          <li><strong>UU No. 40 Tahun 2008:</strong> Penghapusan Diskriminasi Ras & Etnis.</li>
+        </ul>
+      </div>
+      <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded">
+        <p class="text-sm text-slate-700">
+          <strong>💡 Tahukah kamu?</strong> UNESCO mencatat <strong>169 bahasa daerah Indonesia</strong> 
+          terancam punah karena penuturnya kurang dari 1.000 orang.
+        </p>
+      </div>
+      <div class="bg-slate-50 rounded-xl p-5 border border-slate-200 mt-4">
+        <h4 class="font-bold text-slate-800 mb-3">💭 Pertanyaan Refleksi</h4>
+        <ul class="space-y-2 text-sm text-slate-700">
+          <li>1. Jika Indonesia hanya memiliki satu suku dan satu bahasa, apa yang akan hilang?</li>
+          <li>2. Bagaimana kamu merasakan keberagaman di sekolahmu?</li>
+          <li>3. Apakah keberagaman bisa menjadi sumber konflik? Mengapa?</li>
+          <li>4. Apa perbedaan antara "toleransi" dan "menghargai perbedaan"?</li>
+        </ul>
+      </div>
+    `,
+  },
+  2: {
+    judul: "5 Faktor Penyebab Keberagaman Indonesia",
+    ikon: "🌏",
+    isi: `
+      <p class="text-slate-700 leading-relaxed mb-4">
+        Keberagaman masyarakat Indonesia tidak terjadi begitu saja. Ada <strong>5 faktor utama</strong> 
+        yang saling berkaitan dan membentuk mozaik kebudayaan yang kaya.
+      </p>
+      <div class="materi-box">
+        <h5>1️⃣ Letak Strategis Wilayah Indonesia</h5>
+        <p class="text-sm text-slate-700 leading-relaxed mb-2">
+          Indonesia terletak di <strong>posisi silang</strong>, di antara dua samudra (Hindia & Pasifik) 
+          dan dua benua (Asia & Australia). Letak ini menjadikan Indonesia <strong>jalur perdagangan 
+          internasional</strong> sejak berabad-abad. Pengaruh Hindu-Buddha (abad 4 M), Islam (abad 11–15), 
+          dan Barat (abad 16) membentuk lapisan budaya Indonesia.
+        </p>
+        <div class="bg-white rounded-lg p-3 mt-2 border border-slate-200">
+          <p class="text-xs text-slate-600"><strong>Contoh:</strong> Kosakata Sanskerta, arsitektur candi, 
+          dan sistem hukum Eropa meninggalkan jejak jelas dalam budaya Indonesia.</p>
+        </div>
+      </div>
+      <div class="materi-box">
+        <h5>2️⃣ Kondisi Negara Kepulauan</h5>
+        <p class="text-sm text-slate-700 leading-relaxed mb-2">
+          Indonesia memiliki <strong>17.000+ pulau</strong>. Setiap kelompok masyarakat di kepulauan 
+          mengembangkan <strong>budaya, bahasa, dan sistem sosialnya sendiri</strong>. 
+          Ahli C. Van Vollenhoven membagi masyarakat Indonesia menjadi <strong>19 daerah hukum adat</strong>.
+        </p>
+        <div class="bg-white rounded-lg p-3 mt-2 border border-slate-200">
+          <p class="text-xs text-slate-600"><strong>Contoh:</strong> Suku Baduy memilih hidup terisolasi 
+          dan memiliki sistem sosial berbeda dari Sunda sekitarnya.</p>
+        </div>
+      </div>
+      <div class="materi-box">
+        <h5>3️⃣ Perbedaan Kondisi Alam</h5>
+        <p class="text-sm text-slate-700 leading-relaxed mb-2">
+          Kondisi alam (pantai, pegunungan, dataran rendah, rawa) memengaruhi mata pencaharian, 
+          makanan pokok, pakaian, dan arsitektur rumah adat.
+        </p>
+        <div class="bg-white rounded-lg p-3 mt-2 border border-slate-200">
+          <p class="text-xs text-slate-600"><strong>Contoh:</strong> Rumah Gadang (atap melengkung 
+          tahan hujan) vs Honai (rendah, hangat) vs Rumah Panggung (tahan banjir).</p>
+        </div>
+      </div>
+      <div class="materi-box">
+        <h5>4️⃣ Keadaan Transportasi dan Komunikasi</h5>
+        <p class="text-sm text-slate-700 leading-relaxed mb-2">
+          Transportasi maju mempercepat <strong>akulturasi budaya</strong>, tetapi juga memicu 
+          <strong>homogenisasi budaya</strong> di era digital.
+        </p>
+        <div class="bg-white rounded-lg p-3 mt-2 border border-slate-200">
+          <p class="text-xs text-slate-600"><strong>Contoh:</strong> Sebelum Jalan Trans-Papua, suku 
+          pedalaman hidup sangat terisolasi; setelah terbuka, terjadi percampuran budaya.</p>
+        </div>
+      </div>
+      <div class="materi-box">
+        <h5>5️⃣ Penerimaan Masyarakat terhadap Perubahan</h5>
+        <p class="text-sm text-slate-700 leading-relaxed mb-2">
+          Sikap masyarakat terhadap hal baru memengaruhi tingkat keberagaman. Ada yang 
+          <strong>terbuka</strong> (kosmopolit), ada yang <strong>tertutup</strong> (mempertahankan tradisi).
+        </p>
+        <div class="bg-white rounded-lg p-3 mt-2 border border-slate-200">
+          <p class="text-xs text-slate-600"><strong>Contoh:</strong> Yogyakarta & Bali terbuka terhadap 
+          wisatawan; Baduy Dalam menolak modernisasi.</p>
+        </div>
+      </div>
+      <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded mt-4">
+        <p class="text-sm text-slate-700">
+          <strong>💡 Kesimpulan:</strong> Kelima faktor bekerja bersama-sama menciptakan keberagaman 
+          Indonesia. Memahaminya membantu kita menghargai perbedaan sebagai <strong>kekayaan</strong>.
+        </p>
+      </div>
+    `,
+  },
+  3: {
+    judul: "Jenis Keberagaman & Contoh Nyata",
+    ikon: "🎭",
+    isi: `
+      <p class="text-slate-700 leading-relaxed mb-4">
+        Keberagaman Indonesia dapat dikelompokkan menjadi <strong>enam jenis utama</strong>.
+      </p>
+      <div class="grid sm:grid-cols-2 gap-3 mb-4">
+        <div class="bg-krem rounded-xl p-4 border border-amber-200">
+          <h4 class="font-bold text-merah mb-2">👥 Keberagaman Suku Bangsa</h4>
+          <p class="text-sm text-slate-700 leading-relaxed">Lebih dari <strong>1.340 suku bangsa</strong>. 
+          Suku Jawa terbesar (40% populasi), diikuti Sunda, Batak, Madura, Bugis, dan Minangkabau.</p>
+        </div>
+        <div class="bg-blue-50 rounded-xl p-4 border border-blue-200">
+          <h4 class="font-bold text-blue-700 mb-2">🕌 Keberagaman Agama</h4>
+          <p class="text-sm text-slate-700 leading-relaxed">Enam agama resmi: Islam, Kristen, Katolik, 
+          Hindu, Buddha, Konghucu. Plus kepercayaan lokal (Kaharingan, Sunda Wiwitan, Marapu).</p>
+        </div>
+        <div class="bg-green-50 rounded-xl p-4 border border-green-200">
+          <h4 class="font-bold text-green-700 mb-2">🧬 Keberagaman Ras</h4>
+          <p class="text-sm text-slate-700 leading-relaxed">Empat ras utama: Malayan-Mongoloid, Melanesoid, 
+          Asiatic Mongoloid, dan Kaukasoid.</p>
+        </div>
+        <div class="bg-purple-50 rounded-xl p-4 border border-purple-200">
+          <h4 class="font-bold text-purple-700 mb-2">🗣️ Keberagaman Bahasa</h4>
+          <p class="text-sm text-slate-700 leading-relaxed"><strong>1.001 bahasa daerah</strong> dengan 
+          penutur terbanyak: Jawa, Sunda, Melayu, Madura, Batak, Minang, Bugis, Bali, Aceh, dan Sasak.</p>
+        </div>
+        <div class="bg-amber-50 rounded-xl p-4 border border-amber-200">
+          <h4 class="font-bold text-amber-700 mb-2">🎨 Keberagaman Budaya</h4>
+          <p class="text-sm text-slate-700 leading-relaxed">Mencakup rumah adat, tarian, pakaian, senjata, 
+          lagu daerah, alat musik, dan upacara adat.</p>
+        </div>
+        <div class="bg-pink-50 rounded-xl p-4 border border-pink-200">
+          <h4 class="font-bold text-pink-700 mb-2">💼 Keberagaman Golongan</h4>
+          <p class="text-sm text-slate-700 leading-relaxed">Perbedaan profesi, ekonomi, pendidikan, 
+          status sosial, dan latar belakang keluarga.</p>
+        </div>
+      </div>
+      <div class="materi-box">
+        <h5>🔍 Kearifan Lokal Terkenal</h5>
+        <p class="text-sm text-slate-700 leading-relaxed">
+          <em>Gotong royong</em> (Jawa), <em>Tri Hita Karana</em> (Bali), <em>Dalihan Na Tolu</em> (Batak), 
+          <em>Siri' na Pacce</em> (Bugis-Makassar), <em>Si Tou Timou Tumou Tou</em> (Minahasa), 
+          <em>Subak</em> (Bali — irigasi UNESCO).
+        </p>
+      </div>
+    `,
+  },
+  4: {
+    judul: "Konflik Akibat Keberagaman",
+    ikon: "⚠️",
+    isi: `
+      <div class="bg-red-50 border-l-4 border-merah p-4 rounded mb-4">
+        <p class="text-sm text-slate-700">
+          <strong>⚠️ Perhatian:</strong> Materi ini berisi sejarah kelam bangsa. 
+          Mari belajar dari masa lalu untuk masa depan yang lebih damai.
+        </p>
+      </div>
+      <p class="text-slate-700 leading-relaxed mb-4">
+        Keberagaman tidak selalu berjalan mulus. Pernah terjadi <strong>konflik sosial bernuansa SARA</strong>.
+      </p>
+      <div class="space-y-3 mb-4">
+        <div class="bg-white border border-slate-200 rounded-xl p-4">
+          <div class="flex justify-between items-start mb-2">
+            <h4 class="font-bold text-merah">Konflik Sampit (2001)</h4>
+            <span class="bg-red-100 text-red-700 text-xs px-2 py-1 rounded-full font-semibold">Etnis</span>
+          </div>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Kerusuhan antar etnis Dayak dan migran Madura di Kalimantan Tengah. 
+            <strong>500+ kematian</strong>, <strong>100.000+</strong> kehilangan rumah. Akar: perebutan 
+            lahan dan ketidaksesuaian budaya.
+          </p>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-xl p-4">
+          <div class="flex justify-between items-start mb-2">
+            <h4 class="font-bold text-merah">Konflik Ambon (1999-2001)</h4>
+            <span class="bg-red-100 text-red-700 text-xs px-2 py-1 rounded-full font-semibold">Agama</span>
+          </div>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Konflik bernuansa agama Muslim-Kristen di Maluku. Akar: persaingan ekonomi, kecemburuan sosial, 
+            dan provokasi pihak tertentu.
+          </p>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-xl p-4">
+          <div class="flex justify-between items-start mb-2">
+            <h4 class="font-bold text-merah">Konflik Poso (2000-2001)</h4>
+            <span class="bg-red-100 text-red-700 text-xs px-2 py-1 rounded-full font-semibold">Multi-faktor</span>
+          </div>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Kerusuhan di Sulawesi Tengah dipicu perebutan lahan dan provokasi elit kekuasaan.
+          </p>
+        </div>
+      </div>
+      <div class="materi-box">
+        <h5>🔍 Akar Penyebab Konflik</h5>
+        <ul class="text-sm list-disc pl-5 space-y-2">
+          <li><strong>Kesenjangan ekonomi</strong> & kecemburuan sosial.</li>
+          <li><strong>Perseteruan politik</strong> memanfaatkan isu SARA.</li>
+          <li><strong>Perebutan lahan</strong> antara pendatang & penduduk asli.</li>
+          <li><strong>Provokasi & hoaks</strong> di media sosial.</li>
+          <li><strong>Lemahnya penegakan hukum</strong> yang adil.</li>
+        </ul>
+      </div>
+      <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded">
+        <p class="text-sm text-slate-700">
+          <strong>💡 Pelajaran:</strong> Keberagaman bisa menjadi kekuatan sekaligus potensi konflik. 
+          Kuncinya adalah <strong>pendidikan, dialog, dan penegakan hukum yang adil</strong>.
+        </p>
+      </div>
+    `,
+  },
+  5: {
+    judul: "Solusi & Pencegahan Konflik",
+    ikon: "🕊️",
+    isi: `
+      <p class="text-slate-700 leading-relaxed mb-4">
+        Bagaimana mencegah dan menghentikan konflik akibat keberagaman? Berikut <strong>5 solusi utama</strong>.
+      </p>
+      <div class="flex gap-4 items-start bg-white border border-slate-200 rounded-xl p-4 mb-3">
+        <div class="w-10 h-10 rounded-full gradient-hero text-white flex items-center justify-center font-bold flex-shrink-0">1</div>
+        <div>
+          <h4 class="font-bold text-merah mb-1">Pendidikan Multikultural</h4>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Kurikulum multikultural mengajarkan siswa menghargai perbedaan sejak dini, 
+            melalui pembelajaran budaya, agama, dan adat yang beragam.
+          </p>
+        </div>
+      </div>
+      <div class="flex gap-4 items-start bg-white border border-slate-200 rounded-xl p-4 mb-3">
+        <div class="w-10 h-10 rounded-full gradient-hero text-white flex items-center justify-center font-bold flex-shrink-0">2</div>
+        <div>
+          <h4 class="font-bold text-merah mb-1">Dialog Lintas Kelompok</h4>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Forum Kerukunan Umat Beragama (FKUB) berperan aktif — bukan hanya mediator konflik, 
+            tetapi juga mengisi ruang digital dengan edukasi damai.
+          </p>
+        </div>
+      </div>
+      <div class="flex gap-4 items-start bg-white border border-slate-200 rounded-xl p-4 mb-3">
+        <div class="w-10 h-10 rounded-full gradient-hero text-white flex items-center justify-center font-bold flex-shrink-0">3</div>
+        <div>
+          <h4 class="font-bold text-merah mb-1">Literasi Keagamaan Lintas Budaya</h4>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Pelatihan memahami diri sendiri & pandangan orang dengan kepercayaan berbeda (LKLB).
+          </p>
+        </div>
+      </div>
+      <div class="flex gap-4 items-start bg-white border border-slate-200 rounded-xl p-4 mb-3">
+        <div class="w-10 h-10 rounded-full gradient-hero text-white flex items-center justify-center font-bold flex-shrink-0">4</div>
+        <div>
+          <h4 class="font-bold text-merah mb-1">Penguatan Nilai Pancasila</h4>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Sila ke-1 & ke-3 menjadi landasan menghormati keyakinan orang lain dalam satu kesatuan.
+          </p>
+        </div>
+      </div>
+      <div class="flex gap-4 items-start bg-white border border-slate-200 rounded-xl p-4 mb-3">
+        <div class="w-10 h-10 rounded-full gradient-hero text-white flex items-center justify-center font-bold flex-shrink-0">5</div>
+        <div>
+          <h4 class="font-bold text-merah mb-1">Moderasi Beragama</h4>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Mendorong sikap toleran, inklusif, dan menghargai perbedaan melalui Proyek Penguatan 
+            Profil Pelajar Pancasila (P5).
+          </p>
+        </div>
+      </div>
+      <div class="materi-box mt-4">
+        <h5>🌱 Aksi Nyata untuk Pelajar</h5>
+        <ul class="text-sm list-disc pl-5 space-y-2">
+          <li><strong>Di sekolah:</strong> Ikut kegiatan lintas budaya, hormati teman berbeda agama/suku.</li>
+          <li><strong>Di rumah:</strong> Diskusikan pentingnya toleransi bersama keluarga.</li>
+          <li><strong>Di media sosial:</strong> Sebar konten positif, jangan sebar hoaks.</li>
+          <li><strong>Di masyarakat:</strong> Ikut gotong royong & festival budaya daerah.</li>
+        </ul>
+      </div>
+      <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded mt-4">
+        <p class="text-sm text-slate-700">
+          <strong>🌱 Kesimpulan:</strong> Mencegah konflik keberagaman adalah <strong>tanggung jawab 
+          kita semua</strong>. Mulai dari diri sendiri, dari hal kecil, dan dari sekarang.
+        </p>
+      </div>
+    `,
+  },
+};
+
+window.showModul = function (n) {
+  const data = MODUL[n];
+  if (!data) return;
+  const container = document.getElementById("modulContent");
+  container.innerHTML = `
+    <div class="flex items-center gap-3 mb-4">
+      <span class="text-4xl">${data.ikon}</span>
+      <h3 class="text-2xl md:text-3xl font-extrabold text-merah">${data.judul}</h3>
+    </div>
+    <div class="fade-in">${data.isi}</div>
+  `;
+  for (let i = 1; i <= 5; i++) {
+    const btn = document.getElementById("tabM" + i);
+    if (!btn) continue;
+    if (i === n) {
+      btn.style.background = "#b91c1c";
+      btn.style.color = "white";
+      btn.style.borderColor = "#b91c1c";
+    } else {
+      btn.style.background = "white";
+      btn.style.color = "";
+      btn.style.borderColor = "";
+    }
+  }
+};
+
+/* ============================================================
+   KUIS
+   ============================================================ */
+const QUESTION_POOL = [
+  { q:"Indonesia memiliki lebih dari 1.000 bahasa daerah.", type:"tf", options:["Benar","Salah"], answer:"Benar", explain:"1.001 bahasa daerah!" },
+  { q:"Berapa jumlah provinsi di Indonesia saat ini?", type:"mc", options:["34","36","37","38"], answer:"38", explain:"Sejak 2022, Indonesia memiliki 38 provinsi." },
+  { q:"Provinsi nomor 1 pada peta adalah...", type:"mc", options:["Aceh","Sumut","Sumbar","Riau"], answer:"Aceh", explain:"Aceh = provinsi paling barat." },
+  { q:"Provinsi Papua Selatan beribu kota di...", type:"mc", options:["Jayapura","Merauke","Nabire","Manokwari"], answer:"Merauke", explain:"Merauke = kota paling timur Indonesia." },
+  { q:"Rumah Gadang berasal dari...", type:"mc", options:["Sumut","Sumbar","Riau","Jambi"], answer:"Sumbar", explain:"Rumah Gadang = rumah adat Minangkabau." },
+  { q:"Tari Kecak berasal dari...", type:"mc", options:["Bali","Jawa","NTB","NTT"], answer:"Bali", explain:"Tari Kecak dari Bali." },
+  { q:"Suku Baduy ada di provinsi...", type:"fill", answer:["banten"], explain:"Suku Baduy di Banten." },
+  { q:"Rumah Honai dari provinsi...", type:"mc", options:["Papua","NTT","Maluku","Sulawesi"], answer:"Papua", explain:"Honai = rumah adat Dani, Papua." },
+  { q:"Tari Saman dari provinsi...", type:"mc", options:["Aceh","Batak","Bali","Papua"], answer:"Aceh", explain:"Tari Saman dari Aceh, diakui UNESCO." },
+  { q:"Provinsi dengan jumlah suku terbanyak adalah...", type:"mc", options:["Jawa Barat","Papua","Bali","Sumatra Utara"], answer:"Papua", explain:"Papua memiliki 250+ suku." },
+  { q:"Konflik Sampit terjadi tahun...", type:"mc", options:["1998","1999","2001","2003"], answer:"2001", explain:"Konflik Sampit 2001." },
+  { q:"FKUB singkatan dari...", type:"fill", answer:["forum kerukunan umat beragama"], explain:"FKUB = Forum Kerukunan Umat Beragama." },
+  { q:"Semboyan bangsa Indonesia adalah...", type:"fill", answer:["bhinneka tunggal ika","bhineka tunggal ika"], explain:"Bhinneka Tunggal Ika = berbeda tapi satu." },
+  { q:"Pancasila sila ke-3 berbunyi...", type:"mc", options:["Ketuhanan YME","Kemanusiaan","Persatuan Indonesia","Keadilan sosial"], answer:"Persatuan Indonesia", explain:"Sila ke-3 = Persatuan Indonesia." },
+  { q:"Suku Minangkabau menganut sistem...", type:"mc", options:["Patrilineal","Matrilineal","Bilateral","Unilineal"], answer:"Matrilineal", explain:"Minangkabau = matrilineal (garis ibu)." },
+  { q:"Rumah Tongkonan dari suku...", type:"mc", options:["Toraja","Bugis","Batak","Dayak"], answer:"Toraja", explain:"Tongkonan = rumah adat Toraja." },
+  { q:"Tari Sajojo dari provinsi...", type:"mc", options:["Papua","Maluku","NTT","Sulawesi"], answer:"Papua", explain:"Sajojo = tarian rakyat Papua." },
+  { q:"Bhinneka Tunggal Ika terdapat di kitab...", type:"mc", options:["Sutasoma","Negarakertagama","Ramayana","Mahabharata"], answer:"Sutasoma", explain:"Dari Kitab Sutasoma karya Mpu Tantular." },
+  { q:"Rumah Baileo dari provinsi...", type:"mc", options:["Maluku","Papua","NTT","Sulawesi"], answer:"Maluku", explain:"Baileo = rumah adat Maluku." },
+  { q:"Sasando dari pulau...", type:"mc", options:["Rote","Bali","Sumba","Flores"], answer:"Rote", explain:"Sasando = alat musik Pulau Rote, NTT." },
+  { q:"Kain Ulos dari suku...", type:"mc", options:["Batak","Minang","Bugis","Dayak"], answer:"Batak", explain:"Ulos = kain tenun sakral Batak." },
+  { q:"Angklung diakui UNESCO tahun...", type:"mc", options:["2008","2010","2013","2015"], answer:"2010", explain:"Angklung diakui UNESCO 2010." },
+  { q:"Papua Barat Daya beribu kota di...", type:"mc", options:["Sorong","Manokwari","Nabire","Merauke"], answer:"Sorong", explain:"Papua Barat Daya = pemekaran 2022, ibu kota Sorong." },
+  { q:"Kalimantan Utara beribu kota di...", type:"mc", options:["Tanjung Selor","Samarinda","Palangkaraya","Pontianak"], answer:"Tanjung Selor", explain:"Kaltara = pemekaran 2012, ibu kota Tanjung Selor." },
+  { q:"Suku Anak Dalam (Kubu) tinggal di provinsi...", type:"mc", options:["Jambi","Riau","Sumsel","Bengkulu"], answer:"Jambi", explain:"Suku Kubu di TN Bukit Duabelas, Jambi." },
+  { q:"Rumah Kaki Seribu adalah rumah adat...", type:"mc", options:["Arfak","Asmat","Dani","Biak"], answer:"Arfak", explain:"Rumah Kaki Seribu = rumah adat Arfak, Papua Barat." },
+  { q:"Tari Reog berasal dari...", type:"mc", options:["Ponorogo","Banyuwangi","Madura","Surabaya"], answer:"Ponorogo", explain:"Tari Reog dari Ponorogo, Jawa Timur." },
+  { q:"Tari Gending Sriwijaya dari provinsi...", type:"mc", options:["Sumsel","Jambi","Riau","Lampung"], answer:"Sumsel", explain:"Tari Gending Sriwijaya dari Palembang, Sumsel." },
+  { q:"Papeda adalah makanan khas dari...", type:"mc", options:["Maluku & Papua","Jawa","Sumatra","Kalimantan"], answer:"Maluku & Papua", explain:"Papeda = bubur sagu, khas Maluku & Papua." },
+  { q:"Subak di Bali adalah sistem...", type:"mc", options:["Irigasi tradisional","Pertanian","Perdagangan","Pendidikan"], answer:"Irigasi tradisional", explain:"Subak = sistem irigasi Bali, diakui UNESCO." },
+];
+
+const QUIZ_TOTAL = 15;
+let QUIZ_QUESTIONS = [], quizIdx = 0, quizScore = 0, quizAnswered = false, userAnswers = [];
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+
+function buildQuiz() {
+  const selected = shuffle(QUESTION_POOL).slice(0, QUIZ_TOTAL);
+  QUIZ_QUESTIONS = selected.map(q => q.type === "mc" ? { ...q, options: shuffle(q.options) } : { ...q });
+  quizIdx = 0; quizScore = 0; userAnswers = [];
+}
+
+window.renderQuiz = function () {
+  const q = QUIZ_QUESTIONS[quizIdx];
+  if (!q) return;
+  quizAnswered = false;
+  document.getElementById("quizProgress").innerText = `Soal ${quizIdx + 1} / ${QUIZ_TOTAL}`;
+  document.getElementById("quizScore").innerText = `Skor: ${quizScore}`;
+  document.getElementById("quizBar").style.width = `${((quizIdx + 1) / QUIZ_TOTAL) * 100}%`;
+  document.getElementById("quizFeedback").classList.add("hidden");
+  document.getElementById("quizNextBtn").classList.add("hidden");
+  document.getElementById("quizResult").classList.add("hidden");
+
+  const typeLabel = { mc:"Pilihan Ganda", tf:"Benar/Salah", fill:"Isian" }[q.type];
+  let body = `<span class="inline-block bg-amber-100 text-amber-800 text-xs font-bold px-2 py-1 rounded-full mb-3">${typeLabel}</span>`;
+  body += `<p class="text-lg font-semibold text-slate-800 mb-4">${q.q}</p>`;
+
+  if (q.type === "mc" || q.type === "tf") {
+    body += `<div class="space-y-2">`;
+    q.options.forEach((opt, i) => {
+      body += `<div class="quiz-opt bg-slate-50 border border-slate-200 rounded-lg p-3 cursor-pointer font-medium hover:bg-amber-50 transition" onclick="answerQuizByIndex(${i}, this)">${opt}</div>`;
+    });
+    body += `</div>`;
+  } else {
+    body += `<input id="fillAnswer" type="text" placeholder="Jawabanmu..." class="w-full p-3 rounded-lg border border-slate-300 focus:border-merah outline-none" onkeydown="if(event.key==='Enter'){event.preventDefault();answerFill();}">
+      <button type="button" onclick="answerFill()" class="mt-3 bg-merah text-white px-5 py-2 rounded-lg font-semibold hover:bg-red-800">Jawab</button>`;
+  }
+  document.getElementById("quizBody").innerHTML = body;
+};
+
+window.answerQuizByIndex = function (i, el) {
+  const q = QUIZ_QUESTIONS[quizIdx];
+  if (!q || !q.options) return;
+  if (quizAnswered) return;
+  quizAnswered = true;
+  const opt = q.options[i];
+  const correct = opt === q.answer;
+  userAnswers.push({ q: q.q, userAns: opt, correctAns: q.answer, isCorrect: correct });
+  document.querySelectorAll("#quizBody .quiz-opt").forEach(o => {
+    o.style.pointerEvents = "none";
+    o.classList.remove("hover:bg-amber-50");
+  });
+  if (correct) { el.style.background = "#16a34a"; el.style.color = "white"; el.style.borderColor = "#16a34a"; quizScore += 10; }
+  else {
+    el.style.background = "#dc2626"; el.style.color = "white"; el.style.borderColor = "#dc2626";
+    document.querySelectorAll("#quizBody .quiz-opt").forEach((o, idx) => {
+      if (q.options[idx] === q.answer) {
+        o.style.background = "#16a34a"; o.style.color = "white"; o.style.borderColor = "#16a34a";
+      }
+    });
+  }
+  const fb = document.getElementById("quizFeedback");
+  fb.classList.remove("hidden");
+  fb.className = correct ? "mt-4 p-4 rounded-lg text-sm bg-green-50 text-green-800 border-l-4 border-green-500" : "mt-4 p-4 rounded-lg text-sm bg-red-50 text-red-800 border-l-4 border-red-500";
+  fb.innerHTML = correct ? `<strong>✅ Benar!</strong> ${q.explain}` : `<strong>❌ Belum tepat.</strong> Jawaban: <strong>${q.answer}</strong>. ${q.explain}`;
+  document.getElementById("quizScore").innerText = `Skor: ${quizScore}`;
+  const btn = document.getElementById("quizNextBtn");
+  btn.classList.remove("hidden");
+  btn.innerText = quizIdx === QUIZ_TOTAL - 1 ? "Lihat Hasil 🎉" : "Lanjut →";
+};
+
+window.answerFill = function () {
+  if (quizAnswered) return;
+  const el = document.getElementById("fillAnswer");
+  if (!el) return;
+  const val = el.value.trim().toLowerCase();
+  const q = QUIZ_QUESTIONS[quizIdx];
+  if (!q || !Array.isArray(q.answer)) return;
+  const correct = q.answer.some(a => val.includes(a.toLowerCase()));
+  quizAnswered = true;
+  userAnswers.push({ q: q.q, userAns: val || "(kosong)", correctAns: q.answer[0], isCorrect: correct });
+  el.disabled = true;
+  const fb = document.getElementById("quizFeedback");
+  fb.classList.remove("hidden");
+  if (correct) { quizScore += 10; fb.className = "mt-4 p-4 rounded-lg text-sm bg-green-50 text-green-800 border-l-4 border-green-500"; fb.innerHTML = `<strong>✅ Benar!</strong> ${q.explain}`; }
+  else { fb.className = "mt-4 p-4 rounded-lg text-sm bg-red-50 text-red-800 border-l-4 border-red-500"; fb.innerHTML = `<strong>❌ Belum tepat.</strong> Jawaban: <strong>${q.answer[0]}</strong>. ${q.explain}`; }
+  document.getElementById("quizScore").innerText = `Skor: ${quizScore}`;
+  const btn = document.getElementById("quizNextBtn");
+  btn.classList.remove("hidden");
+  btn.innerText = quizIdx === QUIZ_TOTAL - 1 ? "Lihat Hasil 🎉" : "Lanjut →";
+};
+
+function showQuizResult() {
+  const maxScore = QUIZ_TOTAL * 10;
+  const pct = Math.round((quizScore / maxScore) * 100);
+  let grade, emoji, msg;
+  if (pct >= 90) { grade = "A"; emoji = "🏆"; msg = "Luar biasa!"; }
+  else if (pct >= 75) { grade = "B"; emoji = "🌟"; msg = "Bagus!"; }
+  else if (pct >= 60) { grade = "C"; emoji = "👍"; msg = "Cukup baik."; }
+  else { grade = "D"; emoji = "📖"; msg = "Ayo belajar lagi!"; }
+
+  document.getElementById("quizBody").innerHTML = "";
+  document.getElementById("quizFeedback").classList.add("hidden");
+  document.getElementById("quizNextBtn").classList.add("hidden");
+  document.getElementById("quizProgress").innerText = "Selesai";
+  document.getElementById("quizBar").style.width = "100%";
+
+  const reviewHTML = userAnswers.map((a, i) => `
+    <div class="border-l-4 ${a.isCorrect ? 'border-green-500 bg-green-50' : 'border-red-500 bg-red-50'} rounded p-3 mb-2">
+      <p class="text-xs font-bold text-slate-600 mb-1">Soal ${i + 1} ${a.isCorrect ? '✅' : '❌'}</p>
+      <p class="text-sm font-semibold text-slate-800 mb-1">${a.q}</p>
+      <p class="text-xs text-slate-600">Jawabanmu: <strong>${escapeHtml(a.userAns)}</strong></p>
+      ${!a.isCorrect ? `<p class="text-xs text-green-700">Jawaban benar: <strong>${escapeHtml(a.correctAns)}</strong></p>` : ""}
+    </div>`).join("");
+
+  const res = document.getElementById("quizResult");
+  res.classList.remove("hidden");
+  res.innerHTML = `
+    <div class="text-center py-6 fade-in">
+      <div class="text-6xl mb-3">${emoji}</div>
+      <h4 class="text-2xl font-extrabold text-merah mb-2">Kuis Selesai!</h4>
+      <p class="text-slate-600 mb-2">${msg}</p>
+      <div class="inline-block bg-krem rounded-2xl px-8 py-4 my-4">
+        <p class="text-xs text-slate-500 uppercase font-bold">Skor Akhir</p>
+        <p class="text-4xl font-extrabold text-merah">${quizScore}<span class="text-lg text-slate-400">/${maxScore}</span></p>
+        <p class="text-sm font-bold text-amber-600">Nilai: ${grade} (${pct}%)</p>
+      </div>
+      <div class="flex gap-2 justify-center mt-4 flex-wrap">
+        <button type="button" onclick="restartQuiz()" class="bg-merah text-white px-6 py-3 rounded-lg font-bold hover:bg-red-800"><i class="fa-solid fa-dice"></i> Coba Lagi</button>
+        <button type="button" onclick="document.getElementById('reviewBox').classList.toggle('hidden')" class="bg-slate-100 text-slate-700 px-6 py-3 rounded-lg font-bold hover:bg-slate-200"><i class="fa-solid fa-list-check"></i> Pembahasan</button>
+      </div>
+      <div id="reviewBox" class="hidden mt-6 text-left max-h-96 overflow-y-auto">${reviewHTML}</div>
+    </div>`;
+}
+
+window.restartQuiz = function () {
+  buildQuiz();
+  document.getElementById("quizResult").classList.add("hidden");
+  renderQuiz();
+  toast("🎲 Soal baru diacak!");
+};
+
+/* ============================================================
+   JURNAL (Firestore jika login, localStorage jika tamu)
+   ============================================================ */
+let cloudJournals = null;
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+}
+
+function currentUser() { return (firebaseReady && auth) ? auth.currentUser : null; }
+
+async function loadJournalFromCloud() {
+  const user = currentUser();
+  if (!user) return;
+  try {
+    const doc = await db.collection("users").doc(user.uid).get();
+    cloudJournals = (doc.exists && Array.isArray(doc.data().journals)) ? doc.data().journals : [];
+    renderJurnal();
+  } catch (e) {
+    console.error("[Bhinneka Edu] gagal memuat jurnal cloud:", e);
+  }
+}
+
+window.simpanJurnal = async function () {
+  const val = document.getElementById("jurnalInput").value.trim();
+  if (!val) { toast("Jurnal kosong!"); return; }
+  const entry = { text: val, time: new Date().toISOString() };
+  const user = currentUser();
+
+  if (user) {
+    try {
+      cloudJournals = [entry, ...(cloudJournals || [])].slice(0, 50);
+      await db.collection("users").doc(user.uid).set({ journals: cloudJournals }, { merge: true });
+      toast("☁️ Jurnal tersimpan ke cloud!");
+    } catch (e) {
+      console.error(e);
+      toast("Gagal simpan ke cloud — coba lagi.");
+      return;
+    }
+  } else {
+    let list = [];
+    try { list = JSON.parse(safeStorage.get(STORAGE_KEY_JURNAL, "[]")) || []; } catch (e) { list = []; }
+    list.unshift(entry);
+    safeStorage.set(STORAGE_KEY_JURNAL, JSON.stringify(list.slice(0, 50)));
+    toast("✅ Jurnal tersimpan lokal!");
+  }
+  document.getElementById("jurnalInput").value = "";
+  renderJurnal();
+};
+
+function renderJurnal() {
+  let list = [];
+  if (currentUser()) {
+    list = cloudJournals || [];
+  } else {
+    try { list = JSON.parse(safeStorage.get(STORAGE_KEY_JURNAL, "[]")) || []; } catch (e) { list = []; }
+  }
+  const el = document.getElementById("jurnalList");
+  if (!el) return;
+  if (!list.length) {
+    el.innerHTML = '<p class="text-center text-sm text-slate-400 py-6">Belum ada jurnal. Tulis pemikiranmu di atas! ✍️</p>';
+    return;
+  }
+  el.innerHTML = list.slice(0, 10).map(j => `<div class="bg-krem border-l-4 border-emas rounded-lg p-4 fade-in">
+    <p class="text-xs text-slate-500 mb-1">${new Date(j.time).toLocaleString('id-ID')}</p>
+    <p class="text-sm text-slate-700 whitespace-pre-wrap">${escapeHtml(j.text)}</p>
+  </div>`).join("");
+}
+
+function updateJurnalStatus() {
+  const user = currentUser();
+  const status = document.getElementById("jurnalStatus");
+  const hint = document.getElementById("jurnalHint");
+  if (!status || !hint) return;
+  if (user) {
+    status.innerHTML = `☁️ Mode akun <strong>${escapeHtml(user.displayName || user.email)}</strong> — jurnal tersinkron ke cloud.`;
+    hint.innerText = "Tersimpan di Firebase";
+  } else {
+    status.innerText = "Mode tamu — tersimpan lokal di browser.";
+    hint.innerText = "Tersimpan lokal";
+  }
+}
+
+window.toggleUserMenu = function (e) {
+  if (e) e.stopPropagation();
+  const m = document.getElementById("userMenu");
+  if (m) m.classList.toggle("hidden");
+};
+
+document.addEventListener("click", (e) => {
+  const menu = document.getElementById("userMenu");
+  if (!menu || menu.classList.contains("hidden")) return;
+  if (e.target.closest("#userMenu")) return;
+  if (e.target.closest("[data-user-toggle]")) return;
+  menu.classList.add("hidden");
+});
+
+/* ============================================================
+   FIREBASE AUTH UI LOGIC
+   ============================================================ */
+let authMode = "login";
+
+window.openAuthModal = function () {
+  document.getElementById("authModal").classList.add("show");
+  document.body.style.overflow = "hidden";
+  if (!firebaseReady) {
+    const w = document.getElementById("firebaseWarning");
+    w.classList.remove("hidden");
+    w.innerHTML = `⚠️ <strong>Firebase belum dikonfigurasi.</strong> Buka kode HTML dan isi <code class="bg-white px-1 rounded">firebaseConfig</code> dengan kredensial proyek Firebase-mu. Lihat instruksi di komentar script.`;
+  }
+};
+
+window.closeAuthModal = function () {
+  document.getElementById("authModal").classList.remove("show");
+  if (!document.getElementById("modalDaerah").classList.contains("show")) {
+    document.body.style.overflow = "";
+  }
+};
+
+window.switchAuthTab = function (mode, el) {
+  authMode = mode;
+  document.querySelectorAll("#authModal [data-authtab]").forEach(t => t.classList.remove("active"));
+  if (el) el.classList.add("active");
+  document.getElementById("authTitle").innerText = mode === "login" ? "Masuk" : "Daftar";
+  document.getElementById("authSubtitle").innerText = mode === "login"
+    ? "Selamat datang kembali! Lanjutkan petualanganmu. 🇮🇩"
+    : "Buat akun baru & simpan jurnalmu ke cloud. 🚀";
+  document.getElementById("nameField").classList.toggle("hidden", mode !== "register");
+  document.getElementById("forgotBtn").classList.toggle("hidden", mode !== "login");
+  document.getElementById("authSubmit").innerHTML = mode === "login"
+    ? '<i class="fa-solid fa-right-to-bracket"></i> Masuk'
+    : '<i class="fa-solid fa-user-plus"></i> Daftar';
+  document.getElementById("authError").classList.add("hidden");
+};
+
+function showAuthError(msg) {
+  const el = document.getElementById("authError");
+  el.classList.remove("hidden");
+  el.innerText = "⚠️ " + msg;
+}
+
+function translateAuthError(err) {
+  const code = err && err.code ? err.code : "";
+  const map = {
+    "auth/invalid-email": "Format email tidak valid.",
+    "auth/user-not-found": "Akun tidak ditemukan. Silakan daftar dulu.",
+    "auth/wrong-password": "Password salah.",
+    "auth/invalid-credential": "Email atau password salah.",
+    "auth/email-already-in-use": "Email sudah terdaftar. Silakan masuk.",
+    "auth/weak-password": "Password minimal 6 karakter.",
+    "auth/too-many-requests": "Terlalu banyak percobaan. Coba lagi nanti.",
+    "auth/network-request-failed": "Koneksi internet bermasalah.",
+    "auth/popup-closed-by-user": "Jendela login ditutup sebelum selesai.",
+    "auth/popup-blocked": "Popup diblokir browser. Izinkan popup lalu coba lagi.",
+    "auth/operation-not-allowed": "Metode login ini belum diaktifkan di Firebase Console.",
+    "auth/unauthorized-domain": "Domain ini belum diizinkan di Firebase Console (Authentication → Settings → Authorized domains).",
+    "permission-denied": "Izin Firestore ditolak. Periksa Security Rules."
+  };
+  return map[code] || (err && err.message) || "Terjadi kesalahan.";
+}
+
+window.forgotPassword = async function () {
+  if (!firebaseReady) { showAuthError("Firebase belum dikonfigurasi."); return; }
+  const email = document.getElementById("authEmail").value.trim();
+  if (!email) { showAuthError("Masukkan email dulu, lalu klik Lupa password."); return; }
+  try {
+    await auth.sendPasswordResetEmail(email);
+    toast("📧 Email reset password sudah dikirim.");
+  } catch (err) { showAuthError(translateAuthError(err)); }
+};
+
+window.loginGoogle = async function () {
+  if (!firebaseReady) { showAuthError("Firebase belum dikonfigurasi."); return; }
+  try {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    const cred = await auth.signInWithPopup(provider);
+    await db.collection("users").doc(cred.user.uid).set({
+      name: cred.user.displayName || "",
+      email: cred.user.email || "",
+      photo: cred.user.photoURL || "",
+      lastLogin: firebase.firestore.FieldValue.serverTimestamp()
+    }, { merge: true });
+    closeAuthModal();
+    toast("✅ Berhasil masuk dengan Google!");
+  } catch (err) {
+    console.error(err);
+    showAuthError(translateAuthError(err));
+  }
+};
+
+window.logout = async function () {
+  if (!firebaseReady) return;
+  try {
+    await auth.signOut();
+    cloudJournals = null;
+    toast("👋 Berhasil keluar.");
+  } catch (e) { console.error(e); }
+};
+
+function handleAuthChange(user) {
+  const area = document.getElementById("authArea");
+  if (!area) return;
+
+  if (user) {
+    const name = user.displayName || (user.email ? user.email.split("@")[0] : "Pengguna");
+    const initial = (name.charAt(0) || "U").toUpperCase();
+    area.innerHTML = `
+      <div class="relative">
+        <button data-user-toggle="1" onclick="toggleUserMenu(event)"
+                class="flex items-center gap-2 bg-krem hover:bg-amber-200 px-3 py-2 rounded-lg font-semibold text-sm text-merah transition">
+          <span class="w-7 h-7 rounded-full gradient-hero text-white flex items-center justify-center font-bold text-xs">${escapeHtml(initial)}</span>
+          <span class="hidden sm:inline max-w-[110px] truncate">${escapeHtml(name)}</span>
+          <i class="fa-solid fa-chevron-down text-xs"></i>
+        </button>
+        <div id="userMenu" class="hidden absolute right-0 mt-2 w-60 bg-white rounded-xl shadow-xl border border-slate-200 py-2 z-50">
+          <div class="px-4 py-2 border-b border-slate-100">
+            <p class="text-xs font-bold text-slate-800 truncate">${escapeHtml(name)}</p>
+            <p class="text-[10px] text-slate-500 truncate">${escapeHtml(user.email || "")}</p>
+          </div>
+          <button type="button" onclick="loadJournalFromCloud().then(renderJurnal);document.getElementById('userMenu').classList.add('hidden');toast('☁️ Jurnal disinkronkan');" class="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-krem">
+            <i class="fa-solid fa-cloud-arrow-down text-merah"></i> Sinkron Jurnal
+          </button>
+          <button type="button" onclick="logout()" class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50">
+            <i class="fa-solid fa-right-from-bracket"></i> Keluar
+          </button>
+        </div>
+      </div>`;
+    loadJournalFromCloud();
+  } else {
+    area.innerHTML = `
+      <button type="button" onclick="openAuthModal()" class="bg-merah text-white px-4 py-2 rounded-lg font-semibold text-sm hover:bg-red-800 transition">
+        <i class="fa-solid fa-user"></i> Masuk
+      </button>`;
+    cloudJournals = null;
+    renderJurnal();
+  }
+  updateJurnalStatus();
+}
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+let toastTimer;
+function toast(msg) {
+  const el = document.getElementById("toast");
+  if (!el) return;
+  el.innerText = msg;
+  el.classList.remove("hidden");
+  el.classList.add("fade-in");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.add("hidden"), 3000);
+}
+window.toast = toast;
+
+/* ============================================================
+   INIT
+   ============================================================ */
+document.addEventListener("DOMContentLoaded", () => {
+  /* === Auth form handler === */
+  const authForm = document.getElementById("authForm");
+  if (authForm) {
+    authForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!firebaseReady) { showAuthError("Firebase belum dikonfigurasi. Isi firebaseConfig di kode HTML."); return; }
+      const email = document.getElementById("authEmail").value.trim();
+      const password = document.getElementById("authPassword").value;
+      const name = document.getElementById("authName").value.trim();
+      const btn = document.getElementById("authSubmit");
+      const originalHTML = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Memproses...';
+      try {
+        if (authMode === "login") {
+          await auth.signInWithEmailAndPassword(email, password);
+          toast("✅ Berhasil masuk!");
+        } else {
+          const cred = await auth.createUserWithEmailAndPassword(email, password);
+          if (name) {
+            try { await cred.user.updateProfile({ displayName: name }); } catch (_) {}
+          }
+          await db.collection("users").doc(cred.user.uid).set({
+            name: name || email.split("@")[0],
+            email: email,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          }, { merge: true });
+          toast("🎉 Akun berhasil dibuat!");
+        }
+        closeAuthModal();
+        authForm.reset();
+      } catch (err) {
+        console.error(err);
+        showAuthError(translateAuthError(err));
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = originalHTML;
+      }
+    });
+  }
+
+  /* === Quiz next button === */
+  const nextBtn = document.getElementById("quizNextBtn");
+  if (nextBtn) {
+    nextBtn.onclick = () => {
+      if (quizIdx < QUIZ_TOTAL - 1) { quizIdx++; renderQuiz(); }
+      else showQuizResult();
+    };
+  }
+
+  /* === MAP IMAGE handling === */
+  const img = document.getElementById("mapImage");
+  if (img) {
+    img.addEventListener("load", () => {
+      document.getElementById("petaFallback")?.classList.add("hidden");
+    });
+    img.addEventListener("error", () => { handleMapError(); });
+    if (img.complete) {
+      if (img.naturalWidth > 0) { /* gambar sukses dimuat */ }
+      else handleMapError();
+    }
+  } else {
+    handleMapError();
+  }
+
+  /* === Render awal === */
+  renderRegionList("semua", "");
+  renderProvinceGrid("semua");
+  renderJurnal();
+  showModul(1);
+  buildQuiz();
+  renderQuiz();
+  updateJurnalStatus();
+
+  /* === ESC untuk tutup modal === */
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") return;
+    if (document.getElementById("modalDaerah").classList.contains("show")) closeModalDaerah();
+    else if (document.getElementById("authModal").classList.contains("show")) closeAuthModal();
+  });
+});
+</script>
+
+</body>
+</html>
