@@ -57,13 +57,13 @@
   .hotspot::after {
     content: '';
     position: absolute;
-    bottom: -6px;
+    bottom: -7px;
     left: 50%;
     transform: translateX(-50%);
     width: 0; height: 0;
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
-    border-top: 8px solid #b91c1c;
+    border-top: 9px solid #b91c1c;
   }
   .hotspot:hover {
     background: #b91c1c;
@@ -195,6 +195,9 @@
     background: #b91c1c; color: white; font-weight: 800; font-size: 12px;
     margin-right: 8px; flex-shrink: 0;
   }
+
+  .materi-box { background: #f8fafc; border-left: 4px solid #b91c1c; border-radius: 0.5rem; padding: 1rem 1.25rem; margin: 1rem 0; }
+  .materi-box h5 { font-weight: 700; color: #b91c1c; margin-bottom: 0.5rem; }
 </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
@@ -215,23 +218,12 @@
       <a href="#kuis" class="px-3 py-2 rounded-lg hover:bg-krem">Kuis</a>
       <a href="#jurnal" class="px-3 py-2 rounded-lg hover:bg-krem">Jurnal</a>
     </div>
-    <div id="userArea" class="flex items-center gap-2">
-      <button id="loginBtn" class="bg-merah text-white px-4 py-2 rounded-lg font-semibold text-sm hover:bg-red-800">
+    <div class="flex items-center gap-2">
+      <button class="bg-merah text-white px-4 py-2 rounded-lg font-semibold text-sm hover:bg-red-800">
         <i class="fa-solid fa-user"></i> Masuk
       </button>
-      <div id="userInfo" class="hidden flex items-center gap-2">
-        <div class="text-right text-xs">
-          <p id="userName" class="font-bold text-slate-700"></p>
-          <p id="userLevel" class="text-amber-600 font-semibold"></p>
-        </div>
-        <div class="w-10 h-10 rounded-full gradient-hero flex items-center justify-center text-white text-lg">
-          <i class="fa-solid fa-user-astronaut"></i>
-        </div>
-        <button id="logoutBtn" class="text-slate-500 hover:text-merah text-sm"><i class="fa-solid fa-right-from-bracket"></i></button>
-      </div>
     </div>
   </div>
-  <div id="xpBar" class="hidden h-1 bg-slate-200"><div id="xpFill" class="h-full gradient-hero progress-bar" style="width:0%"></div></div>
 </nav>
 
 <!-- HERO -->
@@ -324,7 +316,7 @@
         <div class="mt-4 bg-gradient-to-r from-krem to-amber-100 rounded-xl p-4 border border-amber-200 flex items-center gap-3">
           <span class="text-2xl">💡</span>
           <p class="text-sm text-slate-700 flex-1">
-            <strong>Tips:</strong> Klik nomor <strong>1–38</strong> pada peta. Setiap provinsi menampilkan <strong>6 tab informasi</strong>: suku, bahasa, agama, budaya, kuliner, dan tradisi. Raih badge <strong>Penjelajah Peta</strong> dengan menjelajahi 10 provinsi!
+            <strong>Tips:</strong> Klik nomor <strong>1–38</strong> pada peta. Setiap provinsi menampilkan <strong>6 tab informasi</strong>: suku, bahasa, agama, budaya, kuliner, dan tradisi.
           </p>
         </div>
       </div>
@@ -384,11 +376,6 @@
       <button onclick="showModul(5)" id="tabM5" class="whitespace-nowrap px-5 py-2 rounded-lg font-semibold bg-white border border-slate-200 text-sm">5. Solusi</button>
     </div>
     <div id="modulContent" class="bg-white rounded-2xl shadow-lg p-6 md:p-10"></div>
-    <div class="text-center mt-6">
-      <button onclick="selesaikanModul()" class="bg-emas text-white px-6 py-3 rounded-xl font-bold hover:bg-amber-600">
-        <i class="fa-solid fa-check-circle"></i> Tandai Modul Selesai (+100 XP)
-      </button>
-    </div>
   </div>
 </section>
 
@@ -398,7 +385,7 @@
     <div class="text-center mb-8 text-white">
       <span class="text-xs font-bold uppercase tracking-widest text-amber-300">Uji Pemahaman</span>
       <h3 class="text-3xl md:text-4xl font-extrabold mt-2">Kuis Keberagaman</h3>
-      <p class="text-white/80 mt-2">15 soal acak dari 30 bank soal — kombinasimu unik! 🎲</p>
+      <p class="text-white/80 mt-2">15 soal acak dari bank soal — kombinasimu unik! 🎲</p>
     </div>
     <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8">
       <div class="flex justify-between items-center mb-4">
@@ -426,7 +413,7 @@
     <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200">
       <textarea id="jurnalInput" rows="6" placeholder="Tuliskan pemikiranmu..." class="w-full p-4 rounded-lg border border-slate-300 focus:border-merah outline-none resize-none"></textarea>
       <div class="flex justify-between items-center mt-3">
-        <span class="text-xs text-slate-500"><i class="fa-solid fa-cloud"></i> Tersinkronisasi Firebase</span>
+        <span class="text-xs text-slate-500"><i class="fa-solid fa-cloud"></i> Tersimpan lokal</span>
         <button onclick="simpanJurnal()" class="bg-merah text-white px-5 py-2 rounded-lg font-semibold hover:bg-red-800"><i class="fa-solid fa-save"></i> Simpan</button>
       </div>
     </div>
@@ -437,20 +424,21 @@
 <footer class="gradient-hero text-white py-8">
   <div class="max-w-7xl mx-auto px-4 text-center">
     <h4 class="text-lg font-extrabold mb-2">🦅 Bhinneka Edu</h4>
-    <p class="text-xs text-white/60">© 2025 · 38 Provinsi · Firebase Sync · Offline Ready</p>
+    <p class="text-xs text-white/60">© 2025 · 38 Provinsi · Keragaman Indonesia</p>
   </div>
 </footer>
 
 <div id="toast" class="hidden fixed bottom-6 right-6 z-[400] bg-slate-800 text-white px-5 py-3 rounded-lg shadow-lg fade-in"></div>
 
-<script type="module">
+<script>
   // ============================================================
-  //  DATA 38 PROVINSI INDONESIA (Sesuai Referensi PDF)
-  //  Koordinat x,y dalam % terhadap gambar peta
+  //  DATA 38 PROVINSI INDONESIA
+  //  Koordinat x,y dalam % — sudah disesuaikan dengan
+  //  posisi nomor pada gambar peta referensi
   // ============================================================
   const DAERAH = [
     // ============ SUMATRA ============
-    { no:1, id:"aceh", nama:"Aceh", ibukota:"Banda Aceh", pulau:"Sumatra", x:4.5, y:8.5,
+    { no:1, id:"aceh", nama:"Aceh", ibukota:"Banda Aceh", pulau:"Sumatra", x:8.5, y:18.5,
       populasi:"5,3 juta", deskripsi:"Serambi Mekkah — gerbang barat Indonesia dengan syariat Islam dan budaya Melayu yang kental.",
       suku:[{n:"Aceh",d:"Mayoritas, penutur bahasa Aceh"},{n:"Gayo",d:"Dataran tinggi, kopi arabika"},{n:"Alas",d:"Aceh Tenggara"},{n:"Tamiang",d:"Perbatasan Sumut"},{n:"Simeulue",d:"Pulau Simeulue, kearifan smong"},{n:"Kluet",d:"Aceh Selatan"}],
       bahasa:["Bahasa Aceh","Bahasa Gayo","Bahasa Alas","Bahasa Tamiang","Bahasa Simeulue","Bahasa Devayan"],
@@ -464,7 +452,7 @@
       tradisi:[{n:"Peusijuek",d:"Upacara tepung tawar untuk keberkahan"},{n:"Khanduri Maulod",d:"Perayaan Maulid Nabi"},{n:"Khanduri Blang",d:"Syukuran sebelum turun ke sawah"}],
       fakta:"Satu-satunya provinsi dengan syariat Islam resmi. Tari Saman diakui UNESCO." },
 
-    { no:2, id:"sumut", nama:"Sumatra Utara", ibukota:"Medan", pulau:"Sumatra", x:10, y:13,
+    { no:2, id:"sumut", nama:"Sumatra Utara", ibukota:"Medan", pulau:"Sumatra", x:14, y:27,
       populasi:"14,9 juta", deskripsi:"Rumah bagi Danau Toba dan budaya Batak dengan falsafah Dalihan Na Tolu.",
       suku:[{n:"Batak Toba",d:"Sekitar Danau Toba"},{n:"Batak Karo",d:"Dataran tinggi Karo"},{n:"Batak Simalungun",d:"Kab. Simalungun"},{n:"Batak Mandailing",d:"Mandailing Natal"},{n:"Batak Pakpak",d:"Dairi & Pakpak Bharat"},{n:"Nias",d:"Pulau Nias, tradisi Fahombo"},{n:"Melayu",d:"Pesisir timur"}],
       bahasa:["Bahasa Batak Toba","Bahasa Karo","Bahasa Simalungun","Bahasa Mandailing","Bahasa Pakpak","Bahasa Nias","Bahasa Melayu"],
@@ -478,7 +466,7 @@
       tradisi:[{n:"Fahombo",d:"Lompat batu setinggi 2m di Nias"},{n:"Mangongkal Holi",d:"Pemindahan tulang leluhur"},{n:"Marpangir",d:"Upacara di tepi Danau Toba"}],
       fakta:"Danau Toba adalah danau vulkanik terbesar di dunia (1.145 km²)." },
 
-    { no:3, id:"sumbar", nama:"Sumatra Barat", ibukota:"Padang", pulau:"Sumatra", x:12, y:12,
+    { no:3, id:"sumbar", nama:"Sumatra Barat", ibukota:"Padang", pulau:"Sumatra", x:17, y:33,
       populasi:"5,6 juta", deskripsi:"Tanah Minang dengan sistem matrilineal terbesar di dunia dan rendang yang mendunia.",
       suku:[{n:"Minangkabau",d:"Mayoritas, sistem matrilineal"},{n:"Mentawai",d:"Kepulauan Mentawai, pemburu"},{n:"Melayu",d:"Pesisir"},{n:"Nias",d:"Kepulauan Batu"}],
       bahasa:["Bahasa Minangkabau","Bahasa Mentawai","Bahasa Melayu"],
@@ -492,7 +480,7 @@
       tradisi:[{n:"Tabuik",d:"Perayaan 10 Muharram di Pariaman"},{n:"Randai",d:"Teater rakyat dengan silat"},{n:"Batagak Gala",d:"Pengangkatan gelar adat"}],
       fakta:"Rendang dinobatkan makanan terenak nomor 1 dunia versi CNN Travel." },
 
-    { no:4, id:"riau", nama:"Riau", ibukota:"Pekanbaru", pulau:"Sumatra", x:17, y:18,
+    { no:4, id:"riau", nama:"Riau", ibukota:"Pekanbaru", pulau:"Sumatra", x:20, y:27,
       populasi:"6,5 juta", deskripsi:"Bumi Lancang Kuning — pusat budaya Melayu dengan warisan Kesultanan Siak.",
       suku:[{n:"Melayu",d:"Mayoritas"},{n:"Minangkabau",d:"Perantau"},{n:"Batak",d:"Perantau"},{n:"Jawa",d:"Transmigran"},{n:"Tionghoa-Indonesia",d:"Komunitas dagang"},{n:"Sakai",d:"Suku pedalaman"}],
       bahasa:["Bahasa Melayu Riau","Bahasa Minang","Bahasa Batak","Bahasa Sakai"],
@@ -506,7 +494,7 @@
       tradisi:[{n:"Petang Megang",d:"Tradisi menyambut Ramadhan"},{n:"Balimau Kasai",d:"Mandi bersama dengan limau"}],
       fakta:"Riau memiliki warisan Kesultanan Siak Sri Indrapura yang berpengaruh di Selat Malaka." },
 
-    { no:5, id:"kepri", nama:"Kepulauan Riau", ibukota:"Tanjungpinang", pulau:"Sumatra", x:24, y:22,
+    { no:5, id:"kepri", nama:"Kepulauan Riau", ibukota:"Tanjungpinang", pulau:"Sumatra", x:26, y:30,
       populasi:"2,1 juta", deskripsi:"Provinsi kepulauan dengan 2.408 pulau, budaya Melayu pesisir yang kuat.",
       suku:[{n:"Melayu",d:"Mayoritas"},{n:"Tionghoa-Indonesia",d:"Komunitas besar"},{n:"Jawa",d:"Transmigran"},{n:"Batak",d:"Perantau"},{n:"Minang",d:"Perantau"},{n:"Bugis",d:"Pelaut"}],
       bahasa:["Bahasa Melayu Riau","Bahasa Hokkien","Bahasa Jawa","Bahasa Bugis"],
@@ -520,7 +508,7 @@
       tradisi:[{n:"Mandirikan Ruwah",d:"Tradisi Melayu Kepri"},{n:"Tepuk Tepung Tawar",d:"Upacara keberkahan"}],
       fakta:"Kepulauan Riau memiliki 2.408 pulau — 96% berupa lautan." },
 
-    { no:6, id:"jambi", nama:"Jambi", ibukota:"Jambi", pulau:"Sumatra", x:16, y:28,
+    { no:6, id:"jambi", nama:"Jambi", ibukota:"Jambi", pulau:"Sumatra", x:19, y:35,
       populasi:"3,6 juta", deskripsi:"Tanah Pilih Pesako Betuah — rumah bagi Suku Anak Dalam dan warisan Melayu Kuno.",
       suku:[{n:"Melayu Jambi",d:"Mayoritas"},{n:"Kubu (Anak Dalam)",d:"Hutan Bukit Duabelas"},{n:"Kerinci",d:"Dataran tinggi"},{n:"Batin",d:"Pedalaman"},{n:"Pindah",d:"Berpindah ladang"}],
       bahasa:["Bahasa Melayu Jambi","Bahasa Kubu","Bahasa Kerinci","Bahasa Batin"],
@@ -534,7 +522,7 @@
       tradisi:[{n:"Kenduri Sko",d:"Membersihkan pusaka leluhur Kerinci"},{n:"Betauh",d:"Menumbuk padi bersama"}],
       fakta:"Suku Anak Dalam (Kubu) masih hidup semi-nomaden di dalam TN Bukit Duabelas." },
 
-    { no:7, id:"bengkulu", nama:"Bengkulu", ibukota:"Bengkulu", pulau:"Sumatra", x:12.5, y:32,
+    { no:7, id:"bengkulu", nama:"Bengkulu", ibukota:"Bengkulu", pulau:"Sumatra", x:19, y:40,
       populasi:"2,0 juta", deskripsi:"Bumi Rafflesia — rumah bagi bunga terbesar di dunia dan Suku Rejang.",
       suku:[{n:"Rejang",d:"Mayoritas, bahasa Rejang"},{n:"Serawai",d:"Bengkulu Selatan"},{n:"Lembak",d:"Bengkulu Tengah"},{n:"Melayu",d:"Pesisir"},{n:"Enggano",d:"Pulau Enggano"},{n:"Jawa",d:"Transmigran"}],
       bahasa:["Bahasa Rejang","Bahasa Serawai","Bahasa Lembak","Bahasa Enggano","Bahasa Melayu"],
@@ -548,7 +536,7 @@
       tradisi:[{n:"Kejei",d:"Perayaan adat Rejang"},{n:"Tabot",d:"Tradisi Muharram seperti Tabuik"},{n:"Nundang Padi",d:"Syukuran panen"}],
       fakta:"Bengkulu adalah rumah asli bunga Rafflesia arnoldii — bunga terbesar di dunia." },
 
-    { no:8, id:"sumsel", nama:"Sumatra Selatan", ibukota:"Palembang", pulau:"Sumatra", x:20, y:30,
+    { no:8, id:"sumsel", nama:"Sumatra Selatan", ibukota:"Palembang", pulau:"Sumatra", x:25, y:38,
       populasi:"8,6 juta", deskripsi:"Bumi Sriwijaya — pusat kerajaan maritim terbesar Nusantara dengan Sungai Musi.",
       suku:[{n:"Palembang",d:"Mayoritas"},{n:"Komering",d:"Sepanjang Sungai Komering"},{n:"Musi",d:"Sekitar Sungai Musi"},{n:"Ogan",d:"OKI & OKU"},{n:"Pasemah",d:"Dataran tinggi megalitik"},{n:"Semendo",d:"Perantau"}],
       bahasa:["Bahasa Palembang","Bahasa Komering","Bahasa Musi","Bahasa Ogan","Bahasa Pasemah"],
@@ -562,7 +550,7 @@
       tradisi:[{n:"Perang Ketupat",d:"Tradisi di Desa Air Salek"},{n:"Nganggung",d:"Membawa makanan ke masjid"}],
       fakta:"Kerajaan Sriwijaya (abad 7-13) berpusat di Palembang — kerajaan maritim terbesar Asia Tenggara." },
 
-    { no:9, id:"lampung", nama:"Lampung", ibukota:"Bandar Lampung", pulau:"Sumatra", x:19, y:40,
+    { no:9, id:"lampung", nama:"Lampung", ibukota:"Bandar Lampung", pulau:"Sumatra", x:31, y:43,
       populasi:"9,2 juta", deskripsi:"Sang Bumi Ruwa Jurai — gerbang selatan Sumatra dengan tradisi Pepadun.",
       suku:[{n:"Lampung Pepadun",d:"Pedalaman, patrilineal"},{n:"Lampung Saibatin",d:"Pesisir"},{n:"Jawa",d:"Transmigran mayoritas"},{n:"Sunda",d:"Lampung Barat"},{n:"Semendo",d:"Perantau"}],
       bahasa:["Bahasa Lampung","Bahasa Jawa","Bahasa Sunda","Bahasa Melayu"],
@@ -576,7 +564,7 @@
       tradisi:[{n:"Ngejalang",d:"Silaturahmi saat Lebaran"},{n:"Cangget",d:"Tarian muda-mudi Lampung"},{n:"Nayuh",d:"Menangkap ikan bersama"}],
       fakta:"Lampung memiliki 2 kelompok adat: Pepadun (pedalaman) dan Saibatin (pesisir)." },
 
-    { no:10, id:"babel", nama:"Kep. Bangka Belitung", ibukota:"Pangkal Pinang", pulau:"Sumatra", x:29, y:26,
+    { no:10, id:"babel", nama:"Kep. Bangka Belitung", ibukota:"Pangkal Pinang", pulau:"Sumatra", x:29, y:43,
       populasi:"1,5 juta", deskripsi:"Provinsi kepulauan timah dengan pantai eksotis dan budaya Melayu pesisir.",
       suku:[{n:"Melayu Bangka",d:"Mayoritas"},{n:"Tionghoa-Indonesia",d:"Komunitas besar, penambang timah"},{n:"Bugis",d:"Pelaut"},{n:"Jawa",d:"Transmigran"},{n:"Sekah",d:"Suku pedalaman Bangka"}],
       bahasa:["Bahasa Bangka","Bahasa Belitung","Bahasa Hokkien","Bahasa Melayu"],
@@ -591,7 +579,7 @@
       fakta:"Bangka Belitung adalah penghasil timah terbesar di Indonesia. Kain Cual adalah tenun khas Bangka." },
 
     // ============ JAWA ============
-    { no:11, id:"banten", nama:"Banten", ibukota:"Serang", pulau:"Jawa", x:21, y:52,
+    { no:11, id:"banten", nama:"Banten", ibukota:"Serang", pulau:"Jawa", x:25, y:54,
       populasi:"11,9 juta", deskripsi:"Ujung barat Jawa — rumah bagi Suku Baduy yang menolak modernisasi.",
       suku:[{n:"Sunda Banten",d:"Mayoritas"},{n:"Baduy",d:"Pedalaman Lebak, menolak modernisasi"},{n:"Jawa",d:"Perantau"},{n:"Betawi",d:"Perbatasan Jakarta"},{n:"Tionghoa-Indonesia",d:"Komunitas dagang"}],
       bahasa:["Bahasa Sunda Banten","Bahasa Baduy","Bahasa Jawa Serang","Bahasa Betawi"],
@@ -603,9 +591,9 @@
       makanan:["Sate Bandeng","Rabeg","Kue Cucur","Angeun Lada"],
       senjata:["Golok","Keris"],
       tradisi:[{n:"Sepekan Ruwat Bumi",d:"Tradisi Baduy"},{n:"Kawalu",d:"Upacara Baduy selama 3 bulan"},{n:"Ngaruwat",d:"Syukuran bersama"}],
-      fakta:"Suku Baduy Dalam menolak listrik, sekolah formal, dan teknologi modern — hidup mandiri di pedalaman." },
+      fakta:"Suku Baduy Dalam menolak listrik, sekolah formal, dan teknologi modern." },
 
-    { no:12, id:"jabar", nama:"Jawa Barat", ibukota:"Bandung", pulau:"Jawa", x:26, y:50,
+    { no:12, id:"jabar", nama:"Jawa Barat", ibukota:"Bandung", pulau:"Jawa", x:32, y:51,
       populasi:"48,6 juta", deskripsi:"Paris van Java — tanah Pasundan dengan budaya Sunda yang kental.",
       suku:[{n:"Sunda",d:"Mayoritas"},{n:"Cirebon",d:"Pesisir utara, akulturasi"},{n:"Betawi",d:"Perbatasan Jakarta"},{n:"Jawa",d:"Transmigran"},{n:"Tionghoa-Indonesia",d:"Komunitas di Bandung"}],
       bahasa:["Bahasa Sunda","Bahasa Cirebon","Bahasa Melayu Betawi","Bahasa Indonesia"],
@@ -619,7 +607,7 @@
       tradisi:[{n:"Seren Taun",d:"Syukuran panen padi"},{n:"Ngaruwat Bumi",d:"Tolak bala"},{n:"Babacakan",d:"Makan bersama di atas daun pisang"}],
       fakta:"Angklung diakui UNESCO sebagai Warisan Budaya Takbenda (2010)." },
 
-    { no:13, id:"jateng", nama:"Jawa Tengah", ibukota:"Semarang", pulau:"Jawa", x:31, y:51,
+    { no:13, id:"jateng", nama:"Jawa Tengah", ibukota:"Semarang", pulau:"Jawa", x:36, y:50,
       populasi:"36,5 juta", deskripsi:"Jantung budaya Jawa klasik — rumah bagi Keraton Surakarta dan tradisi wayang.",
       suku:[{n:"Jawa",d:"Mayoritas"},{n:"Samin",d:"Blora, menolak pajak kolonial"},{n:"Tionghoa-Indonesia",d:"Semarang, Solo"},{n:"Arab-Indonesia",d:"Pekalongan, Kudus"}],
       bahasa:["Bahasa Jawa (Ngoko, Krama, Krama Inggil)","Bahasa Samin","Bahasa Indonesia"],
@@ -633,7 +621,7 @@
       tradisi:[{n:"Sekaten",d:"Perayaan Maulid dengan gamelan"},{n:"Ruwatan Sukerta",d:"Tolak bala dengan wayang"},{n:"Tingkeban",d:"Upacara ibu hamil 7 bulan"}],
       fakta:"Batik diakui UNESCO (2009). Bahasa Jawa punya 3 tingkatan: Ngoko, Krama, Krama Inggil." },
 
-    { no:14, id:"diy", nama:"DI Yogyakarta", ibukota:"Yogyakarta", pulau:"Jawa", x:36, y:52,
+    { no:14, id:"diy", nama:"DI Yogyakarta", ibukota:"Yogyakarta", pulau:"Jawa", x:33, y:57,
       populasi:"3,7 juta", deskripsi:"Kota Budaya & Kota Pelajar — pusat kebudayaan Jawa dengan Keraton Ngayogyakarta.",
       suku:[{n:"Jawa",d:"Mayoritas"},{n:"Tionghoa-Indonesia",d:"Kawasan Ketandan"},{n:"Arab-Indonesia",d:"Kauman"}],
       bahasa:["Bahasa Jawa Ngoko","Bahasa Jawa Krama","Bahasa Jawa Krama Inggil"],
@@ -647,7 +635,7 @@
       tradisi:[{n:"Sekaten",d:"Perayaan Maulid Nabi"},{n:"Labuhan",d:"Persembahan ke laut selatan"},{n:"Grebeg",d:"Arak-arakan gunungan"}],
       fakta:"Satu-satunya provinsi yang dipimpin Sultan sebagai gubernur (UU Keistimewaan 2012)." },
 
-    { no:15, id:"jatim", nama:"Jawa Timur", ibukota:"Surabaya", pulau:"Jawa", x:42, y:50,
+    { no:15, id:"jatim", nama:"Jawa Timur", ibukota:"Surabaya", pulau:"Jawa", x:41, y:51,
       populasi:"40,6 juta", deskripsi:"Kota Pahlawan — rumah bagi Suku Jawa, Madura, dan Tengger.",
       suku:[{n:"Jawa",d:"Mayoritas"},{n:"Madura",d:"Karapan sapi"},{n:"Tengger",d:"Gunung Bromo, Hindu kuno"},{n:"Osing",d:"Banyuwangi"},{n:"Samin",d:"Bojonegoro"},{n:"Bawean",d:"Pulau Bawean"}],
       bahasa:["Bahasa Jawa Timur (dialek Arekan)","Bahasa Madura","Bahasa Tengger","Bahasa Osing"],
@@ -661,7 +649,7 @@
       tradisi:[{n:"Karapan Sapi",d:"Balapan sapi khas Madura"},{n:"Kasada",d:"Sesajen ke Gunung Bromo"},{n:"Kebo-keboan",d:"Tradisi Banyuwangi"}],
       fakta:"Suku Tengger adalah keturunan Majapahit yang mempertahankan Hindu-Buddha kuno." },
 
-    { no:37, id:"dki", nama:"DKI Jakarta", ibukota:"Jakarta", pulau:"Jawa", x:24, y:48,
+    { no:37, id:"dki", nama:"DKI Jakarta", ibukota:"Jakarta", pulau:"Jawa", x:30, y:48,
       populasi:"10,6 juta", deskripsi:"Ibu kota negara — melting pot budaya dari seluruh Nusantara dengan Suku Betawi.",
       suku:[{n:"Betawi",d:"Suku asli Jakarta"},{n:"Jawa",d:"Pendatang terbesar"},{n:"Sunda",d:"Jakarta Selatan & Timur"},{n:"Tionghoa-Indonesia",d:"Glodok, Kelapa Gading"},{n:"Batak",d:"Jakarta Pusat"},{n:"Minang",d:"Pasar Rumput"},{n:"Bugis",d:"Pesisir"},{n:"Madura",d:"Jakarta Utara"}],
       bahasa:["Bahasa Betawi","Bahasa Indonesia","Bahasa Jawa","Bahasa Sunda","Bahasa Hokkien"],
@@ -676,7 +664,7 @@
       fakta:"Suku Betawi adalah hasil akulturasi Melayu, Arab, Tionghoa, Belanda, dan Portugis." },
 
     // ============ BALI & NUSA TENGGARA ============
-    { no:16, id:"bali", nama:"Bali", ibukota:"Denpasar", pulau:"Bali & Nusa Tenggara", x:46, y:54,
+    { no:16, id:"bali", nama:"Bali", ibukota:"Denpasar", pulau:"Bali & Nusa Tenggara", x:45, y:54,
       populasi:"4,3 juta", deskripsi:"Pulau Dewata — Hindu-Bali unik dengan falsafah Tri Hita Karana.",
       suku:[{n:"Bali",d:"Mayoritas, Hindu-Bali"},{n:"Bali Aga",d:"Tenganan, Trunyan"},{n:"Jawa",d:"Pendatang"},{n:"Madura",d:"Komunitas"},{n:"Tionghoa-Indonesia",d:"Denpasar"}],
       bahasa:["Bahasa Bali (Sor Singgih)","Bahasa Kawi (kuno)","Bahasa Indonesia"],
@@ -690,7 +678,7 @@
       tradisi:[{n:"Ngaben",d:"Kremasi jenazah Hindu Bali"},{n:"Nyepi",d:"Hari raya sepi 24 jam"},{n:"Galungan & Kuningan",d:"Kemenangan dharma"},{n:"Mekare-kare",d:"Perang pandan di Tenganan"}],
       fakta:"Sistem subak (irigasi tradisional) diakui UNESCO. Falsafah Tri Hita Karana: harmoni manusia-Tuhan-alam." },
 
-    { no:17, id:"ntb", nama:"Nusa Tenggara Barat", ibukota:"Mataram", pulau:"Bali & Nusa Tenggara", x:51, y:56,
+    { no:17, id:"ntb", nama:"Nusa Tenggara Barat", ibukota:"Mataram", pulau:"Bali & Nusa Tenggara", x:49, y:54,
       populasi:"5,3 juta", deskripsi:"Bumi Gora — rumah bagi Suku Sasak di Lombok dan Suku Sumbawa.",
       suku:[{n:"Sasak",d:"Lombok, akulturasi Bali-Jawa"},{n:"Sumbawa",d:"Pulau Sumbawa"},{n:"Bima",d:"Bima, budaya kerajaan"},{n:"Bali",d:"Mataram, Lombok Barat"},{n:"Samawa",d:"Sumbawa Besar"},{n:"Mbojo",d:"Bima, Dompu"}],
       bahasa:["Bahasa Sasak","Bahasa Sumbawa (Samawa)","Bahasa Bima (Mbojo)","Bahasa Bali"],
@@ -704,7 +692,7 @@
       tradisi:[{n:"Bau Nyale",d:"Menangkap cacing laut di Lombok"},{n:"Perisean",d:"Adu ketangkasan Sasak"},{n:"Nyongkolan",d:"Arak-arakan pengantin"}],
       fakta:"Suku Sasak memiliki 2 versi Islam: Wetu Telu (sinkretis) dan Wetu Lima (ortodoks) — hidup damai." },
 
-    { no:18, id:"ntt", nama:"Nusa Tenggara Timur", ibukota:"Kupang", pulau:"Bali & Nusa Tenggara", x:57, y:60,
+    { no:18, id:"ntt", nama:"Nusa Tenggara Timur", ibukota:"Kupang", pulau:"Bali & Nusa Tenggara", x:56, y:53,
       populasi:"5,4 juta", deskripsi:"Bumi Flobamora — rumah bagi suku Flores, Timor, Sumba dengan tradisi megalitik.",
       suku:[{n:"Flores",d:"Katolik kuat"},{n:"Timor (Atoni)",d:"Timor Barat, megalitik"},{n:"Sumba",d:"Pasola, kubur batu"},{n:"Rote",d:"Sasando"},{n:"Alor",d:"Kepulauan Alor"},{n:"Lio",d:"Flores"},{n:"Helong",d:"Kupang, Semau"}],
       bahasa:["Bahasa Dawan","Bahasa Tetun","Bahasa Manggarai","Bahasa Sumba","Bahasa Rote","Bahasa Alor"],
@@ -719,7 +707,7 @@
       fakta:"Sasando terbuat dari daun lontar. Sumba dijuluki 'Pulau Megalitik Hidup'." },
 
     // ============ KALIMANTAN ============
-    { no:19, id:"kalbar", nama:"Kalimantan Barat", ibukota:"Pontianak", pulau:"Kalimantan", x:33, y:20,
+    { no:19, id:"kalbar", nama:"Kalimantan Barat", ibukota:"Pontianak", pulau:"Kalimantan", x:35, y:33,
       populasi:"5,4 juta", deskripsi:"Kota Khatulistiwa — rumah bagi Dayak Kanayatn, Melayu, dan Tionghoa.",
       suku:[{n:"Dayak Kanayatn",d:"Naik Dango"},{n:"Melayu Pontianak",d:"Bercampur Arab"},{n:"Tionghoa-Indonesia",d:"Pontianak, Singkawang"},{n:"Dayak Iban",d:"Perbatasan Malaysia"},{n:"Dayak Bidayuh",d:"Sanggau, Landak"},{n:"Bugis",d:"Pelaut"}],
       bahasa:["Bahasa Melayu Pontianak","Bahasa Dayak Kanayatn","Bahasa Dayak Iban","Bahasa Khek"],
@@ -733,7 +721,7 @@
       tradisi:[{n:"Naik Dango",d:"Syukuran panen Dayak"},{n:"Cap Go Meh",d:"Perayaan Imlek dengan tatung"},{n:"Gawai Dayak",d:"Perayaan adat Dayak"}],
       fakta:"Pontianak dilalui garis khatulistiwa. Singkawang = 'Kota Seribu Kelenteng' dan kota paling toleran." },
 
-    { no:20, id:"kalteng", nama:"Kalimantan Tengah", ibukota:"Palangkaraya", pulau:"Kalimantan", x:42, y:26,
+    { no:20, id:"kalteng", nama:"Kalimantan Tengah", ibukota:"Palangkaraya", pulau:"Kalimantan", x:41, y:37,
       populasi:"2,7 juta", deskripsi:"Bumi Tambun Bungai — rumah bagi Suku Dayak Ngaju dengan Rumah Betang.",
       suku:[{n:"Dayak Ngaju",d:"Mayoritas"},{n:"Dayak Maanyan",d:"Kalteng timur"},{n:"Dayak Ot Danum",d:"Pedalaman"},{n:"Dayak Lawangan",d:"Kaltim & Kalteng"},{n:"Melayu",d:"Pesisir"},{n:"Jawa",d:"Transmigran"}],
       bahasa:["Bahasa Ngaju","Bahasa Maanyan","Bahasa Ot Danum","Bahasa Lawangan","Bahasa Melayu"],
@@ -747,7 +735,7 @@
       tradisi:[{n:"Tiwah",d:"Kremasi besar Dayak Ngaju"},{n:"Manasai",d:"Tarian pergaulan Dayak"},{n:"Manyanggar",d:"Tolak bala"}],
       fakta:"Rumah Betang bisa dihuni 30-40 keluarga. Agama Kaharingan adalah agama asli Dayak." },
 
-    { no:21, id:"kalsel", nama:"Kalimantan Selatan", ibukota:"Banjarmasin", pulau:"Kalimantan", x:43, y:40,
+    { no:21, id:"kalsel", nama:"Kalimantan Selatan", ibukota:"Banjarmasin", pulau:"Kalimantan", x:46, y:41,
       populasi:"4,1 juta", deskripsi:"Kota Seribu Sungai — rumah bagi Suku Banjar dengan budaya sungai.",
       suku:[{n:"Banjar",d:"Mayoritas"},{n:"Dayak Meratus",d:"Pegunungan Meratus"},{n:"Dayak Ngaju",d:"Kalsel utara"},{n:"Jawa",d:"Transmigran"},{n:"Bugis",d:"Pelaut"},{n:"Tionghoa-Indonesia",d:"Banjarmasin"}],
       bahasa:["Bahasa Banjar","Bahasa Dayak Meratus","Bahasa Melayu","Bahasa Jawa"],
@@ -761,9 +749,9 @@
       tradisi:[{n:"Bausung",d:"Menggotong pengantin"},{n:"Batatapas",d:"Tepung tawar pengantin"},{n:"Pasar Terapung",d:"Jual beli di atas perahu"}],
       fakta:"Pasar Terapung Lok Baintan adalah pasar terapung tertua di Indonesia. Kain Sasirangan = batik Banjar." },
 
-    { no:22, id:"kaltim", nama:"Kalimantan Timur", ibukota:"Samarinda", pulau:"Kalimantan", x:50, y:26,
+    { no:22, id:"kaltim", nama:"Kalimantan Timur", ibukota:"Samarinda", pulau:"Kalimantan", x:49, y:29,
       populasi:"4,0 juta", deskripsi:"Bumi Mulawarman — rumah bagi Kerajaan Kutai, kerajaan Hindu tertua.",
-      suku:[{n:"Kutai",d:"Ketuaan Kerajaan Kutai"},{n:"Dayak Kenyah",d:"Tari Enggang"},{n:"Dayak Bahau",d:"Pedalaman Mahakam"},{n:"Dayak Benuaq",d:"Kutai Barat"},{n:"Banjar",d:"Kalsel"},{n:"Bugis",d:"Pesisir"},{n:"Jawa",d:"Transmigran"}],
+      suku:[{n:"Kutai",d:"Keturunan Kerajaan Kutai"},{n:"Dayak Kenyah",d:"Tari Enggang"},{n:"Dayak Bahau",d:"Pedalaman Mahakam"},{n:"Dayak Benuaq",d:"Kutai Barat"},{n:"Banjar",d:"Kalsel"},{n:"Bugis",d:"Pesisir"},{n:"Jawa",d:"Transmigran"}],
       bahasa:["Bahasa Kutai","Bahasa Kenyah","Bahasa Bahau","Bahasa Benuaq","Bahasa Banjar"],
       agama:[{n:"Islam",p:85,c:"#16a34a"},{n:"Kristen Protestan",p:9,c:"#2563eb"},{n:"Katolik",p:3.5,c:"#7c3aed"},{n:"Hindu Kaharingan",p:1.5,c:"#dc2626"},{n:"Buddha",p:0.8,c:"#f59e0b"}],
       rumah:[{n:"Rumah Lamin",d:"Rumah panjang Dayak Kenyah"}],
@@ -775,7 +763,7 @@
       tradisi:[{n:"Hudoq",d:"Tarian topeng Dayak syukuran panen"},{n:"Erau",d:"Festival budaya Kutai"},{n:"Belian",d:"Pengobatan tradisional Dayak"}],
       fakta:"Kerajaan Kutai Martadipura (abad 4 M) adalah kerajaan Hindu tertua di Indonesia." },
 
-    { no:23, id:"kaltara", nama:"Kalimantan Utara", ibukota:"Tanjung Selor", pulau:"Kalimantan", x:47, y:13,
+    { no:23, id:"kaltara", nama:"Kalimantan Utara", ibukota:"Tanjung Selor", pulau:"Kalimantan", x:48, y:23,
       populasi:"720 ribu", deskripsi:"Provinsi termuda di Kalimantan — rumah bagi Dayak Kenyah & Tidung.",
       suku:[{n:"Dayak Kenyah",d:"Mayoritas"},{n:"Dayak Kayan",d:"Pedalaman"},{n:"Tidung",d:"Pesisir"},{n:"Bulungan",d:"Kesultanan Bulungan"},{n:"Dayak Punan",d:"Nomaden hutan"},{n:"Banjar",d:"Perantau"}],
       bahasa:["Bahasa Kenyah","Bahasa Tidung","Bahasa Bulungan","Bahasa Kayan","Bahasa Punan"],
@@ -790,7 +778,7 @@
       fakta:"Kaltara adalah provinsi termuda di Kalimantan (dimekarkan dari Kaltim tahun 2012)." },
 
     // ============ SULAWESI ============
-    { no:24, id:"sulsel", nama:"Sulawesi Selatan", ibukota:"Makassar", pulau:"Sulawesi", x:57, y:47,
+    { no:24, id:"sulsel", nama:"Sulawesi Selatan", ibukota:"Makassar", pulau:"Sulawesi", x:55, y:47,
       populasi:"9,1 juta", deskripsi:"Kota Daeng — rumah bagi pelaut ulung Bugis-Makassar dan Suku Toraja.",
       suku:[{n:"Bugis",d:"Pelaut ulung, Siri' na Pacce"},{n:"Makassar",d:"Mayoritas Makassar"},{n:"Toraja",d:"Rambu Solo'"},{n:"Mandar",d:"Sulawesi Barat"},{n:"Konjo",d:"Bulukumba"},{n:"Selayar",d:"Pulau Selayar"}],
       bahasa:["Bahasa Bugis","Bahasa Makassar","Bahasa Toraja (Sa'dan)","Bahasa Mandar","Bahasa Konjo"],
@@ -804,7 +792,7 @@
       tradisi:[{n:"Rambu Solo'",d:"Pemakaman Toraja megah"},{n:"Rambu Tuka'",d:"Syukuran Toraja"},{n:"Ma'randing",d:"Tarian perang Toraja"},{n:"Angngaru",d:"Sumpah prajurit Bugis"}],
       fakta:"Rambu Solo' bisa menghabiskan miliaran rupiah. Falsafah Siri' na Pacce = jiwa Bugis-Makassar." },
 
-    { no:25, id:"sultra", nama:"Sulawesi Tenggara", ibukota:"Kendari", pulau:"Sulawesi", x:63, y:40,
+    { no:25, id:"sultra", nama:"Sulawesi Tenggara", ibukota:"Kendari", pulau:"Sulawesi", x:58, y:43,
       populasi:"2,7 juta", deskripsi:"Bumi Anoa — rumah bagi Suku Tolaki, Buton, dan Muna.",
       suku:[{n:"Tolaki",d:"Mayoritas"},{n:"Buton",d:"Kesultanan Buton"},{n:"Muna",d:"Pulau Muna"},{n:"Moronene",d:"Bombana"},{n:"Wolio",d:"Baubau"},{n:"Bugis",d:"Pelaut"}],
       bahasa:["Bahasa Tolaki","Bahasa Buton (Wolio)","Bahasa Muna","Bahasa Moronene","Bahasa Bugis"],
@@ -818,7 +806,7 @@
       tradisi:[{n:"Mosehe",d:"Ritual penyucian Tolaki"},{n:"Tari Lariangi",d:"Tarian penyambutan"},{n:"Haroana",d:"Pesta adat Buton"}],
       fakta:"Benteng Keraton Buton adalah benteng terluas di dunia (23,375 hektar)." },
 
-    { no:26, id:"sulbar", nama:"Sulawesi Barat", ibukota:"Mamuju", pulau:"Sulawesi", x:55, y:31,
+    { no:26, id:"sulbar", nama:"Sulawesi Barat", ibukota:"Mamuju", pulau:"Sulawesi", x:52, y:39,
       populasi:"1,4 juta", deskripsi:"Provinsi termuda di Sulawesi — rumah bagi Suku Mandar, pelaut ulung.",
       suku:[{n:"Mandar",d:"Mayoritas, pelaut"},{n:"Bugis",d:"Perantau"},{n:"Toraja",d:"Perbatasan Sulsel"},{n:"Mamuju",d:"Suku lokal"},{n:"Kalumpang",d:"Pedalaman"}],
       bahasa:["Bahasa Mandar","Bahasa Bugis","Bahasa Toraja","Bahasa Mamuju"],
@@ -830,9 +818,9 @@
       makanan:["Jepa","Bau Peapi","Kue Kue","Loka Anjoroi"],
       senjata:["Badik Mandar","Kelewang","Tombak"],
       tradisi:[{n:"Mappande Banua",d:"Syukuran rumah baru"},{n:"Sayyang Pattu'du",d:"Kuda menari"},{n:"Mesa Kada",d:"Upacara adat"}],
-      fakta:"Sulawesi Barat adalah provinsi termuda di Sulawesi (dimekarkan 2004). Sayyang Pattu'du = tradisi kuda menari." },
+      fakta:"Sulawesi Barat adalah provinsi termuda di Sulawesi (dimekarkan 2004)." },
 
-    { no:27, id:"sulteng", nama:"Sulawesi Tengah", ibukota:"Palu", pulau:"Sulawesi", x:61, y:26,
+    { no:27, id:"sulteng", nama:"Sulawesi Tengah", ibukota:"Palu", pulau:"Sulawesi", x:57, y:34,
       populasi:"3,0 juta", deskripsi:"Kota Teluk Palu — rumah bagi Suku Kaili dan tradisi megalitik Lembah Bada.",
       suku:[{n:"Kaili",d:"Mayoritas"},{n:"Banggai",d:"Kepulauan Banggai"},{n:"Toli-Toli",d:"Toli-Toli"},{n:"Bugis",d:"Pesisir"},{n:"Mandar",d:"Sulbar"},{n:"Saluan",d:"Banggai"},{n:"Balantak",d:"Banggai"}],
       bahasa:["Bahasa Kaili","Bahasa Banggai","Bahasa Toli-Toli","Bahasa Saluan","Bahasa Balantak"],
@@ -844,9 +832,9 @@
       makanan:["Kaledo","Palumara","Uta Dada","Sambal Kaledo"],
       senjata:["Keris","Tombak","Parang"],
       tradisi:[{n:"Vunja",d:"Upacara adat Kaili"},{n:"Nolunu",d:"Penyembuhan tradisional"},{n:"Padungku",d:"Syukuran adat Kaili"}],
-      fakta:"Lembah Bada menyimpan ratusan patung megalitik berusia 3.000+ tahun — bukti peradaban Austronesia." },
+      fakta:"Lembah Bada menyimpan ratusan patung megalitik berusia 3.000+ tahun." },
 
-    { no:28, id:"gorontalo", nama:"Gorontalo", ibukota:"Gorontalo", pulau:"Sulawesi", x:66, y:19,
+    { no:28, id:"gorontalo", nama:"Gorontalo", ibukota:"Gorontalo", pulau:"Sulawesi", x:60, y:28,
       populasi:"1,2 juta", deskripsi:"Serambi Madinah — rumah bagi Suku Gorontalo dengan budaya Islam kuat.",
       suku:[{n:"Gorontalo",d:"Mayoritas, Islam kuat"},{n:"Suvu",d:"Pegunungan"},{n:"Atinggola",d:"Gorontalo Utara"},{n:"Bolango",d:"Bone Bolango"},{n:"Bugis",d:"Pelaut"}],
       bahasa:["Bahasa Gorontalo","Bahasa Suwawa","Bahasa Atinggola","Bahasa Bolango"],
@@ -860,7 +848,7 @@
       tradisi:[{n:"Tumbilotohe",d:"Lampu minyak 3 malam terakhir Ramadhan"},{n:"Molapi Saronde",d:"Menginjak telur saat pernikahan"},{n:"Dikili",d:"Zikir bersama"}],
       fakta:"Gorontalo dijuluki 'Serambi Madinah'. Tumbilotohe = warisan budaya takbenda Indonesia." },
 
-    { no:29, id:"sulut", nama:"Sulawesi Utara", ibukota:"Manado", pulau:"Sulawesi", x:68, y:13,
+    { no:29, id:"sulut", nama:"Sulawesi Utara", ibukota:"Manado", pulau:"Sulawesi", x:65, y:25,
       populasi:"2,6 juta", deskripsi:"Kota Tinutuan — rumah bagi Suku Minahasa dengan falsafah Si Tou Timou Tumou Tou.",
       suku:[{n:"Minahasa",d:"8 sub-suku"},{n:"Sangir",d:"Kepulauan Sangihe"},{n:"Talaud",d:"Kepulauan Talaud"},{n:"Bolaang Mongondow",d:"Bolaang Mongondow"},{n:"Gorontalo",d:"Perbatasan"},{n:"Tionghoa-Indonesia",d:"Manado"}],
       bahasa:["Bahasa Manado (Melayu Manado)","Bahasa Minahasa","Bahasa Sangir","Bahasa Talaud","Bahasa Mongondow"],
@@ -875,7 +863,7 @@
       fakta:"Kolintang diakui UNESCO (2013). Falsafah 'Si Tou Timou Tumou Tou' = manusia hidup untuk memanusiakan orang lain." },
 
     // ============ MALUKU ============
-    { no:30, id:"maluku", nama:"Maluku", ibukota:"Ambon", pulau:"Maluku", x:73, y:33,
+    { no:30, id:"maluku", nama:"Maluku", ibukota:"Ambon", pulau:"Maluku", x:72, y:38,
       populasi:"1,8 juta", deskripsi:"Kepulauan Rempah — pusat perdagangan rempah dunia abad ke-16.",
       suku:[{n:"Ambon",d:"Mayoritas, musik kuat"},{n:"Ternate",d:"Malut"},{n:"Buru",d:"Pulau Buru"},{n:"Seram",d:"Pulau Seram"},{n:"Kei",d:"Kepulauan Kei"},{n:"Tanimbar",d:"Kepulauan Tanimbar"},{n:"Aru",d:"Kepulauan Aru"}],
       bahasa:["Bahasa Ambon (Melayu Ambon)","Bahasa Kei","Bahasa Tanimbar","Bahasa Buru","Bahasa Seram"],
@@ -887,9 +875,9 @@
       makanan:["Papeda","Ikan Kuah Kuning","Sagu Lempeng","Kohu-Kohu","Kue Koyabu"],
       senjata:["Parang Salawaku","Tombak","Keris"],
       tradisi:[{n:"Pukul Sapu",d:"Saling memukul dengan sapu lidi"},{n:"Bambu Gila",d:"Tradisi mistis"},{n:"Cuci Negeri",d:"Bersih-bersih kampung"},{n:"Sasi",d:"Larangan adat menjaga alam"}],
-      fakta:"Maluku = satu-satunya sumber cengkih & pala dunia sebelum abad 17. Musik Hawaiian berkembang pesat di Ambon." },
+      fakta:"Maluku = satu-satunya sumber cengkih & pala dunia sebelum abad 17." },
 
-    { no:31, id:"malut", nama:"Maluku Utara", ibukota:"Sofifi", pulau:"Maluku", x:76, y:20,
+    { no:31, id:"malut", nama:"Maluku Utara", ibukota:"Sofifi", pulau:"Maluku", x:70, y:26,
       populasi:"1,3 juta", deskripsi:"Kota Rempah — pusat Kesultanan Ternate, kerajaan Islam tertua di Maluku.",
       suku:[{n:"Ternate",d:"Kesultanan Ternate"},{n:"Tidore",d:"Kesultanan Tidore"},{n:"Bacan",d:"Pulau Bacan"},{n:"Tobelo",d:"Halmahera Utara"},{n:"Galela",d:"Halmahera"},{n:"Makian",d:"Pulau Makian"}],
       bahasa:["Bahasa Ternate","Bahasa Tidore","Bahasa Tobelo","Bahasa Galela","Bahasa Bacan","Bahasa Makian"],
@@ -904,7 +892,7 @@
       fakta:"Kesultanan Ternate (1257) = kerajaan Islam tertua. Sultan Baabullah mengusir Portugis dari Maluku (1575)." },
 
     // ============ PAPUA ============
-    { no:32, id:"papbar", nama:"Papua Barat", ibukota:"Manokwari", pulau:"Papua", x:83, y:28,
+    { no:32, id:"papbar", nama:"Papua Barat", ibukota:"Manokwari", pulau:"Papua", x:82, y:33,
       populasi:"1,1 juta", deskripsi:"Kota Injil — rumah bagi Suku Biak, Arfak, dan suku pegunungan Arfak.",
       suku:[{n:"Biak",d:"Kepulauan Biak-Numfor"},{n:"Arfak",d:"Pegunungan Arfak, rumah kaki seribu"},{n:"Sough",d:"Sorong"},{n:"Moi",d:"Sorong, Raja Ampat"},{n:"Ayamaru",d:"Maybrat"},{n:"Wandamen",d:"Pesisir selatan"},{n:"Mpur",d:"Kebar"}],
       bahasa:["Bahasa Biak","Bahasa Arfak","Bahasa Moi","Bahasa Sough","Bahasa Ayamaru","Bahasa Wandamen"],
@@ -916,9 +904,9 @@
       makanan:["Papeda","Sagu Lempeng","Ikan Bakar Manokwari","Ubi Bakar"],
       senjata:["Busur & Panah","Tombak","Parang"],
       tradisi:[{n:"Wor",d:"Pesta adat Biak"},{n:"Rumsram",d:"Rumah inisiasi pemuda Biak"},{n:"Kain Timur",d:"Kain sakral mahar & perdamaian"}],
-      fakta:"Rumah Kaki Seribu Arfak = tahan gempa & binatang buas. Kain Timur = kain sakral untuk perdamaian." },
+      fakta:"Rumah Kaki Seribu Arfak = tahan gempa & binatang buas." },
 
-    { no:33, id:"papua", nama:"Papua", ibukota:"Jayapura", pulau:"Papua", x:94, y:22,
+    { no:33, id:"papua", nama:"Papua", ibukota:"Jayapura", pulau:"Papua", x:90, y:26,
       populasi:"3,4 juta", deskripsi:"Bumi Cenderawasih — rumah bagi 250+ suku dan bahasa.",
       suku:[{n:"Sentani",d:"Danau Sentani"},{n:"Biak",d:"Pesisir"},{n:"Yali",d:"Pegunungan tengah"},{n:"Amungme",d:"Pegunungan"},{n:"Waropen",d:"Pesisir"},{n:"Mee",d:"Paniai"}],
       bahasa:["Bahasa Sentani","Bahasa Biak","Bahasa Yali","Bahasa Amungme","Bahasa Waropen","+ 250 bahasa lainnya"],
@@ -932,7 +920,7 @@
       tradisi:[{n:"Bakar Batu",d:"Memasak dengan batu panas"},{n:"Wor",d:"Pesta adat Biak"},{n:"Mbitoro",d:"Ukir Asmat"}],
       fakta:"Papua memiliki 250+ bahasa daerah — terbanyak di Indonesia." },
 
-    { no:34, id:"papteng", nama:"Papua Tengah", ibukota:"Nabire", pulau:"Papua", x:89, y:32,
+    { no:34, id:"papteng", nama:"Papua Tengah", ibukota:"Nabire", pulau:"Papua", x:86, y:39,
       populasi:"1,4 juta", deskripsi:"Provinsi hasil pemekaran 2022 — rumah bagi Suku Mee, Amungme, dan Kamoro.",
       suku:[{n:"Mee",d:"Paniai, petani ubi"},{n:"Amungme",d:"Pegunungan, tambang Freeport"},{n:"Kamoro",d:"Pesisir Mimika, ukir"},{n:"Damal",d:"Pegunungan"},{n:"Nduga",d:"Pegunungan"},{n:"Wolani",d:"Paniai"}],
       bahasa:["Bahasa Mee","Bahasa Amungme","Bahasa Kamoro","Bahasa Damal","Bahasa Nduga"],
@@ -944,9 +932,9 @@
       makanan:["Sagu Bakar","Ubi Bakar","Ikan Bakar","Papeda"],
       senjata:["Busur & Panah","Tombak","Parang"],
       tradisi:[{n:"Bakar Batu",d:"Memasak dengan batu panas"},{n:"Emawin",d:"Pesta adat Mee"},{n:"Mbitoro",d:"Ukir leluhur Kamoro"}],
-      fakta:"Papua Tengah adalah provinsi hasil pemekaran tahun 2022. Suku Amungme tinggal di sekitar tambang Grasberg." },
+      fakta:"Papua Tengah adalah provinsi hasil pemekaran tahun 2022." },
 
-    { no:35, id:"pappeg", nama:"Papua Pegunungan", ibukota:"Jayawijaya", pulau:"Papua", x:93, y:38,
+    { no:35, id:"pappeg", nama:"Papua Pegunungan", ibukota:"Jayawijaya", pulau:"Papua", x:93, y:32,
       populasi:"1,4 juta", deskripsi:"Provinsi pegunungan dengan Lembah Baliem dan tradisi Suku Dani.",
       suku:[{n:"Dani",d:"Lembah Baliem, bakar batu"},{n:"Lani",d:"Pegunungan tengah"},{n:"Yali",d:"Pegunungan"},{n:"Nduga",d:"Pegunungan"},{n:"Damal",d:"Pegunungan"},{n:"Korowai",d:"Rumah pohon"}],
       bahasa:["Bahasa Dani","Bahasa Lani","Bahasa Yali","Bahasa Nduga","Bahasa Damal"],
@@ -960,7 +948,7 @@
       tradisi:[{n:"Bakar Batu",d:"Memasak batu panas pesta adat"},{n:"Iki Palek",d:"Potong jari saat berduka"},{n:"Wim",d:"Pesta adat Dani"}],
       fakta:"Honai dibangun rendah untuk menghangatkan ruangan. Suku Korowai membangun rumah di atas pohon setinggi 30m." },
 
-    { no:36, id:"papsel", nama:"Papua Selatan", ibukota:"Merauke", pulau:"Papua", x:92, y:52,
+    { no:36, id:"papsel", nama:"Papua Selatan", ibukota:"Merauke", pulau:"Papua", x:92, y:49,
       populasi:"520 ribu", deskripsi:"Kota paling timur Indonesia — rumah bagi Suku Marind Anim dan Asmat.",
       suku:[{n:"Marind Anim",d:"Mayoritas, tradisi kuat"},{n:"Muyu",d:"Boven Digoel"},{n:"Mandobo",d:"Boven Digoel"},{n:"Citak",d:"Mappi"},{n:"Asmat",d:"Agats, ukir kayu"},{n:"Kombai",d:"Boven Digoel"}],
       bahasa:["Bahasa Marind","Bahasa Muyu","Bahasa Mandobo","Bahasa Citak","Bahasa Asmat","Bahasa Kombai"],
@@ -974,7 +962,7 @@
       tradisi:[{n:"Mbitoro",d:"Ukir leluhur Asmat"},{n:"Bakar Batu",d:"Memasak batu panas"},{n:"Wuramon",d:"Pesta adat Asmat"},{n:"Emak Cem",d:"Inisiasi pemuda Marind"}],
       fakta:"Merauke = kota paling timur Indonesia. Suku Asmat terkenal seni ukir kayu diakui dunia." },
 
-    { no:38, id:"papbarda", nama:"Papua Barat Daya", ibukota:"Sorong", pulau:"Papua", x:79, y:25,
+    { no:38, id:"papbarda", nama:"Papua Barat Daya", ibukota:"Sorong", pulau:"Papua", x:79, y:32,
       populasi:"620 ribu", deskripsi:"Provinsi hasil pemekaran 2022 — rumah bagi Suku Moi dan Raja Ampat.",
       suku:[{n:"Moi",d:"Sorong, Raja Ampat"},{n:"Maya",d:"Pulau Salawati"},{n:"Biak",d:"Pesisir"},{n:"Tehit",d:"Sorong Selatan"},{n:"Mpur",d:"Kebar"},{n:"Karon",d:"Pegunungan"}],
       bahasa:["Bahasa Moi","Bahasa Maya","Bahasa Tehit","Bahasa Mpur","Bahasa Karon"],
@@ -986,13 +974,13 @@
       makanan:["Papeda","Ikan Bakar","Sagu Lempeng","Ubi Bakar"],
       senjata:["Busur & Panah","Tombak","Parang"],
       tradisi:[{n:"Wor",d:"Pesta adat Biak"},{n:"Kain Timur",d:"Kain sakral perdamaian"},{n:"Sasi",d:"Larangan adat menjaga laut"}],
-      fakta:"Papua Barat Daya adalah provinsi hasil pemekaran 2022. Kepulauan Raja Ampat di dalamnya = surga biodiversitas laut dunia." },
+      fakta:"Papua Barat Daya adalah provinsi hasil pemekaran 2022. Raja Ampat = surga biodiversitas laut dunia." },
   ];
 
   // ============================================================
-  //  RENDER PETA & HOTSPOT
+  //  STATE & UTIL
   // ============================================================
-  let exploredSet = new Set(JSON.parse(localStorage.getItem("bhinneka_explored_v5") || "[]"));
+  let exploredSet = new Set(JSON.parse(localStorage.getItem("bhinneka_explored_v6") || "[]"));
   let mapScale = 1;
   let state = { currentDaerah: null, currentTab: "suku", currentFilter: "semua" };
 
@@ -1042,9 +1030,6 @@
     else document.exitFullscreen?.();
   };
 
-  // ============================================================
-  //  DAFTAR PROVINSI SIDEBAR
-  // ============================================================
   function renderRegionList(filter = "semua", query = "") {
     const list = document.getElementById("regionList");
     if (!list) return;
@@ -1076,9 +1061,7 @@
     renderRegionList(island, document.getElementById("searchRegion")?.value || "");
   };
 
-  window.searchRegion = function(q) {
-    renderRegionList(state.currentFilter, q);
-  };
+  window.searchRegion = function(q) { renderRegionList(state.currentFilter, q); };
 
   window.randomExplore = function() {
     const notExplored = DAERAH.filter(d => !exploredSet.has(d.id));
@@ -1087,9 +1070,6 @@
     openModalDaerah(pick.id);
   };
 
-  // ============================================================
-  //  MODAL DETAIL PROVINSI
-  // ============================================================
   window.openModalDaerah = function(id) {
     const d = DAERAH.find(x => x.id === id);
     if (!d) return;
@@ -1111,7 +1091,7 @@
 
     if (!exploredSet.has(d.id)) {
       exploredSet.add(d.id);
-      localStorage.setItem("bhinneka_explored_v5", JSON.stringify([...exploredSet]));
+      localStorage.setItem("bhinneka_explored_v6", JSON.stringify([...exploredSet]));
       updateExploreProgress();
       renderHotspots();
       renderRegionList(state.currentFilter, document.getElementById("searchRegion")?.value || "");
@@ -1137,32 +1117,23 @@
     let html = "";
 
     if (tab === "suku") {
-      html = `
-        <div class="mb-4">
-          <h4 class="font-extrabold text-slate-800 mb-1">👥 Suku Bangsa di ${d.nama}</h4>
-          <p class="text-sm text-slate-500">${d.suku.length} suku utama</p>
-        </div>
+      html = `<div class="mb-4"><h4 class="font-extrabold text-slate-800 mb-1">👥 Suku Bangsa di ${d.nama}</h4>
+        <p class="text-sm text-slate-500">${d.suku.length} suku utama</p></div>
         <div class="grid sm:grid-cols-2 gap-3">
           ${d.suku.map(s => `<div class="info-card"><p class="font-bold text-merah mb-1">${s.n}</p><p class="text-xs text-slate-600 leading-relaxed">${s.d}</p></div>`).join("")}
         </div>`;
     }
     else if (tab === "bahasa") {
-      html = `
-        <div class="mb-4">
-          <h4 class="font-extrabold text-slate-800 mb-1">🗣️ Bahasa Daerah di ${d.nama}</h4>
-          <p class="text-sm text-slate-500">${d.bahasa.length} bahasa utama</p>
-        </div>
+      html = `<div class="mb-4"><h4 class="font-extrabold text-slate-800 mb-1">🗣️ Bahasa Daerah di ${d.nama}</h4>
+        <p class="text-sm text-slate-500">${d.bahasa.length} bahasa utama</p></div>
         <div class="flex flex-wrap">${d.bahasa.map(b => `<span class="chip ungu">${b}</span>`).join("")}</div>
         <div class="mt-5 p-4 bg-amber-50 border-l-4 border-amber-400 rounded">
           <p class="text-xs text-slate-700"><strong>💡 Bahasa Indonesia</strong> menjadi bahasa pemersatu, tetapi bahasa daerah tetap lestari.</p>
         </div>`;
     }
     else if (tab === "agama") {
-      html = `
-        <div class="mb-4">
-          <h4 class="font-extrabold text-slate-800 mb-1">🕌 Komposisi Agama di ${d.nama}</h4>
-          <p class="text-sm text-slate-500">Kerukunan antar umat beragama</p>
-        </div>
+      html = `<div class="mb-4"><h4 class="font-extrabold text-slate-800 mb-1">🕌 Komposisi Agama di ${d.nama}</h4>
+        <p class="text-sm text-slate-500">Kerukunan antar umat beragama</p></div>
         <div class="religion-bar mb-4">
           ${d.agama.map(a => `<div class="religion-segment" style="width:${a.p}%; background:${a.c};" title="${a.n}: ${a.p}%">${a.p >= 8 ? a.p + '%' : ''}</div>`).join("")}
         </div>
@@ -1173,41 +1144,32 @@
           </div>`).join("")}
         </div>
         <div class="mt-5 p-4 bg-green-50 border-l-4 border-green-500 rounded">
-          <p class="text-xs text-slate-700"><strong>🤝 Toleransi:</strong> Meskipun berbeda agama, masyarakat ${d.nama} hidup rukun dan saling menghormati.</p>
+          <p class="text-xs text-slate-700"><strong>🤝 Toleransi:</strong> Masyarakat ${d.nama} hidup rukun dan saling menghormati.</p>
         </div>`;
     }
     else if (tab === "budaya") {
-      html = `
-        <div class="mb-4"><h4 class="font-extrabold text-slate-800 mb-1">🎭 Kekayaan Budaya ${d.nama}</h4></div>
-        <div class="mb-5">
-          <p class="text-xs font-bold uppercase text-merah mb-2">🏠 Rumah Adat</p>
+      html = `<div class="mb-4"><h4 class="font-extrabold text-slate-800 mb-1">🎭 Kekayaan Budaya ${d.nama}</h4></div>
+        <div class="mb-5"><p class="text-xs font-bold uppercase text-merah mb-2">🏠 Rumah Adat</p>
           <div class="grid sm:grid-cols-2 gap-3">
             ${d.rumah.map(r => `<div class="info-card"><p class="font-bold text-sm text-slate-800">${r.n}</p><p class="text-xs text-slate-600 mt-1">${r.d}</p></div>`).join("")}
           </div>
         </div>
-        <div class="mb-5">
-          <p class="text-xs font-bold uppercase text-merah mb-2">💃 Tarian Tradisional</p>
+        <div class="mb-5"><p class="text-xs font-bold uppercase text-merah mb-2">💃 Tarian Tradisional</p>
           <div class="flex flex-wrap">${d.tarian.map(t => `<span class="chip merah">${t}</span>`).join("")}</div>
         </div>
-        <div class="mb-5">
-          <p class="text-xs font-bold uppercase text-merah mb-2">🎵 Alat Musik</p>
+        <div class="mb-5"><p class="text-xs font-bold uppercase text-merah mb-2">🎵 Alat Musik</p>
           <div class="flex flex-wrap">${d.musik.map(m => `<span class="chip biru">${m}</span>`).join("")}</div>
         </div>
-        <div class="mb-5">
-          <p class="text-xs font-bold uppercase text-merah mb-2">👗 Pakaian Adat</p>
+        <div class="mb-5"><p class="text-xs font-bold uppercase text-merah mb-2">👗 Pakaian Adat</p>
           <div class="flex flex-wrap">${d.pakaian.map(p => `<span class="chip hijau">${p}</span>`).join("")}</div>
         </div>
-        <div>
-          <p class="text-xs font-bold uppercase text-merah mb-2">⚔️ Senjata Tradisional</p>
+        <div><p class="text-xs font-bold uppercase text-merah mb-2">⚔️ Senjata Tradisional</p>
           <div class="flex flex-wrap">${d.senjata.map(s => `<span class="chip ungu">${s}</span>`).join("")}</div>
         </div>`;
     }
     else if (tab === "kuliner") {
-      html = `
-        <div class="mb-4">
-          <h4 class="font-extrabold text-slate-800 mb-1">🍲 Kuliner Khas ${d.nama}</h4>
-          <p class="text-sm text-slate-500">${d.makanan.length} makanan & minuman ikonik</p>
-        </div>
+      html = `<div class="mb-4"><h4 class="font-extrabold text-slate-800 mb-1">🍲 Kuliner Khas ${d.nama}</h4>
+        <p class="text-sm text-slate-500">${d.makanan.length} makanan & minuman ikonik</p></div>
         <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
           ${d.makanan.map((m, i) => `<div class="info-card text-center">
             <div class="text-3xl mb-1">${["🍜","🍛","🍢","🍲","🥘","🧆"][i % 6]}</div>
@@ -1216,11 +1178,8 @@
         </div>`;
     }
     else if (tab === "tradisi") {
-      html = `
-        <div class="mb-4">
-          <h4 class="font-extrabold text-slate-800 mb-1">🎉 Tradisi & Upacara Adat ${d.nama}</h4>
-          <p class="text-sm text-slate-500">${d.tradisi.length} tradisi yang masih dilestarikan</p>
-        </div>
+      html = `<div class="mb-4"><h4 class="font-extrabold text-slate-800 mb-1">🎉 Tradisi & Upacara Adat ${d.nama}</h4>
+        <p class="text-sm text-slate-500">${d.tradisi.length} tradisi yang masih dilestarikan</p></div>
         <div class="space-y-3">
           ${d.tradisi.map(t => `<div class="info-card"><p class="font-bold text-merah mb-1">✨ ${t.n}</p><p class="text-xs text-slate-600 leading-relaxed">${t.d}</p></div>`).join("")}
         </div>
@@ -1232,7 +1191,7 @@
   }
 
   // ============================================================
-  //  MODUL (sederhana)
+  //  MODUL
   // ============================================================
   const MODUL = {
     1: { judul:"Apa Itu Keberagaman?", ikon:"🌈", isi:`<p class="text-slate-700 leading-relaxed mb-3">Indonesia adalah salah satu negara <strong>multikultur terbesar di dunia</strong>. Menurut data BPS: <strong>1.340 suku bangsa</strong>, <strong>1.001 bahasa daerah</strong>, <strong>6 agama resmi</strong>, tersebar di <strong>17.000+ pulau</strong> dan <strong>38 provinsi</strong>.</p>
@@ -1273,10 +1232,9 @@
         <div><p class="text-xs font-bold text-merah uppercase">Modul ${num}</p><h3 class="text-2xl font-extrabold">${m.judul}</h3></div>
       </div><hr class="mb-5 border-slate-200">${m.isi}`;
   };
-  window.selesaikanModul = function() { toast("✅ Modul ditandai selesai!"); };
 
   // ============================================================
-  //  KUIS 15 SOAL
+  //  KUIS
   // ============================================================
   const QUESTION_POOL = [
     { q:"Indonesia memiliki lebih dari 1.000 bahasa daerah.", type:"tf", options:["Benar","Salah"], answer:"Benar", explain:"1.001 bahasa daerah!" },
@@ -1439,7 +1397,7 @@
   window.restartQuiz = function() { buildQuiz(); document.getElementById("quizResult").classList.add("hidden"); renderQuiz(); toast("🎲 Soal baru diacak!"); };
 
   // ============================================================
-  //  JURNAL & TOAST
+  //  JURNAL
   // ============================================================
   window.simpanJurnal = function() {
     const val = document.getElementById("jurnalInput").value.trim();
