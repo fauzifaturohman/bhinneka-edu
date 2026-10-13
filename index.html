@@ -1191,48 +1191,510 @@
   }
 
   // ============================================================
-  //  MODUL
+  //  MODUL PEMBELAJARAN
   // ============================================================
   const MODUL = {
-    1: { judul:"Apa Itu Keberagaman?", ikon:"🌈", isi:`<p class="text-slate-700 leading-relaxed mb-3">Indonesia adalah salah satu negara <strong>multikultur terbesar di dunia</strong>. Menurut data BPS: <strong>1.340 suku bangsa</strong>, <strong>1.001 bahasa daerah</strong>, <strong>6 agama resmi</strong>, tersebar di <strong>17.000+ pulau</strong> dan <strong>38 provinsi</strong>.</p>
-      <div class="materi-box"><h5>📖 Definisi</h5><p class="text-sm text-slate-700">Keberagaman = kondisi masyarakat dengan perbedaan suku, agama, ras, bahasa, budaya, dan golongan.</p></div>
-      <div class="materi-box"><h5>📜 Landasan Hukum</h5><ul class="text-sm list-disc pl-5 space-y-1"><li>Pancasila sila ke-3: Persatuan Indonesia</li><li>UUD 1945 Pasal 29 & 32</li><li>UU No. 5 Tahun 2017</li></ul></div>` },
-    2: { judul:"5 Faktor Penyebab Keberagaman", ikon:"🌏", isi:`<p class="text-slate-700 mb-3">Ada <strong>5 faktor utama</strong>:</p>
-      <div class="materi-box"><h5>1️⃣ Letak Strategis Wilayah</h5><p class="text-sm">Posisi silang 2 samudra & 2 benua, jalur perdagangan internasional.</p></div>
-      <div class="materi-box"><h5>2️⃣ Kondisi Negara Kepulauan</h5><p class="text-sm">17.000+ pulau terpisah → isolasi geografis → ribuan suku.</p></div>
-      <div class="materi-box"><h5>3️⃣ Perbedaan Kondisi Alam</h5><p class="text-sm">Pantai vs pegunungan → mata pencaharian & arsitektur berbeda.</p></div>
-      <div class="materi-box"><h5>4️⃣ Keadaan Transportasi & Komunikasi</h5><p class="text-sm">Terbatas → isolasi. Maju → akulturasi.</p></div>
-      <div class="materi-box"><h5>5️⃣ Penerimaan terhadap Perubahan</h5><p class="text-sm">Masyarakat terbuka vs tertutup.</p></div>` },
-    3: { judul:"Jenis Keberagaman & Contoh", ikon:"🎭", isi:`<div class="grid sm:grid-cols-2 gap-3">
-      ${[["Suku Bangsa","Jawa, Sunda, Batak, Dayak, Papua, Bugis, Minang"],["Agama","Islam, Kristen, Katolik, Hindu, Buddha, Konghucu"],["Ras","Malayan-Mongoloid, Melanesoid, Asiatic, Kaukasoid"],["Bahasa","1.001 bahasa daerah"],["Budaya","Rumah adat, tarian, pakaian, senjata"],["Golongan","Profesi, ekonomi, pendidikan, status sosial"]].map(x=>`
-        <div class="bg-krem rounded-xl p-4 border border-amber-200"><h4 class="font-bold text-merah mb-2">${x[0]}</h4><p class="text-sm text-slate-700">${x[1]}</p></div>`).join("")}
-      </div>` },
-    4: { judul:"Konflik Akibat Keberagaman", ikon:"⚠️", isi:`<div class="bg-red-50 border-l-4 border-merah p-4 rounded mb-4"><p class="text-sm">⚠️ Belajar dari sejarah kelam bangsa.</p></div>
-      <div class="space-y-3">
-        <div class="bg-white border rounded-xl p-4"><h4 class="font-bold text-merah">Konflik Sampit (2001)</h4><p class="text-sm text-slate-600">Etnis Dayak vs Madura di Kalteng. 500+ korban.</p></div>
-        <div class="bg-white border rounded-xl p-4"><h4 class="font-bold text-merah">Konflik Ambon (1999-2001)</h4><p class="text-sm text-slate-600">Muslim vs Kristen di Maluku.</p></div>
-        <div class="bg-white border rounded-xl p-4"><h4 class="font-bold text-merah">Konflik Poso (2000-2001)</h4><p class="text-sm text-slate-600">Multi-faktor di Sulawesi Tengah.</p></div>
-      </div>` },
-    5: { judul:"Solusi & Pencegahan", ikon:"🕊️", isi:`${[["Pendidikan Multikultural","Menghargai perbedaan sejak dini."],["Dialog Lintas Kelompok","FKUB aktif menjaga kerukunan."],["Literasi Keagamaan Lintas Budaya","Memahami kepercayaan berbeda."],["Penguatan Nilai Pancasila","Sila 1 & 3 landasan toleransi."],["Moderasi Beragama","Sikap toleran & inklusif via P5."]].map((x,i)=>`
-        <div class="flex gap-4 items-start bg-white border rounded-xl p-4 mb-2">
-          <div class="w-10 h-10 rounded-full gradient-hero text-white flex items-center justify-center font-bold flex-shrink-0">${i+1}</div>
-          <div><h4 class="font-bold text-merah mb-1">${x[0]}</h4><p class="text-sm text-slate-600">${x[1]}</p></div>
-        </div>`).join("")}` },
-  };
+    1: {
+      judul: "Apa Itu Keberagaman?",
+      ikon: "🌈",
+      isi: `
+        <p class="text-slate-700 leading-relaxed mb-4">
+          Indonesia adalah salah satu negara <strong>multikultur terbesar di dunia</strong>. 
+          Menurut data Badan Pusat Statistik (BPS), Indonesia memiliki sekitar <strong>1.340 suku bangsa</strong>, 
+          <strong>1.001 bahasa daerah</strong>, <strong>6 agama resmi</strong>, dan ratusan tradisi yang tersebar 
+          di <strong>17.000+ pulau</strong> dengan <strong>38 provinsi</strong>. Keragaman ini adalah kekayaan 
+          yang tidak dimiliki banyak negara di dunia, sekaligus tantangan besar dalam menjaga persatuan.
+        </p>
 
-  window.showModul = function(num) {
-    for (let i = 1; i <= 5; i++) {
-      const tab = document.getElementById("tabM" + i);
-      if (tab) { tab.style.background = (i === num) ? "#b91c1c" : "white"; tab.style.color = (i === num) ? "white" : ""; }
-    }
-    const m = MODUL[num];
-    document.getElementById("modulContent").innerHTML = `
-      <div class="flex items-center gap-3 mb-4">
-        <span class="text-4xl">${m.ikon}</span>
-        <div><p class="text-xs font-bold text-merah uppercase">Modul ${num}</p><h3 class="text-2xl font-extrabold">${m.judul}</h3></div>
-      </div><hr class="mb-5 border-slate-200">${m.isi}`;
-  };
+        <div class="materi-box">
+          <h5>📖 Definisi Keberagaman</h5>
+          <p class="text-sm text-slate-700 leading-relaxed mb-2">
+            Kata <strong>"keberagaman"</strong> berasal dari kata dasar <em>"ragam"</em> yang berarti jenis, macam, 
+            atau warna. Dalam konteks sosial, keberagaman (atau keragaman) adalah <strong>kondisi masyarakat 
+            yang memiliki perbedaan dalam berbagai aspek kehidupan</strong>, meliputi suku bangsa, agama, ras, 
+            bahasa, budaya, adat istiadat, dan golongan sosial. Keberagaman bukan hanya tentang "berbeda", 
+            tetapi juga mencakup <strong>bagaimana perbedaan tersebut dikelola, dihargai, dan disatukan</strong> 
+            dalam kehidupan bersama.
+          </p>
+          <p class="text-sm text-slate-700 leading-relaxed">
+            Keberagaman Indonesia bersifat <strong>horizontal</strong> (perbedaan antar kelompok setara seperti 
+            suku dan bahasa) dan <strong>vertikal</strong> (perbedaan antar lapisan seperti ekonomi dan pendidikan). 
+            Keduanya harus dikelola dengan bijak untuk mencegah konflik sosial.
+          </p>
+        </div>
 
+        <div class="materi-box">
+          <h5>🎯 Mengapa Keberagaman Penting?</h5>
+          <ul class="text-sm list-disc pl-5 space-y-2">
+            <li><strong>Kekayaan bangsa:</strong> Setiap suku memiliki kearifan lokal unik seperti sistem 
+            pertanian, pengobatan tradisional, seni, dan filosofi hidup yang telah teruji berabad-abad.</li>
+            <li><strong>Identitas nasional:</strong> Semboyan <em>Bhinneka Tunggal Ika</em> menjadi perekat 
+            yang menyatukan perbedaan dalam bingkai Negara Kesatuan Republik Indonesia (NKRI).</li>
+            <li><strong>Modal pembangunan:</strong> Keberagaman budaya menjadi daya tarik pariwisata, 
+            sumber kreativitas, dan kekuatan diplomasi budaya Indonesia di dunia internasional.</li>
+            <li><strong>Pembelajaran hidup:</strong> Hidup di tengah keberagaman melatih kita berpikir 
+            terbuka, empatik, dan mampu berkolaborasi dengan siapa pun tanpa memandang latar belakang.</li>
+            <li><strong>Ketahanan sosial:</strong> Masyarakat yang terbiasa dengan perbedaan cenderung 
+            lebih toleran, adaptif, dan tahan terhadap provokasi perpecahan.</li>
+          </ul>
+        </div>
+
+        <div class="materi-box">
+          <h5>📜 Landasan Hukum Keberagaman di Indonesia</h5>
+          <ul class="text-sm list-disc pl-5 space-y-2">
+            <li><strong>Pancasila, sila ke-3:</strong> "Persatuan Indonesia" — mengakui dan menghargai 
+            keberagaman dalam satu kesatuan bangsa.</li>
+            <li><strong>UUD 1945 Pasal 29:</strong> Menjamin kemerdekaan setiap warga negara untuk memeluk 
+            agama dan beribadat menurut agamanya masing-masing.</li>
+            <li><strong>UUD 1945 Pasal 32:</strong> Negara menghormati dan memelihara bahasa daerah 
+            sebagai kekayaan budaya nasional.</li>
+            <li><strong>UU No. 5 Tahun 2017:</strong> Tentang Pemajuan Kebudayaan — melindungi dan 
+            mengembangkan keberagaman budaya Indonesia secara sistematis.</li>
+            <li><strong>UU No. 40 Tahun 2008:</strong> Tentang Penghapusan Diskriminasi Ras dan Etnis.</li>
+          </ul>
+        </div>
+
+        <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded">
+          <p class="text-sm text-slate-700">
+            <strong>💡 Tahukah kamu?</strong> Indonesia menempati peringkat <strong>ke-2 dunia</strong> sebagai 
+            negara dengan jumlah bahasa terbanyak setelah Papua Nugini. Dari 1.001 bahasa daerah, 
+            10 bahasa terbesar penuturnya adalah Bahasa Jawa, Sunda, Melayu, Madura, Batak, Minangkabau, 
+            Bugis, Bali, Aceh, dan Sasak. UNESCO mencatat <strong>169 bahasa daerah Indonesia</strong> 
+            terancam punah karena penuturnya kurang dari 1.000 orang.
+          </p>
+        </div>
+
+        <div class="bg-slate-50 rounded-xl p-5 border border-slate-200 mt-4">
+          <h4 class="font-bold text-slate-800 mb-3">💭 Pertanyaan Refleksi</h4>
+          <ul class="space-y-2 text-sm text-slate-700">
+            <li>1. Jika Indonesia hanya memiliki satu suku dan satu bahasa, apa yang akan hilang dari kehidupan kita?</li>
+            <li>2. Bagaimana kamu merasakan keberagaman di lingkungan sekolahmu?</li>
+            <li>3. Menurutmu, apakah keberagaman bisa menjadi sumber konflik? Mengapa?</li>
+            <li>4. Apa perbedaan antara "toleransi" dan "menghargai perbedaan"?</li>
+          </ul>
+        </div>
+      `,
+    },
+    2: {
+      judul: "5 Faktor Penyebab Keberagaman Indonesia",
+      ikon: "🌏",
+      isi: `
+        <p class="text-slate-700 leading-relaxed mb-4">
+          Keberagaman masyarakat Indonesia tidak terjadi begitu saja. Ada <strong>5 faktor utama</strong> 
+          yang saling berkaitan dan membentuk mozaik kebudayaan yang kaya. Memahami faktor-faktor ini 
+          membantu kita menghargai akar keberagaman sebagai kekayaan, bukan ancaman.
+        </p>
+
+        <div class="materi-box">
+          <h5>1️⃣ Letak Strategis Wilayah Indonesia</h5>
+          <p class="text-sm text-slate-700 leading-relaxed mb-2">
+            Indonesia terletak di <strong>posisi silang</strong>, yaitu di antara dua samudra (Samudra Hindia 
+            dan Samudra Pasifik) dan dua benua (Benua Asia dan Benua Australia). Letak ini menjadikan 
+            Indonesia <strong>jalur perdagangan internasional</strong> yang sangat penting sejak berabad-abad lalu. 
+            Para pedagang dari India, Tiongkok, Arab, Persia, dan Eropa silih berganti datang ke Nusantara.
+          </p>
+          <p class="text-sm text-slate-700 leading-relaxed mb-2">
+            Mereka tidak hanya membawa komoditas dagang, tetapi juga <strong>budaya, agama, bahasa, 
+            dan tradisi</strong> dari negeri asalnya. Pengaruh kebudayaan asing dapat ditelusuri sejak 
+            tahun 2000 SM melalui kebudayaan Dongson dari daratan Asia Tenggara, kemudian pengaruh 
+            <strong>Hindu-Buddha</strong> sekitar abad ke-4 Masehi, pengaruh <strong>Islam</strong> sejak 
+            abad ke-11 hingga ke-15, dan pengaruh <strong>Barat</strong> sejak abad ke-16 bersamaan 
+            dengan kolonialisme. Tingkat penerimaan dan penafsiran yang berbeda-beda terhadap pengaruh 
+            asing inilah yang semakin menambah keanekaragaman kebudayaan masyarakat Indonesia.
+          </p>
+          <div class="bg-white rounded-lg p-3 mt-2 border border-slate-200">
+            <p class="text-xs text-slate-600"><strong>Contoh nyata:</strong> Pengaruh budaya India terlihat 
+            dalam agama Hindu-Buddha, seni arsitektur candi (Borobudur, Prambanan), dan kosakata Sanskerta 
+            dalam Bahasa Indonesia. Pengaruh Arab terlihat dalam agama Islam dan tradisi keagamaan. 
+            Pengaruh Eropa terlihat dalam sistem hukum, arsitektur kolonial, dan pendidikan.</p>
+          </div>
+        </div>
+
+        <div class="materi-box">
+          <h5>2️⃣ Kondisi Negara Kepulauan</h5>
+          <p class="text-sm text-slate-700 leading-relaxed mb-2">
+            Indonesia adalah <strong>negara kepulauan terbesar di dunia</strong> dengan lebih dari 
+            <strong>17.000 pulau</strong> yang tersebar dari Sabang hingga Merauke. Pulau-pulau ini 
+            secara fisik terpisah oleh laut, sehingga hubungan antar masyarakat di pulau yang berbeda 
+            menjadi terhambat, terutama sebelum adanya transportasi modern. Setiap kelompok masyarakat 
+            di kepulauan mengembangkan <strong>budaya, bahasa, dan sistem sosialnya sendiri</strong> 
+            sesuai dengan lingkungan dan tingkat kemajuan masing-masing.
+          </p>
+          <p class="text-sm text-slate-700 leading-relaxed mb-2">
+            Kondisi geografis ini juga memungkinkan nenek moyang bangsa Indonesia untuk tinggal 
+            dan menetap di berbagai wilayah yang berbeda-beda dan <strong>cenderung terisolasi</strong> 
+            satu sama lain. Isolasi geografis ini mendorong lahirnya ribuan suku bangsa dengan 
+            identitas budaya yang khas. Bahkan, para ahli seperti <strong>C. Van Vollenhoven</strong> membagi 
+            masyarakat Indonesia ke dalam <strong>19 daerah hukum adat</strong> atau <em>culture area</em>, 
+            mulai dari Aceh, Batak, Minangkabau, Jawa, Bali, Dayak, Toraja, hingga Papua.
+          </p>
+          <div class="bg-white rounded-lg p-3 mt-2 border border-slate-200">
+            <p class="text-xs text-slate-600"><strong>Contoh nyata:</strong> Suku Baduy di Banten 
+            mengembangkan sistem sosial yang sangat berbeda dari masyarakat Sunda di sekitarnya karena 
+            memilih hidup terisolasi di pedalaman. Suku Dani di Papua memiliki tradisi dan bahasa yang 
+            sama sekali berbeda dari suku-suku di Jawa, meskipun keduanya adalah bagian dari bangsa Indonesia.</p>
+          </div>
+        </div>
+
+        <div class="materi-box">
+          <h5>3️⃣ Perbedaan Kondisi Alam</h5>
+          <p class="text-sm text-slate-700 leading-relaxed mb-2">
+            Indonesia memiliki kondisi alam yang sangat beragam: <strong>daerah pantai, pegunungan, 
+            dataran rendah, padang rumput, rawa, dan lautan</strong>. Perbedaan kondisi alam ini 
+            memengaruhi <strong>mata pencaharian, makanan pokok, pakaian, seni, bahkan kepercayaan</strong> 
+            masyarakat setempat. Masyarakat yang tinggal di pantai biasanya menjadi nelayan dan 
+            mengandalkan hasil laut, sementara masyarakat pegunungan menjadi petani dengan 
+            hasil bumi seperti sayur, kopi, atau teh.
+          </p>
+          <p class="text-sm text-slate-700 leading-relaxed mb-2">
+            Perbedaan <strong>iklim dan struktur tanah</strong> juga menciptakan dua macam lingkungan 
+            ekologis utama: <strong>pertanian sawah</strong> yang banyak dijumpai di Pulau Jawa, Bali, 
+            dan beberapa wilayah Sumatra, serta <strong>pertanian ladang</strong> yang banyak dijumpai 
+            di luar Jawa dan Bali. Perbedaan ini memengaruhi pola pemukiman, sistem kekerabatan, 
+            dan bahkan arsitektur rumah adat.
+          </p>
+          <div class="bg-white rounded-lg p-3 mt-2 border border-slate-200">
+            <p class="text-xs text-slate-600"><strong>Contoh nyata:</strong> Rumah Gadang di Sumatra Barat 
+            dibangun dengan atap melengkung untuk menghadapi curah hujan tinggi. Rumah Honai di Papua 
+            dibangun rendah dan berlubang asap untuk menghangatkan ruangan di pegunungan dingin. 
+            Rumah panggung di Kalimantan dibangun tinggi untuk menghindari banjir dan binatang buas.</p>
+          </div>
+        </div>
+
+        <div class="materi-box">
+          <h5>4️⃣ Keadaan Transportasi dan Komunikasi</h5>
+          <p class="text-sm text-slate-700 leading-relaxed mb-2">
+            Kemajuan sarana transportasi dan komunikasi memengaruhi tingkat hubungan antar masyarakat. 
+            Di daerah dengan <strong>transportasi terbatas</strong>, masyarakat cenderung lebih 
+            terisolasi dan mempertahankan budaya aslinya. Sebaliknya, di daerah dengan 
+            <strong>transportasi maju</strong>, masyarakat lebih mudah berhubungan dengan kelompok 
+            lain, sehingga terjadi <strong>akulturasi dan percampuran budaya</strong>.
+          </p>
+          <p class="text-sm text-slate-700 leading-relaxed mb-2">
+            Pada era digital saat ini, internet dan media sosial menjadi bentuk komunikasi 
+            yang paling berpengaruh. Informasi dan budaya dari seluruh dunia dapat diakses dalam 
+            hitungan detik. Hal ini mempercepat <strong>asimilasi budaya</strong>, tetapi juga 
+            menimbulkan tantangan baru, seperti <strong>homogenisasi budaya</strong> dan 
+            <strong>polarisasi sosial</strong> akibat penyebaran informasi yang tidak terkendali.
+          </p>
+          <div class="bg-white rounded-lg p-3 mt-2 border border-slate-200">
+            <p class="text-xs text-slate-600"><strong>Contoh nyata:</strong> Sebelum ada jalan Trans-Papua, 
+            suku-suku di pedalaman Papua hidup sangat terisolasi dan mempertahankan tradisi leluhur 
+            secara utuh. Setelah akses dibuka, terjadi percampuran budaya dengan pendatang, yang 
+            membawa dampak positif (akses pendidikan dan kesehatan) dan tantangan (pergeseran nilai tradisional).</p>
+          </div>
+        </div>
+
+        <div class="materi-box">
+          <h5>5️⃣ Penerimaan Masyarakat terhadap Perubahan</h5>
+          <p class="text-sm text-slate-700 leading-relaxed mb-2">
+            Sikap masyarakat terhadap hal-hal baru — baik yang datang dari dalam maupun luar 
+            masyarakat — sangat memengaruhi tingkat keberagaman. Ada masyarakat yang 
+            <strong>terbuka dan mudah menerima</strong> pengaruh budaya asing, seperti masyarakat 
+            perkotaan yang kosmopolitan. Ada pula masyarakat yang <strong>tertutup dan bertahan</strong> 
+            pada budaya leluhurnya, seperti suku Baduy Dalam di Banten atau suku Tengger di 
+            Jawa Timur.
+          </p>
+          <p class="text-sm text-slate-700 leading-relaxed mb-2">
+            Sikap ini menciptakan <strong>spektrum keberagaman</strong> yang unik: di satu sisi, 
+            ada kelompok yang menjadi <strong>agen perubahan</strong> dan memperkaya budaya nasional 
+            dengan elemen-elemen baru. Di sisi lain, ada kelompok yang menjadi <strong>penjaga 
+            tradisi</strong> dan mempertahankan keaslian budaya leluhur. Keduanya memiliki peran 
+            penting dalam ekosistem kebudayaan Indonesia.
+          </p>
+          <div class="bg-white rounded-lg p-3 mt-2 border border-slate-200">
+            <p class="text-xs text-slate-600"><strong>Contoh nyata:</strong> Masyarakat Kota Yogyakarta 
+            dan Bali sangat terbuka terhadap wisatawan dan budaya asing, sehingga terjadi percampuran 
+            budaya yang dinamis. Sebaliknya, Suku Baduy Dalam menolak segala bentuk modernisasi dan 
+            tetap hidup mandiri dengan aturan adat yang ketat — sebuah pilihan sadar untuk 
+            mempertahankan identitas.</p>
+          </div>
+        </div>
+
+        <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded mt-4">
+          <p class="text-sm text-slate-700">
+            <strong>💡 Kesimpulan:</strong> Kelima faktor ini — letak strategis, kondisi kepulauan, 
+            perbedaan alam, transportasi & komunikasi, serta penerimaan terhadap perubahan — bekerja 
+            bersama-sama menciptakan keberagaman Indonesia yang luar biasa. Memahami akar keberagaman 
+            ini membantu kita menghargai perbedaan sebagai <strong>kekayaan, bukan ancaman</strong>.
+          </p>
+        </div>
+      `,
+    },
+    3: {
+      judul: "Jenis Keberagaman & Contoh Nyata",
+      ikon: "🎭",
+      isi: `
+        <p class="text-slate-700 leading-relaxed mb-4">
+          Keberagaman Indonesia dapat dikelompokkan menjadi <strong>enam jenis utama</strong>. 
+          Setiap jenis memiliki contoh nyata yang dapat kita temui dalam kehidupan sehari-hari.
+        </p>
+
+        <div class="grid sm:grid-cols-2 gap-3 mb-4">
+          <div class="bg-krem rounded-xl p-4 border border-amber-200">
+            <h4 class="font-bold text-merah mb-2">👥 Keberagaman Suku Bangsa</h4>
+            <p class="text-sm text-slate-700 leading-relaxed">Indonesia memiliki lebih dari <strong>1.340 suku bangsa</strong>. 
+            Suku Jawa adalah yang terbesar (40% populasi), diikuti Sunda, Batak, Madura, Bugis, dan 
+            Minangkabau. Setiap suku memiliki bahasa, adat, dan tradisi khas yang diwariskan turun-temurun.</p>
+          </div>
+          <div class="bg-blue-50 rounded-xl p-4 border border-blue-200">
+            <h4 class="font-bold text-blue-700 mb-2">🕌 Keberagaman Agama</h4>
+            <p class="text-sm text-slate-700 leading-relaxed">Indonesia mengakui <strong>6 agama resmi</strong>: 
+            Islam, Kristen Protestan, Katolik, Hindu, Buddha, dan Konghucu. Selain itu, ada pula penganut 
+            kepercayaan lokal seperti Kaharingan, Sunda Wiwitan, dan Marapu yang diakui sebagai warisan budaya.</p>
+          </div>
+          <div class="bg-green-50 rounded-xl p-4 border border-green-200">
+            <h4 class="font-bold text-green-700 mb-2">🧬 Keberagaman Ras</h4>
+            <p class="text-sm text-slate-700 leading-relaxed">Secara umum terdapat <strong>4 ras utama</strong>: 
+            Malayan-Mongoloid (mayoritas), Melanesoid (Papua & Maluku), Asiatic Mongoloid (keturunan 
+            Tionghoa), dan Kaukasoid (keturunan Eropa/Arab).</p>
+          </div>
+          <div class="bg-purple-50 rounded-xl p-4 border border-purple-200">
+            <h4 class="font-bold text-purple-700 mb-2">🗣️ Keberagaman Bahasa</h4>
+            <p class="text-sm text-slate-700 leading-relaxed">Terdapat <strong>1.001 bahasa daerah</strong> 
+            dengan penutur terbanyak: Jawa, Sunda, Melayu, Madura, Batak, Minang, Bugis, Bali, Aceh, 
+            dan Sasak. Bahasa Indonesia menjadi bahasa pemersatu.</p>
+          </div>
+          <div class="bg-amber-50 rounded-xl p-4 border border-amber-200">
+            <h4 class="font-bold text-amber-700 mb-2">🎨 Keberagaman Budaya</h4>
+            <p class="text-sm text-slate-700 leading-relaxed">Mencakup rumah adat (Gadang, Tongkonan, Honai, 
+            Joglo), tarian (Saman, Kecak, Piring, Jaipong), pakaian adat, senjata tradisional, lagu 
+            daerah, alat musik, dan upacara adat.</p>
+          </div>
+          <div class="bg-pink-50 rounded-xl p-4 border border-pink-200">
+            <h4 class="font-bold text-pink-700 mb-2">💼 Keberagaman Golongan</h4>
+            <p class="text-sm text-slate-700 leading-relaxed">Perbedaan profesi (petani, nelayan, pedagang, 
+            PNS), tingkat ekonomi, tingkat pendidikan, status sosial, dan latar belakang keluarga.</p>
+          </div>
+        </div>
+
+        <div class="materi-box">
+          <h5>🔍 Memahami Lebih Dalam: Keberagaman Suku Bangsa</h5>
+          <p class="text-sm text-slate-700 leading-relaxed mb-2">
+            Suku bangsa adalah kelompok sosial yang memiliki kesamaan <strong>garis keturunan, 
+            asal usul, bahasa, dan budaya</strong>. Di Indonesia, terdapat lebih dari 1.340 suku bangsa 
+            yang tersebar di berbagai pulau. Suku Jawa merupakan suku terbesar dengan populasi 
+            sekitar 40% dari total penduduk Indonesia, diikuti oleh Suku Sunda, Batak, Madura, 
+            dan Bugis. Setiap suku memiliki <strong>sistem kekerabatan, filosofi hidup, dan 
+            kearifan lokal</strong> yang unik.
+          </p>
+          <p class="text-sm text-slate-700 leading-relaxed">
+            Contoh kearifan lokal yang terkenal: <em>Gotong royong</em> (Jawa), <em>Tri Hita Karana</em> 
+            (Bali — harmoni manusia dengan Tuhan, sesama, dan alam), <em>Dalihan Na Tolu</em> (Batak — 
+            tiga tungku kekerabatan), <em>Siri' na Pacce</em> (Bugis-Makassar — harga diri dan solidaritas), 
+            dan <em>Si Tou Timou Tumou Tou</em> (Minahasa — manusia hidup untuk memanusiakan orang lain).
+          </p>
+        </div>
+
+        <div class="materi-box">
+          <h5>🔍 Memahami Lebih Dalam: Keberagaman Agama</h5>
+          <p class="text-sm text-slate-700 leading-relaxed mb-2">
+            Indonesia mengakui <strong>6 agama resmi</strong>, tetapi juga memberikan kebebasan 
+            bagi penganut kepercayaan lokal. Setiap agama memiliki <strong>kitab suci, tempat ibadah, 
+            hari raya, dan tradisi</strong> yang berbeda. Islam memiliki masjid dan hari raya Idul Fitri; 
+            Kristen memiliki gereja dan Natal; Hindu memiliki pura dan Nyepi; Buddha memiliki vihara 
+            dan Waisak; Konghucu memiliki kelenteng dan Tahun Baru Imlek.
+          </p>
+          <p class="text-sm text-slate-700 leading-relaxed">
+            Kerukunan antar umat beragama menjadi kunci persatuan Indonesia. Contoh nyata kerukunan 
+            dapat dilihat di <strong>Desa Balun, Lamongan</strong> (masyarakat Muslim dan Kristen hidup 
+            berdampingan), <strong>Desa Trunyan, Bali</strong> (Hindu dan Muslim saling menghormati), 
+            serta <strong>Kota Kupang</strong> (kerukunan antar umat beragama yang kuat).
+          </p>
+        </div>
+      `,
+    },
+    4: {
+      judul: "Konflik Akibat Keberagaman",
+      ikon: "⚠️",
+      isi: `
+        <div class="bg-red-50 border-l-4 border-merah p-4 rounded mb-4">
+          <p class="text-sm text-slate-700">
+            <strong>⚠️ Perhatian:</strong> Materi ini berisi sejarah kelam bangsa. Tujuannya 
+            adalah pembelajaran agar konflik serupa tidak terulang kembali. Mari belajar dari masa lalu 
+            untuk membangun masa depan yang lebih damai.
+          </p>
+        </div>
+
+        <p class="text-slate-700 leading-relaxed mb-4">
+          Keberagaman tidak selalu berjalan mulus. Sepanjang sejarah Indonesia, pernah terjadi 
+          <strong>konflik sosial bernuansa SARA</strong> (Suku, Agama, Ras, dan Antargolongan) 
+          yang menimbulkan korban jiwa dan kerugian besar. Berikut adalah tiga konflik besar 
+          yang paling banyak dipelajari:
+        </p>
+
+        <div class="space-y-3 mb-4">
+          <div class="bg-white border border-slate-200 rounded-xl p-4 card-hover">
+            <div class="flex justify-between items-start mb-2">
+              <h4 class="font-bold text-merah">Konflik Sampit (2001)</h4>
+              <span class="bg-red-100 text-red-700 text-xs px-2 py-1 rounded-full font-semibold">Etnis</span>
+            </div>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Kerusuhan antar etnis Suku Dayak asli dan warga migran Madura di Kalimantan Tengah. 
+              Dimulai <strong>18 Februari 2001</strong>, menyebabkan <strong>500+ kematian</strong> dan 
+              <strong>100.000+ warga Madura</strong> kehilangan tempat tinggal. Akar konflik: 
+              perebutan lahan pertanian, perkebunan, dan bisnis, serta ketidakmampuan sebagian 
+              pendatang menyesuaikan diri dengan budaya dominan setempat.
+            </p>
+          </div>
+          <div class="bg-white border border-slate-200 rounded-xl p-4 card-hover">
+            <div class="flex justify-between items-start mb-2">
+              <h4 class="font-bold text-merah">Konflik Ambon (1999-2001)</h4>
+              <span class="bg-red-100 text-red-700 text-xs px-2 py-1 rounded-full font-semibold">Agama</span>
+            </div>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Konflik bernuansa agama antara kelompok Muslim dan Kristen di Maluku. Terjadi 
+              dalam beberapa fase, dengan upaya rekonsiliasi untuk meredakan ketegangan. 
+              Akar konflik: persaingan peluang menguasai pasar, kecemburuan sosial akibat 
+              ketidakmerataan pembangunan, dan provokasi dari pihak-pihak tertentu yang ingin 
+              memecah belah.
+            </p>
+          </div>
+          <div class="bg-white border border-slate-200 rounded-xl p-4 card-hover">
+            <div class="flex justify-between items-start mb-2">
+              <h4 class="font-bold text-merah">Konflik Poso (2000-2001)</h4>
+              <span class="bg-red-100 text-red-700 text-xs px-2 py-1 rounded-full font-semibold">Multi-faktor</span>
+            </div>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Kerusuhan berlatar belakang agama, etnis, dan golongan di Sulawesi Tengah. 
+              Dipicu perebutan lahan antara suku asli dan pendatang, serta provokasi elit 
+              kekuasaan. Konflik ini melibatkan kelompok Muslim dan Kristen, dengan korban 
+              jiwa dan pengungsian besar-besaran.
+            </p>
+          </div>
+        </div>
+
+        <div class="materi-box">
+          <h5>🔍 Akar Penyebab Konflik Keberagaman</h5>
+          <ul class="text-sm list-disc pl-5 space-y-2">
+            <li><strong>Kesenjangan ekonomi:</strong> Ketidakmerataan pembangunan dan akses sumber 
+            daya menciptakan kecemburuan sosial antar kelompok.</li>
+            <li><strong>Perseteruan politik:</strong> Elit kekuasaan sering memanfaatkan isu SARA 
+            untuk memperoleh dukungan, memecah belah masyarakat.</li>
+            <li><strong>Perebutan lahan dan sumber daya:</strong> Konflik agraria antara pendatang 
+            dan penduduk asli menjadi pemicu utama di Sampit dan Poso.</li>
+            <li><strong>Persaingan antar agama:</strong> Klaim kebenaran sepihak dan provokasi 
+            oknum tertentu memicu ketegangan antar umat beragama.</li>
+            <li><strong>Provokasi dan hoaks:</strong> Penyebaran informasi bohong dan ujaran 
+            kebencian mempercepat eskalasi konflik, terutama di era media sosial.</li>
+            <li><strong>Lemahnya penegakan hukum:</strong> Keterlambatan aparat dalam merespons 
+            dan memihaknya aparat kepada kelompok tertentu memperburuk situasi.</li>
+          </ul>
+        </div>
+
+        <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded">
+          <p class="text-sm text-slate-700">
+            <strong>💡 Pelajaran Penting:</strong> Konflik Sampit, Ambon, dan Poso mengajarkan 
+            bahwa keberagaman bisa menjadi <strong>kekuatan sekaligus sumber potensi konflik</strong> 
+            jika tidak dikelola dengan baik. Kuncinya adalah <strong>pendidikan, dialog, dan 
+            penegakan hukum yang adil</strong>.
+          </p>
+        </div>
+      `,
+    },
+    5: {
+      judul: "Solusi & Pencegahan Konflik",
+      ikon: "🕊️",
+      isi: `
+        <p class="text-slate-700 leading-relaxed mb-4">
+          Bagaimana mencegah dan menghentikan konflik akibat keberagaman? Berikut adalah 
+          <strong>5 solusi utama</strong> yang dapat diterapkan di sekolah, keluarga, dan masyarakat.
+        </p>
+
+        <div class="flex gap-4 items-start bg-white border border-slate-200 rounded-xl p-4 card-hover mb-3">
+          <div class="w-10 h-10 rounded-full gradient-hero text-white flex items-center justify-center font-bold flex-shrink-0">1</div>
+          <div>
+            <h4 class="font-bold text-merah mb-1">Pendidikan Multikultural</h4>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Pendidikan inklusif berperan strategis mencegah konflik berbasis perbedaan. 
+              Diperlukan kolaborasi antara pemerintah, institusi pendidikan, tokoh masyarakat, 
+              dan individu. Kurikulum multikultural mengajarkan siswa untuk menghargai perbedaan 
+              sejak dini, melalui pembelajaran tentang budaya, agama, dan adat istiadat yang beragam.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex gap-4 items-start bg-white border border-slate-200 rounded-xl p-4 card-hover mb-3">
+          <div class="w-10 h-10 rounded-full gradient-hero text-white flex items-center justify-center font-bold flex-shrink-0">2</div>
+          <div>
+            <h4 class="font-bold text-merah mb-1">Dialog Lintas Kelompok</h4>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Dialog lintas agama dan etnis harus dilakukan secara sadar dan berkelanjutan. 
+              Forum Kerukunan Umat Beragama (FKUB) perlu berperan aktif, tidak hanya sebagai 
+              mediator saat konflik terjadi, tetapi juga mengisi ruang-ruang digital untuk 
+              edukasi dan kampanye damai. Dialog membangun saling pengertian dan menghilangkan prasangka.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex gap-4 items-start bg-white border border-slate-200 rounded-xl p-4 card-hover mb-3">
+          <div class="w-10 h-10 rounded-full gradient-hero text-white flex items-center justify-center font-bold flex-shrink-0">3</div>
+          <div>
+            <h4 class="font-bold text-merah mb-1">Literasi Keagamaan Lintas Budaya</h4>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Pelatihan yang mendorong peserta memahami diri sendiri, membangun kolaborasi, 
+              dan memahami pandangan orang dengan kepercayaan berbeda. BPSDM Hukum bersama 
+              Institut Leimena telah mengembangkan Pelatihan Literasi Keagamaan Lintas Budaya (LKLB) 
+              yang efektif untuk menginternalisasi nilai-nilai Pancasila dan toleransi.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex gap-4 items-start bg-white border border-slate-200 rounded-xl p-4 card-hover mb-3">
+          <div class="w-10 h-10 rounded-full gradient-hero text-white flex items-center justify-center font-bold flex-shrink-0">4</div>
+          <div>
+            <h4 class="font-bold text-merah mb-1">Penguatan Nilai Pancasila</h4>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Pancasila dan UUD 1945 menjadi landasan kebebasan beragama. Nilai toleransi 
+              harus diinternalisasi melalui pembelajaran dan pembinaan karakter. Sila pertama 
+              "Ketuhanan Yang Maha Esa" mengharuskan kita saling menghormati keyakinan orang lain, 
+              sementara sila ketiga "Persatuan Indonesia" mengajak kita merawat kebinekaan dalam 
+              satu kesatuan.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex gap-4 items-start bg-white border border-slate-200 rounded-xl p-4 card-hover mb-3">
+          <div class="w-10 h-10 rounded-full gradient-hero text-white flex items-center justify-center font-bold flex-shrink-0">5</div>
+          <div>
+            <h4 class="font-bold text-merah mb-1">Moderasi Beragama</h4>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Mendorong sikap toleran, inklusif, dan penghargaan terhadap perbedaan melalui 
+              Proyek Penguatan Profil Pelajar Pancasila (P5). Moderasi beragama sebagai solusi 
+              mendorong sikap toleran, inklusif, dan penghargaan terhadap perbedaan, yang sejalan 
+              dengan tujuan pendidikan karakter dalam Kurikulum Merdeka.
+            </p>
+          </div>
+        </div>
+
+        <div class="materi-box mt-4">
+          <h5>🌱 Aksi Nyata untuk Pelajar</h5>
+          <ul class="text-sm list-disc pl-5 space-y-2">
+            <li><strong>Di sekolah:</strong> Ikut kegiatan lintas budaya, hormati teman yang berbeda 
+            agama/suku, laporkan ujaran kebencian kepada guru BK.</li>
+            <li><strong>Di rumah:</strong> Diskusikan dengan keluarga tentang pentingnya toleransi, 
+            tonton bersama film/video tentang keberagaman Indonesia.</li>
+            <li><strong>Di media sosial:</strong> Sebarkan konten positif tentang keberagaman, 
+            jangan sebarkan hoaks atau ujaran kebencian, komentari dengan sopan.</li>
+            <li><strong>Di masyarakat:</strong> Ikut kegiatan gotong royong, kunjungi tempat ibadah 
+            agama lain dengan izin, ikut festival budaya daerah.</li>
+            <li><strong>Di lingkungan pertemanan:</strong> Jadilah contoh teman yang inklusif, 
+            tidak membeda-bedakan, dan berani menegur teman yang bersikap rasis.</li>
+          </ul>
+        </div>
+
+        <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded mt-4">
+          <p class="text-sm text-slate-700">
+            <strong>🌱 Kesimpulan:</strong> Mencegah konflik keberagaman bukan hanya tanggung jawab 
+            pemerintah atau aparat keamanan, tetapi <strong>tanggung jawab kita semua</strong>. 
+            Mulai dari diri sendiri, dari hal kecil, dan dari sekarang. Dengan pendidikan, dialog, 
+            dan penguatan nilai Pancasila, kita dapat menjaga Indonesia tetap <strong>Bhinneka Tunggal Ika</strong>.
+          </p>
+        </div>
+      `,
+    },
+  };
+  
   // ============================================================
   //  KUIS
   // ============================================================
