@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Platform pembelajaran interaktif tentang keberagaman Indonesia" />
+<meta name="theme-color" content="#b91c1c" />
+<title>Bhinneka Edu — Belajar Keberagaman Indonesia</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: { merah: '#b91c1c', emas: '#f59e0b', krem: '#fef3c7' },
+        fontFamily: { display: ['"Plus Jakarta Sans"', 'sans-serif'] },
+      },
+    },
+  };
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+  * { scroll-behavior: smooth; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; }
+  .gradient-hero { background: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 50%, #ea580c 100%); }
+  .card-hover { transition: all .3s ease; }
+  .card-hover:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,.12); }
+  .fade-in { animation: fadeIn .6s ease-in; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+  .flip-card { perspective: 1000px; }
+  .flip-card-inner { transition: transform .6s; transform-style: preserve-3d; position: relative; }
+  .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
+  .flip-front, .flip-back {
+    backface-visibility: hidden; position: absolute; inset: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    border-radius: 1rem; padding: 1rem; text-align: center;
+  }
+  .flip-back { transform: rotateY(180deg); background: #fef3c7; }
+  .tab-active { background: #b91c1c !important; color: white !important; }
+  .quiz-option { transition: all .2s; }
+  .quiz-option:hover { background: #fef3c7; }
+  .quiz-option.correct { background: #16a34a !important; color: white; }
+  .quiz-option.wrong { background: #dc2626 !important; color: white; }
+  .progress-bar { transition: width .5s ease; }
+  .province-tile { cursor: pointer; transition: all .2s; }
+  .province-tile:hover { transform: scale(1.05); background: #fde68a; }
+  .scroll-x { overflow-x: auto; scrollbar-width: thin; }
+  .materi-box { background: #f8fafc; border-left: 4px solid #b91c1c; border-radius: 0.5rem; padding: 1rem 1.25rem; margin: 1rem 0; }
+  .materi-box h5 { font-weight: 700; color: #b91c1c; margin-bottom: 0.5rem; }
+  .materi-list { list-style: disc; padding-left: 1.5rem; }
+  .materi-list li { margin-bottom: 0.4rem; color: #334155; line-height: 1.7; }
+
+  /* ===== PETA INTERAKTIF ===== */
+  .map-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,.25);
+    border: 4px solid #fef3c7;
+    background: #bae6fd;
+  }
+  .map-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    user-select: none;
+    pointer-events: none;
+  }
+  .hotspot {
+    position: absolute;
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: rgba(185, 28, 28, 0.9);
+    border: 3px solid white;
+    box-shadow: 0 0 0 0 rgba(185, 28, 28, 0.7);
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+    transition: all .25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    animation: pulse 2s infinite;
+  }
+  .hotspot:hover {
+    background: #f59e0b;
+    transform: translate(-50%, -50%) scale(1.3);
+    z-index: 30;
+    animation: none;
+    box-shadow: 0 0 0 6px rgba(245, 158, 11, 0.35);
+  }
+  .hotspot.active {
+    background: #f59e0b;
+    transform: translate(-50%, -50%) scale(1.35);
+    z-index: 30;
+    animation: none;
+    box-shadow: 0 0 0 8px rgba(245, 158, 11, 0.4);
+  }
+  .hotspot .tip {
+    position: absolute;
+    bottom: 130%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1e293b;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s;
+  }
+  .hotspot:hover .tip { opacity: 1; }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(185, 28, 28, 0.7); }
+    70% { box-shadow: 0 0 0 14px rgba(185, 28, 28, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(185, 28, 28, 0); }
+  }
+  .map-legend {
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(8px);
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 11px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+    border: 1px solid #fde68a;
+    z-index: 20;
+  }
+  .map-zoom-btns {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 20;
+  }
+  .map-zoom-btns button {
+    width: 36px; height: 36px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 8px;
+    border: 1px solid #fde68a;
+    color: #b91c1c;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .map-zoom-btns button:hover { background: #fef3c7; }
+  .map-canvas {
+    transition: transform .4s ease;
+    transform-origin: center center;
+    position: relative;
+  }
+  /* Detail panel peta */
+  #petaDetail {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border: 2px solid #f59e0b;
+    box-shadow: 0 20px 40px -10px rgba(185,28,28,.25);
+  }
+  .modal-map {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.6);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+  .modal-map.show { display: flex; }
+</style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+<!-- NAVBAR -->
+<nav class="sticky top-0 z-50 bg-white/95 backdrop-blur shadow-md">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+    <div class="flex items-center gap-2">
+      <div class="w-10 h-10 gradient-hero rounded-lg flex items-center justify-center text-white font-bold text-lg">🦅</div>
+      <div>
+        <h1 class="font-extrabold text-lg leading-tight text-merah">Bhinneka Edu</h1>
+        <p class="text-[10px] text-slate-500 -mt-0.5">Belajar Keberagaman Indonesia</p>
+      </div>
+    </div>
+    <div class="hidden md:flex items-center gap-1 text-sm font-semibold">
+      <a href="#beranda" class="px-3 py-2 rounded-lg hover:bg-krem">Beranda</a>
+      <a href="#peta" class="px-3 py-2 rounded-lg hover:bg-krem">Peta</a>
+      <a href="#modul" class="px-3 py-2 rounded-lg hover:bg-krem">Modul</a>
+      <a href="#kuis" class="px-3 py-2 rounded-lg hover:bg-krem">Kuis</a>
+      <a href="#jurnal" class="px-3 py-2 rounded-lg hover:bg-krem">Jurnal</a>
+      <a href="#papan" class="px-3 py-2 rounded-lg hover:bg-krem">Papan Skor</a>
+    </div>
+    <div id="userArea" class="flex items-center gap-2">
+      <button id="loginBtn" class="bg-merah text-white px-4 py-2 rounded-lg font-semibold text-sm hover:bg-red-800">
+        <i class="fa-solid fa-user"></i> Masuk
+      </button>
+      <div id="userInfo" class="hidden flex items-center gap-2">
+        <div class="text-right text-xs">
+          <p id="userName" class="font-bold text-slate-700"></p>
+          <p id="userLevel" class="text-amber-600 font-semibold"></p>
+        </div>
+        <div class="w-10 h-10 rounded-full gradient-hero flex items-center justify-center text-white text-lg">
+          <i class="fa-solid fa-user-astronaut"></i>
+        </div>
+        <button id="logoutBtn" class="text-slate-500 hover:text-merah text-sm"><i class="fa-solid fa-right-from-bracket"></i></button>
+      </div>
+    </div>
+  </div>
+  <div id="xpBar" class="hidden h-1 bg-slate-200"><div id="xpFill" class="h-full gradient-hero progress-bar" style="width:0%"></div></div>
+</nav>
+
+<!-- HERO -->
+<section id="beranda" class="gradient-hero text-white py-16 md:py-24 relative overflow-hidden">
+  <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 30px 30px;"></div>
+  <div class="max-w-7xl mx-auto px-4 relative">
+    <div class="grid md:grid-cols-2 gap-8 items-center">
+      <div class="fade-in">
+        <span class="inline-block bg-white/20 px-4 py-1 rounded-full text-xs font-semibold mb-4">🇮🇩 Platform Pembelajaran Interaktif</span>
+        <h2 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4">
+          Bhinneka Tunggal Ika<br><span class="text-amber-300">Berbeda Tapi Satu</span>
+        </h2>
+        <p class="text-lg text-white/90 mb-6 leading-relaxed">
+          Jelajahi kekayaan 1.340 suku bangsa, 1.001 bahasa daerah, dan ribuan budaya Indonesia.
+          Belajar sambil bermain, kumpulkan XP, dan raih gelar <strong>Duta Bhinneka</strong>!
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a href="#peta" class="bg-white text-merah px-6 py-3 rounded-xl font-bold hover:bg-amber-100 transition"><i class="fa-solid fa-map-location-dot"></i> Jelajah Peta</a>
+          <a href="#kuis" class="bg-white/20 backdrop-blur border border-white/30 text-white px-6 py-3 rounded-xl font-bold hover:bg-white/30 transition"><i class="fa-solid fa-bolt"></i> Mulai Kuis 15 Soal</a>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-4 fade-in">
+        <div class="bg-white/10 backdrop-blur border border-white/20 rounded-2xl p-5">
+          <i class="fa-solid fa-users text-3xl text-amber-300 mb-2"></i>
+          <p class="text-3xl font-extrabold">1.340</p><p class="text-xs text-white/80">Suku Bangsa</p>
+        </div>
+        <div class="bg-white/10 backdrop-blur border border-white/20 rounded-2xl p-5">
+          <i class="fa-solid fa-language text-3xl text-amber-300 mb-2"></i>
+          <p class="text-3xl font-extrabold">1.001</p><p class="text-xs text-white/80">Bahasa Daerah</p>
+        </div>
+        <div class="bg-white/10 backdrop-blur border border-white/20 rounded-2xl p-5">
+          <i class="fa-solid fa-mosque text-3xl text-amber-300 mb-2"></i>
+          <p class="text-3xl font-extrabold">6</p><p class="text-xs text-white/80">Agama Diakui</p>
+        </div>
+        <div class="bg-white/10 backdrop-blur border border-white/20 rounded-2xl p-5">
+          <i class="fa-solid fa-map text-3xl text-amber-300 mb-2"></i>
+          <p class="text-3xl font-extrabold">17.000+</p><p class="text-xs text-white/80">Pulau</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERTANYAAN PEMANTIK -->
+<section class="py-12 bg-krem">
+  <div class="max-w-5xl mx-auto px-4">
+    <div class="text-center mb-6">
+      <span class="text-xs font-bold text-merah uppercase tracking-widest">Pertanyaan Pemantik</span>
+      <h3 class="text-2xl md:text-3xl font-extrabold text-slate-800 mt-2">Renungkan Sejenak 🤔</h3>
+    </div>
+    <div class="bg-white rounded-2xl shadow-lg p-8 text-center min-h-[140px] flex items-center justify-center">
+      <p id="pemantikText" class="text-lg md:text-xl font-semibold text-slate-700 italic leading-relaxed">
+        "Bayangkan kamu bisa berbicara dengan 1.340 suku bangsa di Indonesia. Bahasa apa yang akan kamu pelajari pertama? Mengapa?"
+      </p>
+    </div>
+    <div class="text-center mt-4">
+      <button onclick="nextPemantik()" class="bg-merah text-white px-6 py-2 rounded-lg font-semibold hover:bg-red-800">
+        <i class="fa-solid fa-rotate"></i> Pertanyaan Lain
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PETA INTERAKTIF BARU ==================== -->
+<section id="peta" class="py-16 bg-gradient-to-b from-white to-sky-50">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-8">
+      <span class="text-xs font-bold text-merah uppercase tracking-widest">Jelajah Nusantara</span>
+      <h3 class="text-3xl md:text-4xl font-extrabold text-slate-800 mt-2">Peta Interaktif Indonesia</h3>
+      <p class="text-slate-500 mt-2">Klik titik <span class="inline-block w-3 h-3 rounded-full bg-merah align-middle"></span> pada peta untuk melihat kekayaan budaya daerah!</p>
+    </div>
+
+    <!-- Peta dengan hotspot -->
+    <div class="map-wrapper">
+      <div id="mapCanvas" class="map-canvas">
+        <!-- Ganti src dengan gambar yang kamu upload. Simpan sebagai map-indonesia.jpg -->
+        <img id="mapImage" src="map-indonesia.jpg" alt="Peta Indonesia" onerror="handleMapError()">
+        <!-- Hotspot akan di-generate oleh JS -->
+      </div>
+
+      <!-- Legend -->
+      <div class="map-legend">
+        <p class="font-bold text-merah mb-1">🗺️ Keterangan</p>
+        <p>🔴 Klik titik untuk detail</p>
+        <p>🟡 Titik aktif</p>
+        <p class="text-slate-500 mt-1">Total: <strong>20 daerah</strong></p>
+      </div>
+
+      <!-- Zoom Controls -->
+      <div class="map-zoom-btns">
+        <button onclick="mapZoom(1.2)" title="Perbesar"><i class="fa-solid fa-plus"></i></button>
+        <button onclick="mapZoom(0.8)" title="Perkecil"><i class="fa-solid fa-minus"></i></button>
+        <button onclick="mapReset()" title="Reset"><i class="fa-solid fa-rotate-left"></i></button>
+        <button onclick="toggleFullscreenMap()" title="Layar Penuh"><i class="fa-solid fa-expand"></i></button>
+      </div>
+    </div>
+
+    <!-- Panel Detail (muncul saat hotspot diklik) -->
+    <div id="petaDetail" class="hidden mt-6 rounded-2xl p-6 fade-in">
+      <!-- diisi oleh JS -->
+    </div>
+
+    <!-- Grid Fallback (jika gambar tidak tersedia) -->
+    <div id="petaFallback" class="hidden mt-6">
+      <div class="bg-amber-50 border border-amber-300 rounded-xl p-4 mb-4 text-sm text-slate-700">
+        <i class="fa-solid fa-circle-info text-amber-600"></i>
+        Gambar peta tidak ditemukan. Menampilkan versi grid. Simpan gambar peta dengan nama <code class="bg-white px-1 rounded">map-indonesia.jpg</code> di folder yang sama.
+      </div>
+      <div id="petaGrid" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2"></div>
+    </div>
+
+    <!-- Progress eksplorasi -->
+    <div class="mt-6 bg-white rounded-xl p-4 shadow-sm border border-slate-200 flex items-center gap-4">
+      <div class="flex-1">
+        <p class="text-xs font-bold text-slate-600 mb-1">Progress Eksplorasi: <span id="exploreCount" class="text-merah">0</span>/20 daerah</p>
+        <div class="w-full bg-slate-200 rounded-full h-2">
+          <div id="exploreBar" class="gradient-hero h-2 rounded-full progress-bar" style="width:0%"></div>
+        </div>
+      </div>
+      <span class="text-2xl">🧭</span>
+    </div>
+  </div>
+</section>
+
+<!-- MODUL -->
+<section id="modul" class="py-16 bg-slate-50">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-10">
+      <span class="text-xs font-bold text-merah uppercase tracking-widest">Modul Pembelajaran</span>
+      <h3 class="text-3xl md:text-4xl font-extrabold text-slate-800 mt-2">5 Modul Keberagaman</h3>
+    </div>
+    <div class="scroll-x flex gap-2 mb-6 pb-2">
+      <button onclick="showModul(1)" id="tab1" class="tab-active whitespace-nowrap px-5 py-2 rounded-lg font-semibold bg-white border border-slate-200 text-sm">1. Pengertian</button>
+      <button onclick="showModul(2)" id="tab2" class="whitespace-nowrap px-5 py-2 rounded-lg font-semibold bg-white border border-slate-200 text-sm">2. 5 Faktor Penyebab</button>
+      <button onclick="showModul(3)" id="tab3" class="whitespace-nowrap px-5 py-2 rounded-lg font-semibold bg-white border border-slate-200 text-sm">3. Jenis & Contoh</button>
+      <button onclick="showModul(4)" id="tab4" class="whitespace-nowrap px-5 py-2 rounded-lg font-semibold bg-white border border-slate-200 text-sm">4. Konflik</button>
+      <button onclick="showModul(5)" id="tab5" class="whitespace-nowrap px-5 py-2 rounded-lg font-semibold bg-white border border-slate-200 text-sm">5. Solusi</button>
+    </div>
+    <div id="modulContent" class="bg-white rounded-2xl shadow-lg p-6 md:p-10 fade-in"></div>
+    <div class="text-center mt-6">
+      <button onclick="selesaikanModul()" class="bg-emas text-white px-6 py-3 rounded-xl font-bold hover:bg-amber-600">
+        <i class="fa-solid fa-check-circle"></i> Tandai Modul Selesai (+100 XP)
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== KUIS 15 SOAL TERACAK ==================== -->
+<section id="kuis" class="py-16 gradient-hero">
+  <div class="max-w-3xl mx-auto px-4">
+    <div class="text-center mb-8 text-white">
+      <span class="text-xs font-bold uppercase tracking-widest text-amber-300">Uji Pemahaman</span>
+      <h3 class="text-3xl md:text-4xl font-extrabold mt-2">Kuis Keberagaman</h3>
+      <p class="text-white/80 mt-2">15 soal acak dari 30 bank soal — kombinasimu unik! 🎲</p>
+    </div>
+    <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8">
+      <div class="flex justify-between items-center mb-4">
+        <span id="quizProgress" class="text-sm font-semibold text-slate-500">Soal 1 / 15</span>
+        <span id="quizScore" class="text-sm font-bold text-merah">Skor: 0</span>
+      </div>
+      <div class="w-full bg-slate-200 rounded-full h-2 mb-6">
+        <div id="quizBar" class="gradient-hero h-2 rounded-full progress-bar" style="width:6.6%"></div>
+      </div>
+      <div id="quizBody"></div>
+      <div id="quizFeedback" class="hidden mt-4 p-4 rounded-lg text-sm"></div>
+      <button id="quizNextBtn" class="hidden mt-4 w-full bg-merah text-white py-3 rounded-lg font-bold hover:bg-red-800">
+        Lanjut <i class="fa-solid fa-arrow-right"></i>
+      </button>
+      <div id="quizResult" class="hidden"></div>
+    </div>
+  </div>
+</section>
+
+<!-- JURNAL -->
+<section id="jurnal" class="py-16 bg-white">
+  <div class="max-w-4xl mx-auto px-4">
+    <div class="text-center mb-8">
+      <span class="text-xs font-bold text-merah uppercase tracking-widest">Refleksi Pribadi</span>
+      <h3 class="text-3xl md:text-4xl font-extrabold text-slate-800 mt-2">Jurnal Belajarmu</h3>
+    </div>
+    <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200">
+      <textarea id="jurnalInput" rows="6" placeholder="Tuliskan pemikiran, pengalaman, atau rencana aksimu..." class="w-full p-4 rounded-lg border border-slate-300 focus:border-merah outline-none resize-none"></textarea>
+      <div class="flex justify-between items-center mt-3">
+        <span class="text-xs text-slate-500"><i class="fa-solid fa-cloud"></i> Tersinkronisasi Firebase</span>
+        <button onclick="simpanJurnal()" class="bg-merah text-white px-5 py-2 rounded-lg font-semibold hover:bg-red-800"><i class="fa-solid fa-save"></i> Simpan Jurnal</button>
+      </div>
+    </div>
+    <div id="jurnalList" class="mt-6 space-y-3"></div>
+  </div>
+</section>
+
+<!-- PAPAN SKOR -->
+<section id="papan" class="py-16 bg-slate-50">
+  <div class="max-w-4xl mx-auto px-4">
+    <div class="text-center mb-8">
+      <span class="text-xs font-bold text-merah uppercase tracking-widest">Papan Peringkat</span>
+      <h3 class="text-3xl md:text-4xl font-extrabold text-slate-800 mt-2">Leaderboard Bhinneka</h3>
+    </div>
+    <div class="bg-white rounded-2xl shadow-lg p-6">
+      <div id="leaderboardList" class="space-y-2">
+        <p class="text-center text-slate-400 py-8">Memuat...</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="gradient-hero text-white py-10 mt-10">
+  <div class="max-w-7xl mx-auto px-4 text-center">
+    <h4 class="text-xl font-extrabold mb-2">🦅 Bhinneka Edu</h4>
+    <p class="text-sm text-white/80">Platform pembelajaran keberagaman Indonesia</p>
+    <p class="text-xs text-white/60 mt-3">© 2025 Bhinneka Edu · Firebase Sync · Offline Ready (PWA)</p>
+  </div>
+</footer>
+
+<!-- MODAL LOGIN -->
+<div id="loginModal" class="hidden fixed inset-0 bg-black/60 z-[100] items-center justify-center p-4">
+  <div class="bg-white rounded-2xl p-6 max-w-sm w-full fade-in">
+    <div class="text-center mb-4">
+      <div class="w-14 h-14 gradient-hero rounded-full mx-auto flex items-center justify-center text-white text-2xl mb-2">
+        <i class="fa-solid fa-user-astronaut"></i>
+      </div>
+      <h3 class="text-xl font-extrabold text-slate-800">Masuk Bhinneka Edu</h3>
+    </div>
+    <div class="space-y-3">
+      <input id="loginName" type="text" placeholder="Nama kamu" class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-merah outline-none">
+      <input id="loginEmail" type="email" placeholder="Email" class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-merah outline-none">
+      <input id="loginPass" type="password" placeholder="Password (min. 6 karakter)" class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-merah outline-none">
+      <button id="doLogin" class="w-full bg-merah text-white py-3 rounded-lg font-bold hover:bg-red-800"><i class="fa-solid fa-sign-in-alt"></i> Masuk / Daftar</button>
+      <button onclick="loginAnonim()" class="w-full bg-slate-100 text-slate-700 py-2 rounded-lg font-semibold text-sm hover:bg-slate-200"><i class="fa-solid fa-user-secret"></i> Coba Tanpa Daftar</button>
+      <button onclick="closeLogin()" class="w-full text-slate-500 py-2 text-sm">Batal</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast" class="hidden fixed bottom-6 right-6 z-[200] bg-slate-800 text-white px-5 py-3 rounded-lg shadow-lg fade-in"></div>
+
+<!-- FIREBASE -->
+<script type="module">
+  // ⚙️ GANTI DENGAN FIREBASE CONFIG MILIKMU
+  const firebaseConfig = {
+    apiKey: "ISI_API_KEY_KAMU",
+    authDomain: "ISI_AUTH_DOMAIN.firebaseapp.com",
+    databaseURL: "https://ISI_DATABASE_URL.firebaseio.com",
+    projectId: "ISI_PROJECT_ID",
+    storageBucket: "ISI_STORAGE_BUCKET.appspot.com",
+    messagingSenderId: "ISI_SENDER_ID",
+    appId: "ISI_APP_ID"
+  };
+
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth, signInAnonymously, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  import { getDatabase, ref, set, get, update, push, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+  const isConfigured = !firebaseConfig.apiKey.includes("ISI_");
+  let app, auth, db;
+  if (isConfigured) {
+    try {
+      app = initializeApp(firebaseConfig);
+      auth = getAuth(app);
+      db = getDatabase(app);
+    } catch (e) { console.warn("Firebase error:", e); }
+  }
+
+  let state = {
+    user: null,
+    profile: { nama: "Tamu", xp: 0, level: "Penjelajah Baru", completedModules: [], badges: [], explored: [] },
+    currentModul: 1,
+  };
+  const LOCAL_KEY = "bhinneka_edu_state";
+  function saveLocal() { try { localStorage.setItem(LOCAL_KEY, JSON.stringify(state.profile)); } catch(e){} }
+  function loadLocal() { try { const raw = localStorage.getItem(LOCAL_KEY); if (raw) state.profile = { ...state.profile, ...JSON.parse(raw) }; } catch(e){} }
+  loadLocal();
+  updateUserUI();
+
+  // ================================================================
+  //  KONTEN MODUL (ringkas — konten lengkap sudah ada di versi sebelumnya,
+  //  di sini dipersingkat supaya fokus pada peta & kuis baru)
+  // ================================================================
+  const MODUL = {
+    1: { judul: "Apa Itu Keberagaman?", ikon: "🌈", isi: `<p class="text-slate-700 leading-relaxed">Indonesia adalah salah satu negara <strong>multikultur terbesar di dunia</strong>. Menurut data BPS, terdapat sekitar <strong>300 kelompok etnis</strong>, <strong>1.340 suku bangsa</strong>, dan <strong>1.001 bahasa daerah</strong>, tersebar di <strong>17.000+ pulau</strong>.</p>
+      <div class="materi-box"><h5>📖 Definisi</h5><p class="text-sm text-slate-700">Keberagaman adalah kondisi masyarakat yang memiliki perbedaan dalam suku, agama, ras, bahasa, budaya, dan golongan. Keberagaman bukan sekadar "berbeda", tetapi bagaimana perbedaan itu dikelola dan dihargai.</p></div>
+      <div class="materi-box"><h5>📜 Landasan Hukum</h5><ul class="materi-list text-sm"><li>Pancasila sila ke-3: Persatuan Indonesia</li><li>UUD 1945 Pasal 29: kebebasan beragama</li><li>UUD 1945 Pasal 32: bahasa daerah dilindungi</li><li>UU No. 5 Tahun 2017: Pemajuan Kebudayaan</li></ul></div>` },
+    2: { judul: "5 Faktor Penyebab Keberagaman", ikon: "🌏", isi: `<p class="text-slate-700 mb-3">Ada <strong>5 faktor utama</strong> penyebab keberagaman Indonesia:</p>
+      <div class="materi-box"><h5>1️⃣ Letak Strategis Wilayah</h5><p class="text-sm text-slate-700">Indonesia berada di posisi silang antara 2 samudra & 2 benua. Menjadi jalur perdagangan internasional, berbagai budaya masuk: Hindu-Buddha, Islam, dan Barat.</p></div>
+      <div class="materi-box"><h5>2️⃣ Kondisi Negara Kepulauan</h5><p class="text-sm text-slate-700">17.000+ pulau terpisah oleh laut → isolasi geografis → lahir ribuan suku dengan budaya khas (19 daerah hukum adat Van Vollenhoven).</p></div>
+      <div class="materi-box"><h5>3️⃣ Perbedaan Kondisi Alam</h5><p class="text-sm text-slate-700">Pantai vs pegunungan, iklim, kesuburan tanah → mata pencaharian, makanan, pakaian, dan arsitektur rumah adat berbeda.</p></div>
+      <div class="materi-box"><h5>4️⃣ Keadaan Transportasi & Komunikasi</h5><p class="text-sm text-slate-700">Transportasi terbatas → isolasi & budaya bertahan. Transportasi maju → akulturasi & percampuran budaya. Era digital: internet mempercepat asimilasi.</p></div>
+      <div class="materi-box"><h5>5️⃣ Penerimaan terhadap Perubahan</h5><p class="text-sm text-slate-700">Masyarakat terbuka (perkotaan) vs tertutup (Baduy, Tengger). Menciptakan spektrum keberagaman: agen perubahan & penjaga tradisi.</p></div>` },
+    3: { judul: "Jenis Keberagaman & Contoh", ikon: "🎭", isi: `<p class="text-slate-700 mb-3">Klik kartu untuk lihat contoh nyata:</p>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      ${[["Suku Bangsa","👥","Jawa, Sunda, Batak, Dayak, Papua, Bugis, Minang, Baduy, Tengger, Toraja","bg-red-100"],["Agama","🕌","Islam, Kristen, Katolik, Hindu, Buddha, Konghucu","bg-blue-100"],["Ras","🧬","Malayan-Mongoloid, Melanesoid, Asiatic Mongoloid, Kaukasoid","bg-green-100"],["Bahasa","🗣️","1.001 bahasa daerah: Jawa, Sunda, Madura, Bugis, Batak","bg-purple-100"],["Budaya","🎨","Rumah Gadang, Tongkonan, Honai, Tari Saman, Kecak","bg-amber-100"],["Golongan","💼","Profesi, ekonomi, pendidikan, status sosial","bg-pink-100"]].map(x=>`
+        <div class="flip-card cursor-pointer" style="height:180px" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner w-full h-full relative">
+            <div class="flip-front ${x[3]} border border-slate-200"><span class="text-4xl mb-2">${x[1]}</span><h4 class="font-bold text-slate-800">${x[0]}</h4></div>
+            <div class="flip-back border border-amber-300"><p class="text-xs font-bold text-merah mb-1">Contoh:</p><p class="text-xs text-slate-700">${x[2]}</p></div>
+          </div>
+        </div>`).join("")}</div>` },
+    4: { judul: "Konflik Akibat Keberagaman", ikon: "⚠️", isi: `
+      <div class="bg-red-50 border-l-4 border-merah p-4 rounded mb-4"><p class="text-sm">⚠️ Belajar dari sejarah kelam bangsa agar tidak terulang.</p></div>
+      <div class="space-y-3">
+        <div class="bg-white border rounded-xl p-4"><h4 class="font-bold text-merah">Konflik Sampit (2001)</h4><p class="text-sm text-slate-600">Etnis Suku Dayak vs migran Madura di Kalteng. 500+ korban, 100.000+ mengungsi. Akar: perebutan lahan & bisnis.</p></div>
+        <div class="bg-white border rounded-xl p-4"><h4 class="font-bold text-merah">Konflik Ambon (1999-2001)</h4><p class="text-sm text-slate-600">Muslim vs Kristen di Maluku. Akar: persaingan ekonomi & provokasi pihak tertentu.</p></div>
+        <div class="bg-white border rounded-xl p-4"><h4 class="font-bold text-merah">Konflik Poso (2000-2001)</h4><p class="text-sm text-slate-600">Multi-faktor: agama, etnis, golongan. Dipicu perebutan lahan dan provokasi elit.</p></div>
+      </div>
+      <div class="materi-box mt-4"><h5>🔍 Akar Penyebab</h5><ul class="materi-list text-sm"><li>Kesenjangan ekonomi</li><li>Perseteruan politik</li><li>Perebutan lahan</li><li>Persaingan agama</li><li>Provokasi & hoaks</li><li>Lemahnya penegakan hukum</li></ul></div>` },
+    5: { judul: "Solusi & Pencegahan", ikon: "🕊️", isi: `<p class="text-slate-700 mb-3">5 solusi utama:</p>
+      ${[["Pendidikan Multikultural","Pendidikan inklusif mengajarkan siswa menghargai perbedaan sejak dini."],["Dialog Lintas Kelompok","FKUB aktif sebagai mediator & edukator, termasuk di ruang digital."],["Literasi Keagamaan Lintas Budaya","Pelatihan memahami diri sendiri & menghargai kepercayaan berbeda (LKLB BPSDM Hukum × Institut Leimena)."],["Penguatan Nilai Pancasila","Sila 1 & 3 menjadi landasan toleransi. Internalisasi via pembelajaran karakter."],["Moderasi Beragama","Sikap toleran & inklusif via Proyek Penguatan Profil Pelajar Pancasila (P5)."]].map((x,i)=>`
+        <div class="flex gap-4 items-start bg-white border rounded-xl p-4 mb-2">
+          <div class="w-10 h-10 rounded-full gradient-hero text-white flex items-center justify-center font-bold flex-shrink-0">${i+1}</div>
+          <div><h4 class="font-bold text-merah mb-1">${x[0]}</h4><p class="text-sm text-slate-600">${x[1]}</p></div>
+        </div>`).join("")}` },
+  };
+
+  window.showModul = function(num) {
+    state.currentModul = num;
+    for (let i = 1; i <= 5; i++) {
+      const tab = document.getElementById("tab" + i);
+      if (tab) tab.classList.toggle("tab-active", i === num);
+    }
+    const m = MODUL[num];
+    const done = state.profile.completedModules?.includes(num);
+    document.getElementById("modulContent").innerHTML = `
+      <div class="flex items-center gap-3 mb-4">
+        <span class="text-4xl">${m.ikon}</span>
+        <div><p class="text-xs font-bold text-merah uppercase">Modul ${num}</p><h3 class="text-2xl font-extrabold">${m.judul}</h3></div>
+        ${done ? '<span class="ml-auto bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold"><i class="fa-solid fa-check"></i> Selesai</span>' : ''}
+      </div><hr class="mb-5 border-slate-200">${m.isi}`;
+  };
+
+  window.selesaikanModul = function() {
+    const num = state.currentModul;
+    if (!state.profile.completedModules) state.profile.completedModules = [];
+    if (state.profile.completedModules.includes(num)) { toast("Sudah selesai ✔️"); return; }
+    state.profile.completedModules.push(num);
+    addXP(100);
+    showModul(num);
+    if (state.profile.completedModules.length === 5) addBadge("Duta Bhinneka");
+  };
+
+  // ================================================================
+  //  ============ PETA INTERAKTIF (HOTSPOT) ============
+  //  Koordinat hotspot dalam PERSEN terhadap gambar peta.
+  //  Sesuaikan jika gambar peta berbeda.
+  // ================================================================
+  const MAP_POINTS = [
+    { id:"aceh", n:"Banda Aceh", x:4.5, y:10, prov:"Aceh", s:"Suku Aceh", b:"Bahasa Aceh", r:"Rumah Krong Bade", t:"Tari Saman", m:"Mie Aceh", f:"Daerah Serambi Mekkah, gerbang barat Indonesia. Kaya tradisi Islam & budaya Melayu." },
+    { id:"medan", n:"Medan", x:9.5, y:13.5, prov:"Sumatra Utara", s:"Suku Batak", b:"Bahasa Batak", r:"Rumah Bolon", t:"Tari Tortor", m:"Bika Ambon", f:"Rumah bagi suku Batak dengan falsafah Dalihan Na Tolu. Danau Toba ikon dunia." },
+    { id:"padang", n:"Padang", x:6.5, y:22.5, prov:"Sumatra Barat", s:"Suku Minang", b:"Bahasa Minang", r:"Rumah Gadang", t:"Tari Piring", m:"Rendang", f:"Sistem matrilineal terbesar di dunia. Rendang dinobatkan makanan terenak sedunia." },
+    { id:"jambi", n:"Jambi", x:12, y:23, prov:"Jambi", s:"Suku Kubu & Melayu", b:"Bahasa Jambi", r:"Rumah Panggung", t:"Tari Sekapur Sirih", m:"Tempoyak", f:"Rumah bagi Suku Anak Dalam (Kubu), salah satu suku tertua di Sumatra." },
+    { id:"palembang", n:"Palembang", x:17.5, y:24, prov:"Sumatra Selatan", s:"Suku Palembang", b:"Bahasa Palembang", r:"Rumah Limas", t:"Tari Gending Sriwijaya", m:"Pempek", f:"Pusat Kerajaan Sriwijaya, kerajaan maritim terbesar Nusantara." },
+    { id:"lampung", n:"Bandar Lampung", x:19.5, y:33, prov:"Lampung", s:"Suku Lampung", b:"Bahasa Lampung", r:"Rumah Nuwou Sesat", t:"Tari Sigeh Penguten", m:"Seruit", f:"Gerbang selatan Sumatra, penyangga Selat Sunda." },
+    { id:"jakarta", n:"Jakarta", x:22, y:42.5, prov:"DKI Jakarta", s:"Suku Betawi", b:"Bahasa Betawi", r:"Rumah Kebaya", t:"Tari Topeng", m:"Kerak Telor", f:"Ibu kota negara, melting pot budaya dari seluruh Nusantara." },
+    { id:"jabar", n:"Bandung", x:24, y:45, prov:"Jawa Barat", s:"Suku Sunda", b:"Bahasa Sunda", r:"Rumah Julang Ngapak", t:"Tari Jaipong", m:"Karedok", f:"Masyarakat Sunda terkenal dengan falsafah 'Someah hade ka semah' (ramah tamah)." },
+    { id:"jateng", n:"Semarang", x:27.5, y:43.5, prov:"Jawa Tengah", s:"Suku Jawa", b:"Bahasa Jawa", r:"Rumah Joglo", t:"Tari Gambyong", m:"Lumpia Semarang", f:"Pusat kebudayaan Jawa klasik dengan keraton Surakarta & Yogyakarta." },
+    { id:"jatim", n:"Surabaya", x:31.5, y:45.5, prov:"Jawa Timur", s:"Suku Jawa & Madura", b:"Bahasa Jawa", r:"Rumah Joglo", t:"Tari Reog", m:"Rawon", f:"Kota Pahlawan. Budaya Madura kuat di tapal kuda Jawa Timur." },
+    { id:"bali", n:"Denpasar", x:35.5, y:48.5, prov:"Bali", s:"Suku Bali", b:"Bahasa Bali", r:"Rumah Gapura", t:"Tari Kecak", m:"Ayam Betutu", f:"Pulau Dewata dengan Hindu-Bali sebagai jantung budaya. Falsafah Tri Hita Karana." },
+    { id:"ntb", n:"Mataram", x:39.5, y:50.5, prov:"Nusa Tenggara Barat", s:"Suku Sasak", b:"Bahasa Sasak", r:"Rumah Bale", t:"Tari Gendang Beleq", m:"Ayam Taliwang", f:"Lombok & Sumbawa, rumah bagi Suku Sasak dengan tradisi unik." },
+    { id:"ntt", n:"Kupang", x:50, y:56.5, prov:"Nusa Tenggara Timur", s:"Suku Flores, Timor, Sumba", b:"Bahasa Dawan", r:"Rumah Mbaru Niang", t:"Tari Likurai", m:"Se'i Sapi", f:"Rumah bagi 3 suku besar: Flores, Timor, dan Sumba dengan tradisi megalitik." },
+    { id:"kalbar", n:"Pontianak", x:24, y:22, prov:"Kalimantan Barat", s:"Suku Dayak & Melayu", b:"Bahasa Dayak", r:"Rumah Panjang", t:"Tari Monong", m:"Pengkang", f:"Dilalui garis khatulistiwa. Budaya Dayak Kanayatn & Melayu Pontianak." },
+    { id:"kalteng", n:"Palangkaraya", x:30.5, y:26, prov:"Kalimantan Tengah", s:"Suku Dayak Ngaju", b:"Bahasa Ngaju", r:"Rumah Betang", t:"Tari Tambun Bungai", m:"Juhu Singkah", f:"Rumah Betang (rumah panjang) jadi simbol kebersamaan suku Dayak." },
+    { id:"kalsel", n:"Banjarmasin", x:29.5, y:29.5, prov:"Kalimantan Selatan", s:"Suku Banjar", b:"Bahasa Banjar", r:"Rumah Bubungan Tinggi", t:"Tari Baksa Kembang", m:"Ketupat Kandangan", f:"Kota Seribu Sungai. Pasar terapung ikon wisata budaya." },
+    { id:"kaltim", n:"Samarinda", x:34.5, y:19.5, prov:"Kalimantan Timur", s:"Suku Kutai & Dayak", b:"Bahasa Kutai", r:"Rumah Lamin", t:"Tari Gong", m:"Nasi Bekepor", f:"Kerajaan Kutai Martadipura, kerajaan Hindu tertua di Indonesia (abad ke-4 M)." },
+    { id:"sulsel", n:"Makassar", x:41.5, y:40.5, prov:"Sulawesi Selatan", s:"Suku Bugis, Makassar, Toraja", b:"Bahasa Bugis", r:"Rumah Tongkonan", t:"Tari Kipas", m:"Coto Makassar", f:"Rumah bagi pelaut ulung Bugis-Makassar dan Toraja dengan tradisi Rambu Solo'." },
+    { id:"sulut", n:"Manado", x:52.5, y:12.5, prov:"Sulawesi Utara", s:"Suku Minahasa", b:"Bahasa Manado", r:"Rumah Wale", t:"Tari Kabasaran", m:"Tinutuan", f:"Masyarakat Minahasa dengan falsafah 'Si Tou Timou Tumou Tou' (manusia hidup untuk memanusiakan orang lain)." },
+    { id:"maluku", n:"Ambon", x:60.5, y:32, prov:"Maluku", s:"Suku Ambon", b:"Bahasa Ambon", r:"Rumah Baileo", t:"Tari Cakalele", m:"Papeda", f:"Kepulauan Rempah, pusat perdagangan dunia abad ke-16. Rumah Baileo simbol musyawarah." },
+    { id:"papua", n:"Jayapura", x:88, y:25, prov:"Papua", s:"Suku Dani, Asmat, Biak", b:"Bahasa Dani", r:"Rumah Honai", t:"Tari Sajojo", m:"Papeda", f:"Pulau paling timur, rumah bagi 250+ suku dengan bahasa berbeda. Tradisi Asmat terkenal ukiran kayu." },
+  ];
+
+  let mapScale = 1;
+  let exploredSet = new Set(JSON.parse(localStorage.getItem("bhinneka_explored") || "[]"));
+
+  function initMap() {
+    const canvas = document.getElementById("mapCanvas");
+    const img = document.getElementById("mapImage");
+    if (!canvas || !img) return;
+
+    // Cek apakah gambar berhasil dimuat
+    img.addEventListener("load", () => {
+      document.getElementById("petaFallback").classList.add("hidden");
+      renderHotspots();
+    });
+  }
+
+  window.handleMapError = function() {
+    // Fallback: tampilkan grid provinsi
+    document.querySelector(".map-wrapper").style.display = "none";
+    document.getElementById("petaFallback").classList.remove("hidden");
+    renderFallbackGrid();
+  };
+
+  function renderHotspots() {
+    const canvas = document.getElementById("mapCanvas");
+    // Hapus hotspot lama
+    canvas.querySelectorAll(".hotspot").forEach(h => h.remove());
+    MAP_POINTS.forEach(p => {
+      const h = document.createElement("div");
+      h.className = "hotspot" + (exploredSet.has(p.id) ? " explored" : "");
+      if (exploredSet.has(p.id)) h.style.background = "#16a34a";
+      h.style.left = p.x + "%";
+      h.style.top = p.y + "%";
+      h.innerHTML = `<i class="fa-solid fa-location-dot"></i><span class="tip">${p.n}</span>`;
+      h.onclick = (e) => {
+        e.stopPropagation();
+        showProvinsi(p);
+        // Tandai aktif
+        canvas.querySelectorAll(".hotspot").forEach(x => x.classList.remove("active"));
+        h.classList.add("active");
+      };
+      canvas.appendChild(h);
+    });
+    updateExploreProgress();
+  }
+
+  function renderFallbackGrid() {
+    const PROVINSI = [
+      { n:"Aceh", s:"Suku Aceh", b:"Bahasa Aceh", r:"Rumah Krong Bade", t:"Tari Saman", m:"Mie Aceh", f:"Daerah Serambi Mekkah." },
+      { n:"Sumut", s:"Suku Batak", b:"Bahasa Batak", r:"Rumah Bolon", t:"Tari Tortor", m:"Bika Ambon", f:"Rumah bagi suku Batak." },
+      { n:"Sumbar", s:"Suku Minang", b:"Bahasa Minang", r:"Rumah Gadang", t:"Tari Piring", m:"Rendang", f:"Sistem matrilineal." },
+      { n:"Riau", s:"Suku Melayu", b:"Bahasa Melayu", r:"Rumah Selaso", t:"Tari Zapin", m:"Gulai Ikan Patin", f:"Budaya Melayu pesisir." },
+      { n:"Jambi", s:"Suku Kubu", b:"Bahasa Jambi", r:"Rumah Panggung", t:"Tari Sekapur Sirih", m:"Tempoyak", f:"Suku Anak Dalam." },
+      { n:"Sumsel", s:"Suku Palembang", b:"Bahasa Palembang", r:"Rumah Limas", t:"Tari Gending Sriwijaya", m:"Pempek", f:"Pusat Sriwijaya." },
+      { n:"Bengkulu", s:"Suku Rejang", b:"Bahasa Rejang", r:"Rumah Bubungan Lima", t:"Tari Andun", m:"Pendap", f:"Bunga Rafflesia." },
+      { n:"Lampung", s:"Suku Lampung", b:"Bahasa Lampung", r:"Rumah Nuwou Sesat", t:"Tari Sigeh Penguten", m:"Seruit", f:"Gerbang Sumatra." },
+      { n:"Babel", s:"Melayu Bangka", b:"Bahasa Bangka", r:"Rumah Limas", t:"Tari Campak", m:"Lempah Kuning", f:"Pulau timah." },
+      { n:"Kepri", s:"Suku Melayu", b:"Bahasa Melayu", r:"Rumah Belah Bubung", t:"Tari Malemang", m:"Otak-otak", f:"Kepulauan Riau." },
+      { n:"DKI", s:"Suku Betawi", b:"Bahasa Betawi", r:"Rumah Kebaya", t:"Tari Topeng", m:"Kerak Telor", f:"Ibu kota." },
+      { n:"Jabar", s:"Suku Sunda", b:"Bahasa Sunda", r:"Rumah Julang Ngapak", t:"Tari Jaipong", m:"Karedok", f:"Tanah Pasundan." },
+      { n:"Jateng", s:"Suku Jawa", b:"Bahasa Jawa", r:"Rumah Joglo", t:"Tari Gambyong", m:"Lumpia", f:"Budaya Jawa klasik." },
+      { n:"DIY", s:"Suku Jawa", b:"Bahasa Jawa", r:"Rumah Joglo", t:"Tari Serimpi", m:"Gudeg", f:"Kota budaya." },
+      { n:"Jatim", s:"Jawa, Madura", b:"Bahasa Jawa", r:"Rumah Joglo", t:"Tari Reog", m:"Rawon", f:"Kota Pahlawan." },
+      { n:"Banten", s:"Suku Baduy", b:"Bahasa Sunda", r:"Rumah Baduy", t:"Tari Bedhaya", m:"Sate Bandeng", f:"Suku Baduy." },
+      { n:"Bali", s:"Suku Bali", b:"Bahasa Bali", r:"Rumah Gapura", t:"Tari Kecak", m:"Ayam Betutu", f:"Pulau Dewata." },
+      { n:"NTB", s:"Suku Sasak", b:"Bahasa Sasak", r:"Rumah Bale", t:"Tari Gendang Beleq", m:"Ayam Taliwang", f:"Lombok." },
+      { n:"NTT", s:"Flores, Timor", b:"Bahasa Dawan", r:"Rumah Mbaru Niang", t:"Tari Likurai", m:"Se'i Sapi", f:"3 suku besar." },
+      { n:"Kalbar", s:"Suku Dayak", b:"Bahasa Dayak", r:"Rumah Panjang", t:"Tari Monong", m:"Pengkang", f:"Khatulistiwa." },
+      { n:"Kalteng", s:"Dayak Ngaju", b:"Bahasa Ngaju", r:"Rumah Betang", t:"Tari Tambun Bungai", m:"Juhu Singkah", f:"Rumah Betang." },
+      { n:"Kalsel", s:"Suku Banjar", b:"Bahasa Banjar", r:"Rumah Bubungan Tinggi", t:"Tari Baksa Kembang", m:"Ketupat Kandangan", f:"Kota Seribu Sungai." },
+      { n:"Kaltim", s:"Kutai, Dayak", b:"Bahasa Kutai", r:"Rumah Lamin", t:"Tari Gong", m:"Nasi Bekepor", f:"Kerajaan Kutai." },
+      { n:"Kaltara", s:"Dayak Kenyah", b:"Bahasa Kenyah", r:"Rumah Lamin", t:"Tari Enggang", m:"Kue Cincin", f:"Kalimantan Utara." },
+      { n:"Sulut", s:"Minahasa", b:"Bahasa Manado", r:"Rumah Wale", t:"Tari Kabasaran", m:"Tinutuan", f:"Minahasa." },
+      { n:"Sulteng", s:"Suku Kaili", b:"Bahasa Kaili", r:"Rumah Tambi", t:"Tari Pamonte", m:"Kaledo", f:"Sulawesi Tengah." },
+      { n:"Sulsel", s:"Bugis, Toraja", b:"Bahasa Bugis", r:"Rumah Tongkonan", t:"Tari Kipas", m:"Coto Makassar", f:"Pelaut ulung." },
+      { n:"Sultra", s:"Suku Tolaki", b:"Bahasa Tolaki", r:"Rumah Laika", t:"Tari Lariangi", m:"Sinonggi", f:"Sulawesi Tenggara." },
+      { n:"Gorontalo", s:"Suku Gorontalo", b:"Bahasa Gorontalo", r:"Rumah Dulohupa", t:"Tari Saronde", m:"Binte Biluhuta", f:"Gorontalo." },
+      { n:"Sulbar", s:"Suku Mandar", b:"Bahasa Mandar", r:"Rumah Boyang", t:"Tari Pattudu", m:"Jepa", f:"Sulawesi Barat." },
+      { n:"Maluku", s:"Suku Ambon", b:"Bahasa Ambon", r:"Rumah Baileo", t:"Tari Cakalele", m:"Papeda", f:"Kepulauan Rempah." },
+      { n:"Malut", s:"Suku Ternate", b:"Bahasa Ternate", r:"Rumah Baileo", t:"Tari Soya-soya", m:"Gohu Ikan", f:"Maluku Utara." },
+      { n:"Papua", s:"Dani, Asmat", b:"Bahasa Dani", r:"Rumah Honai", t:"Tari Sajojo", m:"Papeda", f:"Pulau timur." },
+      { n:"Papbar", s:"Suku Biak", b:"Bahasa Biak", r:"Rumah Kariwari", t:"Tari Yospan", m:"Sagu Bakar", f:"Papua Barat." },
+    ];
+    const grid = document.getElementById("petaGrid");
+    grid.innerHTML = "";
+    PROVINSI.forEach((p, i) => {
+      const id = "grid_" + i;
+      const tile = document.createElement("div");
+      tile.className = "province-tile bg-krem border border-amber-200 rounded-lg p-2 text-center text-xs font-semibold text-slate-700";
+      tile.innerText = p.n;
+      tile.onclick = () => {
+        showProvinsi({ id, n: p.n, prov: p.n, s: p.s, b: p.b, r: p.r, t: p.t, m: p.m, f: p.f });
+      };
+      grid.appendChild(tile);
+    });
+  }
+
+  window.showProvinsi = function(p) {
+    const d = document.getElementById("petaDetail");
+    d.innerHTML = `
+      <div class="flex justify-between items-start mb-4">
+        <div>
+          <p class="text-xs font-bold text-merah uppercase">📍 ${p.prov || p.n}</p>
+          <h4 class="text-3xl font-extrabold text-slate-800">${p.n}</h4>
+          <p class="text-sm text-slate-600 mt-2 italic">${p.f}</p>
+        </div>
+        <button onclick="document.getElementById('petaDetail').classList.add('hidden')" class="text-slate-400 hover:text-merah">
+          <i class="fa-solid fa-times text-xl"></i>
+        </button>
+      </div>
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
+        <div class="bg-white rounded-lg p-3 shadow-sm"><p class="text-xs text-slate-500">👥 Suku</p><p class="font-bold text-slate-800 text-sm">${p.s}</p></div>
+        <div class="bg-white rounded-lg p-3 shadow-sm"><p class="text-xs text-slate-500">🗣️ Bahasa</p><p class="font-bold text-slate-800 text-sm">${p.b}</p></div>
+        <div class="bg-white rounded-lg p-3 shadow-sm"><p class="text-xs text-slate-500">🏠 Rumah Adat</p><p class="font-bold text-slate-800 text-sm">${p.r}</p></div>
+        <div class="bg-white rounded-lg p-3 shadow-sm"><p class="text-xs text-slate-500">💃 Tarian</p><p class="font-bold text-slate-800 text-sm">${p.t}</p></div>
+        <div class="bg-white rounded-lg p-3 shadow-sm"><p class="text-xs text-slate-500">🍲 Makanan</p><p class="font-bold text-slate-800 text-sm">${p.m}</p></div>
+      </div>`;
+    d.classList.remove("hidden");
+    d.scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+    // Tandai sudah dieksplor
+    if (!exploredSet.has(p.id)) {
+      exploredSet.add(p.id);
+      localStorage.setItem("bhinneka_explored", JSON.stringify([...exploredSet]));
+      addXP(5, true);
+      updateExploreProgress();
+      if (exploredSet.size >= 10 && !state.profile.badges?.includes("Penjelajah Peta")) {
+        addBadge("Penjelajah Peta");
+      }
+      // Update warna hotspot
+      const canvas = document.getElementById("mapCanvas");
+      canvas.querySelectorAll(".hotspot").forEach(h => {
+        if (h.style.left === p.x + "%" && h.style.top === p.y + "%") h.style.background = "#16a34a";
+      });
+    }
+  };
+
+  function updateExploreProgress() {
+    const total = MAP_POINTS.length;
+    const count = exploredSet.size;
+    const pct = Math.min(100, (count / total) * 100);
+    const c = document.getElementById("exploreCount");
+    const b = document.getElementById("exploreBar");
+    if (c) c.innerText = count;
+    if (b) b.style.width = pct + "%";
+  }
+
+  window.mapZoom = function(factor) {
+    mapScale = Math.max(0.6, Math.min(2.5, mapScale * factor));
+    document.getElementById("mapCanvas").style.transform = `scale(${mapScale})`;
+  };
+  window.mapReset = function() {
+    mapScale = 1;
+    document.getElementById("mapCanvas").style.transform = "scale(1)";
+  };
+  window.toggleFullscreenMap = function() {
+    const el = document.querySelector(".map-wrapper");
+    if (!document.fullscreenElement) el.requestFullscreen?.();
+    else document.exitFullscreen?.();
+  };
+
+  // ================================================================
+  //  ============ KUIS 15 SOAL TERACAK (dari 30 bank soal) ============
+  // ================================================================
+  const QUESTION_POOL = [
+    { q:"Indonesia memiliki lebih dari 1.000 bahasa daerah. (Benar/Salah)", type:"tf", options:["Benar","Salah"], answer:"Benar", explain:"Indonesia memiliki 1.001 bahasa daerah berdasarkan data BPS!" },
+    { q:"Suku Dayak merupakan suku asli yang mendiami wilayah...", type:"mc", options:["Sumatra Utara","Kalimantan","Papua","Sulawesi"], answer:"Kalimantan", explain:"Suku Dayak mendiami pedalaman Kalimantan." },
+    { q:"Faktor geografis penyebab keberagaman Indonesia adalah...", type:"mc", options:["Indonesia hanya punya 1 pulau","Indonesia terdiri dari 17.000+ pulau","Indonesia tidak punya gunung","Indonesia tidak punya laut"], answer:"Indonesia terdiri dari 17.000+ pulau", explain:"Kondisi kepulauan melahirkan suku dengan identitas khas." },
+    { q:"Manakah yang BUKAN penyebab konflik keberagaman?", type:"mc", options:["Kesenjangan ekonomi","Persaingan politik","Toleransi antar umat","Provokasi elit"], answer:"Toleransi antar umat", explain:"Toleransi justru MENCEGAH konflik." },
+    { q:"Konflik Sampit (2001) terjadi antara Suku Dayak dengan warga migran dari...", type:"fill", answer:["madura","suku madura"], explain:"Konflik Sampit melibatkan Suku Dayak dengan warga migran Madura." },
+    { q:"Salah satu solusi mencegah konflik keberagaman adalah...", type:"mc", options:["Menutup diri dari budaya lain","Pendidikan multikultural","Menyebar ujaran kebencian","Memihak satu suku saja"], answer:"Pendidikan multikultural", explain:"Pendidikan multikultural strategis mencegah konflik." },
+    { q:"Suku Baduy mendiami provinsi...", type:"fill", answer:["banten"], explain:"Suku Baduy tinggal di pedalaman Banten, Kabupaten Lebak." },
+    { q:"Rumah Tongkonan berasal dari suku...", type:"mc", options:["Suku Jawa","Suku Toraja","Suku Bugis","Suku Batak"], answer:"Suku Toraja", explain:"Tongkonan adalah rumah adat suku Toraja di Sulawesi Selatan." },
+    { q:"Rumah Gadang berasal dari provinsi...", type:"mc", options:["Sumatra Utara","Sumatra Barat","Riau","Jambi"], answer:"Sumatra Barat", explain:"Rumah Gadang adalah rumah adat suku Minangkabau, Sumatra Barat." },
+    { q:"Tari Saman berasal dari provinsi...", type:"mc", options:["Aceh","Sumatra Utara","Riau","Bali"], answer:"Aceh", explain:"Tari Saman adalah tarian tradisional suku Gayo, Aceh. Diakui UNESCO." },
+    { q:"Tari Kecak berasal dari...", type:"mc", options:["Bali","Jawa Tengah","NTB","NTT"], answer:"Bali", explain:"Tari Kecak adalah tarian khas Bali yang menceritakan Ramayana." },
+    { q:"Falsafah 'Tri Hita Karana' berasal dari...", type:"mc", options:["Jawa","Bali","Sunda","Batak"], answer:"Bali", explain:"Tri Hita Karana = harmoni manusia dengan Tuhan, sesama, dan alam." },
+    { q:"Sistem kekerabatan matrilineal terbesar di dunia ada di suku...", type:"mc", options:["Jawa","Minangkabau","Batak","Bugis"], answer:"Minangkabau", explain:"Suku Minangkabau menganut sistem matrilineal (garis keturunan ibu)." },
+    { q:"Rumah Honai adalah rumah adat dari...", type:"mc", options:["Papua","NTT","Maluku","Sulawesi"], answer:"Papua", explain:"Honai adalah rumah adat suku Dani di Papua, dibangun rendah untuk menghangatkan ruangan." },
+    { q:"Bahasa daerah dengan penutur terbanyak di Indonesia adalah...", type:"mc", options:["Bahasa Sunda","Bahasa Jawa","Bahasa Melayu","Bahasa Madura"], answer:"Bahasa Jawa", explain:"Bahasa Jawa memiliki puluhan juta penutur, terbanyak di Indonesia." },
+    { q:"Indonesia mengakui berapa agama resmi?", type:"mc", options:["4","5","6","7"], answer:"6", explain:"6 agama resmi: Islam, Kristen, Katolik, Hindu, Buddha, Konghucu." },
+    { q:"Konflik Poso terjadi di provinsi...", type:"mc", options:["Maluku","Sulawesi Tengah","Papua","NTT"], answer:"Sulawesi Tengah", explain:"Konflik Poso (2000-2001) terjadi di Sulawesi Tengah, melibatkan agama & etnis." },
+    { q:"Forum Kerukunan Umat Beragama disingkat...", type:"fill", answer:["fkub"], explain:"FKUB = Forum Kerukunan Umat Beragama, berperan aktif menjaga kerukunan." },
+    { q:"Proyek Penguatan Profil Pelajar Pancasila disingkat...", type:"fill", answer:["p5"], explain:"P5 = Proyek Penguatan Profil Pelajar Pancasila dalam Kurikulum Merdeka." },
+    { q:"Manakah yang termasuk faktor penyebab keberagaman Indonesia?", type:"mc", options:["Letak strategis wilayah","Kondisi kepulauan","Perbedaan kondisi alam","Semua benar"], answer:"Semua benar", explain:"Ada 5 faktor: letak strategis, kepulauan, kondisi alam, transportasi-komunikasi, dan penerimaan perubahan." },
+    { q:"Semboyan 'Bhinneka Tunggal Ika' terdapat dalam kitab...", type:"mc", options:["Negarakertagama","Sutasoma","Ramayana","Mahabharata"], answer:"Sutasoma", explain:"Bhinneka Tunggal Ika berasal dari Kitab Sutasoma karya Mpu Tantular." },
+    { q:"Falsafah 'Dalihan Na Tolu' berasal dari suku...", type:"mc", options:["Batak","Minang","Bugis","Dayak"], answer:"Batak", explain:"Dalihan Na Tolu = tiga tungku, sistem kekerabatan suku Batak." },
+    { q:"Perbedaan kondisi alam Indonesia menyebabkan perbedaan...", type:"mc", options:["Mata pencaharian","Makanan pokok","Rumah adat","Semua benar"], answer:"Semua benar", explain:"Kondisi alam memengaruhi mata pencaharian, makanan, pakaian, hingga arsitektur." },
+    { q:"Suku Asmat terkenal dengan seni...", type:"mc", options:["Ukiran kayu","Tenun","Batik","Wayang"], answer:"Ukiran kayu", explain:"Suku Asmat di Papua terkenal dengan seni ukir kayu yang khas." },
+    { q:"Konflik Ambon (1999-2001) terjadi di provinsi...", type:"mc", options:["Maluku","Maluku Utara","Papua","Sulawesi"], answer:"Maluku", explain:"Konflik Ambon terjadi di Maluku, bernuansa agama." },
+    { q:"Semboyan bangsa Indonesia adalah...", type:"fill", answer:["bhinneka tunggal ika","bhineka tunggal ika"], explain:"Bhinneka Tunggal Ika = berbeda-beda tetapi tetap satu." },
+    { q:"Rumah Baileo adalah rumah adat dari...", type:"mc", options:["Maluku","Papua","NTT","Sulawesi"], answer:"Maluku", explain:"Baileo adalah rumah adat Maluku, simbol musyawarah masyarakat." },
+    { q:"Tari Sajojo berasal dari...", type:"mc", options:["Papua","Maluku","NTT","Sulawesi"], answer:"Papua", explain:"Tari Sajojo adalah tarian rakyat Papua yang populer." },
+    { q:"Pancasila sila ke-3 berbunyi...", type:"mc", options:["Ketuhanan Yang Maha Esa","Kemanusiaan yang adil dan beradab","Persatuan Indonesia","Keadilan sosial"], answer:"Persatuan Indonesia", explain:"Sila ke-3 'Persatuan Indonesia' mengakui keberagaman dalam satu kesatuan." },
+    { q:"UU yang mengatur Pemajuan Kebudayaan adalah UU No...", type:"mc", options:["5 Tahun 2017","5 Tahun 2018","6 Tahun 2017","4 Tahun 2017"], answer:"5 Tahun 2017", explain:"UU No. 5 Tahun 2017 tentang Pemajuan Kebudayaan melindungi keberagaman budaya." },
+  ];
+
+  const QUIZ_TOTAL = 15;
+  let QUIZ_QUESTIONS = [];
+  let quizIdx = 0, quizScore = 0, quizAnswered = false;
+  let userAnswers = []; // untuk review
+
+  // Fungsi shuffle Fisher-Yates
+  function shuffle(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function buildQuiz() {
+    // Pilih 15 soal acak dari pool
+    const selected = shuffle(QUESTION_POOL).slice(0, QUIZ_TOTAL);
+    // Untuk setiap soal: acak opsi jawaban (kecuali TF & fill)
+    QUIZ_QUESTIONS = selected.map(q => {
+      if (q.type === "mc" && q.options) {
+        return { ...q, options: shuffle(q.options) };
+      }
+      return { ...q };
+    });
+    quizIdx = 0;
+    quizScore = 0;
+    userAnswers = [];
+  }
+
+  window.renderQuiz = function() {
+    const q = QUIZ_QUESTIONS[quizIdx];
+    if (!q) return;
+    quizAnswered = false;
+    document.getElementById("quizProgress").innerText = `Soal ${quizIdx + 1} / ${QUIZ_TOTAL}`;
+    document.getElementById("quizScore").innerText = `Skor: ${quizScore}`;
+    document.getElementById("quizBar").style.width = `${((quizIdx + 1) / QUIZ_TOTAL) * 100}%`;
+    document.getElementById("quizFeedback").classList.add("hidden");
+    document.getElementById("quizNextBtn").classList.add("hidden");
+    document.getElementById("quizResult").classList.add("hidden");
+
+    // Badge tipe soal
+    const typeLabel = { mc: "Pilihan Ganda", tf: "Benar / Salah", fill: "Isian Singkat" }[q.type] || "";
+    let body = `<span class="inline-block bg-amber-100 text-amber-800 text-xs font-bold px-2 py-1 rounded-full mb-3">${typeLabel}</span>`;
+    body += `<p class="text-lg font-semibold text-slate-800 mb-4">${q.q}</p>`;
+
+    if (q.type === "mc" || q.type === "tf") {
+      body += `<div class="space-y-2">`;
+      q.options.forEach(opt => {
+        body += `<div class="quiz-option bg-slate-50 border border-slate-200 rounded-lg p-3 cursor-pointer font-medium" onclick="answerQuiz('${opt.replace(/'/g, "\\'")}', this)">${opt}</div>`;
+      });
+      body += `</div>`;
+    } else if (q.type === "fill") {
+      body += `<input id="fillAnswer" type="text" placeholder="Tulis jawabanmu..." class="w-full p-3 rounded-lg border border-slate-300 focus:border-merah outline-none" onkeydown="if(event.key==='Enter')answerFill()">
+        <button onclick="answerFill()" class="mt-3 bg-merah text-white px-5 py-2 rounded-lg font-semibold hover:bg-red-800">Jawab</button>`;
+    }
+    document.getElementById("quizBody").innerHTML = body;
+  };
+
+  window.answerQuiz = function(opt, el) {
+    if (quizAnswered) return;
+    quizAnswered = true;
+    const q = QUIZ_QUESTIONS[quizIdx];
+    const correct = opt === q.answer;
+    userAnswers.push({ q: q.q, userAns: opt, correctAns: q.answer, isCorrect: correct });
+
+    document.querySelectorAll(".quiz-option").forEach(o => {
+      o.classList.remove("cursor-pointer");
+      o.style.pointerEvents = "none";
+      if (o.innerText === q.answer) o.classList.add("correct");
+    });
+    if (!correct) el.classList.add("wrong");
+
+    const fb = document.getElementById("quizFeedback");
+    fb.classList.remove("hidden");
+    if (correct) {
+      quizScore += 10; addXP(10, true);
+      fb.className = "mt-4 p-4 rounded-lg text-sm bg-green-50 text-green-800 border-l-4 border-green-500";
+      fb.innerHTML = `<strong>✅ Benar!</strong> ${q.explain}`;
+    } else {
+      fb.className = "mt-4 p-4 rounded-lg text-sm bg-red-50 text-red-800 border-l-4 border-red-500";
+      fb.innerHTML = `<strong>❌ Belum tepat.</strong> Jawaban benar: <strong>${q.answer}</strong>. ${q.explain}`;
+    }
+    document.getElementById("quizScore").innerText = `Skor: ${quizScore}`;
+    const btn = document.getElementById("quizNextBtn");
+    btn.classList.remove("hidden");
+    btn.innerText = quizIdx === QUIZ_TOTAL - 1 ? "Lihat Hasil 🎉" : "Lanjut →";
+  };
+
+  window.answerFill = function() {
+    if (quizAnswered) return;
+    const val = document.getElementById("fillAnswer").value.trim().toLowerCase();
+    const q = QUIZ_QUESTIONS[quizIdx];
+    const correct = q.answer.some(a => val.includes(a.toLowerCase()));
+    quizAnswered = true;
+    userAnswers.push({ q: q.q, userAns: val || "(kosong)", correctAns: q.answer[0], isCorrect: correct });
+
+    const fb = document.getElementById("quizFeedback");
+    fb.classList.remove("hidden");
+    if (correct) {
+      quizScore += 10; addXP(10, true);
+      fb.className = "mt-4 p-4 rounded-lg text-sm bg-green-50 text-green-800 border-l-4 border-green-500";
+      fb.innerHTML = `<strong>✅ Benar!</strong> ${q.explain}`;
+    } else {
+      fb.className = "mt-4 p-4 rounded-lg text-sm bg-red-50 text-red-800 border-l-4 border-red-500";
+      fb.innerHTML = `<strong>❌ Belum tepat.</strong> Jawaban yang dicari: <strong>${q.answer[0]}</strong>. ${q.explain}`;
+    }
+    document.getElementById("quizScore").innerText = `Skor: ${quizScore}`;
+    const btn = document.getElementById("quizNextBtn");
+    btn.classList.remove("hidden");
+    btn.innerText = quizIdx === QUIZ_TOTAL - 1 ? "Lihat Hasil 🎉" : "Lanjut →";
+  };
+
+  document.getElementById("quizNextBtn").onclick = () => {
+    if (quizIdx < QUIZ_TOTAL - 1) {
+      quizIdx++;
+      renderQuiz();
+    } else {
+      showQuizResult();
+    }
+  };
+
+  function showQuizResult() {
+    const maxScore = QUIZ_TOTAL * 10;
+    const pct = Math.round((quizScore / maxScore) * 100);
+    let grade, emoji, msg;
+    if (pct >= 90) { grade = "A"; emoji = "🏆"; msg = "Luar biasa! Kamu Duta Bhinneka sejati!"; }
+    else if (pct >= 75) { grade = "B"; emoji = "🌟"; msg = "Bagus! Pemahamanmu sudah kuat."; }
+    else if (pct >= 60) { grade = "C"; emoji = "👍"; msg = "Cukup baik. Pelajari lagi modulnya ya!"; }
+    else { grade = "D"; emoji = "📖"; msg = "Ayo belajar lagi! Baca ulang modul 1-5."; }
+
+    document.getElementById("quizBody").innerHTML = "";
+    document.getElementById("quizFeedback").classList.add("hidden");
+    document.getElementById("quizNextBtn").classList.add("hidden");
+    document.getElementById("quizProgress").innerText = "Selesai";
+    document.getElementById("quizBar").style.width = "100%";
+
+    const reviewHTML = userAnswers.map((a, i) => `
+      <div class="border-l-4 ${a.isCorrect ? 'border-green-500 bg-green-50' : 'border-red-500 bg-red-50'} rounded p-3 mb-2">
+        <p class="text-xs font-bold text-slate-600 mb-1">Soal ${i + 1} ${a.isCorrect ? '✅' : '❌'}</p>
+        <p class="text-sm font-semibold text-slate-800 mb-1">${a.q}</p>
+        <p class="text-xs text-slate-600">Jawabanmu: <strong>${a.userAns}</strong></p>
+        ${!a.isCorrect ? `<p class="text-xs text-green-700">Jawaban benar: <strong>${a.correctAns}</strong></p>` : ""}
+      </div>`).join("");
+
+    const res = document.getElementById("quizResult");
+    res.classList.remove("hidden");
+    res.innerHTML = `
+      <div class="text-center py-6 fade-in">
+        <div class="text-6xl mb-3">${emoji}</div>
+        <h4 class="text-2xl font-extrabold text-merah mb-2">Kuis Selesai!</h4>
+        <p class="text-slate-600 mb-2">${msg}</p>
+        <div class="inline-block bg-krem rounded-2xl px-8 py-4 my-4">
+          <p class="text-xs text-slate-500 uppercase font-bold">Skor Akhir</p>
+          <p class="text-4xl font-extrabold text-merah">${quizScore}<span class="text-lg text-slate-400">/${maxScore}</span></p>
+          <p class="text-sm font-bold text-amber-600">Nilai: ${grade} (${pct}%)</p>
+        </div>
+        <div class="flex gap-2 justify-center mt-4 flex-wrap">
+          <button onclick="restartQuiz()" class="bg-merah text-white px-6 py-3 rounded-lg font-bold hover:bg-red-800">
+            <i class="fa-solid fa-dice"></i> Coba Lagi (Soal Acak Baru)
+          </button>
+          <button onclick="toggleReview()" class="bg-slate-100 text-slate-700 px-6 py-3 rounded-lg font-bold hover:bg-slate-200">
+            <i class="fa-solid fa-list-check"></i> Lihat Pembahasan
+          </button>
+        </div>
+        <div id="reviewBox" class="hidden mt-6 text-left max-h-96 overflow-y-auto"></div>
+      </div>`;
+    document.getElementById("reviewBox").innerHTML = reviewHTML;
+    saveQuizScore(quizScore);
+  }
+
+  window.toggleReview = function() {
+    const box = document.getElementById("reviewBox");
+    box.classList.toggle("hidden");
+  };
+
+  window.restartQuiz = function() {
+    buildQuiz();
+    document.getElementById("quizResult").classList.add("hidden");
+    renderQuiz();
+    toast("🎲 Soal baru telah diacak!");
+  };
+
+  // Inisialisasi kuis pertama kali
+  buildQuiz();
+  renderQuiz();
+
+  // ================================================================
+  //  GAMIFIKASI
+  // ================================================================
+  function getLevel(xp) {
+    if (xp >= 1000) return "Duta Bhinneka";
+    if (xp >= 501) return "Detektif Nusantara";
+    if (xp >= 201) return "Pengamat Budaya";
+    return "Penjelajah Baru";
+  }
+  function addXP(amount, silent = false) {
+    state.profile.xp = (state.profile.xp || 0) + amount;
+    state.profile.level = getLevel(state.profile.xp);
+    updateUserUI(); saveLocal();
+    if (state.user && db) update(ref(db, `users/${state.user.uid}/profile`), { xp: state.profile.xp, level: state.profile.level }).catch(()=>{});
+    if (!silent) toast(`+${amount} XP! Level: ${state.profile.level}`);
+  }
+  function addBadge(name) {
+    if (!state.profile.badges) state.profile.badges = [];
+    if (state.profile.badges.includes(name)) return;
+    state.profile.badges.push(name); saveLocal();
+    toast(`🏅 Badge baru: ${name}!`);
+  }
+  function updateUserUI() {
+    document.getElementById("userName").innerText = state.profile.nama || "Tamu";
+    document.getElementById("userLevel").innerText = state.profile.level;
+    if (state.user) {
+      document.getElementById("loginBtn").classList.add("hidden");
+      document.getElementById("userInfo").classList.remove("hidden");
+      document.getElementById("userInfo").classList.add("flex");
+      document.getElementById("xpBar").classList.remove("hidden");
+      const xp = state.profile.xp || 0;
+      const nextAt = xp < 200 ? 200 : xp < 500 ? 500 : xp < 1000 ? 1000 : 2000;
+      document.getElementById("xpFill").style.width = `${Math.min(100, (xp / nextAt) * 100)}%`;
+    }
+  }
+
+  // ================================================================
+  //  JURNAL
+  // ================================================================
+  window.simpanJurnal = async function() {
+    const val = document.getElementById("jurnalInput").value.trim();
+    if (!val) { toast("Jurnal masih kosong!"); return; }
+    const entry = { text: val, time: new Date().toISOString() };
+    let list = JSON.parse(localStorage.getItem("bhinneka_jurnal") || "[]");
+    list.unshift(entry);
+    localStorage.setItem("bhinneka_jurnal", JSON.stringify(list));
+    renderJurnal();
+    if (state.user && db) { try { await push(ref(db, `users/${state.user.uid}/jurnal`), entry); toast("✅ Tersimpan & tersinkron!"); } catch(e) { toast("✅ Tersimpan lokal"); } }
+    else toast("✅ Tersimpan lokal. Login untuk sinkronisasi!");
+    document.getElementById("jurnalInput").value = "";
+    addXP(5, true);
+  };
+  function renderJurnal() {
+    const list = JSON.parse(localStorage.getItem("bhinneka_jurnal") || "[]");
+    const el = document.getElementById("jurnalList");
+    if (!list.length) { el.innerHTML = ""; return; }
+    el.innerHTML = list.slice(0, 10).map(j => `
+      <div class="bg-krem border-l-4 border-emas rounded-lg p-4">
+        <p class="text-xs text-slate-500 mb-1">${new Date(j.time).toLocaleString('id-ID')}</p>
+        <p class="text-sm text-slate-700">${j.text}</p>
+      </div>`).join("");
+  }
+  renderJurnal();
+
+  // ================================================================
+  //  AUTH
+  // ================================================================
+  window.openLogin = () => { document.getElementById("loginModal").classList.remove("hidden"); document.getElementById("loginModal").classList.add("flex"); };
+  window.closeLogin = () => { document.getElementById("loginModal").classList.add("hidden"); document.getElementById("loginModal").classList.remove("flex"); };
+  document.getElementById("loginBtn").onclick = () => {
+    if (!isConfigured) { toast("⚠️ Firebase belum dikonfigurasi."); state.profile.nama = "Siswa Tamu"; state.user = { uid: "lokal_" + Date.now() }; updateUserUI(); return; }
+    openLogin();
+  };
+  document.getElementById("doLogin").onclick = async () => {
+    if (!isConfigured) { toast("⚠️ Firebase belum dikonfigurasi"); return; }
+    const name = document.getElementById("loginName").value.trim() || "Siswa";
+    const email = document.getElementById("loginEmail").value.trim();
+    const pass = document.getElementById("loginPass").value;
+    if (!email || pass.length < 6) { toast("Email & password (min. 6) wajib!"); return; }
+    try {
+      let cred;
+      try { cred = await createUserWithEmailAndPassword(auth, email, pass); await updateProfile(cred.user, { displayName: name }); }
+      catch (e) { if (e.code === "auth/email-already-in-use") cred = await signInWithEmailAndPassword(auth, email, pass); else throw e; }
+      closeLogin(); toast("✅ Masuk sebagai " + (cred.user.displayName || name));
+    } catch(e) { toast("❌ " + e.message); }
+  };
+  window.loginAnonim = async () => {
+    if (!isConfigured) { toast("⚠️ Firebase belum dikonfigurasi"); closeLogin(); return; }
+    try { await signInAnonymously(auth); closeLogin(); toast("👤 Masuk sebagai Tamu"); } catch(e) { toast("❌ " + e.message); }
+  };
+  document.getElementById("logoutBtn").onclick = async () => {
+    if (isConfigured && auth) { try { await signOut(auth); } catch(e){} }
+    state.user = null;
+    document.getElementById("loginBtn").classList.remove("hidden");
+    document.getElementById("userInfo").classList.add("hidden");
+    document.getElementById("userInfo").classList.remove("flex");
+    document.getElementById("xpBar").classList.add("hidden");
+    toast("👋 Berhasil keluar");
+  };
+  if (isConfigured && auth) {
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) { state.user = null; updateUserUI(); return; }
+      state.user = user;
+      const pRef = ref(db, `users/${user.uid}/profile`);
+      const snap = await get(pRef);
+      if (snap.exists()) state.profile = { ...state.profile, ...snap.val() };
+      else { state.profile.nama = user.displayName || "Siswa"; await set(pRef, { nama: state.profile.nama, xp: 0, level: "Penjelajah Baru", createdAt: serverTimestamp() }); state.profile.xp = 0; state.profile.level = "Penjelajah Baru"; }
+      updateUserUI(); loadLeaderboard();
+    });
+  } else { loadLeaderboard(); }
+
+  async function loadLeaderboard() {
+    const el = document.getElementById("leaderboardList");
+    if (!isConfigured || !db) {
+      el.innerHTML = `<p class="text-center text-slate-500 py-4 text-sm"><i class="fa-solid fa-cloud"></i> Konfigurasi Firebase untuk papan peringkat global.</p>
+        <div class="bg-krem rounded-lg p-3 flex items-center justify-between"><span class="font-bold">👤 ${state.profile.nama} (Kamu)</span><span class="text-merah font-bold">${state.profile.xp || 0} XP</span></div>`;
+      return;
+    }
+    try {
+      const snap = await get(ref(db, "users"));
+      if (!snap.exists()) { el.innerHTML = '<p class="text-center text-slate-400 py-4">Belum ada peserta.</p>'; return; }
+      const arr = [];
+      snap.forEach(c => { const p = c.val().profile || {}; arr.push({ uid: c.key, nama: p.nama || "Anonim", xp: p.xp || 0, level: p.level || "Penjelajah Baru" }); });
+      arr.sort((a, b) => b.xp - a.xp);
+      el.innerHTML = arr.slice(0, 20).map((u, i) => {
+        const medals = ["🥇", "🥈", "🥉"];
+        const isMe = state.user && state.user.uid === u.uid;
+        return `<div class="flex items-center justify-between p-3 rounded-lg ${isMe ? 'bg-krem border border-amber-300' : 'bg-slate-50'}">
+          <div class="flex items-center gap-3"><span class="font-bold text-lg w-8 text-center">${medals[i] || (i + 1)}</span>
+          <div><p class="font-bold text-slate-800 text-sm">${u.nama}${isMe ? ' <span class="text-xs text-merah">(Kamu)</span>' : ''}</p><p class="text-xs text-slate-500">${u.level}</p></div></div>
+          <span class="text-merah font-bold text-sm">${u.xp} XP</span></div>`;
+      }).join("");
+    } catch(e) { el.innerHTML = '<p class="text-center text-red-500 py-4">Gagal memuat.</p>'; }
+  }
+  async function saveQuizScore(score) {
+    if (!state.user || !db) return;
+    try { await push(ref(db, `users/${state.user.uid}/quizResults`), { score, total: QUIZ_TOTAL * 10, timestamp: serverTimestamp() }); } catch(e){}
+  }
+
+  // ================================================================
+  //  TOAST + INIT
+  // ================================================================
+  let toastTimer;
+  function toast(msg) {
+    const el = document.getElementById("toast");
+    el.innerText = msg; el.classList.remove("hidden"); el.classList.add("fade-in");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.add("hidden"), 3000);
+  }
+  window.toast = toast;
+
+  // Inisialisasi
+  showModul(1);
+  initMap();
+
+  // PWA
+  if ("serviceWorker" in navigator) {
+    const swCode = `const CACHE='bhinneka-edu-v3';
+      self.addEventListener('install',e=>{self.skipWaiting();});
+      self.addEventListener('activate',e=>{e.waitUntil(clients.claim());});
+      self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).then(resp=>caches.open(CACHE).then(c=>{c.put(e.request,resp.clone());return resp;})).catch(()=>caches.match('/'))));});`;
+    try {
+      const blob = new Blob([swCode], { type: "application/javascript" });
+      navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(()=>{});
+    } catch(e){}
+  }
+
+  if (!isConfigured) setTimeout(() => toast("ℹ️ Firebase belum dikonfigurasi. Mode lokal aktif."), 1500);
+</script>
+
+</body>
+</html>
